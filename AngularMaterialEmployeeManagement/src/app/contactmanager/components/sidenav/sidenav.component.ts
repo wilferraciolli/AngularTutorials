@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
     matchMedia(`(max-width: ${SMALL_WITH_BREAKPOINT}px)`);
 
   constructor(zone: NgZone) {
-    // this.mediaMatcher.addListener(mql =>      zone.run(() => this.mediaMatcher = mql));
+    // this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
   }
 
   ngOnInit() {

@@ -11,3 +11,6 @@ This project shows how to user router outlet within different modules
 
 ##Flex layout
     npm install --save @angular/flex-layout
+    
+##end point with mocked data
+    http://angular-material-api.azurewebsites.net/users

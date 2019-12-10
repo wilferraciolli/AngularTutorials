@@ -8,6 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { ContactmanagerRoutingModule } from './contactmanager-routing.module';
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,11 @@ import { ContactmanagerRoutingModule } from './contactmanager-routing.module';
     ContactmanagerRoutingModule,
     FlexLayoutModule,
     FormsModule,
+    HttpClientModule,
     MaterialModule
+  ],
+  providers: [
+    UserService
   ]
 })
 
