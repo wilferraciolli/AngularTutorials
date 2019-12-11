@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -18,17 +18,28 @@ export class MainContentComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params.id;
+      const id = this.resolveId(params);
+      this.user = null;
 
       this.userService.users.subscribe(users => {
         if (users.length == 0) {
           return;
         }
 
-        this.user = this.userService.findUserById(id);
+        // create a delay to display the spinner
+        setTimeout(() => {
+          this.user = this.userService.findUserById(id);
+        }, 500);
       });
-      this.user = this.userService.findUserById(id);
     });
   }
 
+  private resolveId(params: Params) {
+    let id = params.id;
+    if (!id) {
+      id = 1;
+    }
+
+    return id;
+  }
 }

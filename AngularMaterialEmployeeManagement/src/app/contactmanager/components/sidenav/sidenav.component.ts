@@ -1,8 +1,9 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 const SMALL_WITH_BREAKPOINT = 720;
 
@@ -12,6 +13,8 @@ const SMALL_WITH_BREAKPOINT = 720;
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
+
+  @ViewChild(MatSidenav) sidenav: MatSidenav;
 
   users: Observable<User[]>;
   // method to get the size of the screen
@@ -29,10 +32,10 @@ export class SidenavComponent implements OnInit {
     this.users = this.userService.users;
     this.userService.loadAll();
 
-    this.users.subscribe(data => {
-      // navigate to the first item on te list if ant
-      if (data.length > 0) {
-        this.router.navigate(['contactmanager', data[0].id]);
+    // get events from users router navigation to close the sidenav if screen is small
+    this.router.events.subscribe(() => {
+      if (this.isScreenSmall()) {
+        this.sidenav.close();
       }
     });
   }
