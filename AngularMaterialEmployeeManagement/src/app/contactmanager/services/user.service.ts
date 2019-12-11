@@ -18,12 +18,13 @@ export class UserService {
     this.behaviorUsers = new BehaviorSubject<User[]>([]);
   }
 
-  getUsers(): Observable<User[]> {
+  get users(): Observable<User[]> {
     return this.behaviorUsers.asObservable();
   }
 
   loadAll() {
-    const usersUrl = 'https://angular-material-api.azurewebsites.net/users';
+    // const usersUrl = 'https://angular-material-api.azurewebsites.net/users';
+    const usersUrl = 'assets/users.json';
 
     return this.http.get<User[]>(usersUrl)
       .subscribe(
