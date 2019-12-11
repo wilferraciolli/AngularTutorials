@@ -14,7 +14,7 @@ const SMALL_WITH_BREAKPOINT = 720;
 })
 export class SidenavComponent implements OnInit {
 
-  @ViewChild(MatSidenav) sidenav: MatSidenav;
+  @ViewChild(MatSidenav, { static: false }) sidenav: MatSidenav;
 
   users: Observable<User[]>;
   // method to get the size of the screen

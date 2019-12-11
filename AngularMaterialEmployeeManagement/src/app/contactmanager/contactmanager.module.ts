@@ -10,13 +10,15 @@ import { MaterialModule } from '../shared/material.module';
 import { ContactmanagerRoutingModule } from './contactmanager-routing.module';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotesComponent } from './components/notes/notes.component';
 
 @NgModule({
   declarations: [
     ContactmanagerAppComponent,
     MainContentComponent,
     SidenavComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    NotesComponent
   ],
   imports: [
     CommonModule,
