@@ -39,4 +39,10 @@ export class UserService {
         });
   }
 
+  findUserById(id: number): User {
+
+    return  this.dataStore.users.find(
+      u => u.id == id);
+
+  }
 }
