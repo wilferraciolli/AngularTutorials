@@ -23,8 +23,8 @@ export class UserService {
   }
 
   loadAll() {
-    // const usersUrl = 'https://angular-material-api.azurewebsites.net/users';
-    const usersUrl = 'assets/users.json';
+    const usersUrl = 'https://angular-material-api.azurewebsites.net/users';
+    // const usersUrl = 'assets/users.json';
 
     return this.http.get<User[]>(usersUrl)
       .subscribe(
@@ -41,8 +41,18 @@ export class UserService {
 
   findUserById(id: number): User {
 
-    return  this.dataStore.users.find(
+    return this.dataStore.users.find(
       u => u.id == id);
 
+  }
+
+  addUser(user: User): Promise<User> {
+    return new Promise((resolver, reject) => {
+      user.id = this.dataStore.users.length + 1;
+      this.dataStore.users.push(user);
+      this.behaviorUsers.next(Object.assign({}, this.dataStore).users);
+
+      resolver(user);
+    });
   }
 }
