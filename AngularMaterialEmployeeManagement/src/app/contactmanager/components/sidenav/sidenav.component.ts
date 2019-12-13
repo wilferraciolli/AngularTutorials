@@ -16,6 +16,7 @@ export class SidenavComponent implements OnInit {
 
   @ViewChild(MatSidenav, { static: false }) sidenav: MatSidenav;
 
+  isDarkTheme: boolean = false;
   users: Observable<User[]>;
   // method to get the size of the screen
   private mediaMatcher: MediaQueryList =
@@ -42,5 +43,9 @@ export class SidenavComponent implements OnInit {
 
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
   }
 }
