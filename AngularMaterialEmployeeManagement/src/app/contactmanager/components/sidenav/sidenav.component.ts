@@ -17,7 +17,9 @@ export class SidenavComponent implements OnInit {
   @ViewChild(MatSidenav, { static: false }) sidenav: MatSidenav;
 
   isDarkTheme: boolean = false;
+  direction: string = 'ltr';
   users: Observable<User[]>;
+
   // method to get the size of the screen
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WITH_BREAKPOINT}px)`);
@@ -47,5 +49,9 @@ export class SidenavComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
+  }
+
+  toggleDirection() {
+    this.direction = this.direction === 'ltr' ? 'rtl' : 'ltr';
   }
 }

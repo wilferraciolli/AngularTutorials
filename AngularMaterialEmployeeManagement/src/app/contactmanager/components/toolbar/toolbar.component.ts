@@ -18,6 +18,9 @@ export class ToolbarComponent implements OnInit {
   @Output()
   toggleTheme = new EventEmitter<void>();
 
+  @Output()
+  toggleDirection = new EventEmitter<void>();
+
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
               private router: Router) {
