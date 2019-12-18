@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+  <br>
+  <label>First Name</label>
+  <input placeholder="First name" name="firstName"
+         formControlName="firstName" required>
+
+  <br/>
+  <br/>
+  <label>Email</label>
+  <input placeholder="Email" name="email"
+         formControlName="email" required>
+
+  <br/>
+  <br/>
+  <button (click)="addRole()">Add Role</button>
+  <div formArrayName="roles"
+       *ngFor="let role of form.get('roles').controls; let i = index;">
+    <div [formGroupName]="i">
+      <input formControlName="roleId" placeholder="Role Id">
+      <input formControlName="name" placeholder="Role name">
+    </div>
+
+
+    Chosen name: {{ form.controls.roles.controls[i].controls.name.value }}
+  </div>
+</form>
+
+<br/>
+<br/>
+<h2>The value of the form is {{form.value}}</h2>
+
+
