@@ -11,6 +11,7 @@ import { FlightFilterComponent } from './flight-filter/flight-filter.component';
 import { MyFlightsComponent } from './my-flights/my-flights.component';
 import {AccountsModule} from './accounts/accounts.module';
 import { CurrencyConversionPipe } from './currency-conversion/currency-conversion.pipe';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { CurrencyConversionPipe } from './currency-conversion/currency-conversio
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [FlightsService],
   bootstrap: [AppComponent],

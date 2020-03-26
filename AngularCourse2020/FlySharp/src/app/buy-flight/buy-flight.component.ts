@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import {FlightsService} from '../flights/flights.service';
 import {Flight} from '../model/flight';
@@ -10,18 +10,17 @@ import {Flight} from '../model/flight';
   styleUrls: ['./buy-flight.component.css']
 })
 export class BuyFlightComponent implements OnInit {
-
   // Next line stops tslint complaining about the _ at the start of the variable name
   // tslint:disable-next-line
   _flights: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight;
-  originFilter = '';
+  originFilter: string = null;
   destinationFilter: string = null;
-  rate: number = 1.0;
+conversionRate = 4.0;
 
-  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute) {
-  }
+
+  constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
   onFilterChange(filterValue: string) {
     this.originFilter = filterValue;
@@ -33,7 +32,7 @@ export class BuyFlightComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      if (typeof params.origin !== 'undefined') {
+      if (typeof params.origin !== 'undefined' ) {
         this.originFilter = params.origin;
       }
     });
@@ -71,12 +70,9 @@ export class BuyFlightComponent implements OnInit {
     }
   }
 
+
   onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
-  }
-
-  assignRate(value: string) {
-    this.rate = Number(value);
   }
 }
 

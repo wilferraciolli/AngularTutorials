@@ -1,13 +1,7 @@
 <app-flight-filter (filterEmitter) = "onFilterChange($event)" label='Origin' [initialValue]='originFilter'></app-flight-filter>
 <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" [label]="'Destination'"></app-flight-filter>
 <br>
-
-<p>Enter the rate here</p><input #ratePlaceHolder type="text" placeholder="1.0"
-(keyup)="assignRate(ratePlaceHolder.value)">
-<br>
-<br>
-<br>
-
+<p>Currency Conversion Rate <input #rate (keyup)='conversionRate=rate.value'></p>
 <table *ngIf="showBuyFlights" class="table  table-condensed table-responsive">
 <thead><tr><th>&nbsp;</th><th>Flight</th><th>From</th><th>To</th><th>Departure Day</th><th>Departure Time</th><th>Arrival Day</th><th>Arrival Time</th><th>Price</th></tr></thead>
   <tbody>
@@ -20,7 +14,7 @@
     <td>{{flight.departTime}}</td>
     <td>{{flight.arriveDay}}</td>
     <td>{{flight.arriveTime}}</td>
-    <td>{{flight.price | currencyConversion: rate}}</td>
+    <td>{{flight.price | currencyConversion : conversionRate}}</td>
   </tr>
   </tbody>
 </table>

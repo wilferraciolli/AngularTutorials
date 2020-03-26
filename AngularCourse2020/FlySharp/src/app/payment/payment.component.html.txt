@@ -1,29 +1,40 @@
-<div>
-<h3>Purchase this flight</h3>
+
 <div class="row">
-  <div class="col-md-2 col-xs-4 form-label">Flight Number : </div>
-  <div class="col-md-1 col-xs-8"> TODO - Flight number </div>
-  <div class="col-md-1 col-xs-4 form-label">Origin : </div>
-  <div class="col-md-1  col-xs-8"> TODO - origin </div>
-  <div class="col-md-1 col-xs-4 form-label">Destination : </div>
-  <div class="col-md-1  col-xs-8"> TODO - Destination </div>
-</div>
-<div class="row">
-  <h4 class="col-md-1 col-xs-4 form-label">Departure: </h4>
-</div>
-<div class="row">
-  <div class="col-md-1 col-xs-4 form-label">Day: </div>
-  <div class="col-md-1 col-xs-8"> TODO - departDay </div>
-  <div class="col-md-1 col-xs-4 form-label">Time: </div>
-  <div class="col-md-1  col-xs-8"> TODO - departTime </div>
-</div>
-<div class="row">
-<h4 class="col-md-1 col-xs-4 form-label">Arrive: </h4>
-</div>
-<div class="row">
-  <div class="col-md-1 col-xs-4 form-label">Day: </div>
-  <div class="col-md-1  col-xs-8"> TODO - arriveDay </div>
-  <div class="col-md-1 col-xs-4 form-label">Time: </div>
-  <div class="col-md-1  col-xs-8"> TODO - arriveTime</div>
-</div>
+  <div class="form-outline col-md-12">
+    <form>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea class="form-control" id="address" name="address" placeholder="Address" rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label for="cardNum">Card Number</label>
+        <input type="text" class="form-control" id="cardNum" name="cardNum" placeholder="Card Number">
+      </div>
+      <div class="form-group">
+        <label for="cardType">Card Type</label>
+        <select type="text" class="form-control" id="cardType" name="cardType" placeholder="Card Type">
+          <option>VISA</option>
+          <option>AMEX</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="expDate">Card Expiry</label>
+        <input type="month" class="form-control" id="expDate" name="expDate">
+      </div>
+	<button type="submit" class="btn btn-secondary"  required>Buy Flight</button>
+    </form>
+
+  </div>
 </div>

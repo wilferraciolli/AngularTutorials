@@ -27,3 +27,46 @@
     <div class="col-md-1  col-xs-8">{{selectedFlight?.arriveTime}}</div>
   </div>
 </div>
+
+<div class="row">
+  <div class="form-outline col-md-12">
+    <form [formGroup]="payForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name">
+        <div *ngIf="!payForm.controls.name.valid"> Invalid name</div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea class="form-control" id="address" formControlName="address" placeholder="Address" rows="4" ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email" >
+        <div *ngIf="!payForm.controls.email.valid">You must provide a valid email</div>
+      </div>
+
+      <div class="form-group">
+        <label for="cardNum">Card Number</label>
+        <input type="text" class="form-control" id="cardNum" formControlName="cardNum" placeholder="Card Number" >
+      </div>
+      <div class="form-group">
+        <label for="cardType">Card Type</label>
+        <select type="text" class="form-control" id="cardType" formControlName="cardType" placeholder="Card Type" >
+          <option>VISA</option>
+          <option>AMEX</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="expDate">Card Expiry</label>
+        <input type="month" class="form-control" id="expDate" formControlName="expDate" >
+      </div>
+	<button type="submit" class="btn btn-secondary" [disabled]="!payForm.valid">Buy Flight</button>
+    </form>
+
+  </div>
+</div>
+<p>Form value : {{payForm.value | json}}</p>
