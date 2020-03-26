@@ -42,6 +42,7 @@ class MockFlightFilterComponent {
   public label: string;
   @Input()
   public initialValue: string;
+
   public onFilterChange(flight: string) {}
 
 }
