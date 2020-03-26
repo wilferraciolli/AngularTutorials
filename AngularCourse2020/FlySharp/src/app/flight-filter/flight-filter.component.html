@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-md-2 ">
+    Filter flights by {{label}}:
+  </div>
+  <div class="col-md-2 ">
+    <input [value]="initialValue" #filter (keyup)="onFilterEnter(filter.value)">
+  </div>
+</div>

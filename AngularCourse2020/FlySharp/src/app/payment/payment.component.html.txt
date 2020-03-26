@@ -1,0 +1,29 @@
+<div>
+<h3>Purchase this flight</h3>
+<div class="row">
+  <div class="col-md-2 col-xs-4 form-label">Flight Number : </div>
+  <div class="col-md-1 col-xs-8"> TODO - Flight number </div>
+  <div class="col-md-1 col-xs-4 form-label">Origin : </div>
+  <div class="col-md-1  col-xs-8"> TODO - origin </div>
+  <div class="col-md-1 col-xs-4 form-label">Destination : </div>
+  <div class="col-md-1  col-xs-8"> TODO - Destination </div>
+</div>
+<div class="row">
+  <h4 class="col-md-1 col-xs-4 form-label">Departure: </h4>
+</div>
+<div class="row">
+  <div class="col-md-1 col-xs-4 form-label">Day: </div>
+  <div class="col-md-1 col-xs-8"> TODO - departDay </div>
+  <div class="col-md-1 col-xs-4 form-label">Time: </div>
+  <div class="col-md-1  col-xs-8"> TODO - departTime </div>
+</div>
+<div class="row">
+<h4 class="col-md-1 col-xs-4 form-label">Arrive: </h4>
+</div>
+<div class="row">
+  <div class="col-md-1 col-xs-4 form-label">Day: </div>
+  <div class="col-md-1  col-xs-8"> TODO - arriveDay </div>
+  <div class="col-md-1 col-xs-4 form-label">Time: </div>
+  <div class="col-md-1  col-xs-8"> TODO - arriveTime</div>
+</div>
+</div>
