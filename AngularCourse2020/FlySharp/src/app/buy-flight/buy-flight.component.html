@@ -1,4 +1,4 @@
-<app-flight-filter [initialValue]="originFilter" (filterEmitter) = "onFilterChange($event)" label='Origin'></app-flight-filter>
+<app-flight-filter (filterEmitter) = "onFilterChange($event)" label='Origin' [initialValue]='originFilter'></app-flight-filter>
 <app-flight-filter (filterEmitter)="onDestinationFilterChange($event)" [label]="'Destination'"></app-flight-filter>
 <br>
 <table *ngIf="showBuyFlights" class="table  table-condensed table-responsive">

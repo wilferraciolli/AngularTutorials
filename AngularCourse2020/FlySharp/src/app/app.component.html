@@ -1,20 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button (click)='toggleNavbar()' class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
+  <button (click)='toggleNavbar()' class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }"  id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink='/home'>Home</a></li>
+      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink='/home'>Home</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink='/buy'>Buy Flights</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink='/myflights'>My Flights</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink='/account'>Account</a></li>
     </ul>
   </div>
 </nav>
-
 <main class="container-fluid">
   <router-outlet></router-outlet>
 </main>

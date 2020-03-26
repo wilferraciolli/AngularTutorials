@@ -6,6 +6,9 @@ import {Component, DebugElement, Input} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {Flight} from '../model/flight';
 import {FLIGHTS, MYFLIGHTS} from '../model/mock-flights';
+import {ActivatedRoute, Params} from '@angular/router';
+import {from, Observable, of} from 'rxjs';
+
 
 class MockFlightsService {
 
@@ -24,7 +27,7 @@ class MockFlightsService {
   selector: 'app-payment',
   template: ''
 })
-export class MockAppPaymentComponent {
+class MockAppPaymentComponent {
   @Input()
   public selectedFlight: Flight;
 
@@ -34,9 +37,11 @@ export class MockAppPaymentComponent {
   selector: 'app-flight-filter',
   template: ''
 })
-export class MockFlightFilterComponent {
+class MockFlightFilterComponent {
   @Input()
   public label: string;
+  @Input()
+  public initialValue: string;
   public onFilterChange(flight: string) {}
 
 }
@@ -51,8 +56,17 @@ describe('BuyFlightComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BuyFlightComponent, MockAppPaymentComponent, MockFlightFilterComponent ],
-      providers: [{provide: FlightsService,
-        useValue: mockFlightsService }]
+      providers: [{
+                    provide: FlightsService,
+                    useValue: mockFlightsService
+                  },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{id: 1}]),
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
