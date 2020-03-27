@@ -12,16 +12,19 @@ import { MyFlightsComponent } from './my-flights/my-flights.component';
 import {AccountsModule} from './accounts/accounts.module';
 import { CurrencyConversionPipe } from './currency-conversion/currency-conversion.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TimeDirective } from './time.directive';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe
+    AppComponent, HomeComponent, BuyFlightComponent, PaymentComponent, FlightFilterComponent, MyFlightsComponent, CurrencyConversionPipe, TimeDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [FlightsService],
   bootstrap: [AppComponent],

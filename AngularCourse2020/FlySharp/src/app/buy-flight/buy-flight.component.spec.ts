@@ -15,8 +15,16 @@ class MockFlightsService {
 
   constructor() { }
 
-  public getFlights(): Flight[] {
-    return FLIGHTS;
+  public getFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
+  }
+
+  public getChunkOfFlights(): Observable<Flight[]> {
+    return of<Flight[]>( FLIGHTS);
+  }
+
+  public getNumberOfFlights(): Observable<number> {
+    return of<number>( 10);
   }
 
   public getMyFlights(): Flight[] {

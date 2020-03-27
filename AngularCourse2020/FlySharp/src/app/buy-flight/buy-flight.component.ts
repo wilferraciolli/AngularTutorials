@@ -15,10 +15,13 @@ export class BuyFlightComponent implements OnInit {
   _flights: Flight[];
   showBuyFlights = true;
   selectedFlight: Flight;
+  errorMessage: string;
   originFilter: string = null;
   destinationFilter: string = null;
 conversionRate = 4.0;
 
+  nextFlightIndex = 20;
+  numFlights = 0;
 
   constructor(private flightsService: FlightsService, private activatedRoute: ActivatedRoute ) {}
 
@@ -36,11 +39,49 @@ conversionRate = 4.0;
         this.originFilter = params.origin;
       }
     });
-    this._flights = this.flightsService.getFlights();
+
+
+    const flightStream = this.flightsService.getChunkOfFlights(0, 20);
+    flightStream.subscribe(
+      (flights: Flight[]) => {this._flights = flights; console.log(this.flights); this.showBuyFlights = true; },
+      (error: string) => this.errorMessage = error
+    );
+
+    // Get the number of flights available
+    this.flightsService.getNumberOfFlights().subscribe(
+      num => {console.log(num); this.numFlights = num; },
+      (error: string) => this.errorMessage = error);
   }
 
   onClickBuyFlights() {
     this.showBuyFlights = !this.showBuyFlights;
+  }
+
+
+  onNext() {
+
+    let numFlights = 20;
+    if (this.nextFlightIndex + numFlights > this.numFlights) {
+      numFlights = this.numFlights = this.numFlights; // Adjsust the number of flights so we don't try and load ones that are not available
+    }
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex, numFlights).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
+      (error: string) => this.errorMessage = error);
+    if (this.nextFlightIndex <= this.numFlights) {
+      this.nextFlightIndex += 20; // Move the flightIndex on if there are more flights
+    }
+  }
+
+  onPrevious() {
+      // Don't load flights pre 0
+    if (this.nextFlightIndex > 20) {
+      this.nextFlightIndex -= 20;
+    } else {
+      this.nextFlightIndex = 0;
+    }
+    this.flightsService.getChunkOfFlights(this.nextFlightIndex, 20).subscribe(
+      (flights: Flight[]) => { this._flights = flights; this.showBuyFlights = true; },
+      (error: string) => this.errorMessage = error);
   }
 
   get flights(): Flight[] {
@@ -74,5 +115,7 @@ conversionRate = 4.0;
   onFlightClick(flight: Flight) {
     this.selectedFlight = flight;
   }
+
+
 }
 
