@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const MODULES = [
   MatButtonModule,
@@ -35,6 +36,7 @@ const MODULES = [
   MatPaginatorModule,
   MatRadioModule,
   MatSelectModule,
+  MatSidenavModule,
   MatSnackBarModule,
   MatSortModule,
   MatTableModule,

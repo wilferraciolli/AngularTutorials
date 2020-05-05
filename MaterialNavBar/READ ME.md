@@ -11,3 +11,10 @@ install angular material and the cdk
     
 install animations
     ```npm install --save @angular/animations```
+    
+install gesture
+    ```npm install --save hammerjs```
+
+Then add icons and fonts to the index.html, under the head tag
+    ```  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">```
