@@ -1,17 +1,19 @@
-.example-container {
-  width: 500px;
-  height: 360px;
-  margin: 10px;
-  border: 1px solid #555;
+.app-sidenav-container {
+  flex: 1;
+  position: fixed;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  min-height: 100%;
 }
 
-.example-sidenav-content {
+.app-sidenav-content {
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
 }
 
-.example-sidenav {
-  padding: 20px;
+.app-sidenav {
+  width: 240px;
 }
