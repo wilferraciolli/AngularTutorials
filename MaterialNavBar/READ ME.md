@@ -18,3 +18,7 @@ install gesture
 Then add icons and fonts to the index.html, under the head tag
     ```  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">```
+
+
+This project adds a sidenav on the left that has a side menu navigation 
+paased in as a component.
