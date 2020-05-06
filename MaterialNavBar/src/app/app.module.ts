@@ -9,6 +9,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ToolbarComponent,
     MainContentComponent,
     SideNavComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    WrapperComponent
   ],
   imports: [
     AppRoutingModule,
