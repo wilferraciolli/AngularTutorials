@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "ec1cd5d2-3d32-47f0-92e4-1677041242e9"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-maps-project": {
+    "ModalComponent": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-maps-project",
+            "outputPath": "dist/ModalComponent",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-maps-project:build"
+            "browserTarget": "ModalComponent:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-maps-project:build:production"
+              "browserTarget": "ModalComponent:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-maps-project:build"
+            "browserTarget": "ModalComponent:build"
           }
         },
         "test": {
@@ -116,16 +119,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "my-maps-project:serve"
+            "devServerTarget": "ModalComponent:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-maps-project:serve:production"
+              "devServerTarget": "ModalComponent:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "my-maps-project"
+  "defaultProject": "ModalComponent"
 }
