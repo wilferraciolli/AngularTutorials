@@ -12,8 +12,7 @@ export class DialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA)
-    public dialogData: DialogInterface,
+    @Inject(MAT_DIALOG_DATA) public dialogData: DialogInterface,
     public stateService: StateService
   ) { }
 
