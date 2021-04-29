@@ -14,3 +14,6 @@ This project shows how to user router outlet within different modules
     
 ##end point with mocked data
     http://angular-material-api.azurewebsites.net/users
+    
+
+This project if run with npm start, it will use port 4201
