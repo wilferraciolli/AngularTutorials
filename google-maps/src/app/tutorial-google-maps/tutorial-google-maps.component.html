@@ -1,4 +1,12 @@
-<p>tutorial-google-maps works!</p>
 <div *ngIf="apiLoaded | async">
-  <google-map [options]="options"></google-map>
+
+
+
+  <google-map [options]="options" (mapClick)="addMarker($event)">
+    <map-marker #markerElem *ngFor="let markerPosition of markerPositions"
+                [position]="markerPosition"
+                [options]="markerOptions">
+    </map-marker>
+    <map-info-window>Hello Google Maps</map-info-window>
+  </google-map>
 </div>
