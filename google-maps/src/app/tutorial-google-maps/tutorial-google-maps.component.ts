@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { LocationService } from '../services/location.service';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+
 
 @Component({
   selector: 'app-tutorial-google-maps',
@@ -15,6 +16,8 @@ export class TutorialGoogleMapsComponent implements OnInit {
 
   apiLoaded: Observable<boolean>;
 
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+
   options: google.maps.MapOptions = {
     center: { lat: 64.48113363780652, lng: 16.33826752001327 },
     zoom: 15
@@ -23,7 +26,7 @@ export class TutorialGoogleMapsComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
     label: 'Label',
-    title: 'Title'
+    title: 'Title visible on mouse holover'
   };
   markerPositions: google.maps.LatLngLiteral[] = [];
 
@@ -49,7 +52,7 @@ export class TutorialGoogleMapsComponent implements OnInit {
       // this.addMarker(latLng);
     });
 
-    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyCvlfTh8ZeT9iMX8jRYksQbBSoaxTFW2f0', 'callback')
+    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyC83ynFZWgOl69vxNOc0ms9i-bhl7XCZXE', 'callback')
       .pipe(
         map(() => true),
         catchError(() => of(false)),
@@ -60,4 +63,7 @@ export class TutorialGoogleMapsComponent implements OnInit {
   }
 
 
+  markerClicked(event: MouseEvent) {
+    console.log(event);
+  }
 }

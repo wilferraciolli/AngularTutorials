@@ -1,11 +1,10 @@
 <div *ngIf="apiLoaded | async">
 
-
-
   <google-map [options]="options" (mapClick)="addMarker($event)">
     <map-marker #markerElem *ngFor="let markerPosition of markerPositions"
                 [position]="markerPosition"
-                [options]="markerOptions">
+                [options]="markerOptions"
+    (click)="markerClicked($event)">
     </map-marker>
     <map-info-window>Hello Google Maps</map-info-window>
   </google-map>
