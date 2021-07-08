@@ -3,10 +3,12 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { TutorialGoogleMapsComponent } from './tutorial-google-maps/tutorial-google-maps.component';
+import { MarkerComponent } from './marker/marker.component';
 
 @NgModule({
   declarations: [
     TutorialGoogleMapsComponent,
+    MarkerComponent
   ],
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { TutorialGoogleMapsComponent } from './tutorial-google-maps/tutorial-goo
   ],
   exports: [
     TutorialGoogleMapsComponent,
+    MarkerComponent
   ],
 })
 export class TutorialGoogleMapsModule {}

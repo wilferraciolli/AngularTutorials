@@ -6,7 +6,6 @@ import { catchError, map } from 'rxjs/operators';
 import { LocationService } from '../services/location.service';
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
 
-
 @Component({
   selector: 'app-tutorial-google-maps',
   templateUrl: './tutorial-google-maps.component.html',
@@ -16,7 +15,8 @@ export class TutorialGoogleMapsComponent implements OnInit {
 
   apiLoaded: Observable<boolean>;
 
-  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+  // @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
   options: google.maps.MapOptions = {
     center: { lat: 64.48113363780652, lng: 16.33826752001327 },
@@ -25,18 +25,11 @@ export class TutorialGoogleMapsComponent implements OnInit {
 
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
-    label: 'Label',
+    label: 'Label defined',
     title: 'Title visible on mouse holover'
   };
   markerPositions: google.maps.LatLngLiteral[] = [];
 
-  addMarker1(latLng: any) {
-    this.markerPositions.push(latLng);
-  }
-  addMarker(event: google.maps.MapMouseEvent) {
-    console.log(event.latLng.toJSON());
-    this.markerPositions.push(event.latLng.toJSON());
-  }
   constructor(httpClient: HttpClient,
               locationService: LocationService) {
     locationService.getPosition().then(pos => {
@@ -52,18 +45,32 @@ export class TutorialGoogleMapsComponent implements OnInit {
       // this.addMarker(latLng);
     });
 
-    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyC83ynFZWgOl69vxNOc0ms9i-bhl7XCZXE', 'callback')
+    this.apiLoaded = httpClient.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyC83ynFZWgOl69vxNOc0ms9i-bhl7XCZXE&libraries=visualization', 'callback')
       .pipe(
         map(() => true),
         catchError(() => of(false)),
       );
   }
 
+  addMarker(event: google.maps.MapMouseEvent) {
+    console.log(event.latLng.toJSON());
+    this.markerPositions.push(event.latLng.toJSON());
+  }
+
   ngOnInit(): void {
   }
 
-
   markerClicked(event: MouseEvent) {
     console.log(event);
+  }
+
+  openInfoWindow(marker: MapMarker, bla: any) {
+
+    console.log('The value passed from the marker is', bla);
+
+    console.log(marker.getLabel());
+    console.log(marker.getTitle());
+    // console.log(marker);
+    this.infoWindow.open(marker);
   }
 }
