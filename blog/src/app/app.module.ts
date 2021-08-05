@@ -14,6 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SideNavNavigationComponent } from './side-nav-navigation/side-nav-navigation.component';
 import { ArticleActionComponent } from './article-action/article-action.component';
+import { ArticleTagsComponent } from './article-tags/article-tags.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ArticleActionComponent } from './article-action/article-action.componen
     AboutComponent,
     PortfolioComponent,
     SideNavNavigationComponent,
-    ArticleActionComponent
+    ArticleActionComponent,
+    ArticleTagsComponent
   ],
   imports: [
     BrowserModule,
