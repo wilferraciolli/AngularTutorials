@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SideNavNavigationComponent } from './side-nav-navigation/side-nav-navigation.component';
+import { ArticleActionComponent } from './article-action/article-action.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SideNavNavigationComponent } from './side-nav-navigation/side-nav-navig
     HomeComponent,
     AboutComponent,
     PortfolioComponent,
-    SideNavNavigationComponent
+    SideNavNavigationComponent,
+    ArticleActionComponent
   ],
   imports: [
     BrowserModule,
