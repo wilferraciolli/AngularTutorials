@@ -1,0 +1,27 @@
+
+.footer {
+  padding: 15px 0 15px 0;
+  background-color: #112433;
+  width: 100%;
+}
+
+.footer-container {
+  display: grid;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: "side main main main";
+}
+
+.footer-left {
+  grid-area: side;
+}
+
+.footer-right {
+  grid-area: main;
+}
+
+.footer span {
+  color: #e2e9ed;
+}

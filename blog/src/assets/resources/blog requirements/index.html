@@ -3,134 +3,239 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Blog</title>
 </head>
 
-<body>
-
-<header>
-  <div class="left"><img src="./assets/logo.png" alt=""></div>
-  <div class="right"><h1>WEB DESIGN BLOG</h1></div>
-
+<body class=" ">
+<header class="header">
+  <div class="header-container">
+    <div class="header-logo">
+      <img src="./assets/logo.png" alt="" class="logo">
+    </div>
+    <div class="header-title"><h1>WEB DESIGN BLOG</h1>
+    </div>
+    <div class="header-menu" onclick="openMenu(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
 </header>
-<nav>
-  <ul>
-    <li>HOME</li>
-    <li>ABOUT</li>
-    <li>PORTOFOLIO</li>
-    <li>BLOG</li>
-  </ul>
+<!--
+  1. read css selector cheat sheet
+  2. do css selectory game - diner
+  3. open sliding menu when menu button is clicked. (add/remove navigation-open class to body, update button text to say close)
+
+ -->
+
+<nav class="navigation">
+  <div class="navigation-container">
+    <div class="navigation-left"></div>
+    <div class="navigation-right">
+      <ul>
+        <li>HOME</li>
+        <li>ABOUT</li>
+        <li>PORTOFOLIO</li>
+        <li>BLOG</li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <section>
-  <article>
-    <aside>
-      <button>Thumbs up</button>
-      <span></span>
-      <button>Thumbs up</button>
-    </aside>
-    <div>
-      <header>Header</header>
-      <div>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-          centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        </p>
-        <p> It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-          of
-          Lorem Ipsum.
-        </p>
+  <article class="blogPost">
+    <div class="blogPost-container">
+      <div class="sectionContent">
+        <h3>Heading one</h3>
+        <div class="sectionContentText">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+            It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+          <br>
+          <p> It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus
+            PageMaker including versions
+            of
+            Lorem Ipsum.
+          </p>
+        </div>
+        <ul>
+          <li>#tag1</li>
+          <li>#tag2</li>
+          <li>#tag3</li>
+        </ul>
       </div>
-      <ul>
-        <li>#tag1</li>
-        <li>#tag2</li>
-        <li>#tag3</li>
-      </ul>
+      <aside>
+        <div class="postInteraction">
+          <button class="thumbsUp class22" type="button"><img></button>
+          <span>0</span>
+          <button class="thumbsDown" type="button"><img></button>
+        </div>
+      </aside>
     </div>
   </article>
 
-  <article>
-    <aside>
-      <button>Thumbs up</button>
-      <span></span>
-      <button>Thumbs up</button>
-    </aside>
-    <div>
-      <header>Header</header>
-      <div>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-          centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        </p>
-        <p> It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-          of
-          Lorem Ipsum.
-        </p>
+  <article class="blogPost">
+    <div class="blogPost-container">
+      <div class="sectionContent">
+        <h3>Heading one</h3>
+        <div class="sectionContentText">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+            It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+          <br>
+          <p> It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus
+            PageMaker including versions
+            of
+            Lorem Ipsum.
+          </p>
+        </div>
+        <ul>
+          <li>#tag1</li>
+          <li>#tag2</li>
+          <li>#tag3</li>
+        </ul>
       </div>
-      <ul>
-        <li>#tag1</li>
-        <li>#tag2</li>
-        <li>#tag3</li>
-      </ul>
+      <aside>
+        <div class="postInteraction">
+          <button class="thumbsUp class22" type="button"><img></button>
+          <span>0</span>
+          <button class="thumbsDown" type="button"><img></button>
+        </div>
+      </aside>
     </div>
   </article>
-  <article>
-    <aside>
-      <button>Thumbs up</button>
-      <span></span>
-      <button>Thumbs up</button>
-    </aside>
-    <div>
-      <header>Header</header>
-      <div>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-          centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        </p>
-        <p> It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-          of
-          Lorem Ipsum.
-        </p>
+  <article class="blogPost">
+    <div class="blogPost-container">
+      <div class="sectionContent">
+        <h3>Heading one</h3>
+        <div class="sectionContentText">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+            It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+          <br>
+          <p> It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus
+            PageMaker including versions
+            of
+            Lorem Ipsum.
+          </p>
+        </div>
+        <ul>
+          <li>#tag1</li>
+          <li>#tag2</li>
+          <li>#tag3</li>
+        </ul>
       </div>
-      <ul>
-        <li>#tag1</li>
-        <li>#tag2</li>
-        <li>#tag3</li>
-      </ul>
+      <aside>
+        <div class="postInteraction">
+          <button class="thumbsUp class22" type="button"><img></button>
+          <span>0</span>
+          <button class="thumbsDown" type="button"><img></button>
+        </div>
+      </aside>
     </div>
   </article>
-  <article>
-    <aside>
-      <button>Thumbs up</button>
-      <span></span>
-      <button>Thumbs up</button>
-    </aside>
-    <div>
-      <header>Header</header>
-      <div>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-          centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        </p>
-        <p> It was popularised in the 1960s with the release of
-          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-          of
-          Lorem Ipsum.
-        </p>
+  <article class="blogPost">
+    <div class="blogPost-container">
+      <div class="sectionContent">
+        <h3>Heading one</h3>
+        <div class="sectionContentText">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+            It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+          <br>
+          <p> It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus
+            PageMaker including versions
+            of
+            Lorem Ipsum.
+          </p>
+        </div>
+        <ul>
+          <li>#tag1</li>
+          <li>#tag2</li>
+          <li>#tag3</li>
+        </ul>
       </div>
-      <ul>
-        <li>#tag1</li>
-        <li>#tag2</li>
-        <li>#tag3</li>
-      </ul>
+      <aside>
+        <div class="postInteraction">
+          <button class="thumbsUp class22" type="button"><img></button>
+          <span>0</span>
+          <button class="thumbsDown" type="button"><img></button>
+        </div>
+      </aside>
+    </div>
+  </article>
+  <article class="blogPost">
+    <div class="blogPost-container">
+      <div class="sectionContent">
+        <h3>Heading one</h3>
+        <div class="sectionContentText">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+            book.
+            It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          </p>
+          <br>
+          <p> It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus
+            PageMaker including versions
+            of
+            Lorem Ipsum.
+          </p>
+        </div>
+        <ul>
+          <li>#tag1</li>
+          <li>#tag2</li>
+          <li>#tag3</li>
+        </ul>
+      </div>
+      <aside>
+        <div class="postInteraction">
+          <button class="thumbsUp class22" type="button"><img></button>
+          <span>0</span>
+          <button class="thumbsDown" type="button"><img></button>
+        </div>
+      </aside>
     </div>
   </article>
 </section>
 
-<footer><span>Copyright 2021</span></footer>
-
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left"></div>
+    <div class="footer-right">
+      <span>Copyright 2021</span>
+    </div>
+  </div>
+</footer>
+<script src="scrip.js"></script>
 </body>
 </html>

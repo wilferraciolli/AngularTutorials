@@ -1,0 +1,26 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  //color: #FFF;
+  height: 100%;
+
+  section {
+    flex: 1;
+  }
+}
+
+// not sure what this is doing
+body {
+  font-family: 'Prompt', sans-serif;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #43abd6;
+}
