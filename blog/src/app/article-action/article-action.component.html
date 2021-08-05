@@ -1,0 +1,15 @@
+<div class="postInteraction">
+  <button class="thumbsUp" type="button"
+          [disabled]="!enableThumbsUp"
+          (click)="incrementValue()">
+    <img>
+  </button>
+
+  <span>{{likeCount}}</span>
+
+  <button class="thumbsDown" type="button"
+          [disabled]="!enableThumbsDown"
+          (click)="decrementValue()">
+    <img>
+  </button>
+</div>

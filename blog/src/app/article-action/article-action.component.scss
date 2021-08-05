@@ -1,0 +1,42 @@
+.thumbsUp {
+  background-image: url("../../assets/resources/images/thumb-up-dark.png");
+}
+
+.thumbsDown {
+  background-image: url("../../assets/resources/images/thumb-down-dark.png");
+}
+
+//article:nth-child(even) .thumbsUp {
+//  background-image: url("../../assets/resources/images/thumb-up-light.png");
+//}
+//
+//article:nth-child(even) .thumbsDown {
+//  background-image: url("../../assets/resources/images/thumb-down-light.png");
+//}
+
+button {
+  margin: 50px 15px 0px 0px;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  background-position: center;
+  /*background-repeat: no-repeat;*/
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+span {
+  margin: 60px 10px 0px 0px;
+}
+
+@media screen and (max-width: 700px) {
+  span {
+    margin: 20px 10px 0px 0px;
+  }
+
+  button {
+    margin: 10px 15px 10px 0px;
+  }
+}
