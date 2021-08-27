@@ -3,6 +3,7 @@
 }
 
 .blogPost-container {
+  padding-top: 10px;
   display: grid;
   width: 95%;
   max-width: 1200px;
@@ -19,7 +20,23 @@
   grid-area: side;
 }
 
-article:nth-child(even) {
+//article:nth-child(odd) {
+//  background-color: #7a3052;
+//  color: white;
+//}
+
+//article:nth-child(even) {
+//  background-color: #e2e9ed;
+//  color: #112433;
+//}
+
+article {
+  background-color: #e2e9ed;
+  color: #112433;
+}
+
+// class applied for when the article is even
+.darkColor {
   background-color: #7a3052;
   color: white;
 }

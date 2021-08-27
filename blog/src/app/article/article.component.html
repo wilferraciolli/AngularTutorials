@@ -1,4 +1,4 @@
-<article class="blogPost">
+<article [ngClass]="{'darkColor': even}" class="blogPost">
   <div class="blogPost-container">
     <div class="sectionContent">
       <h3>Heading one</h3>
@@ -22,7 +22,7 @@
       <app-article-tags [tags]="['#tag1', '#tag2', '#tag3']"></app-article-tags>
     </div>
     <aside>
-      <app-article-action></app-article-action>
+      <app-article-action [darkColor]="even"></app-article-action>
     </aside>
   </div>
 </article>

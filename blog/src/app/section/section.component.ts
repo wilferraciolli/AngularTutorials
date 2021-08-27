@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Article} from '../article/article';
 
 @Component({
@@ -16,7 +16,11 @@ export class SectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.articles = [new Article(), new Article()];
+    this.articles = [new Article(), new Article(), new Article(), new Article(), new Article() ,new Article()];
+  }
+
+  isEven(index: number): boolean {
+    return index % 2 === 0;
   }
 
 }

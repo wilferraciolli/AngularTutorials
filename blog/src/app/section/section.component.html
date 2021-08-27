@@ -1,7 +1,7 @@
 
 <!--<app-article></app-article>-->
-<div *ngFor="let article of articles">
-  <app-article></app-article>
+<div *ngFor="let article of articles; let i=index">
+  <app-article [even]="isEven(i)"></app-article>
 </div>
 
 

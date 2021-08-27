@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-article-action',
@@ -7,9 +7,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ArticleActionComponent implements OnInit {
 
+  @Input()
+  darkColor: boolean;
+
   likeCount: number;
   enableThumbsUp: boolean;
   enableThumbsDown: boolean;
+  thumbsUpDark = 'thumbsUpDark';
 
   constructor() {
   }
@@ -22,7 +26,7 @@ export class ArticleActionComponent implements OnInit {
 
   incrementValue(): void {
     this.likeCount++;
-    this.enableThumbsUp = this.likeCount < 9;
+    this.enableThumbsUp = this.likeCount < 10;
     this.enableThumbsDown = true;
   }
 
@@ -30,5 +34,21 @@ export class ArticleActionComponent implements OnInit {
     this.likeCount--;
     this.enableThumbsDown = this.likeCount > 0;
     this.enableThumbsUp = true;
+  }
+
+  getThumbsDownImageBackground(darkColor: boolean) {
+    if (darkColor) {
+      return 'thumbsDownLight';
+    } else {
+      return 'thumbsDownDark';
+    }
+  }
+
+  getThumbsUpImageBackground(darkColor: boolean) {
+    if (darkColor) {
+      return 'thumbsUpLight';
+    } else {
+      return 'thumbsUpDark';
+    }
   }
 }

@@ -1,9 +1,17 @@
-.thumbsUp {
+.thumbsUpDark {
   background-image: url("../../assets/resources/images/thumb-up-dark.png");
 }
 
-.thumbsDown {
+.thumbsDownDark {
   background-image: url("../../assets/resources/images/thumb-down-dark.png");
+}
+
+.thumbsUpLight {
+  background-image: url("../../assets/resources/images/thumb-up-light.png");
+}
+
+.thumbsDownLight {
+  background-image: url("../../assets/resources/images/thumb-down-light.png");
 }
 
 //article:nth-child(even) .thumbsUp {
