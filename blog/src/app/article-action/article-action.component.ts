@@ -36,7 +36,7 @@ export class ArticleActionComponent implements OnInit {
     this.enableThumbsUp = true;
   }
 
-  getThumbsDownImageBackground(darkColor: boolean) {
+  getThumbsDownImageBackground(darkColor: boolean): string {
     if (darkColor) {
       return 'thumbsDownLight';
     } else {
@@ -44,7 +44,7 @@ export class ArticleActionComponent implements OnInit {
     }
   }
 
-  getThumbsUpImageBackground(darkColor: boolean) {
+  getThumbsUpImageBackground(darkColor: boolean): string {
     if (darkColor) {
       return 'thumbsUpLight';
     } else {
