@@ -6,20 +6,12 @@ import { Component } from '@angular/core';
     <div class="app">
       <h1>Sup {{title + '!'}}</h1>
 
-      <button (click)="handleClickEvent()">
-        <span>Change name</span>
+      <button (click)="handleClick(username.value)">
+        <span>Get value</span>
       </button>
 
-      <!--   angulars two way data binding   -->
-      <input type="text"
-             [(ngModel)]="name"
-      >
-
-      <!--   two way data binding   -->
-      <input type="text"
-             [ngModel]="name"
-             (ngModelChange)="handleChange($event)"
-      >
+<!--    create the #ref variable so it can be used within the template to pass values  -->
+       <input type="text" #username>
       <div>{{name}}</div>
     </div>
   `,
@@ -33,12 +25,8 @@ export class AppComponent {
     this.title = 'Title';
   }
 
-  public handleChange(value: string) {
-    this.name = value;
-    console.log(event);
-  }
 
-  public handleClickEvent() {
-    this.name = 'Updated Name';
+  public handleClick(value: string) {
+    this.name = value;
   }
 }
