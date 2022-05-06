@@ -10,8 +10,8 @@ import { Component } from '@angular/core';
         <span>Get value</span>
       </button>
 
-<!--    create the #ref variable so it can be used within the template to pass values  -->
-       <input type="text" #username>
+      <!--    create the #ref variable so it can be used within the template to pass values  -->
+      <input type="text" #username>
       <div>{{name}}</div>
     </div>
   `,
@@ -24,7 +24,6 @@ export class AppComponent {
   constructor() {
     this.title = 'Title';
   }
-
 
   public handleClick(value: string) {
     this.name = value;
