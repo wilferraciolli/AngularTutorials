@@ -10,6 +10,7 @@ import { ProductData } from './products/product-data';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { ProductListComponent } from './products/product-list.component';
 
 /* Feature Modules */
 import { ProductModule } from './products/product.module';
@@ -23,6 +24,7 @@ import { MessageModule } from './messages/message.module';
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent },
+      { path: 'products', component: ProductListComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', component: PageNotFoundComponent }
     ]),
