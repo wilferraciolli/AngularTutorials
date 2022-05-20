@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Product } from './product';
 import { ProductService } from './product.service';
@@ -26,9 +27,14 @@ export class ProductListComponent implements OnInit {
   filteredProducts: Product[] = [];
   products: Product[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    // print out optional params
+    console.log('optional params passed in ', this.route.snapshot.paramMap.get('productType'));
+
     this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
