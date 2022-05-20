@@ -35,6 +35,13 @@ export class ProductListComponent implements OnInit {
     // print out optional params
     console.log('optional params passed in ', this.route.snapshot.paramMap.get('productType'));
 
+    console.log('Query params passed in ', this.route.snapshot.queryParamMap.get('filterBy'));
+    console.log('Query params passed in ', this.route.snapshot.queryParamMap.get('showImage'));
+
+    // get the query params to set initial values to the component
+    this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
+    this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
+
     this.productService.getProducts().subscribe({
       next: products => {
         this.products = products;
