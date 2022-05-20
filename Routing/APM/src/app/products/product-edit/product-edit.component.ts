@@ -16,6 +16,9 @@ export class ProductEditComponent implements OnInit {
 
   product: Product;
 
+  // key pair set to have details about each tab and whether it is valid or not
+  private dataIsValid: { [key: string]: boolean } = {};
+
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private route: ActivatedRoute,
@@ -74,8 +77,20 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  isValid(path?: string): boolean {
+    // validate a specific tab
+    this.validate();
+    if (path) {
+      return this.dataIsValid[path];
+    }
+
+    // validate the whole form
+    return (this.dataIsValid &&
+      Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
+  }
+
   saveProduct(): void {
-    if (true === true) {
+    if (this.isValid()) {
       if (this.product.id === 0) {
         this.productService.createProduct(this.product).subscribe({
           next: () => this.onSaveComplete(`The new ${this.product.productName} was saved`),
@@ -99,5 +114,27 @@ export class ProductEditComponent implements OnInit {
 
     // Navigate back to the product list
     this.router.navigate(['/products']);
+  }
+
+  validate(): void {
+    // Clear the validation object
+    this.dataIsValid = {};
+
+    // 'info' tab
+    if (this.product.productName &&
+      this.product.productName.length >= 3 &&
+      this.product.productCode) {
+      this.dataIsValid['info'] = true;
+    } else {
+      this.dataIsValid['info'] = false;
+    }
+
+    // 'tags' tab
+    if (this.product.category &&
+      this.product.category.length >= 3) {
+      this.dataIsValid['tags'] = true;
+    } else {
+      this.dataIsValid['tags'] = false;
+    }
   }
 }
