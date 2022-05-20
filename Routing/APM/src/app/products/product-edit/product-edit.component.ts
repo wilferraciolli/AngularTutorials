@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from '../../messages/message.service';
 
-import { Product } from '../product';
+import { Product, ProductResolved } from '../product';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -19,11 +19,18 @@ export class ProductEditComponent implements OnInit {
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private route: ActivatedRoute,
-              private router: Router              ) { }
+              private router: Router) { }
 
   public ngOnInit(): void {
 
-    // const id = +this.route.snapshot.paramMap.get('id'); THIS CANNOT BE USED AS THE SNAPSHOT DOES NOT CARE FOR CHANGES ON THE URL, INSTEAD USE THE OBSERVABLE TO KEEP UP WITH CHANGES
+    this.route.data.subscribe(data => {
+      const resolvedData: ProductResolved = data['resolvedData'];
+      this.errorMessage = resolvedData.error;
+      this.onProductRetrieved(resolvedData.product);
+    });
+
+    // const id = +this.route.snapshot.paramMap.get('id'); THIS CANNOT BE USED AS THE SNAPSHOT DOES NOT CARE FOR CHANGES ON THE URL,
+    // INSTEAD USE THE OBSERVABLE TO KEEP UP WITH CHANGES
     this.route.paramMap.subscribe(
       params => {
         const id = +params.get('id');
