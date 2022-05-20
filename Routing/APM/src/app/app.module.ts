@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 // Imports for loading & configuring the in-memory web api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AppRoutingModule } from './app-routing.module';
 import { ProductData } from './products/product-data';
 
 import { AppComponent } from './app.component';
@@ -22,14 +23,9 @@ import { MessageModule } from './messages/message.module';
     BrowserModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
-    RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent },
-      { path: 'products', component: ProductListComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', component: PageNotFoundComponent }
-    ]),
     ProductModule,
     UserModule,
+    AppRoutingModule,
     MessageModule
   ],
   declarations: [
