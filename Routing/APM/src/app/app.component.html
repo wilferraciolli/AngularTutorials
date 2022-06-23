@@ -3,15 +3,19 @@
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link"
-         [routerLink]="['/welcome']">Home</a>
+         [routerLink]="['/welcome']"
+         routerLinkActive="active">Home</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"
-         [routerLink]="['/products', {productType: 'Optional Param Product Type'}]">Product List</a>
+         [routerLink]="['/products', {productType: 'Optional Param Product Type'}]"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}">Product List</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"
-      [routerLink]="['/products', 0, 'edit']">Add Product</a>
+         [routerLink]="['/products', 0, 'edit']"
+         routerLinkActive="active">Add Product</a>
     </li>
   </ul>
   <ul class="navbar-nav ml-auto">
@@ -25,7 +29,7 @@
     <li class="nav-item"
         *ngIf="!isLoggedIn">
       <a class="nav-link"
-      [routerLink]="['/login']">Log In</a>
+         [routerLink]="['/login']">Log In</a>
     </li>
     <li class="nav-item"
         *ngIf="isLoggedIn">
