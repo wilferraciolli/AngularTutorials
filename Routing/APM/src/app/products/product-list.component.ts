@@ -14,11 +14,13 @@ export class ProductListComponent implements OnInit {
   imageMargin = 2;
   showImage = false;
   errorMessage = '';
+  loading = true;
 
   _listFilter = '';
   get listFilter(): string {
     return this._listFilter;
   }
+
   set listFilter(value: string) {
     this._listFilter = value;
     this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
@@ -28,7 +30,8 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   constructor(private productService: ProductService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
 
@@ -46,6 +49,7 @@ export class ProductListComponent implements OnInit {
       next: products => {
         this.products = products;
         this.filteredProducts = this.performFilter(this.listFilter);
+        this.loading = false;
       },
       error: err => this.errorMessage = err
     });
@@ -60,5 +64,4 @@ export class ProductListComponent implements OnInit {
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
-
 }

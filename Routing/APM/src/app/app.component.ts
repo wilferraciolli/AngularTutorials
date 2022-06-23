@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { slideInAnimation } from './app.animation';
 
 import { AuthService } from './user/auth.service';
@@ -12,6 +12,7 @@ import { AuthService } from './user/auth.service';
 })
 export class AppComponent {
   pageTitle = 'Acme Product Management';
+  loading = true;
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
@@ -25,12 +26,29 @@ export class AppComponent {
   }
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    });
+  }
 
   logOut(): void {
     this.authService.logout();
     // call navigate by url to make sure that any parameter on the url is discated
     this.router.navigateByUrl('/welcome');
     console.log('Log out');
+  }
+
+  private checkRouterEvent(routerEvent: Event) {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    }
+
+    // make sure to stop loading when not start
+    if (routerEvent instanceof NavigationEnd ||
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+      this.loading = false;
+    }
   }
 }
