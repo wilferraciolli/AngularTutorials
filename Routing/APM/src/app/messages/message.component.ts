@@ -18,6 +18,10 @@ export class MessageComponent {
               private router: Router) { }
 
   close(): void {
-    // Close the popup.
+    // remove the secondary routing by setting it to null
+    this.router.navigate([
+      { outlets: { popup: null } }
+    ]);
+    this.messageService.isDisplayed = false;
   }
 }
