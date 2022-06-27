@@ -27,7 +27,8 @@
       <a class="nav-link">Welcome {{ userName }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Show Messages</a>
+      <a class="nav-link"
+      [routerLink]="[{ outlets: { popup: ['messages'] }}]">Show Messages</a>
     </li>
     <li class="nav-item"
         *ngIf="!isLoggedIn">
@@ -44,4 +45,18 @@
 <div class="container"
      [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
   <router-outlet #o="outlet"></router-outlet>
+</div>
+<div class="container">
+  <div class="row">
+    <!--  left router outlet  -->
+    <div class="col-md-10"
+         [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
+
+    <!--  left router outlet  -->
+    <div class="col-md-2">
+      <router-outlet name="popup"></router-outlet>
+    </div>
+  </div>
 </div>
