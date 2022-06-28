@@ -8,7 +8,6 @@
       <a [routerLink]="['info']"
          routerLinkActive="active">
         Basic Information <span [ngClass]="{'fa fa-exclamation' : !isValid('info')}"></span>
-<!--        Basic Information <span class="fa fa-exclamation"></span>-->
       </a>
       <a [routerLink]="['tags']"
          routerLinkActive="active">
@@ -16,7 +15,7 @@
       </a>
     </div>
 
-    <!-- Add router otlet for the children components -->
+    <!-- Add router outlet for the children components -->
     <router-outlet></router-outlet>
 
     <div class=" row mb-2">
