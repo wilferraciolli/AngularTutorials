@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     return this.checkLoggedIn(state.url);
   }
 
+  // this canLoad will block preLoadingAllModules to make it work with lazy loading
   public canLoad(route: Route, segments: UrlSegment[]): boolean {
     return this.checkLoggedIn(route.path);
   }
