@@ -9,11 +9,17 @@ import { Component } from '@angular/core';
         Change Name
       </button>
 
+      <!-- two way data binding using property and event binding -->
       <input
         type="text"
-        [value]="name"
-        (input)="handleInput($event)"
-        (blur)="handleBlur($event)"
+        [ngModel]="name"
+        (ngModelChange)="handleChange($event)"
+      >
+
+      <!-- two way data binding -->
+      <input
+        type="text"
+        [(ngModel)]="name"
       >
 
       <div>{{name}}</div>
@@ -22,12 +28,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   name: string = 'Test';
-
-  // this will be handled each time a user leaves the inmput box
-  public handleBlur(event: any): void {
-    this.name = event.target.value;
-    console.log(event);
-  }
 
   // this will be triggered every input of the keyboar
   public handleInput(event: any) {
@@ -38,5 +38,9 @@ export class AppComponent {
     this.name = 'button clicked';
 
     console.log(event);
+  }
+
+  public handleChange(value: string) {
+    this.name = value;
   }
 }
