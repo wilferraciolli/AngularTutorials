@@ -6,14 +6,32 @@ import { Component } from '@angular/core';
   template: `
     <div class="app">
 
+      <!-- Adding classes based on property binding-->
       <h3>Airline passengers</h3>
-    
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
-         {{i}}: {{passenger.fullname}}
+          <span
+            class="status"
+            [class.checked-in]="passenger.checkedIn">   </span>
+          {{i}}: {{passenger.fullname}}
         </li>
       </ul>
-    
+
+      <!-- Adding classes based on nigclass binding-->
+      <h3>Airline passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngClass]="{
+              'checked-in': passenger.checkedIn,
+              'checked-out': !passenger.checkedIn
+            }">  </span>
+          {{i}}: {{passenger.fullname}}
+        </li>
+      </ul>
+
+
     </div>
   `
 })
@@ -35,6 +53,16 @@ export class AppComponent {
       id: 3,
       fullname: 'James',
       checkedIn: true
+    },
+    {
+      id: 4,
+      fullname: 'Louise',
+      checkedIn: true
+    },
+    {
+      id: 5,
+      fullname: 'Tina',
+      checkedIn: false
     }
 
   ];
