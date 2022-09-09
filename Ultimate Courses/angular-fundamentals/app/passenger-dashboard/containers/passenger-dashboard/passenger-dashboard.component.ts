@@ -47,31 +47,46 @@ export class PassengerDashboardComponent implements OnInit {
         id: 3,
         fullname: 'James',
         checkedIn: true,
-        checkInDate: 1490742000000,
+        checkInDate: 1490142000000,
         children: null
       },
       {
         id: 4,
         fullname: 'Louise',
         checkedIn: true,
-        checkInDate: 1490742000000,
+        checkInDate: 1490342000000,
         children: [{ name: 'Jessica', age: 1 }]
       },
       {
         id: 5,
         fullname: 'Tina',
         checkedIn: false,
-        checkInDate: 1490742000000,
+        checkInDate: 1490542000000,
         children: null
       }
     ];
   }
 
-  public handleEdit(event: any): void {
-    console.log(event);
+  public handleEdit(event: Passenger): void {
+    console.log('handling event and updating ', event);
+
+    this.passengers = this.passengers.map((passenger: Passenger) => {
+      // if passenger is the one updated, then update its value
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+
+      return passenger;
+    });
+
+    console.log('list of passengers after updated ', this.passengers);
   }
 
-  public handleRemove(event: any): void {
-    console.log(event);
+  public handleRemove(event: Passenger): void {
+    console.log('handling event and removing ', event);
+
+    this.passengers = this.passengers.filter((passenger: Passenger) =>
+      passenger.id !== event.id);
+
   }
 }
