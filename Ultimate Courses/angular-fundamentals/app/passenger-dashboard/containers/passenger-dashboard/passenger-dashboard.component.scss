@@ -1,0 +1,16 @@
+.status {
+  width: 10px;
+  height: 10px;
+  background: #0000FF;
+  margin: 8px 10px 0 0;
+  float: left;
+  border-radius: 50%;
+
+  &.checked-in {
+    background: #2ecc71;
+  }
+
+  &.checked-out {
+    background: #c0392b;
+  }
+}
