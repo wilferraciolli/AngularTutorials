@@ -1,5 +1,6 @@
 interface Passenger {
   id: number;
   fullname: string;
-  checkedIn: boolean
+  checkedIn: boolean,
+  checkInDate: number | null
 }
