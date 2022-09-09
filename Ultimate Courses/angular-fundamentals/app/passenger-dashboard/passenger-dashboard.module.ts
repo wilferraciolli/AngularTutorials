@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PassengerCountComponent } from './components/passenger-count/passenger-count.component';
+import { PassengerDetailComponent } from './components/passenger-details/passenger-detail.component';
 import { PassengerDashboardComponent } from './containers/passenger-dashboard/passenger-dashboard.component';
 
 @NgModule({
@@ -8,7 +10,9 @@ import { PassengerDashboardComponent } from './containers/passenger-dashboard/pa
   ],
   bootstrap: [],
   declarations: [
-    PassengerDashboardComponent
+    PassengerDashboardComponent,
+    PassengerCountComponent,
+    PassengerDetailComponent
   ],
   exports: [
     PassengerDashboardComponent

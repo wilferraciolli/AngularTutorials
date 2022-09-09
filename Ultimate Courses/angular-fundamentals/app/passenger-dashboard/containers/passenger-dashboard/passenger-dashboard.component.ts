@@ -6,30 +6,35 @@ import { Passenger } from '../../models/passenger.interface';
   selector: 'passenger-dashboard',
   styleUrls: ['passenger-dashboard.component.scss'],
   template: `
-    <h3>Airline passengers</h3>
-    <ul>
-      <li *ngFor="let passenger of passengers; let i = index">
-        <span
-          class="status"
-          [ngClass]="{
+    <div>
+      <passenger-count></passenger-count>
+      <passenger-detail></passenger-detail>
+
+      <h3>Airline passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngClass]="{
               'checked-in': passenger.checkedIn,
               'checked-out': !passenger.checkedIn
             }"></span>
-        {{i}}: {{ passenger.fullname }}
-        <!--        <p>{{ passenger | json }}</p>-->
-        <div class="date">
-          Check-in date:  {{
-          passenger.checkInDate ?
-            (passenger.checkInDate | date: 'yMMMd' | uppercase) :
-            ('Not checked-in' | uppercase)
-          }}
-          <div class="children">
-            <!-- safe navigation to only evaluate expression if preconditions are not null-->
-            Number of children: {{ passenger.children?.length || 0 }}
+          {{i}}: {{ passenger.fullname }}
+          <!--        <p>{{ passenger | json }}</p>-->
+          <div class="date">
+            Check-in date:  {{
+            passenger.checkInDate ?
+              (passenger.checkInDate | date: 'yMMMd' | uppercase) :
+              ('Not checked-in' | uppercase)
+            }}
+            <div class="children">
+              <!-- safe navigation to only evaluate expression if preconditions are not null-->
+              Number of children: {{ passenger.children?.length || 0 }}
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   `
 })
 export class PassengerDashboardComponent implements OnInit {
