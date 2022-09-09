@@ -11,34 +11,10 @@ import { Passenger } from '../../models/passenger.interface';
         [items]="passengers">
       </passenger-count>
 
-      <passenger-detail>
-
+      <passenger-detail
+        *ngFor="let passenger of passengers;"
+        [detail]="passenger">
       </passenger-detail>
-
-
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index">
-          <span
-            class="status"
-            [ngClass]="{
-              'checked-in': passenger.checkedIn,
-              'checked-out': !passenger.checkedIn
-            }"></span>
-          {{i}}: {{ passenger.fullname }}
-          <!--        <p>{{ passenger | json }}</p>-->
-          <div class="date">
-            Check-in date:  {{
-            passenger.checkInDate ?
-              (passenger.checkInDate | date: 'yMMMd' | uppercase) :
-              ('Not checked-in' | uppercase)
-            }}
-            <div class="children">
-              <!-- safe navigation to only evaluate expression if preconditions are not null-->
-              Number of children: {{ passenger.children?.length || 0 }}
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
   `
 })
