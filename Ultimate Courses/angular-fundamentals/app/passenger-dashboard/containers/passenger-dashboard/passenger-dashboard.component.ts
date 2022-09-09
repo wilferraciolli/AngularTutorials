@@ -11,6 +11,11 @@ import { Passenger } from '../../models/passenger.interface';
         [items]="passengers">
       </passenger-count>
 
+      Test
+      <div *ngFor="let passenger of passengers;">
+        {{ passenger.fullname }}
+      </div>
+
       <passenger-detail
         *ngFor="let passenger of passengers;"
         [detail]="passenger"
@@ -68,7 +73,7 @@ export class PassengerDashboardComponent implements OnInit {
   }
 
   public handleEdit(event: Passenger): void {
-    console.log('handling event and updating ', event);
+   // console.log('handling event and updating ', event);
 
     this.passengers = this.passengers.map((passenger: Passenger) => {
       // if passenger is the one updated, then update its value
@@ -78,8 +83,7 @@ export class PassengerDashboardComponent implements OnInit {
 
       return passenger;
     });
-
-    console.log('list of passengers after updated ', this.passengers);
+   // console.log('list of passengers after updated ', this.passengers);
   }
 
   public handleRemove(event: Passenger): void {

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
+import { cache } from 'awesome-typescript-loader/dist/cache';
 import { Passenger } from '../../models/passenger.interface';
 
 @Component({
@@ -46,7 +47,7 @@ import { Passenger } from '../../models/passenger.interface';
     </div>
   `
 })
-export class PassengerDetailComponent implements OnInit {
+export class PassengerDetailComponent implements OnInit, OnChanges {
   @Input()
   detail: Passenger;
 
@@ -61,7 +62,17 @@ export class PassengerDetailComponent implements OnInit {
   constructor() {
   }
 
-  public ngOnInit() {
+  ngOnInit(){
+    console.log('Handling ngOnInit, this is done after onChanges ');
+  }
+
+  public ngOnChanges(changes): void {
+    console.log('Handling ngOnChanges, this is done before onInit ');
+
+    if (changes.detail){
+      // this will prevent the parent from binding to the children passenger, this is used to make sure that only when we are done editing, it will update the parent
+      this.detail = Object.assign({}, changes.detail.currentValue);
+    }
   }
 
   public onNameChange(value: string): void {
@@ -71,7 +82,7 @@ export class PassengerDetailComponent implements OnInit {
 
   public toggleEdit() {
     // when the done button is clicked, then this will be true before setting the editing flag back to false
-    if (this.editing){
+    if (this.editing) {
       this.edit.emit(this.detail);
     }
     this.editing = !this.editing;
