@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Passenger } from '../../models/passenger.interface';
 
 @Component({
@@ -12,7 +12,17 @@ import { Passenger } from '../../models/passenger.interface';
               'checked-in': detail.checkedIn,
               'checked-out': !detail.checkedIn
             }"></span>
-      {{ detail.fullname }}
+      <div *ngIf="editing">
+        <input
+          type="text"
+          [value]="detail.fullname"
+          (input)="onNameChange(name.value)"
+          #name>
+      </div>
+      <div *ngIf="!editing">
+        {{ detail.fullname }}
+      </div>
+
       <!--        <p>{{ passenger | json }}</p>-->
       <div class="date">
         Check-in date:  {{
@@ -20,11 +30,19 @@ import { Passenger } from '../../models/passenger.interface';
           (detail.checkInDate | date: 'yMMMd') :
           ('Not checked-in' | uppercase)
         }}
-        <div class="children">
-          <!-- safe navigation to only evaluate expression if preconditions are not null-->
-          Number of children: {{ detail.children?.length || 0 }}
-        </div>
       </div>
+      <div class="children">
+        <!-- safe navigation to only evaluate expression if preconditions are not null-->
+        Number of children: {{ detail.children?.length || 0 }}
+      </div>
+      <button
+        (click)="toggleEdit()">
+        {{ editing ? 'Done' : 'Edit'}}
+      </button>
+      <button
+        (click)="onRemove()">
+        Delete
+      </button>
     </div>
   `
 })
@@ -32,9 +50,35 @@ export class PassengerDetailComponent implements OnInit {
   @Input()
   detail: Passenger;
 
+  @Output()
+  remove: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  edit: EventEmitter<any> = new EventEmitter();
+
+  editing: boolean = false;
+
   constructor() {
   }
 
   public ngOnInit() {
+  }
+
+  public onNameChange(value: string): void {
+    this.detail.fullname = value;
+    // console.log('Value ', value);
+  }
+
+  public toggleEdit() {
+    // when the done button is clicked, then this will be true before setting the editing flag back to false
+    if (this.editing){
+      this.edit.emit(this.detail);
+    }
+    this.editing = !this.editing;
+  }
+
+  public onRemove() {
+    // reference the event and emit it
+    this.remove.emit(this.detail);
   }
 }
