@@ -5,28 +5,38 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   template: `
     <div class="app">
-      <input
-        type="text"
-        [value]="name"
-        (input)="handleChange($event)"
-      >
 
-      <div *ngIf="name.length > 3">
-        Searching for... {{name}}
-      </div>
+      <h3>Airline passengers</h3>
+    
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+         {{i}}: {{passenger.fullname}}
+        </li>
+      </ul>
+    
     </div>
   `
 })
 export class AppComponent {
   name: string = '';
 
-  // public handleChange(value: string) {
-  //   this.name = value;
-  // }
-  public handleChange(event: Event) {
-    this.name = (event.target as HTMLInputElement).value;
-    console.log((event.target as HTMLInputElement).value);
-    // console.log(value.);
-    // console.log(value);
-  }
+  passengers: Passenger[] = [
+    {
+      id: 1,
+      fullname: 'Steve',
+      checkedIn: true
+    },
+    {
+      id: 2,
+      fullname: 'Rose',
+      checkedIn: false
+    },
+    {
+      id: 3,
+      fullname: 'James',
+      checkedIn: true
+    }
+
+  ];
+
 }
