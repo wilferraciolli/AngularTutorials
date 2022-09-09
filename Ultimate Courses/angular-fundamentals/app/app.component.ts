@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
         </li>
       </ul>
 
-      <!-- Adding classes based on nigclass binding-->
+      <!-- Adding classes based on ngClass binding-->
       <h3>Airline passengers</h3>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
@@ -27,6 +27,30 @@ import { Component } from '@angular/core';
               'checked-in': passenger.checkedIn,
               'checked-out': !passenger.checkedIn
             }">  </span>
+          {{i}}: {{passenger.fullname}}
+        </li>
+      </ul>
+
+      <!-- Adding classes based on styles property binding-->
+      <h3>Airline passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [style.backgroundColor]="(passenger.checkedIn ? '#2ecc71' : '#c0392b')"
+          >  </span>
+          {{i}}: {{passenger.fullname}}
+        </li>
+      </ul>
+
+      <!-- Adding classes based on ngStyle property binding-->
+      <h3>Airline passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngStyle]="{backgroundColor: (passenger.checkedIn ? '#2ecc71' : '#c0392b')}"
+          >  </span>
           {{i}}: {{passenger.fullname}}
         </li>
       </ul>
