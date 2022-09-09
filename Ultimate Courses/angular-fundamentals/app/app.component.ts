@@ -6,13 +6,15 @@ import { Component } from '@angular/core';
   template: `
     <div class="app">
 
-      <!-- Adding classes based on property binding-->
       <h3>Airline passengers</h3>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
           <span
             class="status"
-            [class.checked-in]="passenger.checkedIn"></span>
+            [ngClass]="{
+              'checked-in': passenger.checkedIn,
+              'checked-out': !passenger.checkedIn
+            }"></span>
           {{i}}: {{ passenger.fullname }}
           <p>{{ passenger | json }}</p>
           <div class="date">
@@ -21,6 +23,10 @@ import { Component } from '@angular/core';
               (passenger.checkInDate | date: 'yMMMd' | uppercase) :
               ('Not checked-in' | uppercase)
             }}
+            <div class="children">
+              <!-- safe navigation to only evaluate expression if preconditions are not null-->
+              Number of children: {{ passenger.children?.length || 0 }}
+            </div>
           </div>
         </li>
       </ul>
@@ -36,31 +42,36 @@ export class AppComponent {
       id: 1,
       fullname: 'Steve',
       checkedIn: true,
-      checkInDate: 1490742000000
+      checkInDate: 1490742000000,
+      children: null
     },
     {
       id: 2,
       fullname: 'Rose',
       checkedIn: false,
-      checkInDate: null
+      checkInDate: null,
+      children: [{ name: 'Ted', age: 12 }, { name: 'Chloe', age: 7 }]
     },
     {
       id: 3,
       fullname: 'James',
       checkedIn: true,
-      checkInDate: 1490742000000
+      checkInDate: 1490742000000,
+      children: null
     },
     {
       id: 4,
       fullname: 'Louise',
       checkedIn: true,
-      checkInDate: 1490742000000
+      checkInDate: 1490742000000,
+      children: [{ name: 'Jessica', age: 1 }]
     },
     {
       id: 5,
       fullname: 'Tina',
       checkedIn: false,
-      checkInDate: 1490742000000
+      checkInDate: 1490742000000,
+      children: null
     }
 
   ];
