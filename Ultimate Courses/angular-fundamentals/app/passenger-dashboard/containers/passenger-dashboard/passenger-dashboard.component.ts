@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Passenger } from '../../models/passenger.interface';
+import { PassengerDashboardService } from '../../passernger-dashboar.service';
 
 
 @Component({
@@ -11,7 +12,6 @@ import { Passenger } from '../../models/passenger.interface';
         [items]="passengers">
       </passenger-count>
 
-      Test
       <div *ngFor="let passenger of passengers;">
         {{ passenger.fullname }}
       </div>
@@ -28,52 +28,17 @@ import { Passenger } from '../../models/passenger.interface';
 export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
 
-  constructor() {
+  constructor(private passengerService: PassengerDashboardService) {
   }
 
   public ngOnInit() {
     console.log('ngOnInit passenger component');
-    this.passengers = [
-      {
-        id: 1,
-        fullname: 'Steve',
-        checkedIn: true,
-        checkInDate: 1490742000000,
-        children: null
-      },
-      {
-        id: 2,
-        fullname: 'Rose',
-        checkedIn: false,
-        checkInDate: null,
-        children: [{ name: 'Ted', age: 12 }, { name: 'Chloe', age: 7 }]
-      },
-      {
-        id: 3,
-        fullname: 'James',
-        checkedIn: true,
-        checkInDate: 1490142000000,
-        children: null
-      },
-      {
-        id: 4,
-        fullname: 'Louise',
-        checkedIn: true,
-        checkInDate: 1490342000000,
-        children: [{ name: 'Jessica', age: 1 }]
-      },
-      {
-        id: 5,
-        fullname: 'Tina',
-        checkedIn: false,
-        checkInDate: 1490542000000,
-        children: null
-      }
-    ];
+    this.passengerService.getPassengers()
+        .subscribe((data: Passenger[]) => this.passengers = data);
   }
 
   public handleEdit(event: Passenger): void {
-   // console.log('handling event and updating ', event);
+    // console.log('handling event and updating ', event);
 
     this.passengers = this.passengers.map((passenger: Passenger) => {
       // if passenger is the one updated, then update its value
@@ -83,7 +48,7 @@ export class PassengerDashboardComponent implements OnInit {
 
       return passenger;
     });
-   // console.log('list of passengers after updated ', this.passengers);
+    // console.log('list of passengers after updated ', this.passengers);
   }
 
   public handleRemove(event: Passenger): void {

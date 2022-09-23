@@ -8,7 +8,7 @@ import { Passenger } from '../../models/passenger.interface';
     <div>
       <h3>Airline passengers!</h3>
       <div>
-        Total passengers: {{ items.length }}
+        Total passengers: {{ items?.length }}
         Total checked in: {{ checkedInCount() }}
       </div>
     </div>
