@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Passenger } from '../../models/passenger.interface';
-import { PassengerDashboardService } from '../../passernger-dashboar.service';
+import { PassengerDashboardService } from '../../passenger-dashboar.service';
 
 
 @Component({
@@ -39,23 +39,27 @@ export class PassengerDashboardComponent implements OnInit {
 
   public handleEdit(event: Passenger): void {
     // console.log('handling event and updating ', event);
+    this.passengerService.updatePassenger(event)
+        .subscribe((data: Passenger) => {
+          this.passengers = this.passengers.map((passenger: Passenger) => {
+            // if passenger is the one updated, then update its value
+            if (passenger.id === event.id) {
+              passenger = Object.assign({}, passenger, event);
+            }
 
-    this.passengers = this.passengers.map((passenger: Passenger) => {
-      // if passenger is the one updated, then update its value
-      if (passenger.id === event.id) {
-        passenger = Object.assign({}, passenger, event);
-      }
-
-      return passenger;
-    });
+            return passenger;
+          });
+        });
     // console.log('list of passengers after updated ', this.passengers);
   }
 
   public handleRemove(event: Passenger): void {
-    console.log('handling event and removing ', event);
+    //  console.log('handling event and removing ', event);
 
-    this.passengers = this.passengers.filter((passenger: Passenger) =>
-      passenger.id !== event.id);
-
+    this.passengerService.removePassenger(event)
+        .subscribe((data: Passenger) => {
+          this.passengers = this.passengers.filter((passenger: Passenger) =>
+            passenger.id !== event.id);
+        });
   }
 }

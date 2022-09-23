@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { PassengerCountComponent } from './components/passenger-count/passenger-count.component';
 import { PassengerDetailComponent } from './components/passenger-details/passenger-detail.component';
 import { PassengerDashboardComponent } from './containers/passenger-dashboard/passenger-dashboard.component';
-import { PassengerDashboardService } from './passernger-dashboar.service';
+import { PassengerDashboardService } from './passenger-dashboar.service';
 
 @NgModule({
   imports: [
