@@ -40,6 +40,10 @@ import { Passenger } from '../../models/passenger.interface';
         (click)="onRemove()">
         Delete
       </button>
+      <button
+        (click)="goToPassenger()">
+        View
+      </button>
     </div>
   `
 })
@@ -48,24 +52,27 @@ export class PassengerDetailComponent implements OnInit, OnChanges {
   detail: Passenger;
 
   @Output()
-  remove: EventEmitter<any> = new EventEmitter();
+  remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
   @Output()
-  edit: EventEmitter<any> = new EventEmitter();
+  edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
+  @Output()
+  view: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
   editing: boolean = false;
 
   constructor() {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('Handling ngOnInit, this is done after onChanges ');
   }
 
   public ngOnChanges(changes): void {
     console.log('Handling ngOnChanges, this is done before onInit ');
 
-    if (changes.detail){
+    if (changes.detail) {
       // this will prevent the parent from binding to the children passenger, this is used to make sure that only when we are done editing, it will update the parent
       this.detail = Object.assign({}, changes.detail.currentValue);
     }
@@ -87,5 +94,9 @@ export class PassengerDetailComponent implements OnInit, OnChanges {
   public onRemove() {
     // reference the event and emit it
     this.remove.emit(this.detail);
+  }
+
+  public goToPassenger() {
+    this.view.emit(this.detail);
   }
 }

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Baggage } from '../../models/baggage.interface';
 import { Passenger } from '../../models/passenger.interface';
-import { PassengerDashboardService } from '../../passenger-dashboar.service';
 
 @Component({
   selector: 'passenger-form',
@@ -11,8 +10,6 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
       <form (ngSubmit)="handleSubmit(form.value, form.valid)"
             #form="ngForm"
             novalidate>
-        {{ detail | json }}
-
         <!-- id -->
         <div>
           Passenger Id:
@@ -83,12 +80,14 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
         <!--        <div> Valid: {{ form.valid | json }}</div>-->
         <!--        <div> Invalid: {{ form.invalid | json }} </div>-->
 
-
         <!-- Submit -->
         <button type="submit"
                 [disabled]="form.invalid">
           Update passenger
         </button>
+
+        <br>
+        {{ detail | json }}
       </form>
     </div>
   `
