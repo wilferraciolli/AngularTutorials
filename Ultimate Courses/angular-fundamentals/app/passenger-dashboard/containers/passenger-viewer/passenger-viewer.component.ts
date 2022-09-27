@@ -8,7 +8,9 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
   styleUrls: ['passenger-viewer.component.scss'],
   template: `
     <div>
-      {{ passenger | json }}
+      <passenger-form
+        [detail]="passenger">
+      </passenger-form>
     </div>
   `
 })

@@ -32,10 +32,6 @@ import { Passenger } from '../../models/passenger.interface';
           ('Not checked-in' | uppercase)
         }}
       </div>
-      <div class="children">
-        <!-- safe navigation to only evaluate expression if preconditions are not null-->
-        Number of children: {{ detail.children?.length || 0 }}
-      </div>
       <button
         (click)="toggleEdit()">
         {{ editing ? 'Done' : 'Edit'}}
