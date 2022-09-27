@@ -18,8 +18,13 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
           <input
             type="number"
             name="id"
+            required
+            #id="ngModel"
             [ngModel]="detail?.id"
           >
+          <div *ngIf="id.errors?.required && id.touched" class="error">
+            ID is required
+          </div>
         </div>
 
         <!-- name -->
@@ -28,8 +33,13 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
           <input
             type="text"
             name="fullname"
+            required
+            #fullname="ngModel"
             [ngModel]="detail?.fullname"
           >
+          <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+            Passenger name is required
+          </div>
         </div>
 
         <!-- checked in, toggle event when toggle True or False -->
@@ -63,19 +73,12 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
               {{ item.value }}
             </option>
           </select>
-
-          <!-- angular specific way to bind the selected and value using ngValue -->
-          <select name="baggage"
-                  [ngModel]="detail?.baggage">
-            <option
-              *ngFor="let item of baggage"
-              [ngValue]="item.key">
-              {{ item.value }}
-            </option>
-          </select>
         </div>
 
-        {{ form.value | json }}
+        <!-- Form state -->
+        <div> {{ form.value | json }}</div>
+        <div> Valid: {{ form.valid | json }}</div>
+        <div> Invalid: {{ form.invalid | json }} </div>
       </form>
     </div>
   `
