@@ -34,20 +34,10 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
         <!-- checked in, toggle event when toggle True or False -->
         <div>
           <label>
-            <input type="radio"
-                   [value]="true"
+            <input type="checkbox"
                    name="checkedIn"
                    [ngModel]="detail?.checkedIn"
                    (ngModelChange)="toggleCheckIn($event)">
-            Yes
-          </label>
-          <label>
-            <input type="radio"
-                   [value]="false"
-                   name="checkedIn"
-                   [ngModel]="detail?.checkedIn"
-                   (ngModelChange)="toggleCheckIn($event)">
-            No
           </label>
         </div>
 
