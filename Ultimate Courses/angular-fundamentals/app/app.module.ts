@@ -11,7 +11,7 @@ import { PassengerDashboardModule } from './passenger-dashboard/passenger-dashbo
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
@@ -20,7 +20,7 @@ const routes: Routes = [
     BrowserModule,
     CommonModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
     // custom modules
     PassengerDashboardModule
   ],
@@ -33,4 +33,5 @@ const routes: Routes = [
     NotFoundComponent
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
