@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import * as path from 'path';
 import { PassengerCountComponent } from './components/passenger-count/passenger-count.component';
 import { PassengerDetailComponent } from './components/passenger-details/passenger-detail.component';
 import { PassengerFormComponent } from './components/passenger-form/passenger-form.component';
@@ -11,7 +12,13 @@ import { PassengerViewerComponent } from './containers/passenger-viewer/passenge
 import { PassengerDashboardService } from './passenger-dashboar.service';
 
 const routes: Routes = [
-  { path: 'passengers', component: PassengerDashboardComponent }
+  {
+    path: 'passengers',
+    children: [
+      { path: '', component: PassengerDashboardComponent },
+      { path: ':id', component: PassengerViewerComponent }
+    ]
+  }
 ];
 
 @NgModule({
