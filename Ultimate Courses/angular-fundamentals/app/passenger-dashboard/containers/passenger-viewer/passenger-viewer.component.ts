@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import 'rxjs/add/operator/switchMap';
 import { Passenger } from '../../models/passenger.interface';
 import { PassengerDashboardService } from '../../passenger-dashboar.service';
 
@@ -18,11 +21,20 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
 export class PassengerViewerComponent implements OnInit {
   passenger: Passenger;
 
-  constructor(private passengerService: PassengerDashboardService) {
+  constructor(private passengerService: PassengerDashboardService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.passengerService.getPassenger(1)
+    // print out to see what values are on the path as params
+    // this.route.params
+    //     .subscribe((data: Params) => {
+    //       console.log('Printing the values on the router params ', data);
+    //     });
+
+    this.route.params
+        .switchMap((data: Passenger) => this.passengerService.getPassenger(data.id))
         .subscribe((data: Passenger) => this.passenger = data);
   }
 
@@ -30,7 +42,7 @@ export class PassengerViewerComponent implements OnInit {
     console.log('Received output from child ', event);
     this.passengerService.updatePassenger(event)
         .subscribe((data: Passenger) => {
-          this.passenger = Object.assign({}, this.passenger, event);
+          this.passenger = Object.assign({}, this.passenger, data);
         });
   }
 }

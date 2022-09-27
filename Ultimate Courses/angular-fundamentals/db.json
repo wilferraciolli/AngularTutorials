@@ -18,8 +18,8 @@
       "id": 3,
       "fullname": "James",
       "checkedIn": true,
-      "checkInDate": 1490142000000,
-      "baggage": "none"
+      "baggage": "hand-hold",
+      "checkInDate": 1664281304057
     },
     {
       "id": 4,
