@@ -9,7 +9,8 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
   template: `
     <div>
       <passenger-form
-        [detail]="passenger">
+        [detail]="passenger"
+        (update)="onUpdatePassenger($event)">
       </passenger-form>
     </div>
   `
@@ -25,4 +26,11 @@ export class PassengerViewerComponent implements OnInit {
         .subscribe((data: Passenger) => this.passenger = data);
   }
 
+  public onUpdatePassenger(event: Passenger) {
+    console.log('Received output from child ', event);
+    this.passengerService.updatePassenger(event)
+        .subscribe((data: Passenger) => {
+          this.passenger = Object.assign({}, this.passenger, event);
+        });
+  }
 }

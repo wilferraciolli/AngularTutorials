@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Baggage } from '../../models/baggage.interface';
 import { Passenger } from '../../models/passenger.interface';
 import { PassengerDashboardService } from '../../passenger-dashboar.service';
@@ -8,7 +8,8 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
   styleUrls: ['passenger-form.component.scss'],
   template: `
     <div>
-      <form #form="ngForm"
+      <form (ngSubmit)="handleSubmit(form.value, form.valid)"
+            #form="ngForm"
             novalidate>
         {{ detail | json }}
 
@@ -22,7 +23,8 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
             #id="ngModel"
             [ngModel]="detail?.id"
           >
-          <div *ngIf="id.errors?.required && id.touched" class="error">
+          <div *ngIf="id.errors?.required && id.touched"
+               class="error">
             ID is required
           </div>
         </div>
@@ -37,7 +39,8 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
             #fullname="ngModel"
             [ngModel]="detail?.fullname"
           >
-          <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+          <div *ngIf="fullname.errors?.required && fullname.dirty"
+               class="error">
             Passenger name is required
           </div>
         </div>
@@ -76,9 +79,16 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
         </div>
 
         <!-- Form state -->
-        <div> {{ form.value | json }}</div>
-        <div> Valid: {{ form.valid | json }}</div>
-        <div> Invalid: {{ form.invalid | json }} </div>
+        <!--        <div> {{ form.value | json }}</div>-->
+        <!--        <div> Valid: {{ form.valid | json }}</div>-->
+        <!--        <div> Invalid: {{ form.invalid | json }} </div>-->
+
+
+        <!-- Submit -->
+        <button type="submit"
+                [disabled]="form.invalid">
+          Update passenger
+        </button>
       </form>
     </div>
   `
@@ -86,6 +96,9 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
 export class PassengerFormComponent implements OnInit {
   @Input()
   detail: Passenger;
+
+  @Output()
+  update: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
   baggage: Baggage[] = [
     {
@@ -107,16 +120,21 @@ export class PassengerFormComponent implements OnInit {
 
   ];
 
-  constructor(private passengerService: PassengerDashboardService) {
+  constructor() {
   }
 
   ngOnInit() {
-
   }
 
-  public toggleCheckIn(checkedIn: boolean) {
+  public toggleCheckIn(checkedIn: boolean): void {
     if (checkedIn) {
       this.detail.checkInDate = Date.now();
+    }
+  }
+
+  public handleSubmit(passenger: Passenger, isValid: boolean) {
+    if (isValid) {
+      this.update.emit(passenger);
     }
   }
 }
