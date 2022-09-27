@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Baggage } from '../../models/baggage.interface';
 import { Passenger } from '../../models/passenger.interface';
 import { PassengerDashboardService } from '../../passenger-dashboar.service';
 
@@ -48,7 +49,30 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
                  name="checkInDate"
                  [ngModel]="detail?.checkInDate"
           >
+        </div>
 
+        <!-- luggage, used twice to show the power of ngValue -->
+        <div>
+          Luggage:
+          <select name="baggage"
+                  [ngModel]="detail?.baggage">
+            <option
+              *ngFor="let item of baggage"
+              [value]="item.key"
+              [selected]="item.key === detail?.baggage">
+              {{ item.value }}
+            </option>
+          </select>
+
+          <!-- angular specific way to bind the selected and value using ngValue -->
+          <select name="baggage"
+                  [ngModel]="detail?.baggage">
+            <option
+              *ngFor="let item of baggage"
+              [ngValue]="item.key">
+              {{ item.value }}
+            </option>
+          </select>
         </div>
 
         {{ form.value | json }}
@@ -59,6 +83,26 @@ import { PassengerDashboardService } from '../../passenger-dashboar.service';
 export class PassengerFormComponent implements OnInit {
   @Input()
   detail: Passenger;
+
+  baggage: Baggage[] = [
+    {
+      key: 'none',
+      value: 'No baggage'
+    },
+    {
+      key: 'hand-only',
+      value: 'Hand baggage'
+    },
+    {
+      key: 'hold-only',
+      value: 'Hold baggage'
+    },
+    {
+      key: 'hand-hold',
+      value: 'Hand and hold baggage'
+    }
+
+  ];
 
   constructor(private passengerService: PassengerDashboardService) {
   }
