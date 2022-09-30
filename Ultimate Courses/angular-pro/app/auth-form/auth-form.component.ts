@@ -1,11 +1,15 @@
 import {
-  Component,
-  Output,
-  EventEmitter,
   AfterContentInit,
-  ContentChild,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
   ContentChildren,
-  QueryList, AfterViewInit, ViewChild
+  ElementRef,
+  EventEmitter,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
 
 import { User } from './auth-form.interface';
@@ -14,6 +18,9 @@ import { AuthRememberComponent } from './auth-remember.component';
 
 @Component({
   selector: 'auth-form',
+  styles: [`
+           .email {             border-color: #9f72e6;           }
+           `],
   template: `
     <div>
       <form (ngSubmit)="onSubmit(form.value)"
@@ -24,7 +31,8 @@ import { AuthRememberComponent } from './auth-remember.component';
           Email address
           <input type="email"
                  name="email"
-                 ngModel>
+                 ngModel
+                 #email>
         </label>
         <label>
           Password
@@ -49,8 +57,11 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
 
   showMessage: boolean;
 
-  @ViewChild(AuthMessageComponent)
-  message: AuthMessageComponent;
+  @ViewChild('email') //Query by #ref to get the native element
+  email: ElementRef;
+
+  @ViewChildren(AuthMessageComponent)
+  message: QueryList<AuthMessageComponent>;
 
   @ContentChildren(AuthRememberComponent)
   remember: QueryList<AuthRememberComponent>;
@@ -58,22 +69,32 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
   @Output()
   submitted: EventEmitter<User> = new EventEmitter<User>();
 
-  public ngAfterContentInit(): void {
-    if (this.message) {
-      this.message.days = 30;
-    }
+  constructor(private changeDetection: ChangeDetectorRef) {
+  }
 
+  public ngAfterViewInit(): void {
+    // get the ViewChild bvy #ref and set values on the element
+    console.log(this.email.nativeElement);
+    this.email.nativeElement.setAttribute('placeholder', 'Enter your email address');
+    this.email.nativeElement.classList.add('email');
+    this.email.nativeElement.focus();
+
+    // ViewChildren is only available in this lifecycle
+    if (this.message) {
+      this.message.forEach((message) =>
+        message.days = 30
+      );
+      this.changeDetection.detectChanges();
+    }
+  }
+
+  public ngAfterContentInit(): void {
     if (this.remember) {
-     // console.log(this.remember);
+      // console.log(this.remember);
       this.remember.forEach((item) => {
         item.checked.subscribe((checked: boolean) => this.showMessage = checked);
       });
     }
-  }
-
-  public ngAfterViewInit(): void {
-    // Do not make changes here as Angular will fail on the event lifecycle
-    console.log(this.message.days);
   }
 
   onSubmit(value: User) {
