@@ -5,11 +5,12 @@ import {
   AfterContentInit,
   ContentChild,
   ContentChildren,
-  QueryList
+  QueryList, AfterViewInit, ViewChild
 } from '@angular/core';
 
 import { User } from './auth-form.interface';
-import { AuthRememberComponent } from './auth-remember';
+import { AuthMessageComponent } from './auth-message.component';
+import { AuthRememberComponent } from './auth-remember.component';
 
 @Component({
   selector: 'auth-form',
@@ -35,9 +36,7 @@ import { AuthRememberComponent } from './auth-remember';
         <!-- Grab the Remember me component -->
         <ng-content select="auth-remember"></ng-content>
 
-        <div *ngIf="showMessage">
-          You will be logged in for 30 days
-        </div>
+        <auth-message [style.display]="(showMessage ? 'inherit': 'none')"></auth-message>
 
         <!-- Grab the button tag that was passed onto this component -->
         <ng-content select="button"></ng-content>
@@ -46,9 +45,12 @@ import { AuthRememberComponent } from './auth-remember';
     </div>
   `
 })
-export class AuthFormComponent implements AfterContentInit {
+export class AuthFormComponent implements AfterContentInit, AfterViewInit {
 
   showMessage: boolean;
+
+  @ViewChild(AuthMessageComponent)
+  message: AuthMessageComponent;
 
   @ContentChildren(AuthRememberComponent)
   remember: QueryList<AuthRememberComponent>;
@@ -57,12 +59,21 @@ export class AuthFormComponent implements AfterContentInit {
   submitted: EventEmitter<User> = new EventEmitter<User>();
 
   public ngAfterContentInit(): void {
+    if (this.message) {
+      this.message.days = 30;
+    }
+
     if (this.remember) {
-      console.log(this.remember);
+     // console.log(this.remember);
       this.remember.forEach((item) => {
         item.checked.subscribe((checked: boolean) => this.showMessage = checked);
       });
     }
+  }
+
+  public ngAfterViewInit(): void {
+    // Do not make changes here as Angular will fail on the event lifecycle
+    console.log(this.message.days);
   }
 
   onSubmit(value: User) {

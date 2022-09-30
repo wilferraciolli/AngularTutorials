@@ -16,8 +16,6 @@ import { User } from './auth-form/auth-form.interface';
         (submitted)="loginUser($event)">
         <h3>Login</h3>
         <auth-remember (checked)="rememberUser($event)"></auth-remember>
-        <auth-remember (checked)="rememberUser($event)"></auth-remember>
-        <auth-remember (checked)="rememberUser($event)"></auth-remember>
         <button type="submit">Log in</button>
       </auth-form>
     </div>
@@ -28,7 +26,7 @@ export class AppComponent {
 
   public rememberUser(remember: boolean) {
     this.rememberMe = remember;
-    console.log('Remember me clicked', remember);
+  //  console.log('Remember me clicked', remember);
   }
 
   createUser(user: User) {
