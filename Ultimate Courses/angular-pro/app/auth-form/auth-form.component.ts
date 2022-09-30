@@ -22,8 +22,13 @@ import { User } from './auth-form.interface';
                  name="password"
                  ngModel>
         </label>
+
+        <!-- Grab the Remember me component -->
+        <ng-content select="auth-remember"></ng-content>
+
         <!-- Grab the button tag that was passed onto this component -->
         <ng-content select="button"></ng-content>
+
       </form>
     </div>
   `

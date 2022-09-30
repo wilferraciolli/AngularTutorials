@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
+import { AuthRememberComponent } from './auth-form/auth-remember';
 
 @NgModule({
   imports: [
