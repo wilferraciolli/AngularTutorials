@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
+import { CreditCardDirective } from './credit-card/credit-card.directive';
 import { ExampleOneComponent } from './one/one.component';
 import { ExampleTwoComponent } from './two/two.component';
 
@@ -19,7 +20,8 @@ import { ExampleTwoComponent } from './two/two.component';
   declarations: [
     AppComponent,
     ExampleOneComponent,
-    ExampleTwoComponent
+    ExampleTwoComponent,
+    CreditCardDirective
   ]
 })
 export class AppModule {
