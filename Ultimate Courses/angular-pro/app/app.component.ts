@@ -11,18 +11,6 @@ import { User } from './auth-form/auth-form.interface';
       <div #entry>
 
       </div>
-      <!--      <auth-form-->
-      <!--        (submitted)="createUser($event)">-->
-      <!--        <h3>Create account</h3>-->
-      <!--        <button type="submit">Join us</button>-->
-      <!--      </auth-form>-->
-
-      <!--      <auth-form-->
-      <!--        (submitted)="loginUser($event)">-->
-      <!--        <h3>Login</h3>-->
-      <!--        <auth-remember (checked)="rememberUser($event)"></auth-remember>-->
-      <!--        <button type="submit">Log in</button>-->
-      <!--      </auth-form>-->
     </div>
   `
 })
@@ -40,13 +28,14 @@ export class AppComponent implements AfterContentInit {
 
     // render first component on the dom
     const firstComponent = this.entry.createComponent(authFormFactory);
-    firstComponent.instance.title = 'Create Account';
+    firstComponent.instance.title = 'Create Account';// overriding local properties
+    firstComponent.instance.submitted.subscribe(this.loginUser); //subscribing to outputs
 
     console.log(firstComponent.instance);
   }
 
 
-  createUser(user: User) {
+  loginUser(user: User) {
     console.log('Create account', user);
   }
 }
