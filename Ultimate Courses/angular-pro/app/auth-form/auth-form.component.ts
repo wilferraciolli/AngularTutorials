@@ -7,7 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  QueryList,
+  QueryList, Renderer,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -18,15 +18,19 @@ import { AuthRememberComponent } from './auth-remember.component';
 
 @Component({
   selector: 'auth-form',
-  styles: [`
-           .email {             border-color: #9f72e6;           }
-           `],
+  styles: [
+    `
+      .email {
+        border-color: #9f72e6;
+      }
+    `
+  ],
   template: `
     <div>
       <form (ngSubmit)="onSubmit(form.value)"
             #form="ngForm">
         <!-- Create ngContent to allow content to be passed when creating the component, by default it will take everything between the tag and propject here -->
-        <ng-content select="h3"></ng-content>
+        <h3>{{ title }}</h3>
         <label>
           Email address
           <input type="email"
@@ -41,60 +45,19 @@ import { AuthRememberComponent } from './auth-remember.component';
                  ngModel>
         </label>
 
-        <!-- Grab the Remember me component -->
-        <ng-content select="auth-remember"></ng-content>
-
-        <auth-message [style.display]="(showMessage ? 'inherit': 'none')"></auth-message>
-
-        <!-- Grab the button tag that was passed onto this component -->
-        <ng-content select="button"></ng-content>
-
+        <button type="submit">{{ title }} </button>
       </form>
     </div>
   `
 })
-export class AuthFormComponent implements AfterContentInit, AfterViewInit {
+export class AuthFormComponent {
 
-  showMessage: boolean;
-
-  @ViewChild('email') //Query by #ref to get the native element
-  email: ElementRef;
-
-  @ViewChildren(AuthMessageComponent)
-  message: QueryList<AuthMessageComponent>;
-
-  @ContentChildren(AuthRememberComponent)
-  remember: QueryList<AuthRememberComponent>;
+  title = 'login';
 
   @Output()
   submitted: EventEmitter<User> = new EventEmitter<User>();
 
-  constructor(private changeDetection: ChangeDetectorRef) {
-  }
-
-  public ngAfterViewInit(): void {
-    // get the ViewChild bvy #ref and set values on the element
-    console.log(this.email.nativeElement);
-    this.email.nativeElement.setAttribute('placeholder', 'Enter your email address');
-    this.email.nativeElement.classList.add('email');
-    this.email.nativeElement.focus();
-
-    // ViewChildren is only available in this lifecycle
-    if (this.message) {
-      this.message.forEach((message) =>
-        message.days = 30
-      );
-      this.changeDetection.detectChanges();
-    }
-  }
-
-  public ngAfterContentInit(): void {
-    if (this.remember) {
-      // console.log(this.remember);
-      this.remember.forEach((item) => {
-        item.checked.subscribe((checked: boolean) => this.showMessage = checked);
-      });
-    }
+  constructor() {
   }
 
   onSubmit(value: User) {
