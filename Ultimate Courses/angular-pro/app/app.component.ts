@@ -15,7 +15,12 @@ import { User } from './auth-form/auth-form.interface';
   styleUrls: ['app.component.scss'],
   template: `
     <div>
-      <button (click)="destroyComponent()" *ngIf="component"> Destroy</button>
+      <button (click)="destroyComponent()"
+              *ngIf="component"> Destroy
+      </button>
+      <button (click)="moveComponent()"
+              *ngIf="component"> Move
+      </button>
       <div #entry>
 
       </div>
@@ -36,8 +41,11 @@ export class AppComponent implements AfterContentInit {
     // dynamically create a component, this will get the 'entry' reference in the DOM and instantiate a component
     const authFormFactory = this.componentFactoryResolver.resolveComponentFactory(AuthFormComponent);
 
-    // render first component on the dom
-    this.component = this.entry.createComponent(authFormFactory);
+    // render the first component
+    this.entry.createComponent(authFormFactory);
+
+    // render second component on the dom
+    this.component = this.entry.createComponent(authFormFactory, 0);
     this.component.instance.title = 'Create Account';// overriding local properties
     this.component.instance.submitted.subscribe(this.loginUser); //subscribing to outputs
 
@@ -48,6 +56,10 @@ export class AppComponent implements AfterContentInit {
   public destroyComponent() {
     // console.log(this.component);
     this.component.destroy();// destroy component
+  }
+
+  public moveComponent() {
+    this.entry.move(this.component.hostView, 1);
   }
 
   loginUser(user: User) {
