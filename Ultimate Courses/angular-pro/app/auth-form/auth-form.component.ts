@@ -52,7 +52,7 @@ import { AuthRememberComponent } from './auth-remember.component';
 })
 export class AuthFormComponent {
 
-  title = 'login';
+  title: string = 'Login';
 
   @Output()
   submitted: EventEmitter<User> = new EventEmitter<User>();

@@ -40,9 +40,9 @@ export class AppComponent implements AfterContentInit {
 
     // render first component on the dom
     const firstComponent = this.entry.createComponent(authFormFactory);
+    firstComponent.instance.title = 'Create Account';
 
-    // render first component on the dom
-    const secondComponent = this.entry.createComponent(authFormFactory);
+    console.log(firstComponent.instance);
   }
 
 
