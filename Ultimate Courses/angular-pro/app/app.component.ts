@@ -5,14 +5,9 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   template: `
     <div>
-      <!-- manually pass a component to the ngcontainer -->
-      <ng-container [ngTemplateOutlet]="tmpl">
-      </ng-container>
-
-      <template #tmpl>
-        Wiliam Ferraciolli : CY
-      </template>
-
+        <example-one></example-one>
+        <example-two></example-two>
+        <example-three></example-three>
     </div>
   `
 })
