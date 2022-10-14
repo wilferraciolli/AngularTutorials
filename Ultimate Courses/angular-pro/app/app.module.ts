@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
 import { CreditCardDirective } from './credit-card/credit-card.directive';
+import { MyForDirective } from './my-for/my-for.directive';
 
 import { ExampleOneComponent } from './one/one.component';
 import { TooltipDirective } from './tooltip/tooltip.directive';
@@ -24,7 +25,8 @@ import { ExampleTwoComponent } from './two/two.component';
     ExampleOneComponent,
     ExampleTwoComponent,
     CreditCardDirective,
-    TooltipDirective
+    TooltipDirective,
+    MyForDirective
   ]
 })
 export class AppModule {
