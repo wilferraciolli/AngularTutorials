@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
 import { ExampleOneComponent } from './one/one.component';
-import { ExampleThreeComponent } from './three/three.component';
 import { ExampleTwoComponent } from './two/two.component';
 
 
@@ -20,8 +19,7 @@ import { ExampleTwoComponent } from './two/two.component';
   declarations: [
     AppComponent,
     ExampleOneComponent,
-    ExampleTwoComponent,
-    ExampleThreeComponent
+    ExampleTwoComponent
   ]
 })
 export class AppModule {
