@@ -85,27 +85,65 @@ app-root {
   border-radius: 2px;
   border: 1px solid #dce5f2;
   box-shadow: 0 1px 4px rgba(53,60,72,0.1);
-  padding: 30px;
+  padding: 20px 30px;
 }
-example-one {
-
+form {
+  flex: 1 0;
+  padding: 0 40px;
+}
+input[type="text"] {
+  display: block;
+  border: none;
+  background: #ffffff;
+  font-size: 15px;
+  padding: 6px 30px 6px 10px;
+  border-radius: 1px;
+  border: 1px solid #eeeeee;
+  margin-top: 10px;
 }
 label {
   margin-bottom: 20px;
+  display: block;
 }
 h3 {
   margin-bottom: 20px;
 }
-auth-message {
-  margin-bottom: 20px;
+.tooltip-container {
+  position: relative;
 }
-.users {
-  margin-top: 20px;
-  display: flex;
+.tooltip {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  line-height: 1;
+  font-size: 14px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  white-space: nowrap;
+  display: none;
 }
-example-one {
-  background: rgba(0, 0, 0, 0.1);
+.tooltip--active {
+  display: block;
 }
-example-one, example-two {
-  padding: 10px 15px;
+.tooltip:before {
+  position: absolute;
+  content: ' ';
+  top: 50%;
+  margin-top: -5px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 5px 0;
+  border-color: transparent rgba(0, 0, 0, 0.7) transparent transparent;
+  display: block;
+}
+span {
+  color: #9f72e6;
+  text-decoration: underline;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
 }
