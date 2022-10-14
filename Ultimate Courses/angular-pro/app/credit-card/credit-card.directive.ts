@@ -1,9 +1,13 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[credit-card]'
 })
 export class CreditCardDirective {
+
+  // bind to a host so styles can be added to the host
+  @HostBinding('style.border')
+  border: string;
 
   // create a function to listen to keyboad event on the host(when the directive is applied )
   @HostListener('input', ['$event'])
@@ -16,13 +20,18 @@ export class CreditCardDirective {
     }
 
     let numbers = [];
-    for (let i = 0; i < trimmed.length; i+=4) {
+    for (let i = 0; i < trimmed.length; i += 4) {
       numbers.push(trimmed.substr(i, 4));
     }
 
-    // we want to create batches of fours digits ['1234', '1234', '1234', '1234'] - ideally this would allow only  numbers
+    // we want to create batches of fours digits ['1234', '1234', '1234', '1234']
     input.value = numbers.join(' ');
-    //  console.log(event);
+
+    // use the host binding to check if there are only numbers and apply red border when fails regex
+    this.border = '';
+    if (/[^\d]+/.test(trimmed)) {
+      this.border = '1px solid red';
+    }
   }
 
   constructor(private element: ElementRef) {
