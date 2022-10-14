@@ -20,7 +20,7 @@ export class CreditCardDirective {
       numbers.push(trimmed.substr(i, 4));
     }
 
-    // we want to create batches of fours digits ['1234', '1234', '1234', '1234']
+    // we want to create batches of fours digits ['1234', '1234', '1234', '1234'] - ideally this would allow only  numbers
     input.value = numbers.join(' ');
     //  console.log(event);
   }
