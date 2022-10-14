@@ -1,4 +1,11 @@
-import { AfterContentInit, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { read } from 'fs';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { User } from './auth-form/auth-form.interface';
@@ -8,6 +15,7 @@ import { User } from './auth-form/auth-form.interface';
   styleUrls: ['app.component.scss'],
   template: `
     <div>
+      <button (click)="destroyComponent()" *ngIf="component"> Destroy</button>
       <div #entry>
 
       </div>
@@ -18,6 +26,8 @@ export class AppComponent implements AfterContentInit {
   @ViewChild('entry', { read: ViewContainerRef })
   entry: ViewContainerRef;
 
+  component: ComponentRef<AuthFormComponent>;
+
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
@@ -27,13 +37,18 @@ export class AppComponent implements AfterContentInit {
     const authFormFactory = this.componentFactoryResolver.resolveComponentFactory(AuthFormComponent);
 
     // render first component on the dom
-    const firstComponent = this.entry.createComponent(authFormFactory);
-    firstComponent.instance.title = 'Create Account';// overriding local properties
-    firstComponent.instance.submitted.subscribe(this.loginUser); //subscribing to outputs
+    this.component = this.entry.createComponent(authFormFactory);
+    this.component.instance.title = 'Create Account';// overriding local properties
+    this.component.instance.submitted.subscribe(this.loginUser); //subscribing to outputs
 
-    console.log(firstComponent.instance);
+    console.log(this.component.instance);
   }
 
+
+  public destroyComponent() {
+    // console.log(this.component);
+    this.component.destroy();// destroy component
+  }
 
   loginUser(user: User) {
     console.log('Create account', user);
