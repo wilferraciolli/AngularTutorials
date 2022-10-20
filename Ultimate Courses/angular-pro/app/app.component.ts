@@ -13,11 +13,7 @@ interface File {
   styleUrls: ['app.component.scss'],
   template: `
     <div>
-      <div *ngFor="let file of mapped">
-        <p>{{ file.name }}</p>
-        <!-- Call the pipe on the file size and pass the suffix value -->
-        <p>{{ file.size }}</p>
-      </div>
+      <stock-inventory></stock-inventory>
     </div>
   `,
   providers: [

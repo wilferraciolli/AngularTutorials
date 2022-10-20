@@ -8,6 +8,7 @@ import { FilesizePipe } from './filesize.pipe';
 import { MyForDirective } from './my-for/my-for.directive';
 
 import { ExampleOneComponent } from './one/one.component';
+import { StockInventoryModule } from './stock-inventory/stock-inventory.module';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { ExampleTwoComponent } from './two/two.component';
 
@@ -16,7 +17,8 @@ import { ExampleTwoComponent } from './two/two.component';
 @NgModule({
   imports: [
     BrowserModule,
-    AuthFormModule
+    AuthFormModule,
+    StockInventoryModule
   ],
   bootstrap: [
     AppComponent
