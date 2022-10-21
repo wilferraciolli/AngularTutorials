@@ -9,17 +9,18 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
     <div class="stock-inventory">
       <form [formGroup]="form"
             (ngSubmit)="onSubmit()">
-        <!-- Create the form and assign the names of the form gorup and bind to properties -->
-        <div formGroupName="store">
-          <input type="text"
-                 placeholder="Branch id"
-                 formControlName="branch"
-          >
-          <input type="text"
-                 placeholder="Manager code"
-                 formControlName="code"
-          >
-        </div>
+
+        <stock-branch
+          [parent]="form">
+        </stock-branch>
+
+        <stock-selector
+          [parent]="form">
+        </stock-selector>
+
+        <stock-products
+          [parent]="form">
+        </stock-products>
 
         <div class="stock-inventory__buttons">
           <button type="submit"
@@ -39,13 +40,13 @@ export class StockInventoryComponent {
   form = new FormGroup({
     //first form group name
     store: new FormGroup({
-      branch: new FormControl('B18'),
-      code: new FormControl('1234')
+      branch: new FormControl(''),
+      code: new FormControl('')
     }),
     //second form group name
     selector: new FormGroup({
       product_id: new FormControl(''),
-      quantity: new FormControl(0)
+      quantity: new FormControl(10)
     }),
     //third form group name
     stock: new FormArray([])
