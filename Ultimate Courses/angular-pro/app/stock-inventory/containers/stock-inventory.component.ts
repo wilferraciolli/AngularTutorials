@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -35,13 +35,20 @@ import { FormControl, FormGroup } from '@angular/forms';
   `
 })
 export class StockInventoryComponent {
-
   // create a form, the formGroup is called 'form', the formGoupName is called 'store' and formControlName will be each property
   form = new FormGroup({
+    //first form group name
     store: new FormGroup({
       branch: new FormControl('B18'),
       code: new FormControl('1234')
-    })
+    }),
+    //second form group name
+    selector: new FormGroup({
+      product_id: new FormControl(''),
+      quantity: new FormControl(0)
+    }),
+    //third form group name
+    stock: new FormArray([])
   });
 
   public onSubmit() {
