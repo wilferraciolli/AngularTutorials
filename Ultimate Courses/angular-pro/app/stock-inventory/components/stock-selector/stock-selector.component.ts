@@ -47,5 +47,11 @@ export class StockSelectorComponent {
 
     // emitt and event passing the value of the this part of the form
     this.added.emit(this.parent.get('selector').value);
+
+    //reset the status of the select form after an item was added (resetValue/setValue wants all of the formControls to be passed in, use patchValue for optional fields - just remember that patch wont set the form back to prestine)
+    this.parent.get('selector').reset({
+      product_id: '',
+      quantity: 10
+    });
   }
 }
