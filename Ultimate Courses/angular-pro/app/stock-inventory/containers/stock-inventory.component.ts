@@ -17,7 +17,7 @@ import { Product } from '../models/prouct.interface';
 
         <stock-selector
           [parent]="form"
-        [products]="products">
+          [products]="products">
         </stock-selector>
 
         <stock-products
@@ -40,12 +40,12 @@ import { Product } from '../models/prouct.interface';
 export class StockInventoryComponent {
 
   products: Product[] = [
-    { "id": 1, "price": 2800, "name": "MacBook Pro" },
-    { "id": 2, "price": 50, "name": "USB-C Adaptor" },
-    { "id": 3, "price": 400, "name": "iPod" },
-    { "id": 4, "price": 900, "name": "iPhone" },
-    { "id": 5, "price": 600, "name": "Apple Watch" },
-  ]
+    { 'id': 1, 'price': 2800, 'name': 'MacBook Pro' },
+    { 'id': 2, 'price': 50, 'name': 'USB-C Adaptor' },
+    { 'id': 3, 'price': 400, 'name': 'iPod' },
+    { 'id': 4, 'price': 900, 'name': 'iPhone' },
+    { 'id': 5, 'price': 600, 'name': 'Apple Watch' }
+  ];
 
   // create a form, the formGroup is called 'form', the formGoupName is called 'store' and formControlName will be each property
   form = new FormGroup({
@@ -55,13 +55,20 @@ export class StockInventoryComponent {
       code: new FormControl('')
     }),
     //second form group name
-    selector: new FormGroup({
-      product_id: new FormControl(''),
-      quantity: new FormControl(10)
-    }),
+    selector: this.createStock({}),
     //third form group name
-    stock: new FormArray([])
+    stock: new FormArray([
+      this.createStock({ product_id: 1, quantity: 10 }),
+      this.createStock({ product_id: 3, quantity: 50 })
+    ])
   });
+
+  createStock(stock): FormGroup {
+    return new FormGroup({
+      product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
+      quantity: new FormControl(stock.quantity || 10)
+    });
+  }
 
   public onSubmit() {
     console.log('Submit ', this.form.value);
