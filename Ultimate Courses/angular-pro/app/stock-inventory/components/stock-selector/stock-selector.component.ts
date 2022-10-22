@@ -43,7 +43,7 @@ export class StockSelectorComponent {
   added = new EventEmitter<any>();
 
   onAdd() {
-    console.log('Form value for the stock selector ', this.parent.get('selector').value);
+  //  console.log('Form value for the stock selector ', this.parent.get('selector').value);
 
     // emitt and event passing the value of the this part of the form
     this.added.emit(this.parent.get('selector').value);

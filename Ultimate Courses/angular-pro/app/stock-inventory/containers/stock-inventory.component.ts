@@ -32,6 +32,10 @@ import { StockInventoryService } from '../services/stock-inventory.service';
           (removed)="removeStock($event)">
         </stock-products>
 
+        <div>
+          Total: {{ total | currency: 'USD': true }}
+        </div>
+
         <div class="stock-inventory__buttons">
           <button type="submit"
                   [disabled]="form.invalid">
@@ -50,6 +54,8 @@ export class StockInventoryComponent implements OnInit {
   products: Product[] = [];
 
   productMap: Map<number, Product>; // created to manage ids and their products
+
+  total: number;
 
   constructor(
     private fb: FormBuilder,
@@ -75,6 +81,15 @@ export class StockInventoryComponent implements OnInit {
 
       // populate the cart
       cart.forEach(item => this.addStock(item));
+      // initialy populate the value of the cart items
+      this.calculateTotal(this.form.get('stock').value);
+
+      // subscribe to the reactive form value changes, this case we only care for the Stock from control. This will pass the before and after values
+      this.form.get('stock')
+          .valueChanges.subscribe(value => {
+        // console.log('Form changed value ', value);
+        this.calculateTotal(value);
+      });
     });
   }
 
@@ -98,8 +113,17 @@ export class StockInventoryComponent implements OnInit {
     });
   }
 
+  calculateTotal(value: Item[]) {
+    // calculate the total value of products and its quantities
+    const total = value.reduce((prev: Item, next: Item) => {
+      return prev + (next.quantity * this.productMap.get(next.product_id).price);
+    }, 0);
+
+    this.total = total;
+  }
+
   public addStock(stock: any) {
-    console.log('received event to add from child ', stock);
+   // console.log('received event to add from child ', stock);
 
     // this event handler will take the values from stock-selector and push it onto the stock-products
     const control = this.form.get('stock') as FormArray;
@@ -107,11 +131,10 @@ export class StockInventoryComponent implements OnInit {
   }
 
   public removeStock({ group, index }: { group: FormGroup, index: number }) {
-    console.log('Received event to delete from child ', group, index);
+   // console.log('Received event to delete from child ', group, index);
 
     // this event handler will take the values from stock-products and remove itfrom the stock-products
     const control = this.form.get('stock') as FormArray;
-
     // this is removing by index, but it could also be that the FormControol value of the product it can be fetched
     control.removeAt(index);
   }
