@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 
 @Component({
@@ -23,7 +23,10 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
                    max="1000"
                    formControlName="quantity">
 
-            <button type="button"> Remove</button>
+            <button type="button"
+                    (click)="onRemove(item, i)">
+              Remove
+            </button>
           </div>
 
         </div>
@@ -35,8 +38,17 @@ export class StockProductsComponent {
   @Input()
   parent: FormGroup;
 
+  @Output()
+  removed = new EventEmitter<any>();
+
+  public onRemove(group: any, index: number): void {
+    console.log('Sendign event to remove item ', group, index);
+
+    //emmit event when remove button was clicked, this will pass the details of the item being removed - The format is :{group: FormGroup, index: number}
+    this.removed.emit({ group, index });
+  }
+
   get stocks(): AbstractControl[] {
     return (this.parent.get('stock') as FormArray).controls;
   }
-
 }

@@ -22,7 +22,8 @@ import { Product } from '../models/prouct.interface';
         </stock-selector>
 
         <stock-products
-          [parent]="form">
+          [parent]="form"
+          (removed)="removeStock($event)">
         </stock-products>
 
         <div class="stock-inventory__buttons">
@@ -72,11 +73,21 @@ export class StockInventoryComponent {
   }
 
   public addStock(stock: any) {
-    console.log('received event from child ', stock);
+    console.log('received event to add from child ', stock);
 
     // this event handler will take the values from stock-selector and push it onto the stock-products
     const control = this.form.get('stock') as FormArray;
-    control.push(this.createStock(stock))
+    control.push(this.createStock(stock));
+  }
+
+  public removeStock({ group, index }: { group: FormGroup, index: number }) {
+    console.log('Received event to delete from child ', group, index);
+
+    // this event handler will take the values from stock-products and remove itfrom the stock-products
+    const control = this.form.get('stock') as FormArray;
+
+    // this is removing by index, but it could also be that the FormControol value of the product it can be fetched
+    control.removeAt(index);
   }
 
   public onSubmit() {
