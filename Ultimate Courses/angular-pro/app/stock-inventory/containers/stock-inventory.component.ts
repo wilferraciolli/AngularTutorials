@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Item } from '../models/item.interface';
 import { Product } from '../models/prouct.interface';
+
+import 'rxjs/add/observable/forkJoin';
+import { StockInventoryService } from '../services/stock-inventory.service';
 
 
 @Component({
@@ -23,6 +28,7 @@ import { Product } from '../models/prouct.interface';
 
         <stock-products
           [parent]="form"
+          [map]="productMap"
           (removed)="removeStock($event)">
         </stock-products>
 
@@ -39,33 +45,50 @@ import { Product } from '../models/prouct.interface';
     </div>
   `
 })
-export class StockInventoryComponent {
+export class StockInventoryComponent implements OnInit {
 
-  products: Product[] = [
-    { 'id': 1, 'price': 2800, 'name': 'MacBook Pro' },
-    { 'id': 2, 'price': 50, 'name': 'USB-C Adaptor' },
-    { 'id': 3, 'price': 400, 'name': 'iPod' },
-    { 'id': 4, 'price': 900, 'name': 'iPhone' },
-    { 'id': 5, 'price': 600, 'name': 'Apple Watch' }
-  ];
+  products: Product[] = [];
 
-  constructor(private fb: FormBuilder) {
+  productMap: Map<number, Product>; // created to manage ids and their products
+
+  constructor(
+    private fb: FormBuilder,
+    private stockInventoryService: StockInventoryService
+  ) {
+  }
+
+  public ngOnInit(): void {
+    // get all of the stock items (cart and products)
+    const cart = this.stockInventoryService.getCartItems();
+    const products = this.stockInventoryService.getProducts();
+
+    Observable
+    .forkJoin(cart, products)
+    .subscribe(([cart, products]: [Item[], Product[]]) => {
+      // merge both arrays to pass it down to the form array
+      const myProductsMap = products.map<[number, Product]>(product => [product.id, product]);
+      console.log('The for join of cart and products is ', myProductsMap);
+
+      // populate the products to the map
+      this.productMap = new Map<number, Product>(myProductsMap);
+      this.products = products;
+
+      // populate the cart
+      cart.forEach(item => this.addStock(item));
+    });
   }
 
   // create a form, the formGroup is called 'form', the formGoupName is called 'store' and formControlName will be each property
-  form =this.fb.group({
+  form = this.fb.group({
     //first form group name
-    store:this.fb.group({
+    store: this.fb.group({
       branch: '',
       code: ''
     }),
     //second form group name
     selector: this.createStock({}),
     //third form group name
-    stock: this.fb.array([
-      this.createStock({ product_id: 1, quantity: 10 }),
-      this.createStock({ product_id: 3, quantity: 50 })
-    ])
+    stock: this.fb.array([])
   });
 
   createStock(stock): FormGroup {
