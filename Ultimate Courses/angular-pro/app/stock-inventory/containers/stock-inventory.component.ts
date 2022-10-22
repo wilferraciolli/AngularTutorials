@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Product } from '../models/prouct.interface';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
         </stock-branch>
 
         <stock-selector
-          [parent]="form">
+          [parent]="form"
+        [products]="products">
         </stock-selector>
 
         <stock-products
@@ -36,6 +38,15 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
   `
 })
 export class StockInventoryComponent {
+
+  products: Product[] = [
+    { "id": 1, "price": 2800, "name": "MacBook Pro" },
+    { "id": 2, "price": 50, "name": "USB-C Adaptor" },
+    { "id": 3, "price": 400, "name": "iPod" },
+    { "id": 4, "price": 900, "name": "iPhone" },
+    { "id": 5, "price": 600, "name": "Apple Watch" },
+  ]
+
   // create a form, the formGroup is called 'form', the formGoupName is called 'store' and formControlName will be each property
   form = new FormGroup({
     //first form group name
