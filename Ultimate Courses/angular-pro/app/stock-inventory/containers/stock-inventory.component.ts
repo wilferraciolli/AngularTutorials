@@ -73,7 +73,7 @@ export class StockInventoryComponent implements OnInit {
     .subscribe(([cart, products]: [Item[], Product[]]) => {
       // merge both arrays to pass it down to the form array
       const myProductsMap = products.map<[number, Product]>(product => [product.id, product]);
-      console.log('The for join of cart and products is ', myProductsMap);
+      // console.log('The fork join of cart and products is ', myProductsMap);
 
       // populate the products to the map
       this.productMap = new Map<number, Product>(myProductsMap);

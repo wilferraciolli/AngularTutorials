@@ -13,9 +13,16 @@ const COUNTER_CONTROL_ACCESSOR = {
   providers: [COUNTER_CONTROL_ACCESSOR],
   styleUrls: ['stock-counter.component.scss'],
   template: `
-    <div class="stock-counter">
+    <div
+      class="stock-counter"
+      [class.focused]="focus">
       <div>
-        <div>
+        <div
+          tabindex="0"
+          (keydown)="onKeyDown($event)"
+          (blur)="onBlur($event)"
+          (focus)="onFocus($event)"
+        >
           <p>{{ value }}</p>
           <div>
             <button
@@ -47,21 +54,59 @@ export class StockCounterComponent implements ControlValueAccessor {
 
   value: number = 10;
 
+  focus: boolean;
+
   // fucntions to use with ControlValueAccessor, these are functions that reactive forms can give us
   registerOnTouched(fn) {
     // bind functions when value was touched
     this.onTouch = fn;
   }
+
   registerOnChange(fn) {
     // bind functions when value has changed
     this.onModelChange = fn;
   }
+
   writeValue(value) {
     // this is passed on to the form when crating it and defining the component
     this.value = value || 0;
   }
 
-  increment() {
+  onKeyDown(event: KeyboardEvent): void {
+    // get keyboard event when keys are pressed
+    const handlers = {
+      ArrowDown: () => this.decrement(),
+      ArrowUp: () => this.increment()
+    };
+
+    // call itself if code is expected
+    if (handlers[event.code]) {
+      handlers[event.code]();
+
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    this.onTouch;
+  }
+
+  onBlur(event: FocusEvent): void {
+    this.focus = false;
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.onTouch();
+  }
+
+  onFocus(event: FocusEvent): void {
+    this.focus = true;
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.onTouch();
+  }
+
+  increment(): void {
     if (this.value < this.max) {
       this.value = this.value + this.step;
       this.onModelChange(this.value);
@@ -69,7 +114,7 @@ export class StockCounterComponent implements ControlValueAccessor {
     this.onTouch();
   }
 
-  decrement() {
+  decrement(): void {
     if (this.value > this.min) {
       this.value = this.value - this.step;
       this.onModelChange(this.value);
