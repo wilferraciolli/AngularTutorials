@@ -17,7 +17,8 @@ import { Product } from '../models/prouct.interface';
 
         <stock-selector
           [parent]="form"
-          [products]="products">
+          [products]="products"
+          (added)="addStock($event)">
         </stock-selector>
 
         <stock-products
@@ -68,6 +69,14 @@ export class StockInventoryComponent {
       product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
       quantity: new FormControl(stock.quantity || 10)
     });
+  }
+
+  public addStock(stock: any) {
+    console.log('received event from child ', stock);
+
+    // this event handler will take the values from stock-selector and push it onto the stock-products
+    const control = this.form.get('stock') as FormArray;
+    control.push(this.createStock(stock))
   }
 
   public onSubmit() {

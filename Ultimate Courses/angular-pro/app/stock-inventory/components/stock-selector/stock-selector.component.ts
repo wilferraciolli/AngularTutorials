@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Product } from '../../models/prouct.interface';
 
@@ -13,7 +13,7 @@ import { Product } from '../../models/prouct.interface';
           <option value="">Select stock</option>
           <option
             *ngFor="let product of products"
-                  [value]="product.id">
+            [value]="product.id">
             {{ product.name }}
           </option>
         </select>
@@ -22,9 +22,11 @@ import { Product } from '../../models/prouct.interface';
                step="10"
                min="10"
                max="1000"
-          formControlName="quantity">
+               formControlName="quantity">
 
-        <button type="button">Add stock
+        <button type="button"
+                (click)="onAdd()">
+          Add stock
         </button>
       </div>
     </div>
@@ -36,4 +38,14 @@ export class StockSelectorComponent {
 
   @Input()
   products: Product[];
+
+  @Output()
+  added = new EventEmitter<any>();
+
+  onAdd() {
+    console.log('Form value for the stock selector ', this.parent.get('selector').value);
+
+    // emitt and event passing the value of the this part of the form
+    this.added.emit(this.parent.get('selector').value);
+  }
 }
