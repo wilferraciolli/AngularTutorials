@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import 'rxjs/add/observable/forkJoin';
@@ -96,22 +96,33 @@ export class StockInventoryComponent implements OnInit {
 
   // create a form, the formGroup is called 'form', the formGoupName is called 'store' and formControlName will be each property
   form = this.fb.group({
-    //first form group name
-    store: this.fb.group({
-      branch: ['', [Validators.required, StockValidators.checkBranch]],
-      code: ['', Validators.required]
-    }),
-    //second form group name
-    selector: this.createStock({}),
-    //third form group name
-    stock: this.fb.array([])
-  }, {validator: StockValidators.checkStockExists});
+      //first form group name
+      store: this.fb.group({
+        branch: [
+          '',
+          [Validators.required, StockValidators.checkBranch],
+          [this.validateBranch.bind(this)]
+        ],
+        code: ['', Validators.required]
+      }),
+      //second form group name
+      selector: this.createStock({}),
+      //third form group name
+      stock: this.fb.array([])
+    },
+    { validator: StockValidators.checkStockExists });
 
   createStock(stock): FormGroup {
     return this.fb.group({
       product_id: parseInt(stock.product_id, 10) || '',
       quantity: stock.quantity || 10
     });
+  }
+
+  // check if branches exists validator. method to be used as async Validator
+  validateBranch(control: AbstractControl) {
+    return this.stockInventoryService.checkBranchId(control.value)
+               .map((response: boolean) => response ? null : { unknownBranch: true });
   }
 
   calculateTotal(value: Item[]) {
@@ -130,7 +141,7 @@ export class StockInventoryComponent implements OnInit {
   }
 
   public removeStock({ group, index }: { group: FormGroup, index: number }) {
-     console.log('Received event to delete from child ', group, index);
+    console.log('Received event to delete from child ', group, index);
 
     // this event handler will take the values from stock-products and remove itfrom the stock-products
     const control = this.form.get('stock') as FormArray;
