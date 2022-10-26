@@ -23,6 +23,9 @@ import { ExampleTwoComponent } from './two/two.component';
   bootstrap: [
     AppComponent
   ],
+  exports: [
+    CreditCardDirective
+  ],
   declarations: [
     AppComponent,
     ExampleOneComponent,

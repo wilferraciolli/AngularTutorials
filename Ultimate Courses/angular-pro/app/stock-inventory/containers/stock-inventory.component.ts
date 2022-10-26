@@ -105,7 +105,7 @@ export class StockInventoryComponent implements OnInit {
     selector: this.createStock({}),
     //third form group name
     stock: this.fb.array([])
-  });
+  }, {validator: StockValidators.checkStockExists});
 
   createStock(stock): FormGroup {
     return this.fb.group({
