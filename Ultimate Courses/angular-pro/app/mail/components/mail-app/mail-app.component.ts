@@ -5,8 +5,24 @@ import { Component } from '@angular/core';
   styleUrls: ['mail-app.component.scss'],
   template: `
     <div class="mail">
-      <router-outlet></router-outlet>
+      <router-outlet
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+
+      </router-outlet>
     </div>
   `
 })
-export class MailAppComponent {}
+export class MailAppComponent {
+
+  public onActivate(event: any) {
+    // when the compoennet created on the routeer outlet is created
+    console.log('Activated', event);
+  }
+
+  public onDeactivate(event: any) {
+    // when the compoennet created on the routeer outlet is destroyed
+    console.log('Deactivated', event);
+  }
+}

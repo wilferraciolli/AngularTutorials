@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { FilesizePipe } from './filesize.pipe';
 
 interface File {
@@ -39,17 +40,24 @@ interface File {
   `,
   providers: [
     FilesizePipe
-    ]
+  ]
 })
 export class AppComponent implements OnInit {
   files: File[];
   mapped: File[];
 
-  constructor(private fileSizePipe: FilesizePipe) {
+  constructor(private fileSizePipe: FilesizePipe,
+              private router: Router) {
   }
 
-
   ngOnInit() {
+    //subscribe to routing events
+    this.router.events
+        .filter(event => event instanceof NavigationEnd)
+        .subscribe(event => {
+          console.log(event);
+        });
+
     this.files = [
       { name: 'logo.svg', size: 2120109, type: 'image/svg' },
       { name: 'banner.jpg', size: 18029, type: 'image/jpg' },
@@ -62,7 +70,7 @@ export class AppComponent implements OnInit {
         name: file.name,
         type: file.type,
         size: this.fileSizePipe.transform(file.size, 'Mb')
-      }
+      };
     });
   }
 }
