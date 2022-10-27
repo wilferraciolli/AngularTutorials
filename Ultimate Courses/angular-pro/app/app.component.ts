@@ -12,9 +12,30 @@ interface File {
   changeDetection: ChangeDetectionStrategy.Default,
   styleUrls: ['app.component.scss'],
   template: `
-    <div>
-      <stock-inventory></stock-inventory>
+    <div class="app">
+      <header>
+        <img src="/img/logo.svg">
+      </header>
+      <div class="app__content">
+        <nav>
+          <a
+            routerLink="folder/inbox"
+            routerLinkActive="active">
+            Inbox
+          </a>
+          <a
+            routerLink="folder/trash"
+            routerLinkActive="active">
+            Trash
+          </a>
+        </nav>
+        <mail-app></mail-app>
+      </div>
     </div>
+
+    <!--     <div>
+    Uncomment this for the reactive forms lessons <stock-inventory></stock-inventory>
+    </div>-->
   `,
   providers: [
     FilesizePipe
