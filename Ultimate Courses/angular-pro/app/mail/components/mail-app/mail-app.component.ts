@@ -6,11 +6,14 @@ import { Component } from '@angular/core';
   template: `
     <div class="mail">
       <router-outlet
-      (activate)="onActivate($event)"
-      (deactivate)="onDeactivate($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
       >
-
       </router-outlet>
+    </div>
+
+    <div class="mail">
+      <router-outlet name="pane"></router-outlet>
     </div>
   `
 })
@@ -23,6 +26,6 @@ export class MailAppComponent {
 
   public onDeactivate(event: any) {
     // when the compoennet created on the routeer outlet is destroyed
-   // console.log('Deactivated', event);
+    // console.log('Deactivated', event);
   }
 }

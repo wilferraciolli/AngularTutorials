@@ -6,7 +6,14 @@ import { Mail } from '../../models/mail.interface';
   selector: 'mail-item',
   styleUrls: ['mail-item.component.scss'],
   template: `
-    <a class="mail-item">
+    <!-- navigate the user to the named router outlet   -->
+    <a [routerLink]="['', {
+          outlets:
+          {
+              pane: ['message', message.id]
+           }
+        }]"
+       class="mail-item">
       <h3>
         {{ message.from }}
         <span>{{ message.timestamp | date:'shortTime' }}</span>
