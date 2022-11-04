@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
 import { CreditCardDirective } from './credit-card/credit-card.directive';
 import { FilesizePipe } from './filesize.pipe';
+import { MailFolderResolver } from './mail/containers/mail-folder/mail-folder.resolver';
 import { MailModule } from './mail/mail.module';
+import { MailService } from './mail/mail.service';
 import { MyForDirective } from './my-for/my-for.directive';
 
 import { ExampleOneComponent } from './one/one.component';

@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.router.events
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
-          console.log(event);
+         // console.log(event);
         });
 
     this.files = [

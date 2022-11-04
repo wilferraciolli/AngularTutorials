@@ -18,11 +18,11 @@ export class MailAppComponent {
 
   public onActivate(event: any) {
     // when the compoennet created on the routeer outlet is created
-    console.log('Activated', event);
+    //console.log('Activated', event);
   }
 
   public onDeactivate(event: any) {
     // when the compoennet created on the routeer outlet is destroyed
-    console.log('Deactivated', event);
+   // console.log('Deactivated', event);
   }
 }
