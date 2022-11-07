@@ -19,13 +19,15 @@ interface File {
       </header>
       <div class="app__content">
         <nav>
+          <!-- delete any inner outlet from the path when clicking on those buttons as the url will be build based on inner outlet -->
           <a
-            routerLink="folder/inbox"
+            [routerLink]="[{ outlets: { primary: 'folder/inbox', pane: null }}]"
             routerLinkActive="active">
             Inbox
           </a>
+          <!-- delete any inner outlet from the path when clicking on those buttons as the url will be build based on inner outlet -->
           <a
-            routerLink="folder/trash"
+            [routerLink]="[{ outlets: { primary: 'folder/trash', pane: null }}]"
             routerLinkActive="active">
             Trash
           </a>
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit {
     this.router.events
         .filter(event => event instanceof NavigationEnd)
         .subscribe(event => {
-         // console.log(event);
+          // console.log(event);
         });
 
     this.files = [
