@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadingStrategy, Route, RouterModule, Routes } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
@@ -16,9 +17,16 @@ import { StockInventoryModule } from './stock-inventory/stock-inventory.module';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { ExampleTwoComponent } from './two/two.component';
 
+// class to resolve the custom module preload strategy
+export class CustomPreload implements PreloadingStrategy {
+  public preload(route: Route, fn: () => Observable<any>): Observable<any> {
+    // specify what routes should be preloading during application start up, look at the route config to see whether the preload is set to true
+    return route.data && route.data['preload'] ? fn() : Observable.of(null);
+  }
+}
 
 export const ROUTES: Routes = [
-  { path: 'dashboard', loadChildren: () => DashboardModule },
+  { path: 'dashboard', data: { preload: true }, loadChildren: () => DashboardModule },
   { path: '**', redirectTo: 'mail/folder/inbox' }
 ];
 
@@ -29,13 +37,16 @@ export const ROUTES: Routes = [
     StockInventoryModule,
     MailModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: CustomPreload })
   ],
   bootstrap: [
     AppComponent
   ],
   exports: [
     CreditCardDirective
+  ],
+  providers: [
+    CustomPreload
   ],
   declarations: [
     AppComponent,
