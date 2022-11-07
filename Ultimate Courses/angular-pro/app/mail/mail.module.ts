@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { MailAppComponent } from './components/mail-app/mail-app.component';
 import { MailItemComponent } from './components/mail-item/mail-item.component';
 import { MailViewComponent } from './components/mail-view/mail-view.component';
+import { MailViewGuard } from './components/mail-view/mail-view.guard';
 import { MailViewResolve } from './components/mail-view/mail-view.resolve';
 import { MailFolderResolve } from './containers/mail-folder/mail-folder-resolve';
 
@@ -30,6 +31,7 @@ export const ROUTES: Routes = [
         path: 'message/:id',
         component: MailViewComponent,
         outlet: 'pane',
+        canDeactivate: [MailViewGuard],
         resolve: {
           message: MailViewResolve
         }
@@ -56,7 +58,8 @@ export const ROUTES: Routes = [
   providers: [
     MailService,
     MailFolderResolve,
-    MailViewResolve
+    MailViewResolve,
+    MailViewGuard
   ]
 })
 export class MailModule {
