@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
 import { CreditCardDirective } from './credit-card/credit-card.directive';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { FilesizePipe } from './filesize.pipe';
-import { MailFolderResolver } from './mail/containers/mail-folder/mail-folder.resolver';
 import { MailModule } from './mail/mail.module';
-import { MailService } from './mail/mail.service';
 import { MyForDirective } from './my-for/my-for.directive';
 
 import { ExampleOneComponent } from './one/one.component';
@@ -16,8 +16,10 @@ import { StockInventoryModule } from './stock-inventory/stock-inventory.module';
 import { TooltipDirective } from './tooltip/tooltip.directive';
 import { ExampleTwoComponent } from './two/two.component';
 
+
 export const ROUTES: Routes = [
-  { path: '**', redirectTo: 'folder/inbox' }
+  { path: 'dashboard', loadChildren: () => DashboardModule },
+  { path: '**', redirectTo: 'mail/folder/inbox' }
 ];
 
 @NgModule({
@@ -26,6 +28,7 @@ export const ROUTES: Routes = [
     AuthFormModule,
     StockInventoryModule,
     MailModule,
+    HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
   bootstrap: [

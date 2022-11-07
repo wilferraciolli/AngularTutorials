@@ -21,18 +21,24 @@ interface File {
         <nav>
           <!-- delete any inner outlet from the path when clicking on those buttons as the url will be build based on inner outlet -->
           <a
-            [routerLink]="[{ outlets: { primary: 'folder/inbox', pane: null }}]"
+            [routerLink]="['/mail', { outlets: { primary: 'folder/inbox', pane: null } }]"
             routerLinkActive="active">
             Inbox
           </a>
           <!-- delete any inner outlet from the path when clicking on those buttons as the url will be build based on inner outlet -->
           <a
-            [routerLink]="[{ outlets: { primary: 'folder/trash', pane: null }}]"
+            [routerLink]="['/mail', { outlets: { primary: 'folder/trash', pane: null } }]"
             routerLinkActive="active">
             Trash
           </a>
+          <!-- Lazy load new module -->
+          <a
+            [routerLink]="['/dashboard']"
+            routerLinkActive="active">
+            Dashboard
+          </a>
         </nav>
-        <mail-app></mail-app>
+        <router-outlet></router-outlet>
       </div>
     </div>
 

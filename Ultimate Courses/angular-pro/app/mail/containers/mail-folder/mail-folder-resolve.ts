@@ -6,7 +6,7 @@ import { MailService } from '../../mail.service';
 import { Mail } from '../../models/mail.interface';
 
 @Injectable()
-export class MailFolderResolver implements Resolve<Mail[]> {
+export class MailFolderResolve implements Resolve<Mail[]> {
 
   constructor(private mailService: MailService) {
   }

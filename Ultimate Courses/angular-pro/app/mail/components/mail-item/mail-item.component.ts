@@ -10,7 +10,7 @@ import { Mail } from '../../models/mail.interface';
     <!-- navigate the user to the named router outlet   -->
     <a
       class="mail-item"
-      (click)="navigateToMessage()"
+      [routerLink]="['/mail', { outlets: { pane: ['message', this.message.id] } }]"
       routerLinkActive="active">
       <h3>
         {{ message.from }}
@@ -27,9 +27,10 @@ export class MailItemComponent {
   constructor(private router: Router) {
   }
 
-  public navigateToMessage(): void {
-    this.router.navigate(
-      ['', { outlets: { pane: ['message', this.message.id] } }]
-    );
-  }
+  // // api way to navigate to custom router outlet
+  // public navigateToMessage(): void {
+  //   this.router.navigate(
+  //     ['', { outlets: { pane: ['message', this.message.id] } }]
+  //   );
+  // }
 }
