@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import { AuthFormModule } from './auth-form/auth-form.module';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthModule } from './auth/auth.module';
 import { CreditCardDirective } from './credit-card/credit-card.directive';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { FilesizePipe } from './filesize.pipe';
@@ -26,12 +28,13 @@ export class CustomPreload implements PreloadingStrategy {
 }
 
 export const ROUTES: Routes = [
-  { path: 'dashboard', data: { preload: true }, loadChildren: () => DashboardModule },
+  { path: 'dashboard', canLoad: [AuthGuard], data: { preload: true }, loadChildren: () => DashboardModule },
   { path: '**', redirectTo: 'mail/folder/inbox' }
 ];
 
 @NgModule({
   imports: [
+    AuthModule,
     BrowserModule,
     AuthFormModule,
     StockInventoryModule,

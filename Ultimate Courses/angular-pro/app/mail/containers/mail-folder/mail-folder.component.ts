@@ -24,6 +24,6 @@ export class MailFolderComponent {
 
   constructor(private route: ActivatedRoute) {
     // console.log('The routing data is ', this.route.data);
-    console.log('The title is ', this.title);
+    // console.log('The title is ', this.title);
   }
 }
