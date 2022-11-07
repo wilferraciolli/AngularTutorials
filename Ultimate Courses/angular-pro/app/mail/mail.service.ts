@@ -10,7 +10,12 @@ export class MailService {
   }
 
   public getFolder(folderName: string): Observable<Array<Mail>> {
-    return this.http.get(`/api/messages?folder=${folderName}`)
-      .map(response => response.json());
+    return this.http.get(`/api/messages?folder=${ folderName }`)
+               .map(response => response.json());
+  }
+
+  public getMessage(id: string): Observable<Mail> {
+    return this.http.get(`/api/messages/${id}`)
+               .map(response => response.json());
   }
 }

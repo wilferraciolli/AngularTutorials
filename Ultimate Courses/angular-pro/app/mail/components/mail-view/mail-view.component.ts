@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/pluck';
 
 import { Mail } from '../../models/mail.interface';
 
@@ -7,10 +10,15 @@ import { Mail } from '../../models/mail.interface';
   styleUrls: ['mail-view.component.scss'],
   template: `
     <div class="mail-view">
-      I am a message!
+      <h2>{{ (message | async).from }}</h2>
+      <p>{{ (message | async).full }}</p>
     </div>
   `
 })
 export class MailViewComponent {
+  message: Observable<Mail> = this.route.data.pluck('message');
+
+  constructor(private route: ActivatedRoute) {
+  }
 
 }
