@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 import 'rxjs/add/observable/forkJoin';
 import { Item } from '../models/item.interface';
-import { Product } from '../models/prouct.interface';
+import { Product } from '../models/product.interface';
+
 import { StockInventoryService } from '../services/stock-inventory.service';
 import { StockValidators } from './stock-inventory.validator';
 

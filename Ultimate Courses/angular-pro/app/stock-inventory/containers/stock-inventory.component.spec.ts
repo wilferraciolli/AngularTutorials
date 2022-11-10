@@ -69,8 +69,8 @@ describe('StockInventoryComponent', () => {
 
   it('should create a product map from the service response', () => {
     component.ngOnInit();
-    expect(component.productsMap.get(1)).toEqual({ id: 1, price: 10, name: 'Test' });
-    expect(component.productsMap.get(2)).toEqual({ id: 2, price: 100, name: 'Another test' });
+    expect(component.productMap.get(1)).toEqual({ id: 1, price: 10, name: 'Test' });
+    expect(component.productMap.get(2)).toEqual({ id: 2, price: 100, name: 'Another test' });
   });
 
   it('should store the products response', () => {
