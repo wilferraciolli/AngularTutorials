@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Item } from '../models/item.interface';
-import { Product } from '../models/prouct.interface';
+import { Product } from '../models/product.interface';
 
 // because we are using webpack to manage a DBServer, then we can make calls to get data from the file
 @Injectable()
