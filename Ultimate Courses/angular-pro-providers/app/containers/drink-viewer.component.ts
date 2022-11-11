@@ -14,17 +14,14 @@ export function DrinkFactory(http) {
   return new FoodService(http, '/api/drinks');
 }
 
+export abstract class DrinkService {
+  getDrinks: () => Observable<Drink[]>
+}
+
 @Component({
   selector: 'drink-viewer',
   providers: [
-    // a specific food provider for this instance
-    // FoodService
-    // { provide: FoodService, useClass: FoodService }
-    {
-      provide: FoodService,
-      useFactory: DrinkFactory,
-      deps: [Http]
-    }
+    { provide: FoodService, useExisting: FoodService }
   ],
   template: `
     <div>
@@ -38,10 +35,10 @@ export function DrinkFactory(http) {
 export class DrinkViewerComponent implements OnInit {
   items$: Observable<Drink[]>;
 
-  constructor(private foodService: FoodService) {
+  constructor(private foodService: DrinkService) {
   }
 
   ngOnInit() {
-    this.items$ = this.foodService.getFood();
+    this.items$ = this.foodService.getDrinks();
   }
 }
