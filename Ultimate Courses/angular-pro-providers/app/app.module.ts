@@ -6,11 +6,16 @@ import { AppComponent } from './app.component';
 import { DrinkViewerComponent } from './containers/drink-viewer.component';
 import { PizzaViewerComponent } from './containers/pizza-viewer.component';
 import { SideViewerComponent } from './containers/side-viewer.component';
+import { FoodStoreModule } from './food-store/food-store.module';
 
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    FoodStoreModule.forRoot({
+      storeId: 10292,
+      storeToken: 'eca938c99c0e9ff91029dc'
+    })
   ],
   bootstrap: [
     AppComponent
