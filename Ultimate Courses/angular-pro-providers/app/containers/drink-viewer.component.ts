@@ -10,10 +10,21 @@ interface Drink {
   price: number
 }
 
+export function DrinkFactory(http) {
+  return new FoodService(http, '/api/drinks');
+}
+
 @Component({
   selector: 'drink-viewer',
   providers: [
-    FoodService
+    // a specific food provider for this instance
+    // FoodService
+    // { provide: FoodService, useClass: FoodService }
+    {
+      provide: FoodService,
+      useFactory: DrinkFactory,
+      deps: [Http]
+    }
   ],
   template: `
     <div>
@@ -27,7 +38,8 @@ interface Drink {
 export class DrinkViewerComponent implements OnInit {
   items$: Observable<Drink[]>;
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService) {
+  }
 
   ngOnInit() {
     this.items$ = this.foodService.getFood();
