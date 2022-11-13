@@ -8,14 +8,14 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MonthlyViewComponent } from './montly-view/monthly-view.component';
 import { WeeklyViewComponent } from './weekly-view/weekly-view.component';
-import { DayViewComponent } from './day-view/day-view.component';
+import { DailyViewComponent } from './day-view/daily-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonthlyViewComponent,
     WeeklyViewComponent,
-    DayViewComponent
+    DailyViewComponent
   ],
   imports: [
     BrowserModule,

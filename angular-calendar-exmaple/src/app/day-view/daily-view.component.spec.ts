@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DayViewComponent } from './day-view.component';
+import { DailyViewComponent } from './daily-view.component';
 
 describe('DayViewComponent', () => {
-  let component: DayViewComponent;
-  let fixture: ComponentFixture<DayViewComponent>;
+  let component: DailyViewComponent;
+  let fixture: ComponentFixture<DailyViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DayViewComponent ]
+      declarations: [DailyViewComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DayViewComponent);
+    fixture = TestBed.createComponent(DailyViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
