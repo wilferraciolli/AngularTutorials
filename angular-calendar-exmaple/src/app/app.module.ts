@@ -9,13 +9,15 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MonthlyViewComponent } from './montly-view/monthly-view.component';
 import { WeeklyViewComponent } from './weekly-view/weekly-view.component';
 import { DailyViewComponent } from './day-view/daily-view.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MonthlyViewComponent,
     WeeklyViewComponent,
-    DailyViewComponent
+    DailyViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

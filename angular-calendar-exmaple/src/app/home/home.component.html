@@ -1,0 +1,81 @@
+<div class="row text-center">
+
+  <!-- Add previous today and next buttons -->
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div class="btn btn-primary"
+             mwlCalendarPreviousView
+             [view]="view"
+             [(viewDate)]="viewDate">
+          Previous
+        </div>
+        <div class="btn btn-outline-secondary"
+             mwlCalendarToday
+             [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div class="btn btn-primary"
+             mwlCalendarNextView
+             [view]="view"
+             [(viewDate)]="viewDate">
+          Next
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add title -->
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+
+  <!-- Add the switch go go from month/week/day view -->
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Month)"
+           [class.active]="view === CalendarView.Month">
+        Month
+      </div>
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Week)"
+           [class.active]="view === CalendarView.Week">
+        Week
+      </div>
+      <div class="btn btn-primary"
+           (click)="setView(CalendarView.Day)"
+           [class.active]="view === CalendarView.Day">
+        Day
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Create the views -->
+<div [ngSwitch]="view">
+
+  <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+                           [viewDate]="viewDate"
+                           [events]="events"
+                           (dayClicked)="dayClicked($event.day)"
+  >
+  </mwl-calendar-month-view>
+
+  <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week"
+                          [viewDate]="viewDate"
+                          [events]="events"
+                          (eventClicked)="eventClicked($event.event)"
+  >
+  </mwl-calendar-week-view>
+
+  <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day"
+                         [viewDate]="viewDate"
+                         [events]="events"
+                         (eventClicked)="eventClickedDay($event.event)"
+  >
+  </mwl-calendar-day-view>
+
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
+import { CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'app-monthly-view',
@@ -8,6 +9,9 @@ import { CalendarEvent } from 'angular-calendar';
 })
 export class MonthlyViewComponent implements OnInit {
   viewDate: Date = new Date();
+  view: CalendarView = CalendarView.Month;
+  CalendarView = CalendarView;
+
   public events: CalendarEvent[] = [];
 
   constructor() { }

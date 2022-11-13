@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
+import { CalendarView } from 'angular-calendar';
 
 @Component({
   selector: 'app-weekly-view',
@@ -8,6 +9,9 @@ import { CalendarEvent } from 'angular-calendar';
 })
 export class WeeklyViewComponent implements OnInit {
   viewDate: Date = new Date();
+  view: CalendarView = CalendarView.Week;
+  CalendarView = CalendarView;
+
   public events: CalendarEvent[] = [];
 
   constructor() { }
