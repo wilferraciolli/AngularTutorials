@@ -1,29 +1,27 @@
+<!-- Add previous today and next buttons -->
 <div class="row text-center">
-
-  <!-- Add previous today and next buttons -->
-  <div class="row text-center">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div class="btn btn-primary"
-             mwlCalendarPreviousView
-             [view]="view"
-             [(viewDate)]="viewDate">
-          Previous
-        </div>
-        <div class="btn btn-outline-secondary"
-             mwlCalendarToday
-             [(viewDate)]="viewDate">
-          Today
-        </div>
-        <div class="btn btn-primary"
-             mwlCalendarNextView
-             [view]="view"
-             [(viewDate)]="viewDate">
-          Next
-        </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div class="btn btn-primary"
+           mwlCalendarPreviousView
+           [view]="view"
+           [(viewDate)]="viewDate">
+        Previous
+      </div>
+      <div class="btn btn-outline-secondary"
+           mwlCalendarToday
+           [(viewDate)]="viewDate">
+        Today
+      </div>
+      <div class="btn btn-primary"
+           mwlCalendarNextView
+           [view]="view"
+           [(viewDate)]="viewDate">
+        Next
       </div>
     </div>
   </div>
+
 
   <!-- Add title -->
   <div class="col-md-4">
@@ -50,9 +48,7 @@
       </div>
     </div>
   </div>
-
 </div>
-
 
 <!-- Create the views -->
 <div [ngSwitch]="view">
