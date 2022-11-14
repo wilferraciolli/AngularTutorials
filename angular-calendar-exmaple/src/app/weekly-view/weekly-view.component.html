@@ -1,4 +1,4 @@
-<!-- Add previous today and next buttons -->
+<!-- Add previous today and next buttons TODO move to the header -->
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -22,10 +22,15 @@
     </div>
   </div>
 
+  <!-- Add title -->
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
 </div>
 
 <mwl-calendar-week-view
   [viewDate]="viewDate"
   [events]="events"
+  (eventClicked)="eventClicked($event.event)"
 >
 </mwl-calendar-week-view>

@@ -32,4 +32,9 @@ export class MonthlyViewComponent implements OnInit {
     };
   }
 
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log('Date of event ', date);
+    console.log('Events for the date ', events);
+    //this.openAppointmentList(date)
+  }
 }
