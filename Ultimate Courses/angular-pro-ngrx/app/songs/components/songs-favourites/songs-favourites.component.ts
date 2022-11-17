@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Store } from '../../../store';
-import { SongsService } from '../../services/songs.service';
+import { Song, SongsService } from '../../services/songs.service';
 
 @Component({
   selector: 'songs-favourites',
@@ -16,7 +16,7 @@ import { SongsService } from '../../services/songs.service';
   `
 })
 export class SongsFavouritesComponent implements OnInit {
-  favourite$: Observable<any[]>;
+  favourite$: Observable<Song[]>;
 
   constructor(
     private songsService: SongsService,
@@ -26,7 +26,9 @@ export class SongsFavouritesComponent implements OnInit {
   public ngOnInit(): void {
     this.favourite$ = this.store.select('playlist')
                           .filter(Boolean)// make sure that this only gets run when there is data
-                          .map(playlist => playlist.filter(track => track.favourite));
+                          .map((playlist: Song[]) =>
+                            playlist.filter((track: Song) => track.favourite)
+                          );
   }
 
 }

@@ -8,7 +8,6 @@ to get data
 store.select('store')
  */
 
-
 import { BehaviorSubject, Observable } from 'rxjs';
 import { State } from './state';
 
@@ -17,7 +16,6 @@ const state: State = {
 };
 
 export class Store {
-
   // create a subject so components can subscribe to it
   private subject = new BehaviorSubject<State>(state);
 

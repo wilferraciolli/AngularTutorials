@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { Store } from '../../../store';
-import { SongsService } from '../../services/songs.service';
+import { Song, SongsService } from '../../services/songs.service';
 
 @Component({
   selector: 'songs-playlist',
@@ -17,7 +17,7 @@ import { SongsService } from '../../services/songs.service';
 })
 export class SongsPlaylistComponent implements OnInit, OnDestroy {
 
-  playlist$: Observable<any[]>;
+  playlist$: Observable<Song[]>;
   subscription: Subscription;
 
   constructor(
