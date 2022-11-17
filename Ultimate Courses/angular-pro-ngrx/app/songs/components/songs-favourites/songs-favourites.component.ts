@@ -15,7 +15,7 @@ import { SongsService } from '../../services/songs.service';
     </div>
   `
 })
-export class SongsFavouritesComponent implements OnInit{
+export class SongsFavouritesComponent implements OnInit {
   favourite$: Observable<any[]>;
 
   constructor(
@@ -24,7 +24,9 @@ export class SongsFavouritesComponent implements OnInit{
   }
 
   public ngOnInit(): void {
-    this.favourite$ = this.store.select('playlist');
+    this.favourite$ = this.store.select('playlist')
+                          .filter(Boolean)// make sure that this only gets run when there is data
+                          .map(playlist => playlist.filter(track => track.favourite));
   }
 
 }
