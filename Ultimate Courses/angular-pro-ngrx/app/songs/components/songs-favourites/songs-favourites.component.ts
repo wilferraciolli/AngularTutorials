@@ -8,10 +8,10 @@ import { SongsService } from '../../services/songs.service';
   selector: 'songs-favourites',
   template: `
     <div class="songs">
-      <div *ngFor="let item of favourite$ | async">
-        {{ item.artist }}
-        {{ item.track }}
-      </div>
+      <songs-list
+        [list]="favourite$ | async">
+        Favourites
+      </songs-list>
     </div>
   `
 })
