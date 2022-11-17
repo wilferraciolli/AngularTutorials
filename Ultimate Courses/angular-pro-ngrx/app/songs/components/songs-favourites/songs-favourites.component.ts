@@ -9,7 +9,8 @@ import { Song, SongsService } from '../../services/songs.service';
   template: `
     <div class="songs">
       <songs-list
-        [list]="favourite$ | async">
+        [list]="favourite$ | async"
+        (toggle)="onToggle($event)">
         Favourites
       </songs-list>
     </div>
@@ -29,6 +30,11 @@ export class SongsFavouritesComponent implements OnInit {
                           .map((playlist: Song[]) =>
                             playlist.filter((track: Song) => track.favourite)
                           );
+  }
+
+  public onToggle(event: any) {
+    // use the song service to update the store
+    this.songsService.toggle(event);
   }
 
 }

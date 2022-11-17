@@ -15,11 +15,15 @@ export class SongsService {
 
   constructor(
     private http: Http,
-    private store: Store  ) {
+    private store: Store) {
   }
 
   getPlaylist$: Observable<Song[]> = this.http
-                     .get('/api/playlist')
-                     .map(res => res.json())
-                     .do(next => this.store.set('playlist', next));
+                                         .get('/api/playlist')
+                                         .map(res => res.json())
+                                         .do(next => this.store.set('playlist', next));
+
+  public toggle(event: any): void {
+    console.log('Event received ', event);
+  }
 }
