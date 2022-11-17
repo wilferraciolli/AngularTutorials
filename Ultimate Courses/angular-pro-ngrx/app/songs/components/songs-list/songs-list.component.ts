@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { Store } from '../../../store';
-import { Song, SongsService } from '../../services/songs.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Song } from '../../services/songs.service';
 
 @Component({
   selector: 'songs-list',
   styleUrls: ['./song-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="songs-list">
       <h3>
@@ -38,7 +36,7 @@ export class SongsListComponent {
   @Input()
   list: Song[];
 
-  @Output(  )
+  @Output()
   toggle = new EventEmitter<any>();
 
 
@@ -48,7 +46,7 @@ export class SongsListComponent {
 
     this.toggle.emit({
       // get the property passed in and toggle its value
-      track: {...track, [prop]: !track[prop]}
-    })
+      track: { ...track, [prop]: !track[prop] }
+    });
   }
 }
