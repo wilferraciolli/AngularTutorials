@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'register',
   template: `
     <div>
-      <auth-form>
+      <auth-form
+        (submitted)="registerUser($event)">
         <h1>Register</h1>
         <a routerLink="/auth/login">Already have an account?</a>
         <button type="submit">
@@ -16,4 +18,7 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  public registerUser(event: FormGroup): void {
+    console.log('Event received from registering ', event.value);
+  }
 }
