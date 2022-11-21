@@ -17,7 +17,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
                  placeholder="Email Address"
                  formControlName="email">
         </label>
-        <div class="error" *ngIf="emailFormat">
+        <div class="error"
+             *ngIf="emailFormat">
           Invalid email format
         </div>
 
@@ -26,17 +27,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
                  placeholder="Enter password"
                  formControlName="password">
         </label>
-        <div class="error" *ngIf="passwordInvalid">
-         Password is required
+        <div class="error"
+             *ngIf="passwordInvalid">
+          Password is required
         </div>
 
-        <!-- Display errors -->
+        <!-- Display errors from server -->
         <ng-content select=".error"></ng-content>
 
+        <!-- Add actions -->
         <div class="auth-form__action">
           <ng-content select="button"></ng-content>
         </div>
 
+        <!-- Switch between login and register -->
         <div class="auth-form__toggle">
           <ng-content select="a"></ng-content>
         </div>
