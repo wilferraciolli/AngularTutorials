@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Store } from 'store';
 import { AuthModule } from '../auth/auth.module';
+import { HealthModule } from '../health/health.module';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppNavComponent } from './components/app-nav/app-nav.component';
 import { AppComponent } from './containers/app/app.component';
@@ -14,6 +15,7 @@ export const ROUTES: Routes = [];
   imports: [
     AuthModule,
     BrowserModule,
+    HealthModule,
     RouterModule.forRoot(ROUTES)
   ],
   declarations: [
