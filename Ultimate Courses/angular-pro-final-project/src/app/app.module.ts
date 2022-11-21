@@ -4,15 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Store } from 'store';
 import { AuthModule } from '../auth/auth.module';
-
-// feature modules
-
-// containers
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppNavComponent } from './components/app-nav/app-nav.component';
 import { AppComponent } from './containers/app/app.component';
 
-// components
-
-// routes
 export const ROUTES: Routes = [];
 
 @NgModule({
@@ -22,7 +17,9 @@ export const ROUTES: Routes = [];
     RouterModule.forRoot(ROUTES)
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    AppHeaderComponent,
+    AppNavComponent
   ],
   providers: [
     Store
