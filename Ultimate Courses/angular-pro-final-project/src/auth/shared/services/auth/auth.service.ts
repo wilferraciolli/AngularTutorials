@@ -38,6 +38,11 @@ export class AuthService {
   ) {
   }
 
+  get user() {
+    // get current user
+    return this.af.auth.currentUser;
+  }
+
   get authState(): Observable<any> {
     return this.af.authState;
   }
