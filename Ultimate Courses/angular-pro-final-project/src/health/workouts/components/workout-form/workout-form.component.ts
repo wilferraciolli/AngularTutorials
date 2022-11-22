@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Workout } from '../../../shared/services/workouts/workouts.service';
 
 
@@ -30,6 +30,12 @@ import { Workout } from '../../../shared/services/workouts/workouts.service';
                  *ngIf="required">
               Workout name is required
             </div>
+          </label>
+
+          <label>
+            <h3>Type</h3>
+            <workout-type formControlName="type">
+            </workout-type>
           </label>
         </div>
 
@@ -100,7 +106,8 @@ export class WorkoutFormComponent implements OnChanges {
   remove = new EventEmitter<Workout>();
 
   form = this.fb.group({
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    type: ['strength', Validators.required]
   });
 
   constructor(
