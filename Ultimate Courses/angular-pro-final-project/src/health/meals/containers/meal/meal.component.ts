@@ -25,11 +25,23 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
       </div>
 
       <!-- Meal form -->
-      <div>
+      <div *ngIf="meal$ | async as meal; else loading;">
         <meal-form
-          (create)="addMeal($event)">
+          [meal]="meal"
+          (create)="addMeal($event)"
+          (update)="updateMeal($event)"
+          (remove)="removeMeal($event)"
+        >
         </meal-form>
       </div>
+
+      <ng-template #loading>
+        <div class="message">
+          <img src="/img/loading.svg"
+               alt="">
+          Fetching meal...
+        </div>
+      </ng-template>
     </div>
   `
 })
@@ -65,7 +77,25 @@ export class MealComponent implements OnInit, OnDestroy {
     this.backToMeals();
   }
 
+
+  public async updateMeal(event: Meal) {
+    // get the key from the router url
+    const key = this.route.snapshot.params.id;
+
+    this.mealsService.updateMeal(key, event);
+    this.backToMeals();
+  }
+
+  public removeMeal(event: Meal) {
+    // get the key from the router url
+    const key = this.route.snapshot.params.id;
+
+    this.mealsService.removeMeal(key);
+    this.backToMeals();
+  }
+
   private backToMeals() {
     this.router.navigate(['meals']);
   }
+
 }
