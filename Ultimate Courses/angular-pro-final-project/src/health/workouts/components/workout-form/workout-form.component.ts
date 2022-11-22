@@ -23,7 +23,7 @@ import { Workout } from '../../../shared/services/workouts/workouts.service';
           <label>
             <h3>Workout name</h3>
             <input type="text"
-                   placeholder="E.g. breakfast"
+                   [placeholder]="placeholder"
                    formControlName="name">
 
             <div class="error"
@@ -37,6 +37,54 @@ import { Workout } from '../../../shared/services/workouts/workouts.service';
             <workout-type formControlName="type">
             </workout-type>
           </label>
+        </div>
+
+        <!-- custom work out based on type -->
+        <div class="workout-form__details">
+          <!-- When type is endurance -->
+          <div *ngIf="form.get('type').value === 'strength'">
+            <div class="workout-form__fields"
+                 formGroupName="strength">
+              <label>
+                <h3>Reps</h3>
+                <input type="number"
+                       formControlName="reps">
+              </label>
+              <label>
+                <h3>Set</h3>
+                <input type="number"
+                       formControlName="sets">
+              </label>
+              <label>
+                <h3>Weights
+                  <span>(kg)</span>
+                </h3>
+                <input type="number"
+                       formControlName="weight">
+              </label>
+            </div>
+          </div>
+
+          <!-- When type is endurance -->
+          <div *ngIf="form.get('type').value === 'endurance'">
+            <div class="workout-form__fields"
+                 formGroupName="endurance">
+              <label>
+                <h3>Distance
+                  <span>(km)</span>
+                </h3>
+                <input type="number"
+                       formControlName="distance">
+              </label>
+              <label>
+                <h3>Duration
+                  <span>(minutes)</span>
+                </h3>
+                <input type="number"
+                       formControlName="duration">
+              </label>
+            </div>
+          </div>
         </div>
 
         <!-- actions based on create/update -->
@@ -107,7 +155,16 @@ export class WorkoutFormComponent implements OnChanges {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    type: ['strength', Validators.required]
+    type: ['strength', Validators.required],
+    strength: this.fb.group({
+      reps: 0,
+      sets: 0,
+      weight: 0
+    }),
+    endurance: this.fb.group({
+      distance: 0,
+      duration: 0
+    })
   });
 
   constructor(
@@ -117,17 +174,21 @@ export class WorkoutFormComponent implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges) {
     // check that the workout exists so it is an update
+    if (this.workout && this.workout.name){
+      this.exists = true;
+      const value = this.workout;
+      this.form.patchValue(value);
+    }
+  }
 
+  get placeholder() {
+    return `    e.g. ${ this.form.get('type').value === 'strength' ? 'Benchpress' : 'Threadmill' }    `;
   }
 
   get required() {
     return this.form.get('name').hasError('required') &&
       this.form.get('name').touched;
   }
-
-  // get ingredients(): FormArray {
-  //   return this.form.get('ingredients') as FormArray;
-  // }
 
   public createWorkout() {
     // console.log('The value of the form is ', this.form.value);
@@ -146,24 +207,7 @@ export class WorkoutFormComponent implements OnChanges {
     this.remove.emit(this.form.value);
   }
 
-  // public addIngredient() {
-  //   // add new place to hold ingredients on the form
-  //   this.ingredients.push(new FormControl(''));
-  // }
-  //
-  // public removeIngredient(index: number) {
-  //   // remove an ingredient from the array
-  //   this.ingredients.removeAt(index);
-  // }
-
   toggle() {
     this.toggled != this.toggled;
   }
-
-  // private emptyIngredients() {
-  //   // get the list of ingredients
-  //   while (this.ingredients.controls.length) {
-  //     this.ingredients.removeAt(0);
-  //   }
-  // }
 }
