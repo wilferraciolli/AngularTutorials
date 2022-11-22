@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
-import { Store } from 'store';
 import { Meal, MealsService } from '../../../shared/services/meals/meals.service';
 
 @Component({
@@ -13,7 +13,14 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
       <div class="meal__title">
         <h1>
           <img src="/img/food.svg">
-          <span>Create meal</span>
+
+          <span *ngIf="meal$ | async as meal; else title;">
+            {{meal.name ? 'Edit' : 'Create'}} meal
+          </span>
+          <ng-template #title>
+            Loading...
+          </ng-template>
+
         </h1>
       </div>
 
@@ -26,11 +33,29 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
     </div>
   `
 })
-export class MealComponent {
+export class MealComponent implements OnInit, OnDestroy {
+
+  meal$: Observable<Meal>;
+  subscription: Subscription;
+
   constructor(
     private mealsService: MealsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit(): void {
+    // get the meals from the store to work out whether we are creating or editing a meal
+    this.subscription = this.mealsService.meals$.subscribe();
+
+    // get the id from the route to work out whether the route is for update/create
+    this.meal$ = this.route.params
+                     .switchMap(param => this.mealsService.getMeal(param.id));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   // handle the event ommitted bvy the output of the form, then add to the database

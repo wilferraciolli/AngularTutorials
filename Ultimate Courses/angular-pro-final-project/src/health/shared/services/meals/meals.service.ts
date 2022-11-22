@@ -4,6 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from 'store';
 import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 export interface Meal {
   name: string,
@@ -31,6 +34,18 @@ export class MealsService {
     return this.authService.user.uid;
   }
 
+  public getMeal(key: string) {
+    if (!key) {
+      // if no key is present then ignore
+      return Observable.of({});
+    }
+
+    // check on the store whether the updated meal is already there
+    return this.store.select<Meal[]>('meals')
+               .filter(Boolean)// stop the stream if empty
+               .map(meals => meals.find((meal: Meal) => meal.$key === key));
+  }
+
   addMeal(meal: Meal) {
     return this.db.list(`meals/${ this.uid }`)
                .push(meal);
@@ -40,4 +55,6 @@ export class MealsService {
     return this.db.list(`meals/${ this.uid }`)
                .remove(key);
   }
+
+
 }
