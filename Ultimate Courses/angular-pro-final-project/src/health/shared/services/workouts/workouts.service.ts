@@ -8,19 +8,21 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-export interface Meal {
+export interface Workout {
   name: string,
-  ingredients: string,
+  type: string,
+  strength: any,
+  endurance: any,
   timestamp: string,
   $key: string,
   $exists: () => boolean,
 }
 
 @Injectable()
-export class MealsService {
+export class WorkoutsService {
 
-  meals$: Observable<Meal[]> = this.db.list(`meals/${ this.uid }`)
-                                   .do(next => this.store.set('meals', next));
+  workouts$: Observable<Workout[]> = this.db.list(`workouts/${ this.uid }`)
+                                   .do(next => this.store.set('workouts', next));
 
   constructor(
     private store: Store,
@@ -34,30 +36,30 @@ export class MealsService {
     return this.authService.user.uid;
   }
 
-  public getMeal(key: string) {
+  public getWorkout(key: string) {
     if (!key) {
       // if no key is present then ignore
       return Observable.of({});
     }
 
     // check on the store whether the updated meal is already there
-    return this.store.select<Meal[]>('meals')
+    return this.store.select<Workout[]>('workouts')
                .filter(Boolean)// stop the stream if empty
-               .map(meals => meals.find((meal: Meal) => meal.$key === key));
+               .map(workouts => workouts.find((workout: Workout) => workout.$key === key));
   }
 
-  addMeal(meal: Meal) {
-    return this.db.list(`meals/${ this.uid }`)
-               .push(meal);
+  addWorkout(workout: Workout) {
+    return this.db.list(`workouts/${ this.uid }`)
+               .push(workout);
   }
 
-  updateMeal(key: string, meal: Meal) {
-    return this.db.object(`meals/${ this.uid }/${key}`)
-               .update(meal);
+  updateWorkout(key: string, workout: Workout) {
+    return this.db.object(`workouts/${ this.uid }/${key}`)
+               .update(workout);
   }
 
-  removeMeal(key: string) {
-    return this.db.list(`meals/${ this.uid }`)
+  removeWorkout(key: string) {
+    return this.db.list(`workouts/${ this.uid }`)
                .remove(key);
   }
 }
