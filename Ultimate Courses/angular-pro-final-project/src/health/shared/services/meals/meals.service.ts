@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Store } from 'store';
-import { AuthService } from '../../../auth/shared/services/auth/auth.service';
+import { AuthService } from '../../../../auth/shared/services/auth/auth.service';
 import 'rxjs/add/operator/do';
 
 export interface Meal {
