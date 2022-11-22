@@ -25,18 +25,19 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
           </a>
         </div>
 
-        <!-- display a list of melas -->
+        <!-- display a list of meals -->
         <div *ngIf="meals$ | async as meals; else loading;">
           <!-- if empty -->
           <div class="message"
-               *ngIf="!meals.lengh">
+               *ngIf="!meals.length">
             <img src="/img/face.svg">
             No meals, add a new meal to start
           </div>
 
           <!-- display meals -->
           <list-item *ngFor="let meal of meals;"
-          [item]="meal">
+                     [item]="meal"
+                     (remove)="removeMeal($event)">
           </list-item>
 
         </div>
@@ -69,5 +70,10 @@ export class MealsComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public removeMeal(event: Meal) {
+    // console.log('Removed event received ', event);
+    this.mealsService.removeMeal(event.$key);
   }
 }

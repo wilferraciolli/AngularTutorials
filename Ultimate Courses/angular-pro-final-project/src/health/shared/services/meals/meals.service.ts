@@ -17,7 +17,7 @@ export interface Meal {
 export class MealsService {
 
   meals$: Observable<Meal[]> = this.db.list(`meals/${ this.uid }`)
-    .do(next => this.store.set('meals', next));
+                                   .do(next => this.store.set('meals', next));
 
   constructor(
     private store: Store,
@@ -31,8 +31,13 @@ export class MealsService {
     return this.authService.user.uid;
   }
 
-  addMeal(meal:Meal){
-    return this.db.list(`meals/${this.uid}`)
+  addMeal(meal: Meal) {
+    return this.db.list(`meals/${ this.uid }`)
                .push(meal);
+  }
+
+  removeMeal(key: string) {
+    return this.db.list(`meals/${ this.uid }`)
+               .remove(key);
   }
 }
