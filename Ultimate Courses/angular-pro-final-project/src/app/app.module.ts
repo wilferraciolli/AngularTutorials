@@ -9,7 +9,9 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
 import { AppNavComponent } from './components/app-nav/app-nav.component';
 import { AppComponent } from './containers/app/app.component';
 
-export const ROUTES: Routes = [];
+export const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'schedule' }
+];
 
 @NgModule({
   imports: [
@@ -30,7 +32,8 @@ export const ROUTES: Routes = [];
     AppComponent
   ]
 })
-export class AppModule {}
+export class AppModule {
+}
 
 
 /*
