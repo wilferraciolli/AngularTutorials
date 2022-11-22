@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { Store } from 'store';
@@ -26,11 +27,20 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
   `
 })
 export class MealComponent {
-  constructor() {
+  constructor(
+    private mealsService: MealsService,
+    private router: Router
+  ) {
   }
 
-  // handle the event ommitted bvy the output of the form
-  public addMeal(event: Meal) {
-    console.log('Meal added ', event);
+  // handle the event ommitted bvy the output of the form, then add to the database
+  public async addMeal(event: Meal) {
+    // console.log('Meal added ', event);
+    await this.mealsService.addMeal(event);
+    this.backToMeals();
+  }
+
+  private backToMeals() {
+    this.router.navigate(['meals']);
   }
 }

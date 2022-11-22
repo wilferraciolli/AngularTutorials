@@ -35,6 +35,9 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
           </div>
 
           <!-- display meals -->
+          <list-item *ngFor="let meal of meals;"
+          [item]="meal">
+          </list-item>
 
         </div>
 
