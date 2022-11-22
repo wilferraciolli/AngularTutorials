@@ -11,8 +11,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
         <p class="list-item__name">{{ item.name }}</p>
         <p class="list-item__ingredients">
-          <span>{{ item.ingredients }}</span>
+          <span *ngIf="item.ingredients; else showWorkout">
+            {{ item.ingredients | join }}
+          </span>
         </p>
+        <ng-template #showWorkout>
+          <span>{{ item | workout }}</span>
+        </ng-template>
       </a>
 
       <!-- Delete action with confirm -->
@@ -49,8 +54,8 @@ export class ListItemComponent {
   toggled = false;
 
   public getRoute(item: any) {
-    // dynamically build the route to navigate to
-    return [`../meals`, item.$key];
+    // dynamically build the route to navigate to, based on the key and whether it is a meal
+    return [`../${ item.ingredients ? 'meals' : 'workouts' }`, item.$key];
   }
 
   public removeItem() {
