@@ -5,11 +5,13 @@ import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { User } from './auth/shared/services/auth/auth.service';
 import { Meal } from './health/shared/services/meals/meals.service';
+import { ScheduleItem } from './health/shared/services/schedule/schedule.service';
 import { Workout } from './health/shared/services/workouts/workouts.service';
 
 export interface State {
   user: User;
   date: Date;
+  schedule: ScheduleItem[];
   meals: Meal[];
   workouts: Workout[];
   [key: string]: any
@@ -18,6 +20,7 @@ export interface State {
 const STATE: State = {
   user: undefined,
   date: undefined,
+  schedule: undefined,
   meals: undefined,
   workouts: undefined
 };

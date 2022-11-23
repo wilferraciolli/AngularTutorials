@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ScheduleItem, ScheduleList } from '../../../shared/services/schedule/schedule.service';
 
 @Component({
   selector: 'schedule-calendar',
@@ -15,6 +16,12 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
         [selected]="selectedDayIndex"
         (select)="selectDay($event)">
       </schedule-days>
+
+      <schedule-section
+        *ngFor="let section of sections"
+        [name]="section.name"
+        [section]="getSection(section.key)">
+      </schedule-section>
     </div>
   `
 })
@@ -24,10 +31,20 @@ export class ScheduleCalendarComponent implements OnChanges {
   selectedDay: Date;
   selectedWeek: Date;
 
+  sections = [
+    { key: 'morning', name: 'Morning' },
+    { key: 'lunch', name: 'Lunch' },
+    { key: 'evening', name: 'Evening' },
+    { key: 'snacks', name: 'Snacks and Drinks' }
+  ];
+
   @Input()
   set date(date: Date) {
     this.selectedDay = new Date(date.getTime());
   }
+
+  @Input()
+  items: ScheduleList;
 
   @Output()
   change = new EventEmitter<Date>();
@@ -59,6 +76,10 @@ export class ScheduleCalendarComponent implements OnChanges {
     this.change.emit(selectedDay);
   }
 
+  getSection(name: string): ScheduleItem {
+    return this.items && this.items[name] || {};
+  }
+
   private getStartOfWeek(date: Date) {
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1); // calculate the difference between the dates
@@ -77,4 +98,7 @@ export class ScheduleCalendarComponent implements OnChanges {
   }
 
 
+  public checkF(s: any) {
+    console.log(s);
+  }
 }
