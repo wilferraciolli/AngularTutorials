@@ -25,15 +25,7 @@ export const ROUTES: Routes = [
   }
 ];
 
-export const firebaseConfig: FirebaseAppConfig = {
-  apiKey: "AIzaSyDb-PBwWDDGbBxC0F5MqiPf4UmPOLp_Gpk",
-  authDomain: "angular-app-f3d4d.firebaseapp.com",
-  databaseURL: "https://angular-app-f3d4d-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "angular-app-f3d4d",
-  storageBucket: "angular-app-f3d4d.appspot.com",
-  messagingSenderId: "582598598947"
-  // appId: "1:582598598947:web:2b4303c802777c020fac96"
-};
+
 
 @NgModule({
   imports: [
