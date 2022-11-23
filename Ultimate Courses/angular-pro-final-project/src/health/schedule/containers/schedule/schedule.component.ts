@@ -12,7 +12,8 @@ import { ScheduleItem, ScheduleService } from '../../../shared/services/schedule
       <schedule-calendar
         [date]="date$ | async"
         [items]="schedule$ | async"
-        (change)="changeDate($event)">
+        (change)="changeDate($event)"
+      (select)="changeSection($event)">
       </schedule-calendar>
     </div>
   `
@@ -33,7 +34,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     // subscribe to properties on the store
     this.subscriptions = [
-      this.scheduleService.schedule$.subscribe()
+      this.scheduleService.schedule$.subscribe(),
+      this.scheduleService.selected$.subscribe()
     ];
   }
 
@@ -43,5 +45,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   public changeDate(date: Date) {
     this.scheduleService.updateDate(date);
+  }
+
+  public changeSection(event: any) {
+    // console.log('Event received when section was changed ', event);
+
+    /*this event will be something like assigned
+    assigned: [],
+    data: {},
+    day: Wed Nov 23 2022 10:17:37 GMT+0000 (Greenwich Mean Time)
+    section: lunch,
+    type: 'meals'
+    */
+    this.scheduleService.selectSection(event);
   }
 }

@@ -3,6 +3,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import { Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Store } from 'store';
@@ -31,6 +32,10 @@ export interface ScheduleList {
 export class ScheduleService {
 
   private date$ = new BehaviorSubject(new Date());
+  private section$ = new Subject();
+
+  selected$ = this.section$
+                  .do((next: any) => this.store.set('selected', next));
 
   // when the date was updated, then work out the start and end dates so the data can be fetched
   schedule$: Observable<ScheduleItem[]> = this.date$
@@ -76,6 +81,11 @@ export class ScheduleService {
   updateDate(date: Date) {
     // update the value of the behaviour subject so the store can be updated and subscribvers will listen to it
     this.date$.next(date);
+  }
+
+  // method to update the store to when a selected event was handled
+  public selectSection(event: any) {
+    this.section$.next(event);
   }
 
   private getSchedule(startAt: number, endAt: number) {

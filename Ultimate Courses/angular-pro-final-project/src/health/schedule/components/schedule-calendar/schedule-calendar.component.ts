@@ -20,7 +20,8 @@ import { ScheduleItem, ScheduleList } from '../../../shared/services/schedule/sc
       <schedule-section
         *ngFor="let section of sections"
         [name]="section.name"
-        [section]="getSection(section.key)">
+        [section]="getSection(section.key)"
+        (select)="selectSection($event, section.key)">
       </schedule-section>
     </div>
   `
@@ -49,6 +50,9 @@ export class ScheduleCalendarComponent implements OnChanges {
   @Output()
   change = new EventEmitter<Date>();
 
+  @Output()
+  select = new EventEmitter<any>();
+
   constructor() {
   }
 
@@ -76,16 +80,29 @@ export class ScheduleCalendarComponent implements OnChanges {
     this.change.emit(selectedDay);
   }
 
+// method to emit event when something was selected, this will be handled on a component to speak with the database
+  public selectSection({ type, assigned, data }: any, section: string) {
+    const day = this.selectedDay;
+
+    this.select.emit({
+      type,
+      assigned,
+      section,
+      day,
+      data
+    });
+  }
+
   getSection(name: string): ScheduleItem {
     return this.items && this.items[name] || {};
   }
+
 
   private getStartOfWeek(date: Date) {
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1); // calculate the difference between the dates
     return new Date(date.setDate(diff)); //return next week or start of previous week
   }
-
 
   private getToday(date: Date): number {
     let today = date.getDay() - 1;
@@ -95,10 +112,5 @@ export class ScheduleCalendarComponent implements OnChanges {
     }
 
     return today;
-  }
-
-
-  public checkF(s: any) {
-    console.log(s);
   }
 }
