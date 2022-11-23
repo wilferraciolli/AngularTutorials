@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { ScheduleAssignComponent } from './components/schedule-assign/schedule-assign.component';
 import { ScheduleCalendarComponent } from './components/schedule-calendar/schedule-calendar.component';
 import { ScheduleControlsComponent } from './components/schedule-controls/schedule-controls.component';
 import { ScheduleDaysComponent } from './components/schedule-days/schedule-days.component';
@@ -25,7 +26,8 @@ export const ROUTES: Routes = [
     ScheduleDaysComponent,
     ScheduleControlsComponent,
     ScheduleCalendarComponent,
-    ScheduleSectionComponent
+    ScheduleSectionComponent,
+    ScheduleAssignComponent
   ]
 })
 export class ScheduleModule {

@@ -37,6 +37,10 @@ export class ScheduleService {
   selected$ = this.section$
                   .do((next: any) => this.store.set('selected', next));
 
+  list$ = this.section$
+    .map((value: any) => this.store.value[value.type])
+              .do((next: any) => this.store.set('list', next))
+
   // when the date was updated, then work out the start and end dates so the data can be fetched
   schedule$: Observable<ScheduleItem[]> = this.date$
                                               .do((next: any) => this.store.set('date', next))
