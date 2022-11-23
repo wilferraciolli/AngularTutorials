@@ -18,7 +18,7 @@ export class ScheduleService {
   }
 
   updateDate(date: Date) {
-    // uupdate the value of the behaviour subject so the store can be updated and subscribvers will listen to it
+    // update the value of the behaviour subject so the store can be updated and subscribvers will listen to it
     this.date$.next(date);
   }
 }
