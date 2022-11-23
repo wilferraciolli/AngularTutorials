@@ -21,6 +21,7 @@ export interface Workout {
 @Injectable()
 export class WorkoutsService {
 
+  // @ts-ignore
   workouts$: Observable<Workout[]> = this.db.list(`workouts/${ this.uid }`)
                                    .do(next => this.store.set('workouts', next));
 

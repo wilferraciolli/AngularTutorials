@@ -74,6 +74,8 @@ npm run build:production
 
 #### Deploying to Firebase
 
+PS the initial step is to link this project with the firebase by typing `firebase init` then select the project
+
 You'll need to ensure you're logged into Firebase first (if you are prompted, otherwise skip to next step):
 
 ```
