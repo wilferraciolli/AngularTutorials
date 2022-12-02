@@ -1,6 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromRoot from './../../state/state';
+import { AttendeesEffects } from './attendees/attendees.effects';
 import * as fromAttendees from './attendees/attendees.reducer';
 
 export interface EventState {
@@ -14,3 +15,5 @@ export interface State extends fromRoot.State {
 export const reducers: ActionReducerMap<EventState> = {
   attendees: fromAttendees.reducer
 };
+
+export const effects: any[] = [AttendeesEffects];

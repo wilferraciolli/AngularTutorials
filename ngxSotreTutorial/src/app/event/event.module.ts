@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from '../state/spinner/spinner.reducer';
 import { EventComponent } from './containers/event/event.component';
 import { AddAttendeeComponent } from './components/add-attendee/add-attendee.component';
 import { EventListComponent } from './components/event-list/event-list.component';
-import { reducers } from './state';
+import { effects, reducers } from './state';
 
 
 
@@ -18,6 +19,7 @@ import { reducers } from './state';
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forFeature('event', reducers),
+    EffectsModule.forFeature(effects),
     RouterModule.forChild([
       { path: '', component: EventComponent }
     ])
