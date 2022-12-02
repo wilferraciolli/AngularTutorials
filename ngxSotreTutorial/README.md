@@ -36,6 +36,9 @@ ngRx schematics
 ngRx Entity query
 `npm i @ngrx/entity`
 
+ngRx router store
+`npm i @ngrx/router-store`
+
 
 
 #### RxJs cheat sheet

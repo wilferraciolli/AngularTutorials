@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Attendee } from '../../../models';
-import { getSpinner } from '../../../state/spinner/spiner.selectors';
-import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
-import { State } from '../../state';
 import { EventService } from '../../services/event.service';
+import { EventState } from '../../state';
 import { AddAttendee, LoadAttendees } from '../../state/attendees/attendees.actions';
-import { getAttendees } from '../../state/attendees/attendees.selector';
+import { getAttendees, getFilteredAttendees } from '../../state/attendees/attendees.selector';
 
 @Component({
   selector: 'app-event',
@@ -19,17 +18,22 @@ export class EventComponent implements OnInit {
   attendees$: Observable<Attendee[]> = of([]);
 
   constructor(
-    private store: Store<State>,
-    private eventService: EventService
+    private store: Store<EventState>,
+    private eventService: EventService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.attendees$ = this.store.pipe(select(getAttendees));
+    this.attendees$ = this.store.pipe(select(getFilteredAttendees));
     this.store.dispatch(new LoadAttendees());
   }
 
   public addAttendee(attendee: Attendee) {
     this.store.dispatch(new AddAttendee(attendee));
+  }
+
+  navigate(filterBy: string){
+    this.router.navigateByUrl(`/event?filterBy=${filterBy}`);
   }
 }

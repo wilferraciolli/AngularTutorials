@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 // @ts-ignore
-import { Actions, Effect } from '@ngrx/effects';
-import { ofType } from '@ngrx/effects';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
 import { of } from 'rxjs';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { Attendee } from '../../../models';
 
 import { EventService } from '../../services/event.service';
 import {
-  AttendeesActionTypes,
+  AddAttendee,
+  AddAttendeeFail,
+  AddAttendeeSuccess,
+  AttendeesActionTypes, FilterBy,
   LoadAttendees,
-  LoadAttendeesSuccess,
-  LoadAttendeesFail, AddAttendeeSuccess, AddAttendee, AddAttendeeFail
+  LoadAttendeesFail,
+  LoadAttendeesSuccess
 } from './attendees.actions';
-import { Attendee } from '../../../models';
 
 @Injectable()
 export class AttendeesEffects {
@@ -26,7 +29,8 @@ export class AttendeesEffects {
       this.eventService.getAttendees().pipe(
         map((attendees: Attendee[]) => new LoadAttendeesSuccess(attendees)),
         catchError(error => of(new LoadAttendeesFail(error)))
-      ))
+      )
+    )
   );
 
   @Effect()
@@ -36,6 +40,18 @@ export class AttendeesEffects {
       this.eventService.addAttendee(action.payload).pipe(
         map((attendee: Attendee) => new AddAttendeeSuccess(attendee)),
         catchError(error => of(new AddAttendeeFail(error)))
-      ))
+      )
+    )
+  );
+
+  @Effect()
+  loadDiaryHealthActions$ = this.actions$.pipe(
+    ofType(ROUTER_NAVIGATION),
+    map((r: RouterNavigationAction) => ({
+      url: r.payload.routerState.url,
+      filterBy: r.payload.routerState.root.queryParams['filterBy']
+    })),
+    filter(({ url, filterBy }) => url.startsWith('/event')),
+    map(({ filterBy }) => new FilterBy(filterBy))
   );
 }

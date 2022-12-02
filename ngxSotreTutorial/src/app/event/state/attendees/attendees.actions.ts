@@ -8,7 +8,9 @@ export enum AttendeesActionTypes {
   LoadAttendeesFail = '[Attendees Page] Load Attendees Fail',
   AddAttendee = '[Attendee Page] Add Attendee',
   AddAttendeeSuccess = '[Attendee API] Add Attendee Success',
-  AddAttendeeFail = '[Attendee API] Add Attendee Fail'}
+  AddAttendeeFail = '[Attendee API] Add Attendee Fail',
+  FilterBy = '[Attendee Page] FilterBy'
+}
 
 export class LoadAttendees implements Action {
   readonly type = AttendeesActionTypes.LoadAttendees;
@@ -37,7 +39,13 @@ export class AddAttendeeFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class FilterBy implements Action {
+  readonly type = AttendeesActionTypes.FilterBy;
+  constructor(public payload: string) {}
+}
+
 export type AttendeesActions =
+  | FilterBy
   | AddAttendee
   | AddAttendeeSuccess
   | AddAttendeeFail
