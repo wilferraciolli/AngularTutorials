@@ -8,6 +8,7 @@ import { reducer } from '../state/spinner/spinner.reducer';
 import { EventComponent } from './containers/event/event.component';
 import { AddAttendeeComponent } from './components/add-attendee/add-attendee.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { reducers } from './state';
 
 
 
@@ -16,6 +17,7 @@ import { EventListComponent } from './components/event-list/event-list.component
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forFeature('event', reducers),
     RouterModule.forChild([
       { path: '', component: EventComponent }
     ])

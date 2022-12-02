@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Attendee } from '../../../models';
+import { getSpinner } from '../../../state/spinner/spiner.selectors';
 import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
 import { State } from '../../../state/state';
 import { EventService } from '../../services/event.service';
@@ -24,7 +25,7 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.getAttendees();
     this.spinner$ = this.store
-                        .pipe(select(state => state.spinner.isOn));
+                        .pipe(select(getSpinner));
   }
 
   public addAttendee(attendee: Attendee) {
