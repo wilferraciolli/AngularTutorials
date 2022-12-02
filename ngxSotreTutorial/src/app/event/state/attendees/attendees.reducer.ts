@@ -1,42 +1,42 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Attendee } from '../../../models';
 import { AttendeesActions, AttendeesActionTypes } from './attendees.actions';
 
-export interface State {
-  attendees: Attendee[];
+export interface State extends EntityState<Attendee> {
   loading: boolean;
   error: any;
 }
 
-export const initialState: State = {
-  attendees: [],
+const adapter: EntityAdapter<Attendee> = createEntityAdapter<Attendee>();
+
+export const initialState: State = adapter.getInitialState({
   loading: false,
   error: null
-};
+});
 
 export function reducer(state = initialState, action: AttendeesActions): State {
   switch (action.type) {
     case AttendeesActionTypes.LoadAttendees: {
-      return {
+      return adapter.removeAll({
         ...state,
         loading: true,
         error: null
-      };
+      });
     }
     case AttendeesActionTypes.LoadAttendeesSuccess: {
-      return {
+      return adapter.addMany(action.payload, {
         ...state,
         loading: false,
-        attendees: action.payload,
         error: null
-      };
+      });
     }
 
     case AttendeesActionTypes.LoadAttendeesFail: {
-      return {
+      return adapter.removeAll({
         ...state,
         loading: false,
         error: action.payload
-      };
+      });
     }
 
     default: {
@@ -44,3 +44,10 @@ export function reducer(state = initialState, action: AttendeesActions): State {
     }
   }
 }
+
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal
+} = adapter.getSelectors();
