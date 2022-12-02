@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Attendee } from '../../../models';
 
 @Component({
   selector: 'app-event-list',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event-list.component.scss']
 })
 export class EventListComponent implements OnInit {
+  @Input()
+  attendees: Attendee[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
