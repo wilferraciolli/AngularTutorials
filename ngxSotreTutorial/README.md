@@ -8,7 +8,7 @@ To run type in `npm test`
 
 ##dependencies
 
-Jest testing framework
+Jest testing framework (NOT working)
 `npm i jest-preset-angular jest -D`
 `ng add @davinkevin/jest`
 
@@ -17,4 +17,7 @@ Walllaby.js (Ps this also needs to configure the wallaby json config file)
 
 Fake backend
 `npm i angular-in-memory-web-api -D`
+
+ngRx store
+`npm i @ngrx/store`
 

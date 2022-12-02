@@ -1,2 +1,8 @@
-<app-add-attendee (addAttendee)="addAttendee($event)"></app-add-attendee>
-<app-event-list [attendees]="attendees$ | async"></app-event-list>
+<app-add-attendee
+  (addAttendee)="addAttendee($event)">
+</app-add-attendee>
+
+<app-event-list
+  *ngIf="!(spinner$ | async)"
+  [attendees]="attendees$ | async">
+</app-event-list>
