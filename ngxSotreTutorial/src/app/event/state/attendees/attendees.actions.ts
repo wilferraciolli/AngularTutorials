@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Attendee } from '../../models';
+import { Attendee } from '../../../models';
 
 
 export enum AttendeesActionTypes {

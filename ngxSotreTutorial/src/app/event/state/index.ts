@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromRoot from './../../state/state';
-import * as fromAttendees from './state/attendees/attendees.reducer';
+import * as fromAttendees from './attendees/attendees.reducer';
 
 export interface EventState {
   attendees: fromAttendees.State;

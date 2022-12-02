@@ -1,4 +1,4 @@
-import { Attendee } from '../../models';
+import { Attendee } from '../../../models';
 import { AttendeesActions, AttendeesActionTypes } from './attendees.actions';
 
 export interface State {
@@ -6,12 +6,12 @@ export interface State {
   loading: boolean;
 }
 
-export const intialState: State = {
+export const initialState: State = {
   attendees: [],
   loading: false
 };
 
-export function reducer(state = intialState, action: AttendeesActions): State {
+export function reducer(state = initialState, action: AttendeesActions): State {
   switch (action.type) {
     case AttendeesActionTypes.LoadAttendees:
     {
