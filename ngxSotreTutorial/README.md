@@ -12,6 +12,9 @@ Jest testing framework (NOT working)
 `npm i jest-preset-angular jest -D`
 `ng add @davinkevin/jest`
 
+Marble jest
+`npm i jest-marbles@latest -D`
+
 Walllaby.js (Ps this also needs to configure the wallaby json config file)
 `ng add ngcli-wallaby`
 
@@ -29,6 +32,9 @@ ngRx Effects - to react to actions dispatched
 
 ngRx schematics
 `npm i @ngrx/schematics -D`
+
+ngRx Entity query
+`npm i @ngrx/entity`
 
 
 
