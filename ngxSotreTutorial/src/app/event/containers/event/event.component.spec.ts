@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EventService } from '../../services/event.service';
 
 import { EventComponent } from './event.component';
 
@@ -8,6 +10,15 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: HttpClient, useValue: null },
+        {
+          provide: EventService, useValue: {
+            getAttendees: () => {
+            }
+          }
+        }
+      ],
       declarations: [ EventComponent ]
     })
     .compileComponents();

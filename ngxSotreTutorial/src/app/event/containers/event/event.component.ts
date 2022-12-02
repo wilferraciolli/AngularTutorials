@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Attendee } from '../../../models';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-event',
@@ -7,17 +9,22 @@ import { Attendee } from '../../../models';
   styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
-  attendees: Attendee[] = [];
+  attendees$: Observable<Attendee[]> = of([]);
 
-  constructor() {
+  constructor(
+    private eventService: EventService
+  ) {
   }
 
   ngOnInit(): void {
+    this.getAttendees();
   }
 
   public addAttendee(attendee: Attendee) {
-    // push attendees to the array
-    this.attendees = [...this.attendees, attendee];
-    console.log('Attendee added', attendee);
+    this.eventService.addAttendee(attendee);
+  }
+
+  private getAttendees() {
+    this.attendees$ = this.eventService.getAttendees();
   }
 }

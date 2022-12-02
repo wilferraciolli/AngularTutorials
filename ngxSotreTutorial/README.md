@@ -15,3 +15,6 @@ Jest testing framework
 Walllaby.js (Ps this also needs to configure the wallaby json config file)
 `ng add ngcli-wallaby`
 
+Fake backend
+`npm i angular-in-memory-web-api -D`
+

@@ -8,7 +8,7 @@ import { Attendee } from '../../../models';
 })
 export class EventListComponent implements OnInit {
   @Input()
-  attendees: Attendee[] = [];
+  attendees: Attendee[] | null = [];
 
   constructor() {
   }
