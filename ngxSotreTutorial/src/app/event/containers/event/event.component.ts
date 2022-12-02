@@ -6,7 +6,7 @@ import { getSpinner } from '../../../state/spinner/spiner.selectors';
 import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
 import { State } from '../../state';
 import { EventService } from '../../services/event.service';
-import { LoadAttendees } from '../../state/attendees/attendees.actions';
+import { AddAttendee, LoadAttendees } from '../../state/attendees/attendees.actions';
 import { getAttendees } from '../../state/attendees/attendees.selector';
 
 @Component({
@@ -25,22 +25,11 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadAttendees());
-    this.spinner$ = this.store.pipe(select(getSpinner));
     this.attendees$ = this.store.pipe(select(getAttendees));
+    this.store.dispatch(new LoadAttendees());
   }
 
   public addAttendee(attendee: Attendee) {
-    // dispatch an action to the spinner
-    this.store.dispatch(new StartSpinner());
-
-    // add new attendee, refresh the list of attendees and stop the spinner
-    this.eventService.addAttendee(attendee).subscribe(() => {
-      this.store.dispatch(new StopSpinner());
-    });
+    this.store.dispatch(new AddAttendee(attendee));
   }
-
-  // private getAttendees() {
-  //   this.attendees$ = this.eventService.getAttendees();
-  // }
 }

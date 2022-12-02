@@ -10,13 +10,14 @@ import {
   AttendeesActionTypes,
   LoadAttendees,
   LoadAttendeesSuccess,
-  LoadAttendeesFail
+  LoadAttendeesFail, AddAttendeeSuccess, AddAttendee, AddAttendeeFail
 } from './attendees.actions';
 import { Attendee } from '../../../models';
 
 @Injectable()
 export class AttendeesEffects {
-  constructor(private actions$: Actions, private eventService: EventService) {}
+  constructor(private actions$: Actions, private eventService: EventService) {
+  }
 
   @Effect()
   getAttendees$ = this.actions$.pipe(
@@ -25,7 +26,16 @@ export class AttendeesEffects {
       this.eventService.getAttendees().pipe(
         map((attendees: Attendee[]) => new LoadAttendeesSuccess(attendees)),
         catchError(error => of(new LoadAttendeesFail(error)))
-      )
-    )
+      ))
+  );
+
+  @Effect()
+  addAttendee$ = this.actions$.pipe(
+    ofType(AttendeesActionTypes.AddAttendee),
+    switchMap((action: AddAttendee) =>
+      this.eventService.addAttendee(action.payload).pipe(
+        map((attendee: Attendee) => new AddAttendeeSuccess(attendee)),
+        catchError(error => of(new AddAttendeeFail(error)))
+      ))
   );
 }

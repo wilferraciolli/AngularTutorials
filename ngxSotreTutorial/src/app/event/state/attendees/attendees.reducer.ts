@@ -19,12 +19,13 @@ export function reducer(state = initialState, action: AttendeesActions): State {
     case AttendeesActionTypes.LoadAttendees: {
       return adapter.removeAll({
         ...state,
-        loading: true,
+        loading: false,
         error: null
       });
     }
+
     case AttendeesActionTypes.LoadAttendeesSuccess: {
-      return adapter.addMany(action.payload, {
+      return adapter.addAll(action.payload, {
         ...state,
         loading: false,
         error: null
@@ -37,6 +38,14 @@ export function reducer(state = initialState, action: AttendeesActions): State {
         loading: false,
         error: action.payload
       });
+    }
+
+    case AttendeesActionTypes.AddAttendeeSuccess: {
+      return adapter.addOne(action.payload, { ...state, error: null });
+    }
+
+    case AttendeesActionTypes.AddAttendeeFail: {
+      return { ...state, error: action.payload };
     }
 
     default: {
