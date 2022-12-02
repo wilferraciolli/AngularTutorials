@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,10 @@ import { reducer } from './state/spinner/spinner.reducer';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 100 }),
     StoreModule.forRoot({ spinner: reducer }),
+    StoreDevtoolsModule.instrument({
+      name: 'NgRx Demo App',
+      logOnly: environment.production
+    }),
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },

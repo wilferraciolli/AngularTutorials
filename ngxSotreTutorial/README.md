@@ -21,3 +21,6 @@ Fake backend
 ngRx store
 `npm i @ngrx/store`
 
+ngRx store dev tools (This need config on the modules to allow the extension to debug state)
+`npm install @ngrx/store-devtools`
+

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Attendee } from '../../../models';
+import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
+import { State } from '../../../state/state';
 import { EventService } from '../../services/event.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class EventComponent implements OnInit {
   attendees$: Observable<Attendee[]> = of([]);
 
   constructor(
-    private store: Store<any>,
+    private store: Store<State>,
     private eventService: EventService
   ) {
   }
@@ -27,12 +29,12 @@ export class EventComponent implements OnInit {
 
   public addAttendee(attendee: Attendee) {
     // dispatch an action to the spinner
-    this.store.dispatch({type: 'startSpinner'});
+    this.store.dispatch(new StartSpinner());
 
     // add new attendee, refresh the list of attendees and stop the spinner
-    this.eventService.addAttendee(attendee)      .subscribe(() => {
-      this.store.dispatch({type: 'stopSpinner'});
-      this.getAttendees()
+    this.eventService.addAttendee(attendee).subscribe(() => {
+      this.store.dispatch(new StopSpinner());
+      this.getAttendees();
     });
   }
 
