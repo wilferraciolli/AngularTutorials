@@ -2,7 +2,7 @@
 
 
 this projects is following the tutorials on the following website
-https://morioh.com/p/424297f822ed?f=5d9fed1343803f11f5bcd541
+https://timdeschryver.dev/blog/google-maps-as-an-angular-component#googlemap
 
 
 # Dependencies
