@@ -1,18 +1,18 @@
-// Object literal
-const myObj = {
+class MyClass {
   myMethod() {
-    console.log('Object:::', this);
-  },
-};
-// myObj.myMethod();
+    const foo = '123';
 
-// Function
-function myFunction(...text: string[]) {
-  console.log('Function:::', this, text);
+    console.log('1', this); // the keyword this in here is for the class
+
+    setTimeout(function () {
+      console.log(this); // the keyword this in here is pointing to the class and not the function
+    }, 0);
+
+    setTimeout(() => {
+      console.log(this); // the keyword this in here is pointing to the function scope rather than the class
+    }, 0);
+  }
 }
-const bindFunction = myFunction.bind(myObj); // bind a context to a function and return a new function
-bindFunction('ABC', 'DEF');
-bindFunction('123', '456');
-bindFunction('ABC', 'DEF');
-myFunction.call(myObj, 'ABC', 'DEF');
-myFunction.apply(myObj, ['ABC', 'DEF']);
+
+const myInstance = new MyClass();
+myInstance.myMethod();
