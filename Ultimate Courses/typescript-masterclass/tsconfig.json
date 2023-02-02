@@ -8,6 +8,7 @@
       "dom",
       "es6"
     ],
-    "outDir": "dist"                                      /* Specify when the code will be compoiled to */
+    "outDir": "dist"                                      /* Specify when the code will be compoiled to */,
+    "noImplicitThis": true                                /* error when explicity type of this */
   }
 }

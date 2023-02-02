@@ -1,18 +1,11 @@
-class MyClass {
-  myMethod() {
-    const foo = '123';
+const elem = document.querySelector('.click');
 
-    console.log('1', this); // the keyword this in here is for the class
+// syntax for typescript to allow the 'this' keyword to be infered, the first argument of the function is still the event: Event
+function handleClick(this: HTMLAnchorElement, event: Event) {
+  event.preventDefault();
 
-    setTimeout(function () {
-      console.log(this); // the keyword this in here is pointing to the class and not the function
-    }, 0);
-
-    setTimeout(() => {
-      console.log(this); // the keyword this in here is pointing to the function scope rather than the class
-    }, 0);
-  }
+  // need to specify the argument type to resolve this
+  console.log(this.href);
 }
 
-const myInstance = new MyClass();
-myInstance.myMethod();
+elem.addEventListener('click', handleClick, false);
