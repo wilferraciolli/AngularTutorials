@@ -1,22 +1,16 @@
-interface Person {
-  name: string;
-  age?: number;
-  address: {};
+// create our dictionary using record
+let dictionary: Record<string, TrackStates> = {};
+
+interface TrackStates {
+  current: string;
+  next: string;
 }
 
-// this is not needed as typescript can do it - this is jsut a function to pass an object, then says that the second argument must be a key of the object
-type MyPick<T, K extends keyof T> = {
-  [P in K]: T[P];
+// create an item that will take the key as the keys of an object, then is value
+const item: Record<keyof TrackStates, string> = {
+  current: 'js02js9',
+  next: '8nlksjsk'
 };
 
-
-// Allows to pick which properties we want to pick from an object
-const person: MyPick<Person, 'name' | 'age'> = {
-  name: 'wil',
-  age: 37
-};
-
-
-
-
-
+// javascript index - numbers are coerced to string when adding to dictionary
+dictionary[0] = item;
