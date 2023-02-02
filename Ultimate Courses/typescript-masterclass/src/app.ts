@@ -1,28 +1,25 @@
 interface Person {
   name: string;
-  age: number;
-}
-
-// this is not needed as typescript can create an object Partial<Person>
-interface PartialPerson {
-  name?: string;
   age?: number;
 }
 
-const person: Person = {
-  name: 'Wil',
-  age: 27
+// this is not needed as typescript can do it
+type MyRequired<T> = {
+  [P in keyof T]-?: T[P];
 };
 
-type MyPartial<T> = {
-  // manual way of looping through properties and mark them as optional
-  readonly [P in keyof T]?: T[P];
-};
-
-function updatePerson(person: Person, prop: MyPartial<Person>) {
-  return { ...person, ...prop };
+// method to print a property that is optional ** but we wanted to make it required
+function printAge(person: MyRequired<Person>) {
+  return `${ person.name } is ${ person.age }`;
 }
 
-updatePerson(person, { name: 'NewName' });
+const person:  MyRequired<Person> = {
+  name: 'wil',
+  age: 37
+};
+
+const ager = printAge(person);
+
+
 
 
