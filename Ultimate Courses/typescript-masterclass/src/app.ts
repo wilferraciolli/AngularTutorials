@@ -1,28 +1,32 @@
-// create an anonymus type
-const person = {
-  name: 'Wil',
-  age: 37
-};
-
-// type query
-type Person = typeof person; // type of, will give an interface of an object
-
-// The below is getting the keys of a property, then the below is getting the type of each key, this can be used to look up objects
-type PersonKeys = keyof Person; // union type [ name | age ], this will give the key names of the properties
-type PersonTypes = Person[PersonKeys]; // union type [ string | number ], this will give the type of each key
-
-// using generics to work out types on the fly, this will use keyof to work out the properties name durinf compile,
-// so typescript can know the value of each key before compiling, enforcing type safe
-function getProperty<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key];
+interface Person {
+  name: string;
+  age: number;
 }
 
-// this method will work as this is a type sage look up type since we are declatring the key of
-const personName = getProperty(person, 'name');
-const personAge = getProperty(person, 'age');
-// const personAge = getProperty(person, 'unknownProperty'); // this wont compile because 'unknownProperty is not typeof person'
+// this is not needed as typescript can create an object Readonly<Person>
+interface ReadOnlyPerson {
+  readonly name: string;
+  readonly age: number;
+}
+
+// mutable person
+const person: Person = {
+  name: 'Wil',
+  age: 27
+};
+
+type MyReadOnly<T> = {
+  // manual way of looping through properties and mark them as read only
+  readonly [P in keyof T]: T[P];
+};
 
 
+// function to get a mutable object, then create a new object of same type and properties but with ReadOnly properties
+function freezeObject<T>(objectToMakeReadOnly: T): MyReadOnly<T> {
+  //  this method will take an object, then loop through all its propertyu and create a new object with Read only properties
+  return Object.freeze(objectToMakeReadOnly);
+}
 
+const immurablePerson = freezeObject(person);
 
 
