@@ -1,30 +1,40 @@
-class Song {
-  kind: 'song';
-  constructor(public title: string, public duration: number) {}
+interface Order {
+  id: string;
+  amount: number;
+  currency: string;
 }
 
-class Playlist {
-  kind: 'playlist';
-  constructor(public name: string, public songs: Song[]) {}
+interface Stripe {
+  card: string;
+  cvc: string;
 }
 
-function isSong(item: any): item is Song {
-  // check whether title exists in item object
-  return 'title' in item;
+interface PayPal {
+  email: string;
 }
 
-function getItemName(item: Song | Playlist) {
-  // if (isSong(item)) {
-  if (item.kind === 'song') {
-    return item.title;
-  }
-  return item.name;
-}
+// define types based on intersecting multiple interfacees
+type CheckoutCard = Order & Stripe;
+type CheckoutPayPal = Order & PayPal;
+// type CheckoutABC = Order & { name: string };
 
-const songName = getItemName(new Song('Wonderful Wonderful', 300000));
-console.log('Song name:', songName);
+const order: Order = {
+  id: 'xj28s',
+  amount: 100,
+  currency: 'USD'
+};
 
-const playlistName = getItemName(
-  new Playlist('The Best Songs', [new Song('The Man', 300000)])
-);
-console.log('Playlist name:', playlistName);
+const orderCard: CheckoutCard = {
+  // get trhe order above and add the payment option to the other
+  ...order,
+  card: '1000 2000 3000 4000',
+  cvc: '123'
+};
+
+const orderPayPal: CheckoutPayPal = {
+  // get trhe order above and add the payment option to the other
+  ...order,
+  email: 'abc@def.com'
+};
+
+const assigned = Object.assign({}, order, orderCard);
