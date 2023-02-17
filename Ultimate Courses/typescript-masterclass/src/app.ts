@@ -1,27 +1,20 @@
-class Foo {
-  bar() { }
-}
-
-const bar = new Foo();
-
-// console.log(bar instanceof Foo);
-// console.log(Object.getPrototypeOf(bar) === Foo.prototype);
-
 class Song {
-  constructor(public title: string, public duration: number) { }
+  constructor(public title: string, public duration: number) {}
 }
 
 class Playlist {
-  constructor(public name: string, public songs: Song[]) { }
+  constructor(public name: string, public songs: Song[]) {}
+}
+
+// check that a type is instance of - if returns true then the type of item is a Song
+function isSong(item: any): item is Song {
+  return item instanceof Song;
 }
 
 function getItemName(item: Song | Playlist) {
-  // check if song or playlist
-  if (item instanceof Song) {
+  if (isSong(item)) {
     return item.title;
   }
-
-  // here must be a playlist
   return item.name;
 }
 
