@@ -1,45 +1,23 @@
-class Pizza {
-  constructor(private name: string, private price: number) {
+
+// function overload *******************************
+
+
+// just declare function to allow JS compiler to know what the parameters the function will take
+function reverse(str: string): string;
+// just declare function
+function reverse<T>(arr: T[]): T[];
+// implementation of the function based on the declarations above
+function reverse<T>(stringOrArray: string | T[]): string | T[] {
+  if (typeof stringOrArray === 'string') {
+    return stringOrArray
+    .split('')
+    .reverse()
+    .join('');
   }
+
+  // call the reverse just to be able to return a new array
+  return stringOrArray.slice().reverse();
 }
 
-// // a list that will take anything, however generics can specify a type when instantiated
-// class List {
-//   list: any[];
-//
-//   addItem(item: any): void {
-//     this.list.push(item);
-//   }
-//
-//   getList(): any[] {
-//     return this.list;
-//   }
-// }
-
-//generics can specify a type when instantiated
-class List<T> {
-  private list: T[];
-
-  addItem(item: any): void {
-    this.list.push(item);
-  }
-
-  getList(): T[] {
-    return this.list;
-  }
-}
-
-
-const list = new List<Pizza>();
-list.addItem(new Pizza('Pepperoni', 15));
-list.addItem(new Pizza('Pepperoni', 15));
-
-const pizzas = list.getList();
-
-
-class Coupon {
-  constructor(private name: string) {
-  }
-}
-const anotherList = new List<Coupon>();
-anotherList.addItem(new Coupon('Coupon'));
+reverse('Pepperoni');
+reverse(['bacon', 'pepperoni', 'chili', 'mushrooms']);
