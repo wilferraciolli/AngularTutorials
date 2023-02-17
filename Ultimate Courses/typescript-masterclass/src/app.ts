@@ -1,38 +1,34 @@
-// ******************* type of and Type Guards
-function foo(bar: string | number) {
-  if (typeof bar === 'string') {
-    // handling is string
-  }
-
-  // here it is a number
+class Foo {
+  bar() { }
 }
 
+const bar = new Foo();
+
+// console.log(bar instanceof Foo);
+// console.log(Object.getPrototypeOf(bar) === Foo.prototype);
 
 class Song {
-  constructor(public title: string, public duration: string | number) {
-
-  }
+  constructor(public title: string, public duration: number) { }
 }
 
-function getSongDuration(item: Song){
-  // check that the duration is of type string
-  if(typeof item.duration === 'string'){
-    return item.duration;
-  }
-
-  const {duration} = item;
-  const minutes = Math.floor(duration / 60000);
-  const seconds = (duration / 1000) % 60;
-
-  // parse the duration from milliseconds
-  return `${minutes}:${seconds}`;
+class Playlist {
+  constructor(public name: string, public songs: Song[]) { }
 }
 
-// get song duration as string
-const songDurationFromString = getSongDuration(new Song('title', '05:41'));
-console.log(songDurationFromString);
+function getItemName(item: Song | Playlist) {
+  // check if song or playlist
+  if (item instanceof Song) {
+    return item.title;
+  }
 
-// get song duration as number
-const songDurationFromMs = getSongDuration(new Song('title', 33000));
-console.log(songDurationFromString);
+  // here must be a playlist
+  return item.name;
+}
 
+const songName = getItemName(new Song('Wonderful Wonderful', 300000));
+console.log('Song name:', songName);
+
+const playlistName = getItemName(
+  new Playlist('The Best Songs', [new Song('The Man', 300000)])
+);
+console.log('Playlist name:', playlistName);
