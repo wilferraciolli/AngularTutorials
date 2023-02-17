@@ -1,18 +1,21 @@
 class Song {
+  kind: 'song';
   constructor(public title: string, public duration: number) {}
 }
 
 class Playlist {
+  kind: 'playlist';
   constructor(public name: string, public songs: Song[]) {}
 }
 
-// check that a type is instance of - if returns true then the type of item is a Song
 function isSong(item: any): item is Song {
-  return item instanceof Song;
+  // check whether title exists in item object
+  return 'title' in item;
 }
 
 function getItemName(item: Song | Playlist) {
-  if (isSong(item)) {
+  // if (isSong(item)) {
+  if (item.kind === 'song') {
     return item.title;
   }
   return item.name;
