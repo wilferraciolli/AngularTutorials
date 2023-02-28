@@ -1,6 +1,6 @@
 {
   "include": ["src/**/*.ts"],                                /* Include every folders and files under the src folder */
-  "excludes": ["src/**/*.spec.ts"] ,
+  "exclude": ["src/**/*.spec.ts"] ,
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
     "declaration": true,                                 /* This setting tell typescript to create a declaration file to the code we are writing */
