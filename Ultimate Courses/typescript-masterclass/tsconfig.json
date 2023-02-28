@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
-    "target": "es5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "declaration": true,                                 /* This setting tell typescript to create a declaration file to the code we are writing */
+    "declarationDir": "./@types",                        /* specify where to save the types files */
+    "target": "es5",                                     /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "module": "commonjs",                                /* Specify what module code is generated. */
     "strict": true,                                      /* Enable all strict type-checking options. */
     "lib": [                                             /* Add object assign to the compiler */

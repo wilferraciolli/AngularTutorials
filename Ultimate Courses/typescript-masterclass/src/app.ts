@@ -1,13 +1,7 @@
-import * as _ from 'lodash';
+export class Foo {
 
-// this will be a know type because we have declared lodash types
-_.chunk([1, 2, 3, 4], 2);
-
-// add our own method to lodash
-_.mixin({
-  log(item: string) {
-    console.log(':::', item);
+  constructor() {
   }
-});
 
-_.log('item to log');
+  bar(age: number){}
+}
