@@ -1,15 +1,4 @@
-const enum Sizes {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
+import * as _ from 'lodash';
 
-let selected: Sizes = Sizes.Small;
-
-function updateSize(size: Sizes): void {
-  selected = size;
-}
-
-updateSize(Sizes.Large);
-
-console.log(selected);
+// this will be a know type because we have declared lodash types
+_.chunck([1,2,3,4], 2);
