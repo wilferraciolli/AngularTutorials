@@ -9,6 +9,10 @@
       "es6"
     ],
     "outDir": "dist"                                      /* Specify when the code will be compoiled to */,
-    "noImplicitThis": true                                /* error when explicity type of this */
+    "noImplicitThis": true                                /* error when explicity type of this */,
+    "typeRoots": [                                        /* Manually add type declaration to the compiler so during compiling tsc will know about the types */
+      "src/@types",
+      "node_modules/@types"
+    ]
   }
 }
