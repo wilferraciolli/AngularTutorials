@@ -20,5 +20,6 @@
     ],
     "sourceMap": true,                                     /* This enables ts and js to work together, this is needed for debuging during dev - It will create the app.js.map */
     "inlineSources": true,                                 /* This will make sure that source is inlined with the code so it will give debuggin values for errors */
+    "diagnostics": true,                                   /* Debug info on the prokect */
   }
 }
