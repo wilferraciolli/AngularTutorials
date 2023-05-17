@@ -1,0 +1,69 @@
+<div class="container">
+
+
+  <div class="example-container">
+    <h2>Available numbers</h2>
+
+    <div
+      id="all"
+      cdkDropList
+      [cdkDropListData]="all"
+      cdkDropListConnectedTo="even"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="noReturnPredicate">
+      <div
+        class="example-box"
+        *ngFor="let number of all"
+        [cdkDragData]="number"
+        cdkDrag>{{number}}
+
+        <div *cdkDragPreview>Moving item {{ number }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Even numbers</h2>
+
+    <div
+      id="even"
+      cdkDropList
+      [cdkDropListData]="even"
+      cdkDropListConnectedTo="new"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="evenPredicate">
+      <div
+        class="example-box"
+        *ngFor="let number of even"
+        cdkDrag
+        [cdkDragData]="number">{{number}}
+
+        <div *cdkDragPreview>Moving item {{ number }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>New numbers</h2>
+
+    <div
+      id="new"
+      cdkDropList
+      [cdkDropListData]="new"
+      cdkDropListConnectedTo="even"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="evenPredicate">
+      <div
+        class="example-box"
+        *ngFor="let number of new"
+        cdkDrag
+        [cdkDragData]="number">{{number}}
+
+        <div *cdkDragPreview>Moving item {{ number }}</div>
+      </div>
+    </div>
+  </div>
+</div>
