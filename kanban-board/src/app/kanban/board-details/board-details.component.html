@@ -1,0 +1,75 @@
+<div cdkDropListGroup>
+  <div class="container">
+    <h2>To do</h2>
+
+    <div
+      id="incoming"
+      cdkDropList
+      [cdkDropListData]="incomingItems"
+      cdkDropListConnectedTo="available"
+      class="list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="box" *ngFor="let item of incomingItems" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Doing</h2>
+
+    <div
+      id="available"
+      cdkDropList
+      [cdkDropListData]="availableItems"
+      cdkDropListConnectedTo="sold"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="box" *ngFor="let item of availableItems" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Test</h2>
+
+    <div
+      id="sold"
+      cdkDropList
+      [cdkDropListData]="soldItems"
+      cdkDropListConnectedTo="signOff"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="box" *ngFor="let item of soldItems" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Sign off</h2>
+
+    <div
+      id="signOff"
+      cdkDropList
+      [cdkDropListData]="signOffItems"
+      cdkDropListConnectedTo="done"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="box" *ngFor="let item of signOffItems" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Done</h2>
+
+    <div
+      id="done"
+      cdkDropList
+      [cdkDropListData]="doneItems"
+      cdkDropListConnectedTo="available"
+      class="list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="box" *ngFor="let item of doneItems" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+</div>

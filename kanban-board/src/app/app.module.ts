@@ -9,11 +9,13 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { BoardDetailsComponent } from './kanban/board-details/board-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardsComponent
+    BoardsComponent,
+    BoardDetailsComponent
   ],
   imports: [
     BrowserModule,
