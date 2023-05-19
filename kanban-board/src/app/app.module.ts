@@ -10,12 +10,16 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { BoardDetailsComponent } from './kanban/board-details/board-details.component';
+import { BoardItemComponent } from './kanban/board-item/board-item.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardsComponent,
-    BoardDetailsComponent
+    BoardDetailsComponent,
+    BoardItemComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { BoardDetailsComponent } from './kanban/board-details/board-details.comp
     MatSlideToggleModule,
     MatToolbarModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

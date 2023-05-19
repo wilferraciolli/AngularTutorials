@@ -1,0 +1,31 @@
+<div class="BoardItem-container">
+  <span class="BoardItem-title">{{boardItem.title}}</span>
+ <div class="BoardItem-subTitleContainer">
+   <span class="BoardItem-subTitle">{{boardItem.assignedTo}}</span>
+   <span class="BoardItem-subTitle">{{boardItem.points}}</span>
+ </div>
+
+  <span class="BoardItem-description">{{boardItem.description}}</span>
+
+<button class="BoardItem-editButton"
+  type="button"
+(click)="editBoardItem()">Edit
+  </button>
+</div>
+
+
+
+<!--<mat-card>-->
+<!--  <mat-card-header>-->
+<!--    <mat-card-title>{{boardItem.title}}</mat-card-title>-->
+<!--  </mat-card-header>-->
+
+<!--  <mat-card-content>-->
+<!--    <p>-->
+<!--      {{boardItem.description}}-->
+<!--    </p>-->
+<!--  </mat-card-content>-->
+<!--  <mat-card-actions>-->
+<!--    <button mat-stroked-button>Edit</button>-->
+<!--  </mat-card-actions>-->
+<!--</mat-card>-->

@@ -1,0 +1,71 @@
+.BoardItem {
+  &-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    font-family: Roboto, SansSerif;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #00000020;
+    border-radius: 0.8rem;
+    padding: 10px;
+    max-width: 160px;
+  }
+
+  &-title {
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  &-subTitleContainer {
+    display: flex;
+    //align-items: flex-end;
+    //align-content: flex-end;
+    //justify-content: flex-end;
+    //justify-items: flex-end;
+    margin-left: auto;
+    //padding-right: 55px;
+    gap: 5px;
+  }
+
+  &-subTitle {
+    line-height: 0.5;
+    margin-bottom: 0.5rem;
+    font-size: 10px;
+    //font-weight: 500;
+    font-style: normal;
+  }
+
+  &-description{
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    //font-weight: 500;
+    font-style: normal;
+  }
+
+  &-editButton {
+    padding: 2px 8px;
+    top:50%;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none;
+    border-radius:10px;
+    box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+  }
+
+  &-editButton:active {
+    background-color: #0F3A90FF;
+  }
+
+  &-editButton:focus {
+    outline-color: transparent;
+    outline-style:solid;
+    box-shadow: 0 0 0 4px #5a01a7;
+    transition: 0.7s;
+  }
+}
