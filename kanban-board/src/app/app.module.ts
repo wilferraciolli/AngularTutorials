@@ -13,6 +13,7 @@ import { BoardDetailsComponent } from './kanban/board-details/board-details.comp
 import { BoardItemComponent } from './kanban/board-item/board-item.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
+import {provideRouter, withComponentInputBinding} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatCardModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

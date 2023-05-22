@@ -3,15 +3,15 @@
     <h2>To do</h2>
 
     <div
-      id="incoming"
+      id="toDo"
       cdkDropList
-      [cdkDropListData]="boardItems"
-      cdkDropListConnectedTo="available"
+      [cdkDropListData]="toDoItems"
+      cdkDropListConnectedTo="doing"
       class="list"
       (cdkDropListDropped)="dropItem($event)">
 <!--      <div class="box" *ngFor="let item of boardItems" cdkDrag>{{item.title}}</div>-->
       <app-board-item class="box"
-                      *ngFor="let item of boardItems"
+                      *ngFor="let item of toDoItems"
                       [boardItem]="item"
                       cdkDrag>
       </app-board-item>
@@ -22,16 +22,16 @@
     <h2>Doing</h2>
 
     <div
-      id="available"
+      id="doing"
       cdkDropList
-      [cdkDropListData]="availableItems"
-      cdkDropListConnectedTo="sold"
+      [cdkDropListData]="doingItems"
+      cdkDropListConnectedTo="testing"
       class="list"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="dropItem($event)"
     >
 <!--      <div class="box" *ngFor="let item of availableItems" cdkDrag>{{item}}</div>-->
       <app-board-item class="box"
-                      *ngFor="let item of boardItems"
+                      *ngFor="let item of doingItems"
                       [boardItem]="item"
                       cdkDrag>
       </app-board-item>
@@ -42,16 +42,16 @@
     <h2>Test</h2>
 
     <div
-      id="sold"
+      id="testing"
       cdkDropList
-      [cdkDropListData]="soldItems"
+      [cdkDropListData]="testingItems"
       cdkDropListConnectedTo="signOff"
       class="list"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="dropItem($event)"
     >
 <!--      <div class="box" *ngFor="let item of soldItems" cdkDrag>{{item}}</div>-->
       <app-board-item class="box"
-                      *ngFor="let item of boardItems"
+                      *ngFor="let item of testingItems"
                       [boardItem]="item"
                       cdkDrag>
       </app-board-item>
@@ -64,14 +64,14 @@
     <div
       id="signOff"
       cdkDropList
-      [cdkDropListData]="signOffItems"
+      [cdkDropListData]="singOffItems"
       cdkDropListConnectedTo="done"
       class="list"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="dropItem($event)"
     >
 <!--      <div class="box" *ngFor="let item of signOffItems" cdkDrag>{{item}}</div>-->
       <app-board-item class="box"
-                      *ngFor="let item of boardItems"
+                      *ngFor="let item of singOffItems"
                       [boardItem]="item"
                       cdkDrag>
       </app-board-item>
@@ -85,16 +85,23 @@
       id="done"
       cdkDropList
       [cdkDropListData]="doneItems"
-      cdkDropListConnectedTo="available"
+      cdkDropListConnectedTo="toDo"
       class="list"
-      (cdkDropListDropped)="drop($event)"
+      (cdkDropListDropped)="dropItem($event)"
     >
 <!--      <div class="box" *ngFor="let item of doneItems" cdkDrag>{{item}}</div>-->
       <app-board-item class="box"
-                      *ngFor="let item of boardItems"
+                      *ngFor="let item of doneItems"
                       [boardItem]="item"
                       cdkDrag>
       </app-board-item>
     </div>
   </div>
 </div>
+
+The values of to do are
+<div *ngIf="toDoItems">
+  {{toDoItems.length}}
+  {{toDoItems}}
+</div>
+
