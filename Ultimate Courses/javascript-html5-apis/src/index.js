@@ -5,8 +5,9 @@ app.innerHTML = `
   <h1>JavaScript HTML5 APIs</h1>
   <div class="uploader">
 <!-- Set the element to allow drag -->
-    <div id="item-0" class="dragme" draggable="true"></div>
-    <div class="dropzone">&#127919; target Drag here!</div>
+<!--    <div id="item-0" class="dragme" draggable="true"></div>-->
+    <h2>Upload your files &#128209</h2>
+    <div class="dropzone">&#128194; target Drag here!</div>
   </div>
   
   <style>
@@ -43,13 +44,13 @@ app.innerHTML = `
 
 
 const init = () => {
-  const dragme = document.querySelector('.dragme');
-
-  dragme.addEventListener('dragstart', (e) => {
-    // console.log(e.dataTransfer);
-    // console.log(e.target.id); // print the id attribute
-    e.dataTransfer.setData('text/plain', e.target.id);
-  });
+  // const dragme = document.querySelector('.dragme');
+  //
+  // dragme.addEventListener('dragstart', (e) => {
+  //   // console.log(e.dataTransfer);
+  //   // console.log(e.target.id); // print the id attribute
+  //   e.dataTransfer.setData('text/plain', e.target.id);
+  // });
 
 
   // **************** drop zone *************************
@@ -85,12 +86,20 @@ const init = () => {
     e.target.classList.remove('active');
     // console.log('Dropping');
 
-    // get the data from the dropped item, then get the element by id and move it
-    console.log(e.dataTransfer.getData('text/plain'), 'data from dropped item');
-    const id = e.dataTransfer.getData('text/plain');
-    const element = document.getElementById(id);
-    dropzone.append(element); // add the element to the dropzone
+    // // get the data from the dropped item, then get the element by id and move it
+    // console.log(e.dataTransfer.getData('text/plain'), 'data from dropped item');
+    // const id = e.dataTransfer.getData('text/plain');
+    // const element = document.getElementById(id);
+    // dropzone.append(element); // add the element to the dropzone
+
+    // manage files dropped
+    const { files } = e.dataTransfer;
+    console.log(files);
   });
+
+  // allow to drop anywhere on the screen and add it to the dropzone, this is to prevent the browser from defaulting behaviour when dropping outside the drop zone
+  document.addEventListener('dargover', (e) => e.preventDefault());
+  document.addEventListener('drop', (e) => e.preventDefault());
 };
 
 // check if browser supports drag and drop
