@@ -1,2 +1,5 @@
 node_modules
 dist/*
+/.idea/javascript-html5-apis.iml
+/.idea/modules.xml
+/.idea/vcs.xml
