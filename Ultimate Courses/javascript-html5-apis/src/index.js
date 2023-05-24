@@ -5,7 +5,7 @@ app.innerHTML = `
   <h1>JavaScript HTML5 APIs</h1>
   <div class="uploader">
 <!-- Set the element to allow drag -->
-    <div class="dragme" draggable="true"></div>
+    <div id="item-0" class="dragme" draggable="true"></div>
     <div class="dropzone">&#127919; target Drag here!</div>
   </div>
   
@@ -43,6 +43,16 @@ app.innerHTML = `
 
 
 const init = () => {
+  const dragme = document.querySelector('.dragme');
+
+  dragme.addEventListener('dragstart', (e) => {
+    // console.log(e.dataTransfer);
+    // console.log(e.target.id); // print the id attribute
+    e.dataTransfer.setData('text/plain', e.target.id);
+  });
+
+
+  // **************** drop zone *************************
   const dropzone = document.querySelector('.dropzone');
 
   // add event on drag enter
@@ -59,7 +69,7 @@ const init = () => {
 
   // add event on drag over - this will be firing as long as it is on top of a drop zone
   dropzone.addEventListener('dragover', (e) =>{
-    console.log(e, 'dragging over');
+    // console.log(e, 'dragging over');
     e.preventDefault();
     e.stopImmediatePropagation();
 
@@ -73,7 +83,13 @@ const init = () => {
     e.stopImmediatePropagation();
 
     e.target.classList.remove('active');
-    console.log('Dropping');
+    // console.log('Dropping');
+
+    // get the data from the dropped item, then get the element by id and move it
+    console.log(e.dataTransfer.getData('text/plain'), 'data from dropped item');
+    const id = e.dataTransfer.getData('text/plain');
+    const element = document.getElementById(id);
+    dropzone.append(element); // add the element to the dropzone
   });
 };
 
