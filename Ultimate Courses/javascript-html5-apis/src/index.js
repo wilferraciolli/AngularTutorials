@@ -9,6 +9,7 @@ app.innerHTML = `
     <h2>Upload your files &#128209</h2>
     <p>Accepts only .png, .jpeg, .svg</p>
     <div class="dropzone">&#128194; target Drag here!</div>
+    <div class="list"></div>
   </div>
   
   <style>
@@ -56,6 +57,7 @@ const init = () => {
 
   // **************** drop zone *************************
   const dropzone = document.querySelector('.dropzone');
+  const list = document.querySelector('.list');
 
   // add event on drag enter
   dropzone.addEventListener('dragenter', (e) => {
@@ -98,6 +100,32 @@ const init = () => {
     handleFileUpload(files);
   });
 
+  const showPreviewFile = (file) => {
+    const reader = new FileReader();
+    // console.log(reader);
+    reader.readAsDataURL(file); // read the file and convert onto Base64
+    reader.addEventListener('load', (e) => {
+      // get target base 64 for preview
+      const div = document.createElement('div');
+      // console.log(file); // print the actual file
+
+      // create the preview for the file so it can be appended to the DOM
+      div.innerHTML = `
+        <div style="display: flex">
+          <img 
+            src="${e.target.result}"
+            alt="${file.name}"
+            style="width: 20px; margin-right: 10px;"
+            > 
+            <p>${file.name} <span>${file.size} bytes</span></p>
+        </div> 
+      `;
+      list.append(div); // add the preview image to the DOM
+    });
+
+    // console.log(list, file);
+  };
+
   const isAllowedType = (file) => {
     return ['image/png', 'image/jpeg', 'image/svg+xml'].includes(file.type);
   };
@@ -109,7 +137,7 @@ const init = () => {
 
     // filter accepted files type
     const filteredFiles = Array.from(files).filter(isAllowedType);
-    console.log(filteredFiles);
+    filteredFiles.forEach(showPreviewFile);
 
   };
 
