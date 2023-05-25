@@ -29,10 +29,18 @@ const init = async () => {
     }
   }
 
-  const notification = notify(`&#127909; Now playing`, 'Song name');
-  if (notification) {
-    console.log('Notifications active');
-  }
+  const showNotification = () => {
+    const notification = notify(`&#127909; Now playing`, 'Song name');
+
+    if (notification) {
+      notification.addEventListener('click', (e) => {
+        window.parent.focus(); // opens the tab where the notification was created
+        e.target.close();
+      });
+    }
+  };
+
+  setTimeout(showNotification, 2000);
 };
 
 const notify = (title, body) => {
