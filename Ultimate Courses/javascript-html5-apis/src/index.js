@@ -113,24 +113,38 @@ const init = () => {
       div.innerHTML = `
         <div style="display: flex">
           <img 
-            src="${e.target.result}"
-            alt="${file.name}"
+            src="${ e.target.result }"
+            alt="${ file.name }"
             style="width: 20px; margin-right: 10px;"
             > 
-            <p>${file.name} <span>${file.size} bytes</span></p>
+            <p>${ file.name } <span>${ file.size } bytes</span></p>
         </div> 
       `;
       list.append(div); // add the preview image to the DOM
     });
+  };
 
-    // console.log(list, file);
+  const uploadFiles = async (files) => {
+    const form = new FormData();
+    [...files].forEach((file) => form.append(file.name, file)); // add each file to the form data array so it can be
+                                                                // uploaded
+
+    // console.log([...form.entries()]); // get the array values of the form and their data
+
+    // upload the files to the following project https://glitch.com/edit/#!/dragdropfiles
+    const request = await fetch('//dragdropfiles.glitch.me/upload', {
+      method: 'POST',
+      body: form
+    });
+
+    return await request.json();
   };
 
   const isAllowedType = (file) => {
     return ['image/png', 'image/jpeg', 'image/svg+xml'].includes(file.type);
   };
 
-  const handleFileUpload = (files) => {
+  const handleFileUpload = async (files) => {
     if (Array.from(files).filter(isAllowedType).length !== files.length) {
       console.log('There was bad files passed in, handle error');
     }
@@ -139,6 +153,14 @@ const init = () => {
     const filteredFiles = Array.from(files).filter(isAllowedType);
     filteredFiles.forEach(showPreviewFile);
 
+    // upload the files to the test server
+    const uploaded = await uploadFiles(filteredFiles);
+
+    if (uploaded) {
+      for (const image of uploaded.images) {
+        console.log('Uploaded to the following URL', image);
+      }
+    }
   };
 
   // allow to drop anywhere on the screen and add it to the dropzone, this is to prevent the browser from defaulting
