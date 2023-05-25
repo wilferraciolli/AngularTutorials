@@ -7,6 +7,7 @@ app.innerHTML = `
 <!-- Set the element to allow drag -->
 <!--    <div id="item-0" class="dragme" draggable="true"></div>-->
     <h2>Upload your files &#128209</h2>
+    <p>Accepts only .png, .jpeg, .svg</p>
     <div class="dropzone">&#128194; target Drag here!</div>
   </div>
   
@@ -69,7 +70,7 @@ const init = () => {
   });
 
   // add event on drag over - this will be firing as long as it is on top of a drop zone
-  dropzone.addEventListener('dragover', (e) =>{
+  dropzone.addEventListener('dragover', (e) => {
     // console.log(e, 'dragging over');
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -94,10 +95,26 @@ const init = () => {
 
     // manage files dropped
     const { files } = e.dataTransfer;
-    console.log(files);
+    handleFileUpload(files);
   });
 
-  // allow to drop anywhere on the screen and add it to the dropzone, this is to prevent the browser from defaulting behaviour when dropping outside the drop zone
+  const isAllowedType = (file) => {
+    return ['image/png', 'image/jpeg', 'image/svg+xml'].includes(file.type);
+  };
+
+  const handleFileUpload = (files) => {
+    if (Array.from(files).filter(isAllowedType).length !== files.length) {
+      console.log('There was bad files passed in, handle error');
+    }
+
+    // filter accepted files type
+    const filteredFiles = Array.from(files).filter(isAllowedType);
+    console.log(filteredFiles);
+
+  };
+
+  // allow to drop anywhere on the screen and add it to the dropzone, this is to prevent the browser from defaulting
+  // behaviour when dropping outside the drop zone
   document.addEventListener('dargover', (e) => e.preventDefault());
   document.addEventListener('drop', (e) => e.preventDefault());
 };
