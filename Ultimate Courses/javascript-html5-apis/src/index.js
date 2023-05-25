@@ -8,6 +8,7 @@ app.innerHTML = `
 <!--    <div id="item-0" class="dragme" draggable="true"></div>-->
     <h2>Upload your files &#128209</h2>
     <p>Accepts only .png, .jpeg, .svg</p>
+    <input type="file" class="files" accept="image/*" multiple>
     <div class="dropzone">&#128194; target Drag here!</div>
     <div class="list"></div>
   </div>
@@ -57,6 +58,7 @@ const init = () => {
 
   // **************** drop zone *************************
   const dropzone = document.querySelector('.dropzone');
+  const files = document.querySelector('.files');
   const list = document.querySelector('.list');
 
   // add event on drag enter
@@ -64,13 +66,11 @@ const init = () => {
     // console.log(e, 'dragenter');
     e.target.classList.add('active');
   });
-
   // add event on drag leave
   dropzone.addEventListener('dragleave', (e) => {
     // console.log(e, 'dragleave');
     e.target.classList.remove('active');
   });
-
   // add event on drag over - this will be firing as long as it is on top of a drop zone
   dropzone.addEventListener('dragover', (e) => {
     // console.log(e, 'dragging over');
@@ -80,7 +80,6 @@ const init = () => {
     // change the cursor when dropping over
     e.dataTransfer.dropEffect = 'copy';
   });
-
   // add the drop event
   dropzone.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -97,6 +96,13 @@ const init = () => {
 
     // manage files dropped
     const { files } = e.dataTransfer;
+    handleFileUpload(files);
+  });
+
+  // add event listener for file input field
+  files.addEventListener('change', (e) => {
+    // manage files picked by the input form
+    const { files } = e.target;
     handleFileUpload(files);
   });
 
