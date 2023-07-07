@@ -37,6 +37,13 @@
   width: 100px;
 }
 
+.player__sound {
+  align-items: center;
+  display: flex;
+  width: 80px;
+  margin-left: auto;
+}
+
 input[type='range'] {
   -webkit-appearance: none;
   height: 8px;
@@ -56,11 +63,6 @@ input[type='range']::-webkit-slider-thumb {
   height: 14px;
   border-radius: 50px;
 }
-
-//.player__progress {
-//  display: flex;
-//  flex: 1;
-//}
 
 .player__timeline {
 

@@ -7,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoComponent implements OnInit {
 
-  // @ts-ignore
-  public globalDuration;
-  // @ts-ignore
-  public globalTotalDuration;
+  public volumeIconSource: string = 'assets/img/icons/volume.svg';
+  public muteIconSource: string = 'assets/img/icons/volume-mute.svg';
 
   public ngOnInit(): void {
     //this._addEventsToTheVideoPlayer();
@@ -26,15 +24,29 @@ export class VideoComponent implements OnInit {
     let stop = player?.querySelector('.player__stop');
     stop?.addEventListener('click', () => this.stopMedia(media, playImage));
 
+    // set current and total duration
+    let duration = player?.querySelector('.player__duration');
+    media?.addEventListener('durationchange', (e) => this.setInitialDuration(e, duration));
+
     // set values on the progress
     let timeline = player?.querySelector('.player__timeline');
-    media?.addEventListener('timeupdate', (e) => this.setDuration(e, timeline));
+    media?.addEventListener('timeupdate', (e) => this.setDuration(e, timeline, duration));
 
-    // set values on the progress
-    this.globalDuration = player?.querySelector('.player__duration');
-    media?.addEventListener('durationchange', (e) => this.setInitialDuration(e));
+    // add the event to when the media reaches the end, then it will call the stop function reseting the video
+    media?.addEventListener('ended', () => this.stopMedia(media, playImage));
+
+    //listen to timeline event to work out when the video progress was manually changed
+    timeline?.addEventListener('input', (e) => this.skipToPosition(e, media));
+
+    // Volume mute/unmute control
+    let volumeToggle = player?.querySelector('.player__mute');
+    volumeToggle?.addEventListener('click', () => this.toggleVolume(volumeToggle, volume, media));
+
+    // Volume up and down control
+    let volume = player?.querySelector('.player__volume');
+    volume?.addEventListener('input', (e) => this.setVolume(e, volumeToggle, media));
+
   }
-
 
   public toggleMediaStatus(media: any, playImage: any) {
     if (media.paused) {
@@ -53,7 +65,13 @@ export class VideoComponent implements OnInit {
     playImage.src = 'assets/img/icons/play.svg';
   }
 
-  public setDuration(e: any, timeline: any) {
+  public skipToPosition(e: any, media: any) {
+    // get the value of the progress bar when manually changed, and update the current progress and duration of the video
+    const position = parseInt(e.target.value, 10) / 100;
+    media.currentTime = media.duration * position;
+  }
+
+  public setDuration(e: any, timeline: any, duration: any) {
     // work out the progress of the video by calculating its elapsed time based on timeupdated event
     const progress = (e.target.currentTime / e.target.duration) * 100;
     const currentDuration = this.getTime(e.target.currentTime);
@@ -61,21 +79,42 @@ export class VideoComponent implements OnInit {
     timeline.value = progress;
 
     // update the current Duration as the video plays
-    this.globalDuration.innerText = `${currentDuration} / ${this.globalTotalDuration}`;
+    const totalDuration = this.getTime(e.target.duration);
+    duration.innerText = `${ currentDuration } / ${ totalDuration }`;
   }
 
-  public setInitialDuration(e: any) {
+  public setInitialDuration(e: any, duration: any) {
     // update the duration of the video label
-    this.globalTotalDuration = this.getTime(e.target.duration);
-    this.globalDuration.innerText = `00:00 / ${this.globalTotalDuration}`;
+    const totalDuration = this.getTime(e.target.duration);
+    duration.innerText = `00:00 / ${ totalDuration }`;
+  }
+
+  public setVolume(e: any, volumeToggle: any, media: any) {
+    // get the value of the volume toggle and divide by 100 so it can be assigned to the media volume
+    const volumePosition = parseInt(e.target.value, 10) / 100;
+    media.volume = volumePosition;
+
+    // update the icons when muted
+    volumeToggle.src = media.volume > 0 ? this.volumeIconSource : this.muteIconSource;
+  }
+
+  public toggleVolume(volumeToggle: any, volume: any, media: any) {
+    // toggle the value of the volume to muted or not muted
+    const isMuted = media.volume === 0;
+
+    console.log('The cuyrrent value of the image is ', isMuted, media.volume, volumeToggle.src);
+
+    volumeToggle.src = isMuted ? this.volumeIconSource : this.muteIconSource;
+    volume.value = isMuted ? 100 : 0;
+    media.volume = isMuted ? 1 : 0;
   }
 
   private getTime = (duration: any): string => {
     const time = parseInt(duration.toFixed(), 10);
     // @ts-ignore
-    const minutes =  `${parseInt(time / 60)}`.padStart(2, 0);
+    const minutes = `${ parseInt(time / 60) }`.padStart(2, 0);
     // @ts-ignore
-    const seconds = `${time % 60}`.padStart(2, 0);
+    const seconds = `${ time % 60 }`.padStart(2, 0);
 
     return `${ minutes }:${ seconds }`;
   };
