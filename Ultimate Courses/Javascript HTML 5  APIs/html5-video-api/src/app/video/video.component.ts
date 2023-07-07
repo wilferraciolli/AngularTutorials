@@ -16,7 +16,6 @@ export class VideoComponent implements OnInit {
     let player = document.querySelector('.player');
     let media = player?.querySelector('.media');
 
-
     let play = player?.querySelector('.player__play');
     play?.addEventListener('click', () => this.toggleMediaStatus(media, playImage));
     let playImage = play?.querySelector('img');
@@ -46,6 +45,13 @@ export class VideoComponent implements OnInit {
     let volume = player?.querySelector('.player__volume');
     volume?.addEventListener('input', (e) => this.setVolume(e, volumeToggle, media));
 
+
+    if (this.isPictureInPictureEnabled()) {
+      console.log('Enabled');
+      // Get the reference to the Picture in picture button
+      let pip = player?.querySelector('.player__pip');
+      pip?.addEventListener('click', () => this.setPip(media));
+    }
   }
 
   public toggleMediaStatus(media: any, playImage: any) {
@@ -102,11 +108,41 @@ export class VideoComponent implements OnInit {
     // toggle the value of the volume to muted or not muted
     const isMuted = media.volume === 0;
 
-    console.log('The cuyrrent value of the image is ', isMuted, media.volume, volumeToggle.src);
+    console.log('The current value of the image is ', isMuted, media.volume, volumeToggle.src);
 
     volumeToggle.src = isMuted ? this.volumeIconSource : this.muteIconSource;
     volume.value = isMuted ? 100 : 0;
     media.volume = isMuted ? 1 : 0;
+  }
+
+  public setPip(media: any) {
+    this.addOptionalEventsToPiP(media);
+
+    if (this.hasEnteredPip()) {
+      document.exitPictureInPicture();
+    } else {
+      media.requestPictureInPicture();
+    }
+  }
+
+  private isPictureInPictureEnabled(): boolean {
+    return 'pictureInPictureEnabled' in document;
+  }
+
+  private addOptionalEventsToPiP(media: any) {
+    media.addEventListener('enterpictureinpicture', () => console.log('Entered PiP')
+    );
+
+    media.addEventListener('leavepictureinpicture', () => console.log('Left PiP')
+    );
+  }
+
+  private hasEnteredPip(): boolean {
+    if (document.pictureInPictureElement) {
+      return true;
+    }
+
+    return false;
   }
 
   private getTime = (duration: any): string => {
