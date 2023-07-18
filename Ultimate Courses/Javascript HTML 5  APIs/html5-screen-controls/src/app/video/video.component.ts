@@ -69,7 +69,7 @@ export class VideoComponent implements OnInit {
     }
 
     if (this.isFullScreenEnabled()) {
-      fullscreen?.addEventListener('click', () => this.initFullScreen());
+      fullscreen?.addEventListener('click', () => this.initFullScreen(media));
     }
   }
 
@@ -173,12 +173,30 @@ export class VideoComponent implements OnInit {
     return document.fullscreenEnabled;
   }
 
-  private async initFullScreen() {
+  private async initFullScreen(media: any) {
     try {
-      await document.documentElement.requestFullscreen();
+      if (document.fullscreenElement === null) {
+        await media.requestFullscreen();
+      }
     } catch (e) {
       console.log('Error ', e);
     }
+
+    // auto exit full screen mode after a timer
+    setTimeout(() => {
+      if (document.fullscreenElement !== null) {
+        document.exitFullscreen();
+      }
+    }, 2500);
+
+    // add event to handle when full screen has changed
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement !== null) {
+        console.log('entered full screen mode');
+      } else {
+        console.log('exited full screen mode');
+      }
+    });
   }
 
   private handleVisibilityChange(e: any, media: any) {
