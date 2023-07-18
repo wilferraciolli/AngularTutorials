@@ -1,3 +1,4 @@
+import { logMessages } from '@angular-devkit/build-angular/src/tools/esbuild/utils';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -47,6 +48,9 @@ export class VideoComponent implements OnInit {
     let volume = player?.querySelector('.player__volume');
     volume?.addEventListener('input', (e) => this.setVolume(e, volumeToggle, media));
 
+    // full screen
+    let fullscreen = player?.querySelector('.player__fullscreen');
+
     // if PiP is enabled
     if (this.isPictureInPictureEnabled()) {
       console.log('PiP is supported by browser');
@@ -62,6 +66,10 @@ export class VideoComponent implements OnInit {
 
       // add events to handle the visibility changes, starting value is 'visible'
       document.addEventListener('visibilitychange', (e) => this.handleVisibilityChange(e, media));
+    }
+
+    if (this.isFullScreenEnabled()) {
+      fullscreen?.addEventListener('click', () => this.initFullScreen());
     }
   }
 
@@ -158,6 +166,19 @@ export class VideoComponent implements OnInit {
 
   private isInVisibleState(): boolean {
     return 'visibilityState' in document;
+  }
+
+  private isFullScreenEnabled(): boolean {
+    // check whether media has full screen functionality
+    return document.fullscreenEnabled;
+  }
+
+  private async initFullScreen() {
+    try {
+      await document.documentElement.requestFullscreen();
+    } catch (e) {
+      console.log('Error ', e);
+    }
   }
 
   private handleVisibilityChange(e: any, media: any) {
