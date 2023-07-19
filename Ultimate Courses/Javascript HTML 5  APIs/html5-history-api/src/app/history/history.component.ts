@@ -12,15 +12,24 @@ export class HistoryComponent implements OnInit {
   public ngOnInit(): void {
     // check if on base root
     if (location.pathname === '/') {
-      // add data and append to the url using the replace state, it could also be pushState()
-      const player: Player = PLAYERS[0];
-      history.replaceState(player, '', player.id);
-
-      // call the render state to browser
-      this.render(player);
+      this.pushDefaultState();
     }
 
     // this.setLinks(); this wont work till angular component is run
+
+    // check that the url already contains an id
+    this.renderUserFromUrl();
+
+    this.addNavigationButtons();
+
+    // this is the event triggered when navigation the history back and forth
+    this.handlePopStateEvent();
+  }
+
+  public addLinks(): void {
+    // This method is used just to allow Angular to instantiate the component then we grab the values
+    // and add remove the behaviour from the nav links
+    this.setLinks();
   }
 
   private render(state: Player): void {
@@ -57,10 +66,47 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  // This method is used just to allow Angular to instantiate the component then we grab the values
-  // and add remove the behaviour from the nav links
-  public addLinks(): void {
-    this.setLinks();
+  private renderUserFromUrl(): void {
+    const idFromUrl = location.pathname.substring(1); // get the id of the player from url
+    const chosenPlayer: Player | undefined = PLAYERS.find((player: Player) => player.id === idFromUrl);
+
+    // add the push state to the history
+    if (chosenPlayer) {
+      history.pushState(chosenPlayer, '', chosenPlayer.id);
+      this.render(chosenPlayer);
+    }
+  }
+
+  private addNavigationButtons(): void {
+    // back button
+    const backButton: any = document.querySelector('.back');
+    backButton.addEventListener('click', () => history.go(-1));
+
+    // forward button
+    const forwardButton: any = document.querySelector('.forward');
+    forwardButton.addEventListener('click', () => history.go(1));
+  }
+
+  private handlePopStateEvent(): void {
+    window.addEventListener('popstate', (e) => {
+      if (!e.state) {
+        // render initial state when null
+        this.pushDefaultState();
+        return;
+      }
+
+      const player = e.state;
+      this.render(player);
+    });
+  }
+
+  private pushDefaultState() {
+    // add data and append to the url using the replace state, it could also be pushState()
+    const player: Player = PLAYERS[0];
+    history.replaceState(player, '', player.id);
+
+    // call the render state to browser
+    this.render(player);
   }
 }
 
