@@ -1,1 +1,10 @@
-<p>history works!</p>
+<nav class="links">
+  <a *ngFor="let player of players"
+     href="/{{ player.id }}">
+    {{ player.name }}
+  </a>
+</nav>
+<div class="info">
+  <button (click)="addLinks()"> Remove current behaviour of anchor tag</button>
+
+</div>
