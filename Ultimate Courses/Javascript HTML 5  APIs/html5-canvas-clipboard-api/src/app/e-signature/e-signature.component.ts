@@ -35,6 +35,23 @@ export class ESignatureComponent implements OnInit {
         // define the render method, this is recursive and will call itself
         this.render();
       }
+
+      // create button to download the image
+      const app: Element | null = document.getElementById('app');
+      const save: Element | null = document.querySelector('.save');
+      if (save) {
+        save.addEventListener('click', () => {
+          const a: HTMLAnchorElement = document.createElement('a');
+          a.href = this.canvas.toDataURL('image/png');
+          a.innerText = 'Download Image';
+          a.setAttribute('download', 'canvas-drawing');
+
+          // add the anchor link with the details of the canvas image
+          if (app) {
+            app.append(a);
+          }
+        });
+      }
     }
   }
 
