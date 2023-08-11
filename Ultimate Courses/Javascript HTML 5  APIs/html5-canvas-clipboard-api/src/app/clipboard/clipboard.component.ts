@@ -31,6 +31,10 @@ export class ClipboardComponent implements OnInit {
 
       this.pasteButton = document.querySelector('.paste');
       this._assignPasteButton();
+
+      // add events to handler for copy and paste
+      this._addHandlerCopyEvent();
+      this._addHandlerPasteEvent();
     }
   }
 
@@ -39,7 +43,7 @@ export class ClipboardComponent implements OnInit {
     const copyToClipboard = async () => {
       try {
         await navigator.clipboard.writeText(this.source.innerText);
-        console.log('copied to clipboard');
+        //  console.log('copied to clipboard');
       } catch (error) {
         console.log('error ', error);
       }
@@ -55,12 +59,32 @@ export class ClipboardComponent implements OnInit {
         // read the clipboard contents with permission to read from pasteboard
         const text: string = await navigator.clipboard.readText();
         this.destination.innerText = text;
-        console.log(`Paste ${ text }`);
+        // console.log(`Paste ${ text }`);
       } catch (error) {
         console.log('error ', error);
       }
     };
 
     this.pasteButton.addEventListener('click', pasteToClipboard);
+  }
+
+  // not working
+  private _addHandlerCopyEvent(): void {
+    document.addEventListener('copy', (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      event.clipboardData?.setData('text/plain', event.target.innerText
+                                                      .replace('Pizza', 'Burger'));
+    });
+  }
+
+  // not working
+  private _addHandlerPasteEvent(): void {
+    document.addEventListener('paste', (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      const text = event.clipboardData.getData('text/plain');
+      this.destination.innerText = text;
+    });
   }
 }
