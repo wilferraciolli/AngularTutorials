@@ -35,6 +35,10 @@ export class ClipboardComponent implements OnInit {
       // add events to handler for copy and paste
       this._addHandlerCopyEvent();
       this._addHandlerPasteEvent();
+
+      // add intercept events
+      this._addHandlerInterceptCopyEvent();
+      this._addHandlerInterceptPasteEvent();
     }
   }
 
@@ -80,6 +84,26 @@ export class ClipboardComponent implements OnInit {
 
   // not working
   private _addHandlerPasteEvent(): void {
+    document.addEventListener('paste', (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      const text = event.clipboardData.getData('text/plain');
+      this.destination.innerText = text;
+    });
+  }
+
+  // method to intercept what is being copied using crtl+C then we can overide it
+  private _addHandlerInterceptCopyEvent() {
+    document.addEventListener('copy', (event) => {
+      event.preventDefault();
+      // @ts-ignore
+      event.clipboardData?.setData('text/plain', event.target.innerText
+                                                      .replace('Pizza', 'Burger'));
+    });
+  }
+
+  // method to intercept the paste event and overide it
+  private _addHandlerInterceptPasteEvent() {
     document.addEventListener('paste', (event) => {
       event.preventDefault();
       // @ts-ignore
