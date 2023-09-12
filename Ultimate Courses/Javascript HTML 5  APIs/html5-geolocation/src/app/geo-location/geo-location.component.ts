@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeoLocationComponent implements OnInit {
 
+  public coordinates: { latitude: number, longitude: number, accuracy: number } | undefined;
+
   public ngOnInit(): void {
     if ('geolocation' in navigator) {
 
@@ -16,6 +18,8 @@ export class GeoLocationComponent implements OnInit {
         // get the lat and long from coords using object destructuring
         const { latitude, longitude, accuracy } = coords;
         console.log(latitude, longitude, accuracy);
+
+        this.coordinates = { latitude, longitude, accuracy };
       };
 
       // define the handle failure callback function
@@ -66,8 +70,8 @@ export class GeoLocationComponent implements OnInit {
     errorFn: (error: any) => void,
     options: PositionOptions
   ): void {
-
-    const watcher= navigator.geolocation.watchPosition(successFn, errorFn, options); // function to watch the position and react to changes
+    // method used to refresh the position, this can be used to get the most accurate position
+    const watcher = navigator.geolocation.watchPosition(successFn, errorFn, options); // function to watch the position and react to changes
 
     setTimeout(() => {
       navigator.geolocation.clearWatch(watcher); // stop watching the position
