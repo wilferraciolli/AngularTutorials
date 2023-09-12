@@ -10,9 +10,10 @@ export class GeoLocationComponent implements OnInit {
   public ngOnInit(): void {
     if ('geolocation' in navigator) {
 
-      // define the handle success callback function
+      // define the handle success callback function, it use object destructuring to get the coords
       // @ts-ignore
       const handleSuccessCallback = ({ coords }) => {
+        // get the lat and long from coords using object destructuring
         const { latitude, longitude, accuracy } = coords;
         console.log(latitude, longitude, accuracy);
       };
@@ -46,25 +47,30 @@ export class GeoLocationComponent implements OnInit {
         enableHighAccuracy: true
       };
 
-      this._getGeolocation(handleSuccessCallback, handleFailureCallback);
-
-
+      this._getGeolocation(handleSuccessCallback, handleFailureCallback, options);
+      this._getMostAccurateGeolocation(handleSuccessCallback, handleFailureCallback, options);
     }
   }
 
   private _getGeolocation(
     successFn: ({ coords }: { coords: any }) => void,
-    errorFn: (error: any) => void
+    errorFn: (error: any) => void,
+    options: PositionOptions
   ): void {
-    // get the inner variable or coordinates and assign it to coords
-    // navigator.geolocation.getCurrentPosition(({ coords }) => {
-    //   console.log(coords);
-    //
-    //   // get the lat and long from coords
-    //   const { latitude, longitude } = coords;
-    //   console.log(latitude, longitude);
-    // });
-    //
-    navigator.geolocation.getCurrentPosition(successFn, errorFn);
+
+    navigator.geolocation.getCurrentPosition(successFn, errorFn, options); // function to get position once
+  }
+
+  private _getMostAccurateGeolocation(
+    successFn: ({ coords }: { coords: any }) => void,
+    errorFn: (error: any) => void,
+    options: PositionOptions
+  ): void {
+
+    const watcher= navigator.geolocation.watchPosition(successFn, errorFn, options); // function to watch the position and react to changes
+
+    setTimeout(() => {
+      navigator.geolocation.clearWatch(watcher); // stop watching the position
+    }, 10000);
   }
 }
