@@ -95,4 +95,8 @@ export class StorageManagerService {
 
     return 'string to return';
   }
+
+  public getAllKeysFromLocalStorage(): string[] {
+    return Object.keys(localStorage);
+  }
 }

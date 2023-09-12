@@ -25,6 +25,9 @@ export class StorageComponent implements OnInit {
     }
 
     this._addStorageChangeEventHandler();
+
+    // get a list of all keys in the locals storage
+    console.log(this._storageService.getAllKeysFromLocalStorage());
   }
 
   private _shouldDisplayAllowCookie(cookie: Element): boolean {
@@ -85,7 +88,6 @@ export class StorageComponent implements OnInit {
         // handle the event
         this._storageService.onStorageChangesEventHandler(() => event.newValue ? event.newValue : '');
       }
-      console.log();
     });
   }
 }
