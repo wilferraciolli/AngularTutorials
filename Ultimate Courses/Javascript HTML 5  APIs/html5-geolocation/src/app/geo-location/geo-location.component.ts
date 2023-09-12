@@ -12,19 +12,45 @@ export class GeoLocationComponent implements OnInit {
 
       // define the handle success callback function
       // @ts-ignore
-      const handleSuccess = ({ coords }) => {
+      const handleSuccessCallback = ({ coords }) => {
         const { latitude, longitude } = coords;
         console.log(latitude, longitude);
       };
 
 
-      this._getGeolocation(handleSuccess);
+      // define the handle failure callback function
+      // @ts-ignore
+      const handleFailureCallback = (error) => {
+        // this could be any type of error, we should loop through to get the error message
+        console.log(error);
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            console.log('Permission Denied, please allow access to your location');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            console.log('Position unavailable');
+            break;
+          case error.TIMEOUT:
+            console.log(error.message);
+            break;
+          default:
+            console.log('Position Unavailable');
+            break;
+        }
+      };
+
+
+      this._getGeolocation(handleSuccessCallback, handleFailureCallback);
 
 
     }
   }
 
-  private _getGeolocation(successFn: ({ coords }: { coords: any }) => void): void {
+  private _getGeolocation(
+    successFn: ({ coords }: { coords: any }) => void,
+    errorFn: (error: any) => void
+  ): void {
     // get the inner variable or coordinates and assign it to coords
     // navigator.geolocation.getCurrentPosition(({ coords }) => {
     //   console.log(coords);
@@ -34,6 +60,6 @@ export class GeoLocationComponent implements OnInit {
     //   console.log(latitude, longitude);
     // });
     //
-    navigator.geolocation.getCurrentPosition(successFn);
+    navigator.geolocation.getCurrentPosition(successFn, errorFn);
   }
 }
