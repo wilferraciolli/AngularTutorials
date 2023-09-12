@@ -18,8 +18,8 @@ export class StorageManagerService {
     const person: Person | null = this._getValueFromLocalStorage<Person>('person');
     const food: Food | null = this._getValueFromLocalStorage<Food>('food');
 
-    console.log(person);
-    console.log(food);
+    // console.log(person);
+    // console.log(food);
 
     this._removeItemFromLocalStorage('person');
     this._emptyLocalStorage();
@@ -27,7 +27,11 @@ export class StorageManagerService {
 
   // add an object to local storage and specify type
   public _addValueToLocalStorage<T>(key: string, value: T): void {
-    localStorage.setItem(key, JSON.stringify(value));
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // get an object from local storage and specify type
@@ -35,7 +39,11 @@ export class StorageManagerService {
     const value: string | null = localStorage.getItem(key);
 
     if (value) {
-      return JSON.parse(value);
+      try {
+        return JSON.parse(value);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return null;
@@ -51,7 +59,11 @@ export class StorageManagerService {
 
   // add an object to session storage and specify type
   public _addValueToSessionStorage<T>(key: string, value: T): void {
-    sessionStorage.setItem(key, JSON.stringify(value));
+    try {
+      sessionStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // get an object from session storage and specify type
@@ -59,7 +71,11 @@ export class StorageManagerService {
     const value: string | null = sessionStorage.getItem(key);
 
     if (value) {
-      return JSON.parse(value);
+      try {
+        return JSON.parse(value);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return null;
@@ -72,5 +88,11 @@ export class StorageManagerService {
 
     // check that local storage is available
     console.log(!!(typeof Storage === 'function' && localStorage));
+  }
+
+  public onStorageChangesEventHandler(func: () => string): string {
+    func();
+
+    return 'string to return';
   }
 }

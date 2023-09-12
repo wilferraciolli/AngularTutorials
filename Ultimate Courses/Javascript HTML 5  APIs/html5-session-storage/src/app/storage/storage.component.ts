@@ -16,8 +16,6 @@ export class StorageComponent implements OnInit {
     const accept: Element | null = document.querySelector('[data-cookie-accept]');
     const reject: Element | null = document.querySelector('[data-cookie-reject]');
 
-    console.log(cookie);
-
     // add event handlers
     this._addAcceptCookieEvent(cookie, accept);
     this._addRejectCookieEvent(cookie, reject);
@@ -25,6 +23,8 @@ export class StorageComponent implements OnInit {
     if (cookie && this._shouldDisplayAllowCookie(cookie)) {
       this._showCookie(cookie);
     }
+
+    this._addStorageChangeEventHandler();
   }
 
   private _shouldDisplayAllowCookie(cookie: Element): boolean {
@@ -73,5 +73,19 @@ export class StorageComponent implements OnInit {
   private _showCookie(cookie: Element): void {
     // @ts-ignore
     cookie.style.display = 'block';
+  }
+
+  private _addStorageChangeEventHandler(): void {
+    // add an event listener to the window object to handle when the local/session storage is changed,
+    // this is intended to work by listening to other Browser tabs
+    window.addEventListener('storage', (event: StorageEvent) => {
+      // check that the key added to local storage is of type cookie. This allows to handle when user is on multiple tabs
+      if (event.key === 'cookie'
+        && event.newValue !== null) {
+        // handle the event
+        this._storageService.onStorageChangesEventHandler(() => event.newValue ? event.newValue : '');
+      }
+      console.log();
+    });
   }
 }
