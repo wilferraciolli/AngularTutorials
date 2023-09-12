@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { StorageManagerService } from '../storage-manager.service';
 
 @Component({
   selector: 'app-storage',
@@ -7,68 +8,70 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StorageComponent implements OnInit {
 
+  private _storageService: StorageManagerService = inject(StorageManagerService);
+
   public ngOnInit(): void {
-    this._checkLocalStorageIsAvailable();
+    // get the element by reference
+    const cookie: Element | null = document.querySelector('[data-cookie]');
+    const accept: Element | null = document.querySelector('[data-cookie-accept]');
+    const reject: Element | null = document.querySelector('[data-cookie-reject]');
 
-    localStorage.setItem('cookies', 'true');
-    localStorage.getItem('cookies');
+    console.log(cookie);
 
-    // add to storage passing types
-    this._addValueToLocalStorage<Person>('person', { id: 1, name: 'John', surname: 'Doe' } as Person);
-    this._addValueToLocalStorage<Food>('food', { id: 1, title: 'Burger' } as Food);
+    // add event handlers
+    this._addAcceptCookieEvent(cookie, accept);
+    this._addRejectCookieEvent(cookie, reject);
 
-    // get from storage passing types
-    const person: Person | null = this._getValueFromLocalStorage<Person>('person');
-    const food: Food | null = this._getValueFromLocalStorage<Food>('food');
-
-    console.log(person);
-    console.log(food);
-
-    this._removeItemFromLocalStorage('person');
-    this._emptyLocalStorage();
+    if (cookie && this._shouldDisplayAllowCookie(cookie)) {
+      this._showCookie(cookie);
+    }
   }
 
-  // add an object to local storage and specify type
-  private _addValueToLocalStorage<T>(key: string, value: T): void {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
+  private _shouldDisplayAllowCookie(cookie: Element): boolean {
+    // users who agree will have their cookie status saved onto local storage
+    const cookieAccepted: boolean | null = this._storageService._getValueFromLocalStorage('cookie');
 
-  // get an object from local storage and specify type
-  private _getValueFromLocalStorage<T>(key: string): T | null {
-    const value: string | null = localStorage.getItem(key);
-
-    if (value) {
-      return JSON.parse(value);
+    // check whether the user has already accepted the cookie, only accept is saved onto local storage
+    if (cookieAccepted === true) {
+      return false;
     }
 
-    return null;
+    // users who have denied will have their status saved onto session storage
+    const cookieDenied: boolean | null = this._storageService._getValueFromSessionStorage('cookie');
+
+    if (cookieDenied !== null) {
+      // user has denied so it was saved onto session storage, meaning next time they visit the site they will be asked again
+      return false;
+    }
+
+    return true;
   }
 
-  private _removeItemFromLocalStorage(key: string): void {
-    localStorage.removeItem(key);
+  private _addAcceptCookieEvent(cookie: Element | null, accept: Element | null): void {
+    if (cookie && accept) {
+      this._hideCookie(cookie);
+      accept.addEventListener('click', () => {
+        this._storageService._addValueToLocalStorage('cookie', true);
+      });
+    }
   }
 
-  private _emptyLocalStorage(): void {
-    setTimeout(() => localStorage.clear(), 4000);
+  private _addRejectCookieEvent(cookie: Element | null, reject: Element | null): void {
+    if (cookie && reject) {
+      this._hideCookie(cookie);
+      reject.addEventListener('click', () => {
+        this._storageService._addValueToSessionStorage('cookie', false);
+      });
+    }
   }
 
-  private _checkLocalStorageIsAvailable(): void {
-    // both local and session storage are the same object
-    // console.log(window.localStorage);  // Storage object that is always present on the browser
-    // console.log(window.sessionStorage); // Storage object that will live on the browser until the browser is closed
-
-    // check that local storage is available
-    console.log(!!(typeof Storage === 'function' && localStorage));
+  private _hideCookie(cookie: Element): void {
+    // @ts-ignore
+    cookie.style.display = 'none';
   }
-}
 
-export interface Person {
-  id: number;
-  name: string;
-  surname: string;
-}
-
-export interface Food {
-  id: number;
-  title: string;
+  private _showCookie(cookie: Element): void {
+    // @ts-ignore
+    cookie.style.display = 'block';
+  }
 }
