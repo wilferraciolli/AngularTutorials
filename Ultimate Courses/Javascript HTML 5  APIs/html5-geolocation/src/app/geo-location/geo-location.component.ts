@@ -13,10 +13,9 @@ export class GeoLocationComponent implements OnInit {
       // define the handle success callback function
       // @ts-ignore
       const handleSuccessCallback = ({ coords }) => {
-        const { latitude, longitude } = coords;
-        console.log(latitude, longitude);
+        const { latitude, longitude, accuracy } = coords;
+        console.log(latitude, longitude, accuracy);
       };
-
 
       // define the handle failure callback function
       // @ts-ignore
@@ -40,6 +39,12 @@ export class GeoLocationComponent implements OnInit {
         }
       };
 
+      // define the option to get geolocation
+      const options: PositionOptions = {
+        timeout: 1000,
+        maximumAge: 0,
+        enableHighAccuracy: true
+      };
 
       this._getGeolocation(handleSuccessCallback, handleFailureCallback);
 
