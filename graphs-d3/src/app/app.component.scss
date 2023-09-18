@@ -1,0 +1,16 @@
+.app {
+  &-container {
+    display: flex;
+  }
+
+  &-nav {
+    margin-left: auto;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &-navItem {
+    padding: 0 0 0 20px;
+  }
+}
