@@ -1,0 +1,11 @@
+<div *ngIf="coordinates">
+  <p>Accuracy: {{ coordinates.accuracy }}</p>
+  <p>https://maps.google.com/maps?q={{ coordinates.latitude }},{{ coordinates.longitude }}&amp;z=14&amp;output=embed</p>
+
+  <iframe src="https://maps.google.com/maps?q={{ coordinates.latitude }},{{ coordinates.longitude }}&amp;z=14&amp;output=embed"
+          width="600"
+          height="250"
+          frameborder="0">
+  </iframe>
+
+</div>
