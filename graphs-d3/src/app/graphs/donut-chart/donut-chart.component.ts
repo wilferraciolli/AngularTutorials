@@ -1,13 +1,13 @@
 import { Component, OnInit, ElementRef, ViewEncapsulation, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 import * as d3 from 'd3';
+import {ScaleOrdinal} from "d3-scale";
 
-export class DonutChartDatum {
-  code!: string;
-  displayValue!: string;
-  count!: number;
-}
-
+// export class DonutChartDatum {
+//   code!: string;
+//   displayValue!: string;
+//   count!: number;
+// }
 
 @Component({
   selector: 'app-donut-chart',
@@ -18,6 +18,7 @@ export class DonutChartDatum {
 export class DonutChartComponent implements OnInit, OnChanges {
 
   @Input() data: number[] = [];
+
   hostElement; // Native element hosting the SVG container
   svg: any; // Top level SVG element
   g: any; // SVG Group element
@@ -57,7 +58,6 @@ export class DonutChartComponent implements OnInit, OnChanges {
   }
 
   private createChart(data: number[]) {
-
     this.processPieData(data);
 
     this.removeExistingChartFromParent();
@@ -98,7 +98,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
     // this.colorScale = d3.scaleOrdinal().domain(["0","1","2","3"]).range(['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']);
   }
 
-  private processPieData(data: any, initial = true) {
+  private processPieData(data: any, initial: boolean = true) {
     this.rawData = data;
     this.total = this.rawData.reduce((sum: any, next: any) => sum + next, 0);
 
@@ -110,7 +110,7 @@ export class DonutChartComponent implements OnInit, OnChanges {
 
 
   private setupArcGenerator() {
-    this.innerRadius = 50;
+    this.innerRadius = 60;
     this.radius = 80;
     this.arc = d3.arc()
       .innerRadius(this.innerRadius)
