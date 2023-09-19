@@ -5,10 +5,12 @@ import {BarCharVerticalComponent} from "./graphs/bar-char-vertical/bar-char-vert
 import {BarChartVerticalWrapComponent} from "./graphs/bar-chart-vertical-wrap/bar-chart-vertical-wrap.component";
 import {PieChartComponent} from "./graphs/pie-chart/pie-chart.component";
 import {HistogramChartWrapComponent} from "./graphs/histogram-chart-wrap/histogram-chart-wrap.component";
+import {DonutChartWrapComponent} from "./graphs/donut-chart-wrap/donut-chart-wrap.component";
 
 const routes: Routes = [
   { path: 'graphs/arch', component: ArchComponent },
   { path: 'graphs/pie', component: PieChartComponent },
+  { path: 'graphs/donut', component: DonutChartWrapComponent },
   { path: 'graphs/histogram', component: HistogramChartWrapComponent },
   { path: 'graphs/bar', component: BarChartVerticalWrapComponent },
   { path: '**', component: ArchComponent },

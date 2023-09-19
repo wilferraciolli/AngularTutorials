@@ -16,6 +16,8 @@ import { HistogramChartComponent } from './graphs/histogram-chart/histogram-char
 import {MatCardModule} from "@angular/material/card";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatTableModule} from "@angular/material/table";
+import { DonutChartComponent } from './graphs/donut-chart/donut-chart.component';
+import { DonutChartWrapComponent } from './graphs/donut-chart-wrap/donut-chart-wrap.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {MatTableModule} from "@angular/material/table";
     BarChartVerticalWrapComponent,
     PieChartComponent,
     HistogramChartWrapComponent,
-    HistogramChartComponent
+    HistogramChartComponent,
+    DonutChartComponent,
+    DonutChartWrapComponent
   ],
   imports: [
     BrowserModule,
