@@ -5,9 +5,30 @@
     <div class="app-nav">
 
       <button mat-fab extended routerLink="/graphs/arch">
-        <mat-icon>donut_small</mat-icon>
+        <mat-icon>donut_large</mat-icon>
         Arch
       </button>
+
+      <div class="app-navItem">
+        <button mat-fab extended routerLink="/graphs/pie">
+          <mat-icon>pie_chart</mat-icon>
+          Pie
+        </button>
+      </div>
+
+      <div class="app-navItem">
+        <button mat-fab extended routerLink="/graphs/area">
+          <mat-icon>donut_small</mat-icon>
+          Donut
+        </button>
+      </div>
+
+      <div class="app-navItem">
+        <button mat-fab extended routerLink="/graphs/histogram">
+          <mat-icon>timeline</mat-icon>
+          Histogram
+        </button>
+      </div>
 
       <div class="app-navItem">
         <button mat-fab extended routerLink="/graphs/bar">
@@ -16,12 +37,6 @@
         </button>
       </div>
 
-      <div class="app-navItem">
-        <button mat-fab extended routerLink="/graphs/arch">
-          <mat-icon>menu</mat-icon>
-          Arch2
-        </button>
-      </div>
 
     </div>
   </mat-toolbar>

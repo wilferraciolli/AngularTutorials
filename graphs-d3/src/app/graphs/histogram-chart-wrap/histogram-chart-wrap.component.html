@@ -1,0 +1,43 @@
+<mat-card class="container">
+  <mat-card-title class="title">
+    <div>Histogram chart</div>
+  </mat-card-title>
+
+  <mat-card-content id="delivery" #delivery>
+    <div id="chartAndDataContainer">
+      <div id="chartContainer" [ngClass]="{'half': chartControlsService.showData}">
+        <app-histogram-chart #areaChart [data]="chartData"></app-histogram-chart>
+      </div>
+
+      <div id="deliveryTable"  *ngIf="chartControlsService.showData">
+        <table mat-table [dataSource]="deliveryMetrics"
+               *ngIf="deliveryMetrics"
+               class="mat-elevation-z8">
+          <ng-container matColumnDef="legend">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" [ngClass]="element.state">&#9632;</td>
+          </ng-container>
+          <ng-container matColumnDef="stateDisplayValue">
+            <th mat-header-cell *matHeaderCellDef>Order State</th>
+            <td mat-cell *matCellDef="let element">{{element.stateDisplayValue}}</td>
+          </ng-container>
+          <ng-container matColumnDef="mean">
+            <th mat-header-cell *matHeaderCellDef>Mean (min)</th>
+            <td mat-cell *matCellDef="let element">{{element.mean}}</td>
+          </ng-container>
+          <ng-container matColumnDef="stdDev">
+            <th mat-header-cell *matHeaderCellDef>Std. Dev.</th>
+            <td mat-cell *matCellDef="let element">{{element.stdDev}}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        </table>
+      </div>
+    </div>
+    <mat-slide-toggle class="show-data" color="primary"
+                      [checked]="chartControlsService.showData"
+                      (change)="toggleData($event)">
+      Show data
+    </mat-slide-toggle>
+  </mat-card-content>
+</mat-card>
