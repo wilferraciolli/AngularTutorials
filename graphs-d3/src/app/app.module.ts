@@ -9,12 +9,14 @@ import { ArchComponent } from './graphs/arch/arch.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { BarCharVerticalComponent } from './graphs/bar-char-vertical/bar-char-vertical.component';
+import { BarChartVerticalWrapComponent } from './graphs/bar-chart-vertical-wrap/bar-chart-vertical-wrap.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArchComponent,
-    BarCharVerticalComponent
+    BarCharVerticalComponent,
+    BarChartVerticalWrapComponent
   ],
   imports: [
     BrowserModule,
