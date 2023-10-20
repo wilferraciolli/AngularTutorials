@@ -21,6 +21,14 @@ import { ProductSalesChartComponent } from './charts/product-sales-chart/product
 import { SalesTrafficChartComponent } from './charts/sales-traffic-chart/sales-traffic-chart.component';
 import { AnnualSalesChartComponent } from './charts/annual-sales-chart/annual-sales-chart.component';
 import { StoreSessionsChartComponent } from './charts/store-sessions-chart/store-sessions-chart.component';
+import { LineChartComponent } from './charts/templates/line-chart/line-chart.component';
+import { PieChartComponent } from './charts/templates/pie-chart/pie-chart.component';
+import { BarChartComponent } from './charts/templates/bar-chart/bar-chart.component';
+import { DoughnutChartComponent } from './charts/templates/doughnut-chart/doughnut-chart.component';
+import { RadarChartComponent } from './charts/templates/radar-chart/radar-chart.component';
+import { PolarAreaChartComponent } from './charts/templates/polar-area-chart/polar-area-chart.component';
+import { BubbleChartComponent } from './charts/templates/bubble-chart/bubble-chart.component';
+import { ScatterChartComponent } from './charts/templates/scatter-chart/scatter-chart.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashComponent }
@@ -35,7 +43,15 @@ const routes: Routes = [
     ProductSalesChartComponent,
     SalesTrafficChartComponent,
     AnnualSalesChartComponent,
-    StoreSessionsChartComponent
+    StoreSessionsChartComponent,
+    LineChartComponent,
+    PieChartComponent,
+    BarChartComponent,
+    DoughnutChartComponent,
+    RadarChartComponent,
+    PolarAreaChartComponent,
+    BubbleChartComponent,
+    ScatterChartComponent
   ],
   imports: [
     BrowserModule,

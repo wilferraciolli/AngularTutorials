@@ -7,7 +7,7 @@ Ps this project was done with an older version of cng3 charts and rxJs
 The library used here can be found here
 `https://github.com/valor-software/ng2-charts#readme`
 
-The most up to date tutorial is here 
+The most up to date tutorial is here ****
 `https://github.com/valor-software/ng2-charts`
 
 
