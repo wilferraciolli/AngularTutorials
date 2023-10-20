@@ -21,7 +21,13 @@ Ng2ChartsModule will need importing to the app modules
 
 
 
+## Material commands used to generate out of the box components
+Here is a list of commands used to generrate out of the box Angular MAterial components
+### Material Navigation
+`ng generate @angular/material:navigation nav`
 
+### Material dashcoard
+`ng generate @angular/material:dashboard dash`
 
 
 
