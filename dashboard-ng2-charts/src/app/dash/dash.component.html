@@ -5,12 +5,19 @@
                  rowHeight="200px">
     <!--Mini Cards-->
     <div *ngIf="cardLayout |async as cardLayout">
-      <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]"
+      <mat-grid-tile *ngFor="let mc of miniCardData"
                      [colspan]="cardLayout.miniCard.cols"
                      [rowspan]="cardLayout.miniCard.rows">
-        <app-card title="Card {{i}}">
-          <div>Mini Card Content Here</div>
-        </app-card>
+        <app-mini-card
+          [isCurrency]="mc.isCurrency"
+          [isIncrease]="mc.isIncrease"
+          [duration]="mc.duration"
+          [icon]="mc.icon"
+          [title]="mc.title"
+          [value]="mc.value"
+          [color]="mc.color"
+          [percentValue]="mc.percentValue">
+        </app-mini-card>
       </mat-grid-tile>
 
       <!--Charts-->
@@ -29,7 +36,8 @@
       <mat-grid-tile [colspan]="cardLayout.chart.cols"
                      [rowspan]="cardLayout.chart.rows">
         <app-card title="Sales by Traffic Source">
-          <<app-sales-traffic-chart></app-sales-traffic-chart>
+          <
+          <app-sales-traffic-chart></app-sales-traffic-chart>
         </app-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="cardLayout.chart.cols"

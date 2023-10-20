@@ -34,6 +34,7 @@ import { ScatterChartComponent } from './charts/templates/scatter-chart/scatter-
 import { DashComponent } from './dash/dash.component';
 import { NavComponent } from './nav/nav.component';
 import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { MiniCardComponent } from './mini-card/mini-card.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashComponent }
@@ -57,7 +58,8 @@ const routes: Routes = [
     PolarAreaChartComponent,
     BubbleChartComponent,
     ScatterChartComponent,
-    OrdersTableComponent
+    OrdersTableComponent,
+    MiniCardComponent
   ],
   imports: [
     BrowserModule,

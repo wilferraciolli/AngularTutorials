@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MINICARDDATA } from '../mini-card/mini-card-data';
 
 @Component({
   selector: 'app-dash',
@@ -11,10 +12,9 @@ import { map } from 'rxjs/operators';
 export class DashComponent {
   private breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
 
-  // public cardLayout: any;
+  public miniCardData = MINICARDDATA;
 
-
-  public cardLayout:Observable<ICardLayout> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  public cardLayout: Observable<ICardLayout> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
         return {
