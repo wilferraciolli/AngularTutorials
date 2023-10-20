@@ -3,6 +3,9 @@
 ### Prroject to display dashboards using ng2 charts
 `https://www.smashingmagazine.com/2020/07/responsive-dashboard-angular-material-ng2-charts-schematics/`
 
+The library used here can be found here
+`https://github.com/valor-software/ng2-charts#readme`
+
 
 ## Dependencies
 
@@ -10,9 +13,14 @@
 `ng add @angular/material`
 
 #### N2 Charts, Charts js and ng2 charts schematics
+Ng2ChartsModule will need importing to the app modules
 `npm install ng2-charts --save`
 `npm install chart.js --save`
 `npm install --save-dev ng2-charts-schematics`
+
+
+
+
 
 
 
