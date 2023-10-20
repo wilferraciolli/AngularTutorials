@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'dashboard-ng2-charts';
+  title: string = 'Angular NG2 dashboard Charts';
 }
