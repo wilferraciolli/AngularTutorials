@@ -1,0 +1,52 @@
+<!-- orders-table.component.html -->
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let row">{{row.date | date }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+
+    <!-- Order Total Column -->
+    <ng-container matColumnDef="orderTotal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Order Total</th>
+      <td mat-cell *matCellDef="let row">{{row.orderTotal | currency}}</td>
+    </ng-container>
+
+    <!-- Payment Mode Column -->
+    <ng-container matColumnDef="paymentMode">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment Mode</th>
+      <td mat-cell *matCellDef="let row">{{row.paymentMode}}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let row">
+        <mat-chip-listbox>
+          <mat-chip color="{{ row.status == 'delivered' ? 'primary' : ( row.status == 'shipped' ? 'accent' : 'warn' ) }}" selected>
+            {{row.status}}
+          </mat-chip>
+        </mat-chip-listbox>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataLength" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 15, 20]">
+  </mat-paginator>
+</div>
