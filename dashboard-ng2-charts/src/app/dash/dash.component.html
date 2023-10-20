@@ -14,11 +14,28 @@
       </mat-grid-tile>
 
       <!--Charts-->
-      <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]"
-                     [colspan]="cardLayout.chart.cols"
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
                      [rowspan]="cardLayout.chart.rows">
-        <app-card title="Card {{i}}">
-          <div>Chart Content Here</div>
+        <app-card title="Monthly Revenue">
+          <app-annual-sales-chart></app-annual-sales-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Product Sales">
+          <app-product-sales-chart></app-product-sales-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Sales by Traffic Source">
+          <<app-sales-traffic-chart></app-sales-traffic-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Online Store Sessions by Traffic Source">
+          <app-store-sessions-chart></app-store-sessions-chart>
         </app-card>
       </mat-grid-tile>
 

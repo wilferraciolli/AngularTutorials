@@ -1,10 +1,14 @@
 # DashboardNg2Charts
+Ps this project was done with an older version of cng3 charts and rxJs
 
 ### Prroject to display dashboards using ng2 charts
 `https://www.smashingmagazine.com/2020/07/responsive-dashboard-angular-material-ng2-charts-schematics/`
 
 The library used here can be found here
 `https://github.com/valor-software/ng2-charts#readme`
+
+The most up to date tutorial is here 
+`https://github.com/valor-software/ng2-charts`
 
 
 ## Dependencies
