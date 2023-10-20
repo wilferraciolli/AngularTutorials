@@ -1,26 +1,35 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
 
-  <mat-grid-list cols="4" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}"
+                 rowHeight="200px">
+    <!--Mini Cards-->
+    <div *ngIf="cardLayout |async as cardLayout">
+      <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]"
+                     [colspan]="cardLayout.miniCard.cols"
+                     [rowspan]="cardLayout.miniCard.rows">
+        <app-card title="Card {{i}}">
+          <div>Mini Card Content Here</div>
+        </app-card>
+      </mat-grid-tile>
 
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+      <!--Charts-->
+      <mat-grid-tile *ngFor="let i of [5, 6, 7, 8]"
+                     [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Card {{i}}">
+          <div>Chart Content Here</div>
+        </app-card>
+      </mat-grid-tile>
+
+      <!--Table-->
+      <mat-grid-tile [colspan]="cardLayout.table.cols"
+                     [rowspan]="cardLayout.table.rows">
+        <app-card title="Card 9">
+          <div>Table Content Here</div>
+        </app-card>
+      </mat-grid-tile>
+    </div>
+
   </mat-grid-list>
 </div>
