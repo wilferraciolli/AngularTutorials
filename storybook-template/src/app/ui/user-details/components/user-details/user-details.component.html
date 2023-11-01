@@ -1,0 +1,14 @@
+<div *ngIf="user" class="details">
+  <div *ngIf="notificationCount" class="details__notification-count">
+    {{ notificationCount }}
+  </div>
+  <img
+    [alt]="user.avatar?.alt || 'avatar'"
+    [src]="user.avatar?.url || '/assets/placeholder.jpeg'"
+    class="details__img"
+  />
+  <div class="details__data">
+    <h1>{{ user.firstName }}&nbsp;{{ user.lastName }}</h1>
+    <h3>{{ user.email }}</h3>
+  </div>
+</div>

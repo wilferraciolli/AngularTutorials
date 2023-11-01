@@ -17,3 +17,9 @@ Application
 
 Storybook
 `npm run storybook`
+
+
+## Resources
+Story book docs
+https://storybook.js.org/docs/angular/get-started/install
+
