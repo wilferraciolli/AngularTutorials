@@ -9,3 +9,11 @@ It talks about Component Driven UI
 ## Dependencies
 Storybook
 `npx storybook@latest init`
+
+
+## Run the application
+Application
+`ng serve`
+
+Storybook
+`npm run storybook`
