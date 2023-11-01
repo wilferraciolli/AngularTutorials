@@ -28,11 +28,29 @@ const userMock: UiUserDetails = {
   }
 };
 
+const userMock2: UiUserDetails = {
+  firstName: "Wiliam",
+  lastName: "Ferraciolli",
+  email: "wiliam.ferreciolli@wiltech.com",
+  avatar: {
+    url: "https://placehold.it/100x100",
+    alt: "Wiliam avatar"
+  }
+};
+
+
 // stories
 type UserDetailsStory = StoryObj<UserDetailsComponent>;
 
 export const primary: UserDetailsStory = {
   args: {
-    user: userMock
+    user: userMock,
+    notificationCount: 100
+  }
+};
+
+export const secondary: UserDetailsStory = {
+  args: {
+    user: userMock2
   }
 };
