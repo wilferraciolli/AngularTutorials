@@ -1,0 +1,76 @@
+<div class="Home-container">
+  <mat-toolbar class="Home-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - of() and from() operators</h1>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and
+        Error Handling
+      </p>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="Home-cards">
+    <mat-card class="Home-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content *ngIf="agent">
+        {{agent}}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Home-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Using interval to create observable</mat-card-title>
+          <mat-card-subtitle>interval operator</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content *ngIf="agent2">
+        {{agent2}}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Home-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Operator of() using array</mat-card-title>
+          <mat-card-subtitle>Creation operator, can be use with objects or arrays</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h3 *ngFor="let student of students">{{student}}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Home-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Operator of() using object</mat-card-title>
+          <mat-card-subtitle>Creation operator, can be use with objects or arrays</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="student"> {{ student | json }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- from operator -->
+    <mat-card class="Home-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Operator from() using array</mat-card-title>
+          <mat-card-subtitle>Creation operator, can be use with arrays</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="orderName"> {{ orderName | json }}</p>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

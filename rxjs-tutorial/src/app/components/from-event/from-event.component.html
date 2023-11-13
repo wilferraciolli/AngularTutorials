@@ -1,0 +1,42 @@
+<div class="FromEvent-container">
+  <mat-toolbar class="FromEvent-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - of() and from() operators</h1>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and
+        Error Handling
+      </p>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="FromEvent-cards">
+    <mat-card class="FromEvent-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable fromEvent</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS by getting the button and subscribing to it, there are
+            click over events.
+            Bear in mind that only when we click on the button, the observable will emit.
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h4 *ngIf="buttonEvent">
+          {{buttonEvent}}
+        </h4>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button #validate
+                (click)="createObservable()"
+                (mouseover)="createObservable()"
+        >Button to add observable
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
+</div>
