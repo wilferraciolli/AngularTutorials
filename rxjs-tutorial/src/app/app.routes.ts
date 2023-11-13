@@ -9,5 +9,8 @@ export const routes: Routes = [
   },
   {
     path: 'interval', loadComponent: () => import('./components/interval/interval.component').then(m => m.IntervalComponent)
+  },
+  {
+    path: 'debounce', loadComponent: () => import('./components/debounce-time/debounce-time.component').then(m => m.DebounceTimeComponent)
   }
 ];
