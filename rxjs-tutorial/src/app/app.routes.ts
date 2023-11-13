@@ -6,5 +6,8 @@ export const routes: Routes = [
   },
   {
     path: 'fromEvent', loadComponent: () => import('./components/from-event/from-event.component').then(m => m.FromEventComponent)
+  },
+  {
+    path: 'interval', loadComponent: () => import('./components/interval/interval.component').then(m => m.IntervalComponent)
   }
 ];

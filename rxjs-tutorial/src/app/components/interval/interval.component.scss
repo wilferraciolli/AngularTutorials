@@ -1,0 +1,34 @@
+.Interval {
+  &-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-header {
+    text-align: center;
+  }
+
+  &-cards {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: space-evenly;
+    width: 100%;
+    //overflow: hidden;
+
+    @media (max-width: 767px) {
+      /* CSS styles for small screens */
+      flex-direction: column;
+    }
+  }
+
+  &-card {
+    min-width: 300px;
+    min-height: 200px;
+  }
+}
