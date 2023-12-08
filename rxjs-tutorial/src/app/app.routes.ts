@@ -15,5 +15,8 @@ export const routes: Routes = [
   },
   {
     path: 'take', loadComponent: () => import('./components/take/take.component').then(m=> m.TakeComponent)
+  },
+  {
+    path: 'first', loadComponent: () => import('./components/first/first.component').then(m=> m.FirstComponent)
   }
 ];

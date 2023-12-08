@@ -1,0 +1,46 @@
+<div class="First-container">
+  <mat-toolbar class="First-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - first() & last() operators</h1>
+    </mat-toolbar-row>
+    <!--    <mat-toolbar-row>-->
+    <!--      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and-->
+    <!--        Error Handling-->
+    <!--      </p>-->
+    <!--    </mat-toolbar-row>-->
+  </mat-toolbar>
+
+  <span>Values to be used to create observable</span>
+  <h3>{{ values }}</h3>
+
+  <div class="First-cards">
+    <mat-card class="First-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS first(), used to take the first value emitted from an
+            observable
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 *ngIf="valueFirst">{{ valueFirst }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="First-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS last(), used to take the last value emitted from an
+            observable
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 *ngIf="valueLast">{{ valueLast }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
