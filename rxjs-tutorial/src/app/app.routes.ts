@@ -12,5 +12,8 @@ export const routes: Routes = [
   },
   {
     path: 'debounce', loadComponent: () => import('./components/debounce-time/debounce-time.component').then(m => m.DebounceTimeComponent)
+  },
+  {
+    path: 'take', loadComponent: () => import('./components/take/take.component').then(m=> m.TakeComponent)
   }
 ];
