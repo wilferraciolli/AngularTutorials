@@ -3,7 +3,7 @@
     width: 100%;
     height: 100%;
     max-width: 1200px;
-    padding: 50px;
+    gap: 30px;
     display: flex;
     flex-direction: column;
   }
@@ -16,7 +16,6 @@
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
-    margin: 20px;
     justify-content: space-evenly;
     width: 100%;
     //overflow: hidden;

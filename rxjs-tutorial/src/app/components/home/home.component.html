@@ -1,13 +1,27 @@
 <div class="Home-container">
-  <mat-toolbar class="Home-header5">
-    <mat-toolbar-row>
-      <h1>RxJS Tutorial - of() and from() operators</h1>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and
-        Error Handling
-      </p>
-    </mat-toolbar-row>
+  <mat-toolbar class="Home-header">
+    <div class="Home-headerText">
+      <mat-toolbar-row>
+        <h1 class="Home-headerText">RxJS Tutorial - of() and from() operators</h1>
+      </mat-toolbar-row>
+    </div>
+
+<!--    <div class="Home-headerText">-->
+<!--&lt;!&ndash;      <mat-toolbar-row>&ndash;&gt;-->
+<!--        <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility-->
+<!--        </p>-->
+<!--&lt;!&ndash;      </mat-toolbar-row>&ndash;&gt;-->
+<!--    </div>-->
+
+<!--    <div class="Home-headerText">-->
+<!--      &lt;!&ndash;      <mat-toolbar-row>&ndash;&gt;-->
+<!--      <p>-->
+<!--        Conditional, Multicasting and-->
+<!--        Error Handling-->
+<!--      </p>-->
+<!--      &lt;!&ndash;      </mat-toolbar-row>&ndash;&gt;-->
+<!--    </div>-->
+
   </mat-toolbar>
 
   <div class="Home-cards">
@@ -19,7 +33,7 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content *ngIf="agent">
-        {{agent}}
+        {{ agent }}
       </mat-card-content>
     </mat-card>
 
@@ -31,7 +45,7 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content *ngIf="agent2">
-        {{agent2}}
+        {{ agent2 }}
       </mat-card-content>
     </mat-card>
 
@@ -43,7 +57,7 @@
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-        <h3 *ngFor="let student of students">{{student}}</h3>
+        <h3 *ngFor="let student of students">{{ student }}</h3>
       </mat-card-content>
     </mat-card>
 

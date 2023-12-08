@@ -25,9 +25,11 @@ export class DebounceTimeComponent implements OnInit {
   public ngOnInit(): void {
     // subscribe and wait for the debounce time
     this.searchForm.get('name')?.valueChanges
-        .pipe(debounceTime(1000))
+        .pipe(
+          debounceTime(1000)
+        )
         .subscribe((data: string) => {
-          console.log('Value entered ', data);
+          console.log('Value entered after debounce', data);
           this.valueAssigned = data;
         });
   }
