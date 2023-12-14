@@ -18,5 +18,8 @@ export const routes: Routes = [
   },
   {
     path: 'first', loadComponent: () => import('./components/first/first.component').then(m=> m.FirstComponent)
+  },
+  {
+    path: 'filter', loadComponent: () => import('./components/filter/filter.component').then(m=> m.FilterComponent)
   }
 ];

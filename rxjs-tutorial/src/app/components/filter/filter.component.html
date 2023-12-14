@@ -1,0 +1,85 @@
+<div class="Filter-container">
+  <mat-toolbar >
+    <mat-toolbar-row>
+      <h1 class="Filter-header">RxJS Tutorial - filter(), distinct(), skip() & count() operators</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="Filter-cards">
+    <mat-card class="Filter-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS filter(),
+            used to only trigger observable if the value passes the filter logic Eg if text is less than 10 chars...
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 *ngIf="valueAssigned">{{ valueAssigned }}</h2>
+
+        <div [formGroup]="searchForm">
+          <mat-form-field >
+            <mat-label>Enter a value to test filter (chars < 10)</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Filter-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS distinct(),
+            used to ignore duplicated values...
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <span>Values to be used to create observable</span>
+        <h1>{{ values }}</h1>
+
+        <mat-divider></mat-divider>
+        <h4> total count of distinct values {{ distinctCount }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Filter-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS skip(),
+            used to skip a certain number of values for an observable Eg skip 2
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <span>Values to be used to create observable</span>
+        <h1>{{ values }}</h1>
+
+        <mat-divider></mat-divider>
+        <h4> total count of skip values after skipping three = {{ skipCount }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Filter-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS count(),
+            used to count the values emitted by an observable
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <span>Values to be used to create observable</span>
+        <h1>{{ values }}</h1>
+
+        <mat-divider></mat-divider>
+        <h4> total count of values emitted = {{ count }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
