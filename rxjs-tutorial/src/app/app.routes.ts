@@ -21,5 +21,8 @@ export const routes: Routes = [
   },
   {
     path: 'filter', loadComponent: () => import('./components/filter/filter.component').then(m=> m.FilterComponent)
+  },
+  {
+    path: 'minmax', loadComponent: () => import('./components/min-max/min-max.component').then(m=> m.MinMaxComponent)
   }
 ];

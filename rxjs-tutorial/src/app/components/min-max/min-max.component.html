@@ -1,0 +1,40 @@
+<div class="MinMax-container">
+  <mat-toolbar class="MinMax-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - min() & max() operators</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <span>Values to be used to create observable</span>
+  <h3>{{ values }}</h3>
+
+  <div class="MinMax-cards">
+    <mat-card class="MinMax-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS min(), used to the lowest value from an observable,
+            only minimum value will emitt
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 *ngIf="minValue">The minimum value is = {{ minValue }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="MinMax-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS max(), used to the highest value from an observable,
+            only maximum value will emmit
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2 *ngIf="maxValue">The maximum value is = {{ maxValue }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
