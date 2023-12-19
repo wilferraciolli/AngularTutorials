@@ -19,7 +19,7 @@ export class PostService {
                    ...(userId ? { userId: userId.toString() } : {})
                  }
                })
-               .pipe(delay(2000));
+               .pipe(delay(1000));
   }
 }
 
