@@ -12,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class HomeComponent implements OnInit {
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
 }

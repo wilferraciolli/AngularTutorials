@@ -1,1 +1,18 @@
-<p>to-signal works!</p>
+<div class="page-container">
+  <mat-form-field class="page-container--form-field">
+    <mat-label>Enter User Id (Empty will fetch all)</mat-label>
+    <input matInput type="text" [matAutocomplete]="autoComplete" />
+
+    <mat-spinner
+      *ngIf="false"
+      matSuffix
+      class="page-container--spinner"
+    ></mat-spinner>
+
+    <mat-autocomplete #autoComplete="matAutocomplete">
+      <mat-option *ngFor="let post of posts()" [value]="post.title">
+        {{ post.title }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
