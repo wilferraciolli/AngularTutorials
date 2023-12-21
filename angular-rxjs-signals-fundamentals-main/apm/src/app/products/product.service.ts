@@ -18,7 +18,7 @@ export class ProductService {
   }
 
   public getProduct(id: number): Observable<Product> {
-    const productUrl: string = this.productsUrl +'/ +id';
+    const productUrl: string = this.productsUrl +'/' + id;
 
     return this.http.get<Product>(productUrl).pipe(
       tap(() => console.log('Calling product by id '))

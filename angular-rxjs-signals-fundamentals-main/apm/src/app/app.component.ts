@@ -10,9 +10,7 @@ import { RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // Just enough here for the template to compile
-  pageTitle = 'Acme Product Management';
-
-  cartCount = 0;
+  public pageTitle: string = 'Acme Product Management';
+  public cartCount: number = 0;
 
 }

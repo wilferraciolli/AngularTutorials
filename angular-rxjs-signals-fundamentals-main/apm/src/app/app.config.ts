@@ -8,11 +8,11 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     importProvidersFrom(
       FormsModule,
-      InMemoryWebApiModule.forRoot(AppData, { delay: 1000 })
+      InMemoryWebApiModule.forRoot(AppData, { delay: 500 })
     ),
-    provideRouter(routes),
-    provideHttpClient()
+    provideRouter(routes)
   ]
 };
