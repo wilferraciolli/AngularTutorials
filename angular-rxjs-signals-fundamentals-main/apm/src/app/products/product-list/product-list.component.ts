@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 
 import { NgIf, NgFor, NgClass } from '@angular/common';
-import { Subscription, tap } from 'rxjs';
+import { catchError, EMPTY, Subscription, tap } from 'rxjs';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../product.service';
@@ -28,9 +28,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.productService.getProducts().pipe(
-      tap(() => console.log('received data'))
+      tap(() => console.log('received data')),
+      catchError(err => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
     ).subscribe((products: Product[]) =>
-      this.products = products);
+      this.products = products
+    );
   }
 
   ngOnDestroy(): void {

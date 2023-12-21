@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 
 import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { catchError, EMPTY, Subscription } from 'rxjs';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -27,8 +27,12 @@ export class ProductDetailComponent implements OnChanges, OnDestroy {
     const id: number = changes['productId'].currentValue;
 
     if (id) {
-      this.sub = this.productService.getProduct(id)
-                     .subscribe((product: Product) => this.product = product);
+      this.sub = this.productService.getProduct(id).pipe(
+        catchError(err => {
+          this.errorMessage = err;
+          return EMPTY;
+        })
+      ).subscribe((product: Product) => this.product = product);
     }
   }
 
