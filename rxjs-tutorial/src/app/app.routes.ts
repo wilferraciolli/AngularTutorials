@@ -24,5 +24,8 @@ export const routes: Routes = [
   },
   {
     path: 'minmax', loadComponent: () => import('./components/min-max/min-max.component').then(m=> m.MinMaxComponent)
+  },
+  {
+    path: 'higherOrderMaps', loadComponent: () => import('./components/higher-order-maps/higher-order-maps.component').then(m=> m.HigherOrderMapsComponent)
   }
 ];
