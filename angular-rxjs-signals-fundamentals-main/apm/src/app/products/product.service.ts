@@ -1,11 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { Review } from '../reviews/review';
 import { ReviewService } from '../reviews/review.service';
 import { HttpErrorService } from '../utilities/http-error.service';
 import { Product } from './product';
-import { ProductData } from './product-data';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +28,13 @@ export class ProductService {
 
     return this.http.get<Product>(productUrl).pipe(
       tap(() => console.log('Calling product by id ')),
-      map((product: Product) => this.getProductWithReviews(product)),
+      switchMap((product: Product) => this.getProductWithReviews(product)),
       catchError((error) => this.handleError(error))
     );
   }
 
   private getProductWithReviews(product: Product): Observable<Product> {
+    // if product has reviews, then fetch it and add to the product
     if (product.hasReviews) {
       return this.http.get<Review[]>(this.reviewService.getReviewUrl(product.id))
                  .pipe(
