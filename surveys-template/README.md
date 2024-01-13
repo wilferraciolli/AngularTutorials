@@ -4,3 +4,8 @@ This is a tutorial from here `https://www.bytefish.de/blog/composable_surveys_an
 
 
 
+# Dependencies
+
+`ng add @angular/material`
+`npm install @angular/flex-layout`
+`npm install moment --save`
