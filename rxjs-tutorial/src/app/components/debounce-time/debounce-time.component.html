@@ -1,0 +1,35 @@
+<div class="Debounce-container">
+  <mat-toolbar class="Debounce-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - debounce() operator</h1>
+    </mat-toolbar-row>
+<!--    <mat-toolbar-row>-->
+<!--      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and-->
+<!--        Error Handling-->
+<!--      </p>-->
+<!--    </mat-toolbar-row>-->
+  </mat-toolbar>
+
+  <div class="Debounce-cards">
+    <mat-card class="Debounce-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS debounce time, used to pause the obsevable from emiting for a given time,
+            Used to when doing a searcha nd you wnat to give some time betweent he uyser typing and the event firing</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content >
+        <h2 *ngIf="valueAssigned">{{ valueAssigned }}</h2>
+
+      <div [formGroup]="searchForm">
+        <mat-form-field >
+          <mat-label>Enter a value to test debounce</mat-label>
+          <input matInput formControlName="name" (keyup)="readValue($event)">
+        </mat-form-field>
+      </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

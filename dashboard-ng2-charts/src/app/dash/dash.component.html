@@ -1,0 +1,60 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}"
+                 rowHeight="200px">
+    <!--Mini Cards-->
+    <div *ngIf="cardLayout |async as cardLayout">
+      <mat-grid-tile *ngFor="let mc of miniCardData"
+                     [colspan]="cardLayout.miniCard.cols"
+                     [rowspan]="cardLayout.miniCard.rows">
+        <app-mini-card
+          [isCurrency]="mc.isCurrency"
+          [isIncrease]="mc.isIncrease"
+          [duration]="mc.duration"
+          [icon]="mc.icon"
+          [title]="mc.title"
+          [value]="mc.value"
+          [color]="mc.color"
+          [percentValue]="mc.percentValue">
+        </app-mini-card>
+      </mat-grid-tile>
+
+      <!--Charts-->
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Monthly Revenue">
+          <app-annual-sales-chart></app-annual-sales-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Product Sales">
+          <app-product-sales-chart></app-product-sales-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Sales by Traffic Source">
+          <
+          <app-sales-traffic-chart></app-sales-traffic-chart>
+        </app-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cardLayout.chart.cols"
+                     [rowspan]="cardLayout.chart.rows">
+        <app-card title="Online Store Sessions by Traffic Source">
+          <app-store-sessions-chart></app-store-sessions-chart>
+        </app-card>
+      </mat-grid-tile>
+
+      <!--Table-->
+      <mat-grid-tile [colspan]="cardLayout.table.cols"
+                     [rowspan]="cardLayout.table.rows">
+        <app-card title="Latest Orders">
+          <app-orders-table></app-orders-table>
+        </app-card>
+      </mat-grid-tile>
+    </div>
+
+  </mat-grid-list>
+</div>

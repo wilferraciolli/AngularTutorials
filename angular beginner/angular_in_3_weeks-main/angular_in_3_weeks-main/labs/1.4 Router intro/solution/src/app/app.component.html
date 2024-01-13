@@ -1,0 +1,16 @@
+<header>
+  <nav>
+    <a href="/">Main</a>
+    <a href="/orders">Orders</a>
+    <a href="/areas">Areas</a>
+    <a href="/logout">Logout</a>
+    <a href="'/login'">Login</a>
+    <span> Hello, {{ user.first }}!</span> <!-- Add this line -->
+  </nav>
+</header>
+<main>
+  <router-outlet /> <!-- Change this line -->
+</main>
+<footer>
+  <p>Copyright &copy; {{ today.getFullYear() }} Dinner and a Movie</p>
+</footer>

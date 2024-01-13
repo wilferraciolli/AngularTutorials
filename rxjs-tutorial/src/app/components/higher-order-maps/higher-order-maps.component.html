@@ -1,0 +1,59 @@
+<div class="HigherOrderMaps-container">
+  <mat-toolbar class="HigherOrderMaps-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - concatMap(), mergeMap & switchMap() operators</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <span>Values to be used to create observable</span>
+  <h3>{{ values }}</h3>
+
+  <div class="HigherOrderMaps-cards">
+    <mat-card class="HigherOrderMaps-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS range with a delay, concatMap will process each item in
+            order.
+            Good for when processing each item at a time in a given order
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>The values of concatMap are:</h2>
+        <p *ngFor="let value of concatMapValues()"> {{ value }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="HigherOrderMaps-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS range with a delay, mergeMap will process all the items
+            in parallel and not guarantee order.
+            Good for when multitasking async in parallel
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>The values of mergeMap are:</h2>
+        <p *ngFor="let value of mergeMapValues()"> {{ value }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="HigherOrderMaps-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS range with a delay, switchMap will process only the latest value cancelling the one that it is already processing.
+            Good for when subscribing to user input on a search where only the latest value input needs processing
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <h2>The values of switchMap are:</h2>
+        <p *ngFor="let value of switchMapValues()"> {{ value }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

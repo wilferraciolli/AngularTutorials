@@ -1,0 +1,33 @@
+<div class="Interval-container">
+  <mat-toolbar class="Interval-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - interval() operator</h1>
+    </mat-toolbar-row>
+<!--    <mat-toolbar-row>-->
+<!--      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and-->
+<!--        Error Handling-->
+<!--      </p>-->
+<!--    </mat-toolbar-row>-->
+  </mat-toolbar>
+
+  <div class="Interval-cards">
+    <mat-card class="Interval-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable interval</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS by using interval, this is very useful when wanting to poll.
+            It will emit every second up to 1--
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h4 *ngIf="value">
+          {{value}}
+        </h4>
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
+</div>

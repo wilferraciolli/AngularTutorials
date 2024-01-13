@@ -1,0 +1,92 @@
+<mat-drawer-container class="example-container"
+                      autosize>
+  <mat-drawer #drawer
+              class="example-sidenav"
+              mode="side">
+    <h2>Operators</h2>
+    <div class="buttons">
+      <a routerLink="/">
+        <button mat-button
+                color="primary">Home, of(), & from()
+        </button>
+      </a>
+
+      <a routerLink="/fromEvent">
+        <button mat-button
+                color="primary">fromEvent()
+        </button>
+      </a>
+
+      <a routerLink="/interval">
+        <button mat-button
+                color="primary">interval()
+        </button>
+      </a>
+
+      <a routerLink="/debounce">
+        <button mat-button
+                color="primary">debounce()
+        </button>
+      </a>
+
+      <a routerLink="/take">
+        <button mat-button
+                color="primary">take(), takeWhile() & takeLast()
+        </button>
+      </a>
+
+      <a routerLink="/first">
+        <button mat-button
+                color="primary">first(), last() & elementAt()
+        </button>
+      </a>
+
+      <a routerLink="/filter">
+        <button mat-button
+                color="primary">filter(), distinct(), skip() & count()
+        </button>
+      </a>
+
+      <a routerLink="/minmax">
+        <button mat-button
+                color="primary">min() & max()
+        </button>
+      </a>
+
+      <a routerLink="/higherOrderMaps">
+        <button mat-button
+                color="primary">concatMat(), mergeMap() & switchMap()
+        </button>
+      </a>
+
+    </div>
+
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <mat-toolbar color="primary">
+      <button mat-icon-button
+              class="example-icon"
+              aria-label="Example icon-button with menu icon"
+              (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>RxJS tutorial</span>
+
+      <span class="example-spacer"></span>
+
+      <button mat-icon-button
+              class="example-icon"
+              aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
+
+
+
+
+

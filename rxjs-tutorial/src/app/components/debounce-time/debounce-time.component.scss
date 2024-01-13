@@ -1,0 +1,32 @@
+.Debounce {
+  &-container {
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &-header {
+    text-align: center;
+  }
+
+  &-cards {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+
+    @media (max-width: 767px) {
+      /* CSS styles for small screens */
+      flex-direction: column;
+    }
+  }
+
+  &-card {
+    min-width: 200px;
+    min-height: 100px;
+  }
+}

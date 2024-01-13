@@ -1,0 +1,73 @@
+<div class="Take-container">
+  <mat-toolbar class="Take-header5">
+    <mat-toolbar-row>
+      <h1>RxJS Tutorial - take(), takeWhile & takeLast() operators</h1>
+    </mat-toolbar-row>
+    <!--    <mat-toolbar-row>-->
+    <!--      <p>RxJS operators are Creation, Mathematical, Join, Transforming, Filtering, Utility Conditional, Multicasting and-->
+    <!--        Error Handling-->
+    <!--      </p>-->
+    <!--    </mat-toolbar-row>-->
+  </mat-toolbar>
+
+  <div class="Take-cards">
+    <mat-card class="Take-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable take()</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS take pipe, it will take a certain number of values
+            and then complete the observable</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content >
+        <h2 *ngIf="valueAssignedForTake">{{ valueAssignedForTake }}</h2>
+
+        <div [formGroup]="searchForm">
+          <mat-form-field >
+            <mat-label>Enter a value to test take</mat-label>
+            <input matInput formControlName="name" (keyup)="readValue($event)">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Take-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable takeWhile()</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS takeWhile pipe, it will take if the condition is true, and once the condition is false
+            then complete the observable</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content >
+        <h2 *ngIf="valueAssignedForTakeWhile">{{ valueAssignedForTakeWhile }}</h2>
+
+        <div [formGroup]="searchForm">
+          <mat-form-field >
+            <mat-label>Enter a value to test takeWhile</mat-label>
+            <input matInput formControlName="surname" (keyup)="readValue($event)">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="Take-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Creating Observable takeLast()</mat-card-title>
+          <mat-card-subtitle>Creating an observable using RxJS takeLast pipe, it will take the last values specified on the operator, and will occur only after the observable completes</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content >
+        <h2 *ngIf="valueAssignedForTakeLast">{{ valueAssignedForTakeLast }}</h2>
+
+        <div [formGroup]="searchForm">
+          <mat-form-field >
+            <mat-label>Enter a value to test takeLast</mat-label>
+            <input matInput formControlName="address" (keyup)="readValue($event)">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
