@@ -15,8 +15,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { AddressComponent } from './components/address/address.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { SymptonComponent } from './components/sympton/sympton.component';
-import { HealthQuestionaireComponent } from './components/health-questionaire/health-questionaire.component';
+import { SymptomComponent } from './components/symptom/symptom.component';
+import { HealthQuestionnaireComponent } from './components/health-questionnaire/health-questionnaire.component';
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -24,8 +25,8 @@ import { HealthQuestionaireComponent } from './components/health-questionaire/he
     AppComponent,
     AddressComponent,
     ContactComponent,
-    SymptonComponent,
-    HealthQuestionaireComponent
+    SymptomComponent,
+    HealthQuestionnaireComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +38,7 @@ import { HealthQuestionaireComponent } from './components/health-questionaire/he
     MatSelectModule,
     MatCardModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     // MatMomentDateModule,
     MatAutocompleteModule,
     MatStepperModule,
