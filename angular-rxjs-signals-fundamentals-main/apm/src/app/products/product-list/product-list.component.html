@@ -3,16 +3,16 @@
 
     <div class="card">
       <div class="card-header">
-        {{pageTitle}}
+        {{ pageTitle }}
       </div>
 
       <div class='card-body'
-       *ngIf="products$ | async as products">
+           *ngIf="products$ | async as products">
         <div class='list-group'>
           <button type='button'
                   class='list-group-item'
                   *ngFor='let product of products'
-                  [ngClass]="{'active': product.id === selectedProductId}"
+                  [ngClass]="{'active': product.id === (selectedProductId$ | async)}"
                   (click)='onSelected(product.id)'>
             {{ product.productName }}
           </button>
@@ -21,11 +21,12 @@
     </div>
     <div class="alert alert-danger"
          *ngIf="errorMessage">
-      {{errorMessage}}
+      {{ errorMessage }}
     </div>
   </div>
 
   <div class='col-md-8'>
-    <pm-product-detail [productId]="selectedProductId"/>
+    <!-- pass the value zero if product selected is undefined - could use a ngIg -->
+    <pm-product-detail [productId]="(selectedProductId$ | async) ?? 0"/>
   </div>
 </div>

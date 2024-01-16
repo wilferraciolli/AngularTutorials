@@ -16,20 +16,20 @@ export class ProductListComponent {
   public pageTitle: string = 'Products';
   public errorMessage: string = '';
 
-  // Selected product id to highlight the entry
-  public selectedProductId: number = 0;
-
   private productService: ProductService = inject(ProductService);
 
+  // get the observable from the server
   public readonly products$: Observable<Product[]> = this.productService.products$.pipe(
-
     catchError(err => {
       this.errorMessage = err;
       return EMPTY;
     })
   );
 
+  public readonly selectedProductId$: Observable<number | undefined> = this.productService.productSelected$;
+
   public onSelected(productId: number): void {
-    this.selectedProductId = productId;
+    // add state to the service when the user selects a product
+    this.productService.productSelected(productId);
   }
 }

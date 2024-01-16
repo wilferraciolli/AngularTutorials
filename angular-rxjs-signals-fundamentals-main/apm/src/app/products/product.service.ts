@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
 import { Review } from '../reviews/review';
 import { ReviewService } from '../reviews/review.service';
 import { HttpErrorService } from '../utilities/http-error.service';
@@ -22,6 +22,12 @@ export class ProductService {
     catchError((error) => this.handleError(error))
   );
 
+  // define a selected product id Behaviour subject as private as only this service is allowed to write to it
+  private productSelectedSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
+
+  // expose the product selected as Observable so people can get its value
+  public readonly productSelected$: Observable<number | undefined> = this.productSelectedSubject.asObservable();
+
   public getProduct(id: number): Observable<Product> {
     const productUrl: string = this.productsUrl + '/' + id;
 
@@ -30,6 +36,11 @@ export class ProductService {
       switchMap((product: Product) => this.getProductWithReviews(product)),
       catchError((error) => this.handleError(error))
     );
+  }
+
+  // emmit a new value to the product selected id
+  public productSelected(selectedProductId: number): void {
+    this.productSelectedSubject.next(selectedProductId);
   }
 
   private getProductWithReviews(product: Product): Observable<Product> {
