@@ -16,12 +16,10 @@ export class ProductService {
   private errorService: HttpErrorService = inject(HttpErrorService);
   private reviewService: ReviewService = inject(ReviewService);
 
-  public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.productsUrl).pipe(
-      tap(() => console.log('Calling products ')),
-      catchError((error) => this.handleError(error))
-    );
-  }
+  public readonly products$: Observable<Product[]> = this.http.get<Product[]>(this.productsUrl).pipe(
+    tap(() => console.log('Calling products ')),
+    catchError((error) => this.handleError(error))
+  );
 
   public getProduct(id: number): Observable<Product> {
     const productUrl: string = this.productsUrl + '/' + id;
