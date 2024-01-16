@@ -48,6 +48,22 @@ export class CartService {
     );
   }
 
+  public updateQuantity(cartItem: CartItem, quantity: number): void {
+    // update the quantity on the cart item
+    this.cartItems.update((items: CartItem[]) =>
+      items.map((item: CartItem) =>
+        // loop through the array and if the id matches then update object and return the whole new array to the signal
+        item.product.id === cartItem.product.id ? { ...item, quantity } : item)
+    );
+  }
+
+  public removeFromCart(cartItem: CartItem): void {
+    this.cartItems.update((items: CartItem[]) =>
+      items.filter((item: CartItem) =>
+        item.product.id !== cartItem.product.id)
+    );
+  }
+
   public calculateSubTotalForItem(item: CartItem): number {
     return item.quantity * item.product.price;
   }
