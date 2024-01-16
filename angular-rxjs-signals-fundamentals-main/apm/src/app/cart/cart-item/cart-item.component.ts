@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, computed, inject, Input, Signal, signal, WritableSignal } from '@angular/core';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,23 +13,30 @@ import { CartService } from '../cart.service';
 })
 export class CartItemComponent {
 
+  // create the input as a setter so we can set the value to the signal, going forwards, this will be included on newer versions of Angular
   @Input({ required: true })
-  public cartItem!: CartItem;
+  set cartItem(ci: CartItem) {
+    this.item.set(ci);
+  }
 
   private cartService: CartService = inject(CartService);
+
+  public item: WritableSignal<CartItem> = signal<CartItem>(undefined!);
 
   // Quantity available (hard-coded to 8)
   // Mapped to an array from 1-8
   qtyArr = [...Array(8).keys()].map(x => x + 1);
 
   // Calculate the extended price
-  exPrice = this.cartItem?.quantity * this.cartItem?.product.price;
+  public exPrice: Signal<number> = computed(() =>
+    this.item().quantity * this.item().product.price
+  );
 
   onQuantitySelected(quantity: number): void {
-    this.cartService.updateQuantity(this.cartItem, Number(quantity));
+    this.cartService.updateQuantity(this.item(), Number(quantity));
   }
 
   removeFromCart(): void {
-    this.cartService.removeFromCart(this.cartItem);
+    this.cartService.removeFromCart(this.item());
   }
 }
