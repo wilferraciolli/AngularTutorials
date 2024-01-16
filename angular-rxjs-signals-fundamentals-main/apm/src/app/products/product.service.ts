@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import {
   BehaviorSubject,
-  catchError,
+  catchError, combineLatest,
   filter,
   map,
   Observable,
@@ -40,7 +40,7 @@ export class ProductService {
   public readonly productSelected$: Observable<number | undefined> = this.productSelectedSubject.asObservable();
 
   // react to changes on the selected product changes so we can fetch the correct product upon selection
-  public readonly product$: Observable<Product> = this.productSelected$.pipe(
+  public readonly product1$: Observable<Product> = this.productSelected$.pipe(
     filter(Boolean),// ignore when the input is null or undefined
     switchMap((id: number) => {
       return this.http.get<Product>(this.productsUrl + '/' + id)
@@ -52,15 +52,19 @@ export class ProductService {
     })
   );
 
-  // public getProduct(id: number): Observable<Product> {
-  //   const productUrl: string = this.productsUrl + '/' + id;
-  //
-  //   return this.http.get<Product>(productUrl).pipe(
-  //     tap(() => console.log('Calling product by id ')),
-  //     switchMap((product: Product) => this.getProductWithReviews(product)),
-  //     catchError((error) => this.handleError(error))
-  //   );
-  // }
+  // second way to get a product, this way we are getting it from the list rather than a call to the API, this is just a different way then the one above
+  public readonly product$: Observable<Product> = combineLatest([
+    this.productSelected$,
+    this.products$
+  ]).pipe(
+    // the emitted value is a combination of the first and second obsevable input
+    map(([selectedProductId, products]: [number | undefined, Product[]]) =>
+      products.find((product: Product) => product.id === selectedProductId)
+    ),
+    filter(Boolean),// ignore when the input is null or undefined
+    switchMap((product: Product) => this.getProductWithReviews(product)),
+    catchError((error) => this.handleError(error))
+  );
 
   // emmit a new value to the product selected id
   public productSelected(selectedProductId: number): void {
