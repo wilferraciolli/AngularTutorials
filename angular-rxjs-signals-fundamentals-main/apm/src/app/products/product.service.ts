@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
 import { Review } from '../reviews/review';
 import { ReviewService } from '../reviews/review.service';
 import { HttpErrorService } from '../utilities/http-error.service';
@@ -17,7 +17,8 @@ export class ProductService {
   private reviewService: ReviewService = inject(ReviewService);
 
   public readonly products$: Observable<Product[]> = this.http.get<Product[]>(this.productsUrl).pipe(
-    tap(() => console.log('Calling products ')),
+    tap((p: Product[]) => console.log(JSON.stringify(p))),
+    shareReplay(1),
     catchError((error) => this.handleError(error))
   );
 

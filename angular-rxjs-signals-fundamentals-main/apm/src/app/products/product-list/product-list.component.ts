@@ -22,7 +22,7 @@ export class ProductListComponent {
   private productService: ProductService = inject(ProductService);
 
   public readonly products$: Observable<Product[]> = this.productService.products$.pipe(
-    tap(() => console.log('received data')),
+
     catchError(err => {
       this.errorMessage = err;
       return EMPTY;
