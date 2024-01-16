@@ -1,6 +1,17 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  map,
+  Observable,
+  of,
+  shareReplay,
+  switchMap,
+  tap,
+  throwError
+} from 'rxjs';
 import { Review } from '../reviews/review';
 import { ReviewService } from '../reviews/review.service';
 import { HttpErrorService } from '../utilities/http-error.service';
@@ -28,15 +39,28 @@ export class ProductService {
   // expose the product selected as Observable so people can get its value
   public readonly productSelected$: Observable<number | undefined> = this.productSelectedSubject.asObservable();
 
-  public getProduct(id: number): Observable<Product> {
-    const productUrl: string = this.productsUrl + '/' + id;
+  // react to changes on the selected product changes so we can fetch the correct product upon selection
+  public readonly product$: Observable<Product> = this.productSelected$.pipe(
+    filter(Boolean),// ignore when the input is null or undefined
+    switchMap((id: number) => {
+      return this.http.get<Product>(this.productsUrl + '/' + id)
+                 .pipe(
+                   tap(() => console.log('Calling product by id ')),
+                   switchMap((product: Product) => this.getProductWithReviews(product)),
+                   catchError((error) => this.handleError(error))
+                 );
+    })
+  );
 
-    return this.http.get<Product>(productUrl).pipe(
-      tap(() => console.log('Calling product by id ')),
-      switchMap((product: Product) => this.getProductWithReviews(product)),
-      catchError((error) => this.handleError(error))
-    );
-  }
+  // public getProduct(id: number): Observable<Product> {
+  //   const productUrl: string = this.productsUrl + '/' + id;
+  //
+  //   return this.http.get<Product>(productUrl).pipe(
+  //     tap(() => console.log('Calling product by id ')),
+  //     switchMap((product: Product) => this.getProductWithReviews(product)),
+  //     catchError((error) => this.handleError(error))
+  //   );
+  // }
 
   // emmit a new value to the product selected id
   public productSelected(selectedProductId: number): void {

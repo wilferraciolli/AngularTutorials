@@ -1,7 +1,6 @@
-import { Component, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-
-import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
-import { catchError, EMPTY, Subscription } from 'rxjs';
+import { AsyncPipe, CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -9,38 +8,22 @@ import { ProductService } from '../product.service';
   selector: 'pm-product-detail',
   templateUrl: './product-detail.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, CurrencyPipe]
+  imports: [NgIf, NgFor, CurrencyPipe, AsyncPipe]
 })
-export class ProductDetailComponent implements OnChanges, OnDestroy {
-  @Input()
-  public productId: number = 0;
-
-  public errorMessage: string = '';
-  public product: Product | null = null;
-  public pageTitle: string = this.product ? `Product Detail for: ${ this.product.productName }` : 'Product Detail';
-
-  private sub!: Subscription;
+export class ProductDetailComponent {
 
   private productService: ProductService = inject(ProductService);
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    const id: number = changes['productId'].currentValue;
+  public errorMessage: string = '';
+  public readonly product$: Observable<Product> = this.productService.product$.pipe(
+    catchError(err => {
+      this.errorMessage = err;
+      return EMPTY;
+    })
+  );
 
-    if (id) {
-      this.sub = this.productService.getProduct(id).pipe(
-        catchError(err => {
-          this.errorMessage = err;
-          return EMPTY;
-        })
-      ).subscribe((product: Product) => this.product = product);
-    }
-  }
-
-  public ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
+  // public pageTitle: string = this.product ? `Product Detail for: ${ this.product.productName }` : 'Product Detail';
+  public pageTitle: string = 'Page title to be changed later';
 
   public addToCart(product: Product) {
   }
