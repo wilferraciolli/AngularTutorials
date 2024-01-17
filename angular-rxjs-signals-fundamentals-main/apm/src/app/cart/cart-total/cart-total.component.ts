@@ -18,5 +18,4 @@ export class CartTotalComponent {
   deliveryFee: Signal<number> = this.cartService.deliveryFee;
   tax: Signal<number> = this.cartService.tax;
   totalPrice: Signal<number> = this.cartService.totalPrice;
-
 }

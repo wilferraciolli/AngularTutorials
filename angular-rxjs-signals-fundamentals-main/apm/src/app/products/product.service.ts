@@ -1,18 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import {
-  BehaviorSubject,
-  catchError,
-  filter,
-  map,
-  Observable,
-  of,
-  shareReplay,
-  switchMap,
-  tap,
-  throwError
-} from 'rxjs';
+import { catchError, filter, map, Observable, of, shareReplay, switchMap, tap, throwError } from 'rxjs';
 import { Review } from '../reviews/review';
 import { ReviewService } from '../reviews/review.service';
 import { HttpErrorService } from '../utilities/http-error.service';
@@ -52,10 +41,10 @@ export class ProductService {
 
   // react to changes on the selected product changes so we can fetch the correct product upon selection
   private productResult$: Observable<Result<Product>> = toObservable(this.selectedProductId)
-    .pipe(
-      filter(Boolean),
-      switchMap((id: number) => {
-        return this.http.get<Product>(this.productsUrl + '/' + id)
+  .pipe(
+    filter(Boolean),
+    switchMap((id: number) => {
+      return this.http.get<Product>(this.productsUrl + '/' + id)
                  .pipe(
                    switchMap((product: Product) => this.getProductWithReviews(product)),
                    catchError(err => of({
@@ -66,7 +55,6 @@ export class ProductService {
     }),
     map((p: Product | Result<Product>) => ({ data: p } as Result<Product>))
   );
-
   private productResult: Signal<Result<Product>> = toSignal(this.productResult$,
     { initialValue: ({ data: undefined } as Result<Product>) });
   // expose values so other components can get a list of both product and when there are errors

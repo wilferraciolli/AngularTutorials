@@ -18,10 +18,13 @@ export class ProductDetailComponent {
   public product: Signal<Product | undefined> = this.productService.product;
   public errorMessage: Signal<string | undefined> = this.productService.productError;
 
-  public pageTitle: Signal<string> = computed(() =>
-    this.product() ?
-    `Product detail for: ${ this.product()?.productName }` :
-    'Product detail'
+  public pageTitle: Signal<string> = computed(() =>{
+    const product: Product | undefined = this.product();
+
+    return product ?
+      `Product detail for: ${ product.productName }` :
+      'Product detail';
+  }
   );
 
   public addToCart(product: Product): void {

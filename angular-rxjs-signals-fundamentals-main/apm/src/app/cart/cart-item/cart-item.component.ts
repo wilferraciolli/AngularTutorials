@@ -23,10 +23,6 @@ export class CartItemComponent {
 
   public item: WritableSignal<CartItem> = signal<CartItem>(undefined!);
 
-  // Quantity available (hard-coded to 8)
-  // Mapped to an array from 1-8
-  //qtyArr = [...Array(8).keys()].map(x => x + 1);
-
   // Calculate the extended price
   public exPrice: Signal<number> = computed(() =>
     this.item().quantity * this.item().product.price
