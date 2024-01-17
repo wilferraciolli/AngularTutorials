@@ -44,7 +44,6 @@ export class ProductService {
   // create a read only signal from observable
   private readonly productsResult: Signal<Result<Product[]>> = toSignal(this.productsResult$,
     { initialValue: ({ data: [] } as Result<Product[]>) });
-
   // expose values so other components can get a list of both products and when there are errors
   public products: Signal<Product[] | undefined> = computed(() => this.productsResult().data);
   public productsError: Signal<string | undefined> = computed(() => this.productsResult().error);
@@ -52,17 +51,27 @@ export class ProductService {
   public selectedProductId: WritableSignal<number | undefined> = signal(undefined);
 
   // react to changes on the selected product changes so we can fetch the correct product upon selection
-  public readonly product$: Observable<Product> = toObservable(this.selectedProductId).pipe(
-    filter(Boolean),// ignore when the input is null or undefined
-    switchMap((id: number) => {
-      return this.http.get<Product>(this.productsUrl + '/' + id)
+  private productResult$: Observable<Result<Product>> = toObservable(this.selectedProductId)
+    .pipe(
+      filter(Boolean),
+      switchMap((id: number) => {
+        return this.http.get<Product>(this.productsUrl + '/' + id)
                  .pipe(
-                   tap(() => console.log('Calling product by id ')),
                    switchMap((product: Product) => this.getProductWithReviews(product)),
-                   catchError((error) => this.handleError(error))
+                   catchError(err => of({
+                     data: undefined,
+                     error: this.errorService.formatError(err)
+                   } as Result<Product>))
                  );
-    })
+    }),
+    map((p: Product | Result<Product>) => ({ data: p } as Result<Product>))
   );
+
+  private productResult: Signal<Result<Product>> = toSignal(this.productResult$,
+    { initialValue: ({ data: undefined } as Result<Product>) });
+  // expose values so other components can get a list of both product and when there are errors
+  public product: Signal<Product | undefined> = computed(() => this.productResult()?.data);
+  public productError: Signal<string | undefined> = computed(() => this.productResult()?.error);
 
   // second way to get a product, this way we are getting it from the list rather than a call to the API, this is just a different way then the one above
   // public readonly product1$: Observable<Product> = combineLatest([

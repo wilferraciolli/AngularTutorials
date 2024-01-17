@@ -12,7 +12,6 @@ import { ProductService } from '../product.service';
   imports: [NgIf, NgFor, NgClass, ProductDetailComponent, AsyncPipe]
 })
 export class ProductListComponent {
-
   public pageTitle: string = 'Products';
 
   private productService: ProductService = inject(ProductService);
