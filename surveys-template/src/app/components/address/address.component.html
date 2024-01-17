@@ -1,0 +1,20 @@
+<div ngModelGroup="{{modelGroupName}}">
+
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100">
+      <input matInput placeholder="Street" name="street" ngModel i18n-placeholder required>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+    <mat-form-field fxFlex="20">
+      <input matInput placeholder="ZIP Code" name="zip" ngModel i18n-placeholder required>
+    </mat-form-field>
+    <mat-form-field fxFlex="45">
+      <input matInput placeholder="City" name="city" ngModel i18n-placeholder required>
+    </mat-form-field>
+    <mat-form-field fxFlex="30">
+      <input matInput placeholder="Country" name="country" ngModel i18n-placeholder>
+    </mat-form-field>
+  </div>
+</div>

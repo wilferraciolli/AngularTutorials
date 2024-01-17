@@ -1,0 +1,37 @@
+<div ngModelGroup="{{modelGroupName}}">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100">
+      <mat-label i18n>Symptoms</mat-label>
+      <mat-select multiple name="symptom" (selectionChange)="handleSelection($event.value)" ngModel>
+        <mat-option value="fever" i18n>Fever</mat-option>
+        <mat-option value="cough" i18n>Cough</mat-option>
+        <mat-option value="shortnessOfBreath" i18n>Shortness of breath</mat-option>
+        <mat-option value="breathingDifficulties" i18n>Breathing difficulties</mat-option>
+        <mat-option value="other" i18n>Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" *ngIf="selectedItems.includes('fever')" fxLayout.lt-sm="column" fxLayoutGap="0px" >
+    <mat-form-field fxFlex="10">
+      <mat-select [(ngModel)]="selectedUnit" name="unit">
+        <mat-option value="celsius">&#176;C</mat-option>
+        <mat-option value="fahrenheit">&#176;F</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="30">
+      <input matInput type="number" placeholder="Temperature" name="temperature" required ngModel>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" *ngIf="selectedItems.includes('other')" fxLayout.lt-sm="column" fxLayoutGap="0px" >
+    <mat-form-field fxFlex="100">
+      <mat-label>Other</mat-label>
+      <textarea name="other" matInput #message rows="5" maxlength="2500" placeholder="Please describe your symptoms ..." required ngModel></textarea>
+      <mat-hint align="start"><strong>Please describe your symptoms.</strong> </mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 2500</mat-hint>
+    </mat-form-field>
+  </div>
+
+</div>

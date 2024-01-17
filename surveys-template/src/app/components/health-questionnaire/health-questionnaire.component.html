@@ -1,0 +1,31 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Health Questionnaire</mat-card-title>
+    <mat-card-subtitle>This is a sample questionnaire for Health Evaluation</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+      <mat-horizontal-stepper linear>
+        <mat-step #personal="ngModelGroup" ngModelGroup="personal" [completed]="personal.valid">
+          <ng-template matStepLabel>Personal</ng-template>
+          <app-contact modelGroupName="contact"></app-contact>
+        </mat-step>
+
+        <mat-step #health="ngModelGroup" ngModelGroup="health" [completed]="health.valid">
+          <ng-template matStepLabel>Health</ng-template>
+          <app-symptom modelGroupName="symptoms"></app-symptom>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>Thanks for using the survey!</p>
+          <div>
+            <button mat-raised-button type="button" (click)="onClick(f)" color="primary">Submit Data</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </form>
+    <pre>{{ f.value | json }}</pre>
+  </mat-card-content>
+</mat-card>
