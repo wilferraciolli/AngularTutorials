@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { computed, inject, Injectable, Signal } from '@angular/core';
+import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   BehaviorSubject,
@@ -51,9 +51,9 @@ export class ProductService {
 
   // define a selected product id Behaviour subject as private as only this service is allowed to write to it
   private productSelectedSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
-
   // expose the product selected as Observable so people can get its value
   public readonly productSelected$: Observable<number | undefined> = this.productSelectedSubject.asObservable();
+  public selectedProductId: WritableSignal<number | undefined> = signal(undefined);
 
   // react to changes on the selected product changes so we can fetch the correct product upon selection
   public readonly product$: Observable<Product> = this.productSelected$.pipe(
@@ -85,6 +85,7 @@ export class ProductService {
   // emmit a new value to the product selected id
   public productSelected(selectedProductId: number): void {
     this.productSelectedSubject.next(selectedProductId);
+    this.selectedProductId.set(selectedProductId);
   }
 
   private getProductWithReviews(product: Product): Observable<Product> {

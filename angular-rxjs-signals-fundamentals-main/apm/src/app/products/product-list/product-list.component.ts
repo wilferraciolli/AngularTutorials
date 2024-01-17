@@ -20,7 +20,7 @@ export class ProductListComponent {
   public products: Signal<Product[] | undefined> = this.productService.products;
   public errorMessage: Signal<string | undefined> = this.productService.productsError;
 
-  public readonly selectedProductId$: Observable<number | undefined> = this.productService.productSelected$;
+  public selectedProductId: Signal<number | undefined> = this.productService.selectedProductId;
 
   public onSelected(productId: number): void {
     // add state to the service when the user selects a product
