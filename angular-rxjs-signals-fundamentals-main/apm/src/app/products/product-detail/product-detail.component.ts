@@ -1,7 +1,6 @@
-import { Component, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-
-import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
-import { catchError, EMPTY, Subscription } from 'rxjs';
+import { AsyncPipe, CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { Component, computed, inject, Signal } from '@angular/core';
+import { CartService } from '../../cart/cart.service';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -9,39 +8,26 @@ import { ProductService } from '../product.service';
   selector: 'pm-product-detail',
   templateUrl: './product-detail.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, CurrencyPipe]
+  imports: [NgIf, NgFor, CurrencyPipe, AsyncPipe]
 })
-export class ProductDetailComponent implements OnChanges, OnDestroy {
-  @Input()
-  public productId: number = 0;
-
-  public errorMessage: string = '';
-  public product: Product | null = null;
-  public pageTitle: string = this.product ? `Product Detail for: ${ this.product.productName }` : 'Product Detail';
-
-  private sub!: Subscription;
+export class ProductDetailComponent {
 
   private productService: ProductService = inject(ProductService);
+  private cartService: CartService = inject(CartService);
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    const id: number = changes['productId'].currentValue;
+  public product: Signal<Product | undefined> = this.productService.product;
+  public errorMessage: Signal<string | undefined> = this.productService.productError;
 
-    if (id) {
-      this.sub = this.productService.getProduct(id).pipe(
-        catchError(err => {
-          this.errorMessage = err;
-          return EMPTY;
-        })
-      ).subscribe((product: Product) => this.product = product);
-    }
+  public pageTitle: Signal<string> = computed(() =>{
+    const product: Product | undefined = this.product();
+
+    return product ?
+      `Product detail for: ${ product.productName }` :
+      'Product detail';
   }
+  );
 
-  public ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
-
-  public addToCart(product: Product) {
+  public addToCart(product: Product): void {
+    this.cartService.addToCart(product);
   }
 }
