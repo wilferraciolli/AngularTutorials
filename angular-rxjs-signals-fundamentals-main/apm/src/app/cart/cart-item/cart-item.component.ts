@@ -25,11 +25,17 @@ export class CartItemComponent {
 
   // Quantity available (hard-coded to 8)
   // Mapped to an array from 1-8
-  qtyArr = [...Array(8).keys()].map(x => x + 1);
+  //qtyArr = [...Array(8).keys()].map(x => x + 1);
 
   // Calculate the extended price
   public exPrice: Signal<number> = computed(() =>
     this.item().quantity * this.item().product.price
+  );
+
+  // calculate the quantity available for the item
+  public qtyArr: Signal<number[]> = computed(() =>
+    [...Array(this.item().product.quantityInStock).keys()]
+    .map((x: number) => x + 1)
   );
 
   onQuantitySelected(quantity: number): void {

@@ -1,6 +1,6 @@
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { catchError, EMPTY, Observable, tap } from 'rxjs';
+import { Component, inject, Signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from '../product';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductService } from '../product.service';
@@ -14,17 +14,11 @@ import { ProductService } from '../product.service';
 export class ProductListComponent {
 
   public pageTitle: string = 'Products';
-  public errorMessage: string = '';
 
   private productService: ProductService = inject(ProductService);
 
-  // get the observable from the server
-  public readonly products$: Observable<Product[]> = this.productService.products$.pipe(
-    catchError(err => {
-      this.errorMessage = err;
-      return EMPTY;
-    })
-  );
+  public products: Signal<Product[] | undefined> = this.productService.products;
+  public errorMessage: Signal<string | undefined> = this.productService.productsError;
 
   public readonly selectedProductId$: Observable<number | undefined> = this.productService.productSelected$;
 
