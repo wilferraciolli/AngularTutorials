@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { computed, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
   BehaviorSubject,
   catchError,
@@ -49,14 +49,10 @@ export class ProductService {
   public products: Signal<Product[] | undefined> = computed(() => this.productsResult().data);
   public productsError: Signal<string | undefined> = computed(() => this.productsResult().error);
 
-  // define a selected product id Behaviour subject as private as only this service is allowed to write to it
-  private productSelectedSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
-  // expose the product selected as Observable so people can get its value
-  public readonly productSelected$: Observable<number | undefined> = this.productSelectedSubject.asObservable();
   public selectedProductId: WritableSignal<number | undefined> = signal(undefined);
 
   // react to changes on the selected product changes so we can fetch the correct product upon selection
-  public readonly product$: Observable<Product> = this.productSelected$.pipe(
+  public readonly product$: Observable<Product> = toObservable(this.selectedProductId).pipe(
     filter(Boolean),// ignore when the input is null or undefined
     switchMap((id: number) => {
       return this.http.get<Product>(this.productsUrl + '/' + id)
@@ -84,7 +80,6 @@ export class ProductService {
 
   // emmit a new value to the product selected id
   public productSelected(selectedProductId: number): void {
-    this.productSelectedSubject.next(selectedProductId);
     this.selectedProductId.set(selectedProductId);
   }
 
