@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngRx-store": {
+    "ngRx-signals": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngRx-store:build:production"
+              "browserTarget": "ngRx-signals:build:production"
             },
             "development": {
-              "browserTarget": "ngRx-store:build:development"
+              "browserTarget": "ngRx-signals:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngRx-store:build"
+            "browserTarget": "ngRx-signals:build"
           }
         },
         "test": {
