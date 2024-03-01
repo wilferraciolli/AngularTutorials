@@ -5,3 +5,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 tutorial ban be found here `https://medium.com/google-cloud/build-ai-powered-angular-apps-with-google-gemini-5bf5e905ca1d`
 
 
+## Dependencies
+
+#### Angular Material
+
+
+### generative ai
+`npm install @google/generative-ai`
