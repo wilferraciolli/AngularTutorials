@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ai-google-gemini:build:production"
+              "buildTarget": "ai-google-gemini:build:production"
             },
             "development": {
-              "browserTarget": "ai-google-gemini:build:development"
+              "buildTarget": "ai-google-gemini:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ai-google-gemini:build"
+            "buildTarget": "ai-google-gemini:build"
           }
         },
         "test": {
