@@ -1,5 +1,5 @@
-import { inject } from '@angular/core';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { computed, inject } from '@angular/core';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { Todo } from '../models/todo.model';
 import { TodosService } from '../services/todos.service';
 
@@ -65,8 +65,26 @@ export const TodosStore = signalStore(
             return todo;
           })
         }));
+      },
+
+      updateFilter(filter: TodosFilter): void {
+        patchState(store, { filter });
       }
     })
-  )
+  ),
+  withComputed((state) => ({
+    filteredTodos: computed(() => {
+      const todos: Todo[] = state.todos();
+
+      switch (state.filter()) {
+        case 'all':
+          return todos;
+        case 'pending':
+          return todos.filter(todo => !todo.completed);
+        case 'completed':
+          return todos.filter(todo => todo.completed);
+      }
+    })
+  }))
 );
 
