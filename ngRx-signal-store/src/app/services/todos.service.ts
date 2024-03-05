@@ -21,6 +21,14 @@ export class TodosService {
       ...todo
     } as Todo;
   }
+
+  public async deleteTodo(id: string): Promise<void> {
+    await sleep(500);
+  }
+
+  public async updateTodo(id: string, completed: boolean): Promise<void> {
+    await sleep(500);
+  }
 }
 
 // dummy function to make the code delay mimicing calling an api

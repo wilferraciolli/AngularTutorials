@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
@@ -18,7 +19,8 @@ import { TodosStore } from '../store/todos.store';
     MatButtonToggleGroup,
     MatButtonToggle,
     MatSelectionList,
-    MatListOption
+    MatListOption,
+    NgStyle
   ],
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.scss'
@@ -29,5 +31,15 @@ export class TodosListComponent {
 
   public async onAddTodo(title: string): Promise<void> {
     await this.store.addTodo(title);
+  }
+
+  public async onDeleteTodo(id: string, event: MouseEvent): Promise<void> {
+    event.stopPropagation();
+
+    await this.store.deleteTodo(id);
+  }
+
+  public async onTodoToggled(id: string, completed: boolean): Promise<void> {
+    await this.store.updateTodo(id, completed);
   }
 }

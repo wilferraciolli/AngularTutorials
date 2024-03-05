@@ -36,12 +36,34 @@ export const TodosStore = signalStore(
 
         patchState(store, { todos, loading: false });
       },
+
       async addTodo(title: string): Promise<void> {
         const todo: Todo = await todoService.addTodo({ title, completed: false });
 
         // patch the state by running a function, this takes the current state
         patchState(store, (state) => ({
           todos: [...state.todos, todo]
+        }));
+      },
+
+      async deleteTodo(id: string): Promise<void> {
+        await todoService.deleteTodo(id);
+
+        patchState(store, (state) => ({
+          todos: state.todos.filter(todo => todo.id !== id)
+        }));
+      },
+
+      async updateTodo(id: string, completed: boolean): Promise<void> {
+        await todoService.updateTodo(id, completed);
+
+        patchState(store, (state) => ({
+          todos: state.todos.map((todo: Todo) => {
+            if (todo.id === id) {
+              return { ...todo, completed };
+            }
+            return todo;
+          })
         }));
       }
     })
