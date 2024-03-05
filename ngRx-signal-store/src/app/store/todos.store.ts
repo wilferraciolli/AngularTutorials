@@ -29,12 +29,20 @@ export const TodosStore = signalStore(
   withState(initialState),
   // methods to manipulate the store
   withMethods((store, todoService = inject(TodosService)) => ({
-      async loadAll() {
+      async loadAll(): Promise<void> {
         patchState(store, { loading: true });
 
-        const todos = await todoService.getTodos();
+        const todos: Todo[] = await todoService.getTodos();
 
         patchState(store, { todos, loading: false });
+      },
+      async addTodo(title: string): Promise<void> {
+        const todo: Todo = await todoService.addTodo({ title, completed: false });
+
+        // patch the state by running a function, this takes the current state
+        patchState(store, (state) => ({
+          todos: [...state.todos, todo]
+        }));
       }
     })
   )

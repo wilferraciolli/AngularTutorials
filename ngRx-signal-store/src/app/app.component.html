@@ -4,7 +4,12 @@
     <a href="https://blog.angular-university.io/angular-signals/">Signal store</a>
   </div>
 
-  <todos-list />
+  @if (!store.loading()) {
+    <todos-list/>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+
 </div>
 
 
