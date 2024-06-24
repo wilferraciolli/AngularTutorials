@@ -1,0 +1,16 @@
+<div class="app">
+  <div class="title-container">
+    <h1>NgRx signals store tutorial</h1>
+    <a href="https://blog.angular-university.io/angular-signals/">Signal store</a>
+  </div>
+
+  @if (!store.loading()) {
+    <todos-list/>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+
+</div>
+
+
+
