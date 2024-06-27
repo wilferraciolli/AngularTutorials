@@ -2,12 +2,65 @@
   <mat-toolbar>
     <span>Date Time Sample</span>
   </mat-toolbar>
+  "
+  <div class="form">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Template for date time</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="formBuilder.form" class="my-form" (ngSubmit)="submitForm()">
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Template for date time</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>Simple card</mat-card-content>
-  </mat-card>
+          <!--          <mat-form-field class="full-width">-->
+          <!--            <mat-label>Date</mat-label>-->
+          <!--            <input matInput placeholder="YYYY-MM-DD" name="date"-->
+          <!--                   formControlName="date" required>-->
+          <!--          </mat-form-field>-->
+
+          <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput
+                   [matDatepicker]="picker"
+                   placeholder="YYYY-MM-DD"
+                   formControlName="businessDate">
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker>
+            </mat-datepicker>
+          </mat-form-field>
+
+
+          <mat-form-field class="full-width">
+            <mat-label>Time</mat-label>
+            <input matInput placeholder="HH:mm" name="time"
+                   formControlName="businessTime" required>
+          </mat-form-field>
+
+
+          <mat-form-field class="full-width">
+            <mat-label>Date and Time</mat-label>
+            <input matInput placeholder="YYYY-MM-DDT09:00:00Z" name="dateTime"
+                   formControlName="dateTime" required>
+          </mat-form-field>
+
+
+          <!-- buttons -->
+          <mat-card-actions>
+            <div class="registration-form-actions">
+              <button [disabled]="!formBuilder.form.valid" mat-raised-button type="submit" color="primary">
+                Submit
+              </button>
+            </div>
+          </mat-card-actions>
+        </form>
+
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!--  <h3>Form Value: {{formBuilder.getFormValueBeforeParsing() | json}}</h3>-->
+  <h3>Form Value: </h3>
 </div>
 

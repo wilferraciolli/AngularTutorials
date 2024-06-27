@@ -1,7 +1,8 @@
 import { FormControl } from "@angular/forms";
+import { DateTime } from 'luxon';
 
 export interface DateTimeForm {
-  date: FormControl<string>;
-  time: FormControl<string>;
-  dateTime: FormControl<string>;
+  businessDate: FormControl<DateTime>;
+  businessTime: FormControl<DateTime>;
+  dateTime: FormControl<DateTime>;
 }

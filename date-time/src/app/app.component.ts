@@ -12,7 +12,17 @@ export class AppComponent {
 
   constructor(public dateTimeService: DateTimeService,
               public formBuilder: FormBuilderService) {
+    this.formBuilder.populateFormValues();
   }
 
 
+  public submitForm(): void {
+    // console.log('Submitting form ', this.formBuilder.getFormValueBeforeParsing());
+    // console.log('Submitting form ', this.formBuilder.getFormValuePArsed());
+
+    let value = this.formBuilder.businessDate.value;
+    this.dateTimeService.getDateTime(value);
+    // this.dateTimeService.getDateTime(`${this.formBuilder.date.value}${this.formBuilder.time.value}`);
+    // this.dateTimeService.getDateTime(this.formBuilder.dateTime.value);
+  }
 }
