@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatCardModule } from "@angular/material/card";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInput } from "@angular/material/input";
+import { MatInput, MatInputModule } from "@angular/material/input";
 import { MatButton } from "@angular/material/button";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { DateTimeFieldComponent } from './form-fields/date-time-field/date-time-field.component';
 
 // config for date time format
 const MY_DATE_FORMATS = {
@@ -28,7 +30,9 @@ const MY_DATE_FORMATS = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DateTimeFieldComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,10 @@ const MY_DATE_FORMATS = {
     MatCardModule,
     ReactiveFormsModule,
     MatInput,
-    MatButton
+    MatButton,
+    DatePickerComponent,
+    MatInputModule,
+    FormsModule,
   ],
   providers: [
     provideAnimationsAsync(),

@@ -17,19 +17,37 @@
           <!--                   formControlName="date" required>-->
           <!--          </mat-form-field>-->
 
-          <mat-form-field>
-            <mat-label>Date</mat-label>
-            <input matInput
-                   [matDatepicker]="picker"
-                   placeholder="YYYY-MM-DD"
-                   formControlName="businessDate">
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker">
-            </mat-datepicker-toggle>
-            <mat-datepicker #picker>
-            </mat-datepicker>
-          </mat-form-field>
+          <!--          <mat-form-field>-->
+          <!--            <mat-label>Date</mat-label>-->
+          <!--            <input matInput-->
+          <!--                   [matDatepicker]="picker"-->
+          <!--                   placeholder="YYYY-MM-DD"-->
+          <!--                   formControlName="businessDate">-->
+          <!--            <mat-datepicker-toggle-->
+          <!--              matSuffix-->
+          <!--              [for]="picker">-->
+          <!--            </mat-datepicker-toggle>-->
+          <!--            <mat-datepicker #picker>-->
+          <!--            </mat-datepicker>-->
+          <!--          </mat-form-field>-->
+
+          <!--          <mat-form-field>-->
+          <!--            <mat-label>Date</mat-label>-->
+          <!--            <app-date-time-field-->
+          <!--              [controlName]="'businessDate'"-->
+          <!--              [dateTime]="'2024-01-01T09:00:00Z'">-->
+          <!--            </app-date-time-field>-->
+          <!--          </mat-form-field>-->
+
+
+          <app-date-time-field
+            formControlName="businessDate"
+            [controlName]="'businessDae'"
+            [dateTime]="'2024-01-01T09:00:00Z'"></app-date-time-field>
+          <!--          <app-date-picker-->
+          <!--            formControlName="businessDate"-->
+          <!--            [parentFormGroup]="formBuilder.form">-->
+          <!--          </app-date-picker>-->
 
 
           <mat-form-field class="full-width">
@@ -38,13 +56,11 @@
                    formControlName="businessTime" required>
           </mat-form-field>
 
-
           <mat-form-field class="full-width">
             <mat-label>Date and Time</mat-label>
             <input matInput placeholder="YYYY-MM-DDT09:00:00Z" name="dateTime"
                    formControlName="dateTime" required>
           </mat-form-field>
-
 
           <!-- buttons -->
           <mat-card-actions>
@@ -60,7 +76,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <!--  <h3>Form Value: {{formBuilder.getFormValueBeforeParsing() | json}}</h3>-->
+    <h3>Form Value: {{formBuilder.form.value | json}}</h3>
   <h3>Form Value: </h3>
 </div>
 
