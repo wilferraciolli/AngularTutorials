@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { DateTime } from "luxon";
 
 @Component({
   selector: 'app-date-time-field',
@@ -14,19 +15,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ]
 })
 export class DateTimeFieldComponent implements OnInit, OnChanges, ControlValueAccessor {
-  @Input({
-    required: true
-  })
-  public controlName!: string;
+  private _controlName!: string;
+  private _dateTime!: string;
 
-  @Input({
-    required: true
-  })
-  public dateTime!: string;
+  @Input() set controlName(value: string) {
+    this._controlName = value;
+    this.updateForm();
+  }
+
+  @Input() set dateTime(value: string) {
+    this._dateTime = value;
+    this.updateForm();
+  }
 
   private touched: boolean = false;
-  disabled!: boolean;
-  value: string = '';
+  formGroup!: FormGroup;
+  businessDateControl!: FormControl;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.formGroup = this.formBuilder.group({
+      businessDate: this.businessDateControl = new FormControl(
+        DateTime.fromISO(this._dateTime, { zone: 'utc' })),
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -34,22 +45,28 @@ export class DateTimeFieldComponent implements OnInit, OnChanges, ControlValueAc
   ngOnChanges(changes: SimpleChanges): void {
   }
 
-  public valueChanged(value: string): void {
-    console.log('Value changed ', value);
-    this.onChange(value);
-
-    this.markAsTouched();
+  private updateForm(): void {
+    if (this._dateTime) {
+      console.log('***************** setting date time ', this._dateTime)
+      this.businessDateControl.setValue(DateTime.fromISO(this._dateTime, { zone: 'utc' }));
+    }
   }
 
-  writeValue(value: string): void {
-    console.log('write value , dateTime ', value);
-    this.value = value;
+  // write method called by Angular Forms when initialized
+  writeValue(value: DateTime): void {
+    console.log('write value Called in with ', value);
+    console.log('value.toJSON(): ', value.toJSON());
+
+    let fromISO = DateTime.fromISO('2024-01-01T09:00:00Z', { zone: 'utc' });
+    console.log('fromISO: ', fromISO);
+    console.log('fromISO.toJSON(): ', fromISO.toJSON());
+    console.log('fromISO.toJSDate(): ', fromISO.toJSDate());
+
+    this.businessDateControl.setValue(fromISO.toJSDate());
   }
 
   // holder function to deal with on touch
   onTouched: any = () => {
-  };
-  onChange = (val: string) => {
   };
 
   private markAsTouched(): void {
@@ -60,14 +77,18 @@ export class DateTimeFieldComponent implements OnInit, OnChanges, ControlValueAc
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    // this.onTouched = fn;
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.businessDateControl.valueChanges.subscribe(fn);
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled
+    if (isDisabled) {
+      this.businessDateControl.disable();
+    } else {
+      this.businessDateControl.enable();
+    }
   }
 }

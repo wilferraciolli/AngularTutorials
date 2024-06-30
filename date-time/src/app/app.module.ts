@@ -44,9 +44,9 @@ const MY_DATE_FORMATS = {
     MatCardModule,
     ReactiveFormsModule,
     MatInput,
+    MatInputModule,
     MatButton,
     DatePickerComponent,
-    MatInputModule,
     FormsModule,
   ],
   providers: [

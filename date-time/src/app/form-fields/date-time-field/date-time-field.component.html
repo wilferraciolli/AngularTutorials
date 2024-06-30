@@ -1,22 +1,49 @@
-<div>
-  <br/>
-  <input
-    type="text"
-    #val
-    (change)="valueChanged(val.value)"
-    placeholder="Date Time"/>
+<!--<div>-->
+<!--  <br/>-->
+<!--  <input  [(ngModel)]="value"-->
+<!--    type="text"-->
+<!--    #val-->
+<!--    (change)="valueChanged(val.value)"-->
+<!--    placeholder="Date Time"/>-->
+<!--</div>-->
+
+
+
+
+<div [formGroup]="formGroup">
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" formControlName="businessDate" placeholder="Date Time">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 </div>
+
+<!--<div>-->
+<!--  <mat-form-field>-->
+<!--    <input matInput [matDatepicker]="picker" [(ngModel)]="value" placeholder="Date Time">-->
+<!--    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--    <mat-datepicker #picker></mat-datepicker>-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+
+
+<!--<input matInput [matDatepicker]="picker">-->
+<!--<mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--<mat-datepicker #picker></mat-datepicker>-->
+
 
 <!--          <mat-form-field>-->
 <!--            <mat-label>Date</mat-label>-->
 <!--            <input matInput-->
-<!--                   [matDatepicker]="picker"-->
-<!--                   placeholder="YYYY-MM-DD"-->
-<!--                   formControlName="businessDate">-->
+<!--                   [formControl]="businessDate"-->
+<!--                   [matDatepicker]="picker" #val-->
+<!--                   placeholder="YYYY-MM-DD">-->
 <!--            <mat-datepicker-toggle-->
 <!--              matSuffix-->
 <!--              [for]="picker">-->
 <!--            </mat-datepicker-toggle>-->
-<!--            <mat-datepicker #picker>-->
+<!--            <mat-datepicker #picker (change)="onDateChange($event)">-->
 <!--            </mat-datepicker>-->
 <!--          </mat-form-field>-->
