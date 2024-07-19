@@ -1,6 +1,7 @@
 <h1>Form Fields</h1>
 
-<form [formGroup]="form">
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()">
 
   <app-date-field
     label="Enter Date"
@@ -30,8 +31,10 @@
   <!--  </div>-->
 
   <app-date-time-field
-    label="Enter Date and 7Time"
-    [type]="'datetime-local'"
+    label="Enter Date and Time"
+    [required]="true"
+    [min]="'2024-01-01T09:00'"
+    [max]="'2025-07-01T23:59'"
     formControlName="dateTime"
   ></app-date-time-field>
   <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
@@ -40,12 +43,13 @@
   <!--    >-->
   <!--  </div>-->
 
-
+  <button type="submit">Submit</button>
 </form>
 
 {{ form.getRawValue() | json }}
 <br>
-<br><br>
+<br>
+<br>
 <br>
 <br>
 Form valid

@@ -10,6 +10,7 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import { DATE_MAX_END, DATE_MIN_START } from '../date-field/date.constants';
 import {
   TIME_FIELD_TYPE,
   TIME_LABEL,
@@ -67,6 +68,7 @@ export class TimeFieldComponent implements ControlValueAccessor, Validator {
   })
   maxTimeErrorLabel: string = TIME_MAX_END_ERROR_LABEL;
 
+  // Required validation can be done by the parent
   @Input({
     required: false
   })
@@ -118,7 +120,7 @@ export class TimeFieldComponent implements ControlValueAccessor, Validator {
     }
 
     if (time) {
-      // if chosen date is before the min
+      // if chosen time is before the min
       if (this.min && time < this.min) {
         this.errorCannotBeBeforeMinTime.set(true);
         return {
@@ -128,7 +130,7 @@ export class TimeFieldComponent implements ControlValueAccessor, Validator {
         };
       }
 
-      // if chosen date is after max
+      // if chosen time is after max
       if (this.max && time > this.max) {
         this.errorCannotBeAfterMaxTime.set(true);
         return {

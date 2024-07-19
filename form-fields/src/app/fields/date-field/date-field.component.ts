@@ -10,6 +10,7 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import { DATE_TIME_MAX_END, DATE_TIME_MIN_START } from '../date-time-field/date-time.constants';
 import {
   DATE_FIELD_TYPE,
   DATE_LABEL,
@@ -69,6 +70,7 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
   })
   maxDateErrorLabel: string = DATE_MAX_END_ERROR_LABEL;
 
+  // Required validation can be done by the parent
   @Input({
     required: false
   })

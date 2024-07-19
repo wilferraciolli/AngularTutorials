@@ -1,14 +1,23 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormControl,
-  FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ReactiveFormsModule,
+  FormsModule,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
   ValidationErrors,
-  Validator,
-  Validators
+  Validator
 } from '@angular/forms';
+import {
+  DATE_TIME_FIELD_TYPE,
+  DATE_TIME_LABEL,
+  DATE_TIME_MAX_END,
+  DATE_TIME_MAX_END_ERROR_LABEL,
+  DATE_TIME_MIN_START,
+  DATE_TIME_MIN_START_ERROR_LABEL
+} from './date-time.constants';
 
 @Component({
   selector: 'app-date-time-field',
@@ -33,26 +42,50 @@ import {
   templateUrl: './date-time-field.component.html',
   styleUrl: './date-time-field.component.scss'
 })
-export class DateTimeFieldComponent implements ControlValueAccessor, Validator  {
+export class DateTimeFieldComponent implements ControlValueAccessor, Validator {
   @Input({
     required: false
   })
-  label: string = 'Enter date and time';
+  public label: string = DATE_TIME_LABEL;
 
   @Input({
     required: false
   })
-  type: string = 'text';
+  min: string = DATE_TIME_MIN_START;
 
-  // @Output()
-  // valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input({
+    required: false
+  })
+  minDateTimeErrorLabel: string = DATE_TIME_MIN_START_ERROR_LABEL;
+
+  @Input({
+    required: false
+  })
+  max: string = DATE_TIME_MAX_END;
+
+  @Input({
+    required: false
+  })
+  maxDateTimeErrorLabel: string = DATE_TIME_MAX_END_ERROR_LABEL;
+
+  // Required validation can be done by the parent
+  @Input({
+    required: false
+  })
+  required: boolean = false;
+
+  public fieldType: string = DATE_TIME_FIELD_TYPE;
 
   public value: string = '';
   disabled: boolean = false;
-  onChange: Function = (value: string) => {};
-  onTouched: Function = () => {};
+  onChange: Function = (value: string) => {
+  };
+  onTouched: Function = () => {
+  };
 
-  control: FormControl = new FormControl('', Validators.required);
+  public errorRequired: WritableSignal<boolean> = signal(false);
+  public errorCannotBeBeforeMinDateTime: WritableSignal<boolean> = signal(false);
+  public errorCannotBeAfterMaxDateTime: WritableSignal<boolean> = signal(false);
 
   public writeValue(newValue: any): void {
     console.log('Writing value ', newValue);
@@ -74,27 +107,58 @@ export class DateTimeFieldComponent implements ControlValueAccessor, Validator  
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    const dateTime: string = control.value;
-    // do validation here
-    // console.log('Validating date: ', control);
-    console.log('Validating date: ', control.value);
-    // console.log('Validating date: ', date === '2024-01-01');
-    // console.log('Validating date: ', date , '2024-01-01');
+    this.resetErrorsOnChange();
 
-    if (dateTime === '2024-01-01T09:00') {
-      console.log('Validation failed');
+    const dateTime: string = control.value;
+
+    // if field is required then validate for empty
+    if (this.required && (!dateTime || dateTime === '')) {
+      this.errorRequired.set(true);
       return {
-        cannotBeThisDateTime: {
-          dateTime
-        }
+        required: true
       };
     }
 
-    if (!control.value || control.value === '') {
-      return { required: true };
+    // if there is a date and time, then validate
+    if (dateTime) {
+      // if chosen date time is before the min
+      if (this.min && dateTime < this.min) {
+        this.errorCannotBeBeforeMinDateTime.set(true);
+        return {
+          cannotBeBeforeMinDateTime: {
+            dateTime
+          }
+        };
+      }
+
+      // if chosen date time is after max
+      if (this.max && dateTime > this.max) {
+        this.errorCannotBeAfterMaxDateTime.set(true);
+        return {
+          cannotBeAfterMaxDateTime: {
+            dateTime
+          }
+        };
+      }
     }
 
     return null;
+  }
+
+
+  private resetErrorsOnChange(): void {
+    // since it can be called before component initializes, then check if not null
+    if (this.errorRequired) {
+      this.errorRequired.set(false);
+    }
+
+    if (this.errorCannotBeBeforeMinDateTime) {
+      this.errorCannotBeBeforeMinDateTime.set(false);
+    }
+
+    if (this.errorCannotBeAfterMaxDateTime) {
+      this.errorCannotBeAfterMaxDateTime.set(false);
+    }
   }
 }
 

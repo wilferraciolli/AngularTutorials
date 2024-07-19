@@ -45,4 +45,8 @@ export class AppComponent {
   get dateTime(): FormControl<string | null> {
     return this.form.controls.dateTime;
   }
+
+  public onSubmit(): void {
+    console.log('Submitting form');
+  }
 }

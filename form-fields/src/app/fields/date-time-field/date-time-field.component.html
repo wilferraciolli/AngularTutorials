@@ -1,16 +1,29 @@
 <div class="form-group">
   <label>{{ label }}</label>
   <input
-    [type]="type"
+    [type]="fieldType"
     class="form-control"
     [attr.placeholder]="label"
     [(ngModel)]="value"
     [disabled]="disabled"
     [readOnly]="disabled"
+    [min]="min"
+    [max]="max"
     (input)="onChange(value)"
     (blur)="onTouched()"
   />
-  <div *ngIf="control.invalid && control.touched" class="text-danger">
+
+  <div *ngIf="errorRequired()" class="text-danger">
     This field is required.
   </div>
+
+  <div *ngIf="errorCannotBeBeforeMinDateTime()" class="text-danger">
+    {{ minDateTimeErrorLabel }} {{ min }}.
+  </div>
+
+  <div *ngIf="errorCannotBeAfterMaxDateTime()" class="text-danger">
+    {{ maxDateTimeErrorLabel }} {{ max }}.
+  </div>
+
+  <br><br><br><br>
 </div>
