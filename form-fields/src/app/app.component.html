@@ -1,0 +1,40 @@
+<h1>Form Fields</h1>
+
+<form [formGroup]="form">
+
+  <app-date-field
+    label="Enter Date"
+    [type]="'date'"
+    formControlName="date"
+  ></app-date-field>
+<!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
+<!--    <span *ngIf="form.controls['date'].errors?.required"-->
+<!--    >This field is required</span-->
+<!--    >-->
+<!--  </div>-->
+
+</form>
+
+{{ form.getRawValue() | json }}
+<br>
+<br><br>
+<br>
+<br>
+Form invalid
+{{ form.invalid | json }}
+<br>
+<br>
+Form touched
+{{ form.touched | json }}
+<br>
+<br>
+Date Errors
+{{ date.errors | json }}
+<br>
+<br>
+Time Errors
+{{ time.errors | json }}
+<br>
+<br>
+Date Time Errors
+{{ dateTime.errors | json }}
