@@ -16,11 +16,11 @@
   </div>
 
   <div *ngIf="errorCannotBeBeforeMinDate()" class="text-danger">
-    This date cannot be before {{ min }}.
+    {{ minDateErrorLabel }} {{ min }}.
   </div>
 
   <div *ngIf="errorCannotBeAfterMaxDate()" class="text-danger">
-    This date cannot be after {{ max }}.
+    {{ maxDateErrorLabel }} {{ max }}.
   </div>
 
   <br><br><br><br>

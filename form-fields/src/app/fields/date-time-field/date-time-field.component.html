@@ -6,6 +6,7 @@
     [attr.placeholder]="label"
     [(ngModel)]="value"
     [disabled]="disabled"
+    [readOnly]="disabled"
     (input)="onChange(value)"
     (blur)="onTouched()"
   />

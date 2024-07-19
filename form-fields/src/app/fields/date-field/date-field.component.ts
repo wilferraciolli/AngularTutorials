@@ -3,7 +3,6 @@ import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/c
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormControl,
   FormsModule,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -11,7 +10,14 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
-import { DATE_LABEL, DATE_FIELD_TYPE, DATE_MAX_END, DATE_MIN_START } from './date.constants';
+import {
+  DATE_FIELD_TYPE,
+  DATE_LABEL,
+  DATE_MAX_END,
+  DATE_MAX_END_ERROR_LABEL,
+  DATE_MIN_START,
+  DATE_MIN_START_ERROR_LABEL
+} from './date.constants';
 
 
 @Component({
@@ -51,7 +57,17 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
   @Input({
     required: false
   })
+  minDateErrorLabel: string = DATE_MIN_START_ERROR_LABEL;
+
+  @Input({
+    required: false
+  })
   max: string = DATE_MAX_END;
+
+  @Input({
+    required: false
+  })
+  maxDateErrorLabel: string = DATE_MAX_END_ERROR_LABEL;
 
   @Input({
     required: false
@@ -61,7 +77,7 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
   public fieldType: string = DATE_FIELD_TYPE;
   public value: string = '';
   public disabled: boolean = false;
-  public control: FormControl = new FormControl('', this.validate.bind(this));
+  // public control: FormControl = new FormControl('', this.validate.bind(this));
 
   public errorRequired: WritableSignal<boolean> = signal(false);
   public errorCannotBeBeforeMinDate: WritableSignal<boolean> = signal(false);
@@ -103,7 +119,6 @@ export class DateFieldComponent implements ControlValueAccessor, Validator {
     // if field is required then validate for empty
     if (this.required && (!date || date === '')) {
       this.errorRequired.set(true);
-      console.log('setting reuired to true');
       return {
         required: true
       };

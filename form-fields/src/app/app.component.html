@@ -17,7 +17,10 @@
 
   <app-time-field
     label="Enter Time"
-    [type]="'time'"
+    [required]="true"
+    [min]="'09:00'"
+    [minTimeErrorLabel]="'Time cannot be before min time'"
+    [max]="'17:00'"
     formControlName="time"
   ></app-time-field>
   <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->

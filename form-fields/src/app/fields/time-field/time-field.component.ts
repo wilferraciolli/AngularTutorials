@@ -1,13 +1,22 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, FormControl,
+  ControlValueAccessor,
   FormsModule,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ReactiveFormsModule, ValidationErrors, Validator, Validators
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
+import {
+  TIME_FIELD_TYPE,
+  TIME_LABEL,
+  TIME_MAX_END, TIME_MAX_END_ERROR_LABEL,
+  TIME_MIN_START,
+  TIME_MIN_START_ERROR_LABEL
+} from './time.constants';
 
 @Component({
   selector: 'app-time-field',
@@ -32,26 +41,49 @@ import {
   templateUrl: './time-field.component.html',
   styleUrl: './time-field.component.scss'
 })
-export class TimeFieldComponent implements ControlValueAccessor, Validator  {
+export class TimeFieldComponent implements ControlValueAccessor, Validator {
   @Input({
     required: false
   })
-  public label: string = 'Enter the time';
+  public label: string = TIME_LABEL;
 
   @Input({
     required: false
   })
-  public type: string = 'text';
+  min: string = TIME_MIN_START;
 
-  // @Output()
-  // valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input({
+    required: false
+  })
+  minTimeErrorLabel: string = TIME_MIN_START_ERROR_LABEL;
 
+  @Input({
+    required: false
+  })
+  max: string = TIME_MAX_END;
+
+  @Input({
+    required: false
+  })
+  maxTimeErrorLabel: string = TIME_MAX_END_ERROR_LABEL;
+
+  @Input({
+    required: false
+  })
+  required: boolean = false;
+
+  public fieldType: string = TIME_FIELD_TYPE;
   public value: string = '';
   disabled: boolean = false;
-  onChange: Function = (value: string) => {};
-  onTouched: Function = () => {};
 
-  control: FormControl = new FormControl('', Validators.required);
+  public errorRequired: WritableSignal<boolean> = signal(false);
+  public errorCannotBeBeforeMinTime: WritableSignal<boolean> = signal(false);
+  public errorCannotBeAfterMaxTime: WritableSignal<boolean> = signal(false);
+
+  onChange: Function = (value: string) => {
+  };
+  onTouched: Function = () => {
+  };
 
   public writeValue(newValue: any): void {
     console.log('Writing value ', newValue);
@@ -73,26 +105,55 @@ export class TimeFieldComponent implements ControlValueAccessor, Validator  {
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    const time: string = control.value;
-    // do validation here
-    // console.log('Validating date: ', control);
-    console.log('Validating date: ', control.value);
-    // console.log('Validating date: ', date === '2024-01-01');
-    // console.log('Validating date: ', date , '2024-01-01');
+    this.resetErrorsOnChange();
 
-    if (time === '09:00') {
-      console.log('Validation failed');
+    const time: string = control.value;
+
+    // if field is required then validate for empty
+    if (this.required && (!time || time === '')) {
+      this.errorRequired.set(true);
       return {
-        cannotBeThisTime: {
-          time
-        }
+        required: true
       };
     }
 
-    if (!control.value || control.value === '') {
-      return { required: true };
+    if (time) {
+      // if chosen date is before the min
+      if (this.min && time < this.min) {
+        this.errorCannotBeBeforeMinTime.set(true);
+        return {
+          cannotBeBeforeMinTime: {
+            time
+          }
+        };
+      }
+
+      // if chosen date is after max
+      if (this.max && time > this.max) {
+        this.errorCannotBeAfterMaxTime.set(true);
+        return {
+          cannotBeAfterMaxTime: {
+            time
+          }
+        };
+      }
     }
 
     return null;
+  }
+
+  private resetErrorsOnChange(): void {
+    // since it can be called before component initializes, then check if not null
+    if (this.errorRequired) {
+      this.errorRequired.set(false);
+    }
+
+    if (this.errorCannotBeBeforeMinTime) {
+      this.errorCannotBeBeforeMinTime.set(false);
+    }
+
+    if (this.errorCannotBeAfterMaxTime) {
+      this.errorCannotBeAfterMaxTime.set(false);
+    }
   }
 }

@@ -23,7 +23,7 @@ export class AppComponent {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.formBuilder.group<DateTimeForm>({
       date: this.formBuilder.control('2024-01-01'),
       time: this.formBuilder.control('09:00'),
