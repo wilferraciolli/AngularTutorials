@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/core';
+import { Component, forwardRef, Input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -10,7 +10,9 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { DATE_TIME_MAX_END, DATE_TIME_MIN_START } from '../date-time-field/date-time.constants';
+import { TIME_LABEL } from '../time-field/time.constants';
 import {
   DATE_FIELD_TYPE,
   DATE_LABEL,
@@ -27,7 +29,8 @@ import {
   imports: [
     ReactiveFormsModule,
     NgIf,
-    FormsModule
+    FormsModule,
+    MatInput
   ],
   providers: [
     {
@@ -42,7 +45,8 @@ import {
     }
   ],
   templateUrl: './date-field.component.html',
-  styleUrl: './date-field.component.scss'
+  styleUrl: './date-field.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class DateFieldComponent implements ControlValueAccessor, Validator {
   @Input({

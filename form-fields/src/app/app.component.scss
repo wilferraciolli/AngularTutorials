@@ -1,0 +1,28 @@
+.app {
+  &-container {
+    display: flex;
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  &-header {
+    background-color: pink;
+    width: 80%;
+  }
+
+  &-content-container {
+    background-color: blanchedalmond;
+    width: 80%;
+  }
+
+  &-form-actions {
+    background-color: grey;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin: 20px;
+  }
+}

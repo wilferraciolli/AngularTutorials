@@ -1,29 +1,39 @@
-<div class="form-group">
-  <label>{{ label }}</label>
-  <input
-    [type]="fieldType"
-    class="form-control"
-    [attr.placeholder]="label"
-    [(ngModel)]="value"
-    [disabled]="disabled"
-    [readOnly]="disabled"
-    [min]="min"
-    [max]="max"
-    (input)="onChange(value)"
-    (blur)="onTouched()"
-  />
+<div class="time-field-container">
+  <div class="time-field-label">
+    <label>{{ label }}</label>
+  </div>
+  <div class="time-field-input">
+    <input
+      matInput
+      [type]="fieldType"
+      [attr.placeholder]="label"
+      [(ngModel)]="value"
+      [disabled]="disabled"
+      [readOnly]="disabled"
+      [min]="min"
+      [max]="max"
+      (input)="onChange(value)"
+      (blur)="onTouched()"
+    />
+  </div>
 
-  <div *ngIf="errorRequired()" class="text-danger">
+  <div *ngIf="errorRequired()"
+       class="time-field-error">
     This field is required.
   </div>
 
-  <div *ngIf="errorCannotBeBeforeMinTime()" class="text-danger">
+  <div *ngIf="errorCannotBeBeforeMinTime()"
+       class="time-field-error">
     {{ minTimeErrorLabel }} {{ min }}.
   </div>
 
-  <div *ngIf="errorCannotBeAfterMaxTime()" class="text-danger">
+  <div *ngIf="errorCannotBeAfterMaxTime()"
+       class="time-field-error">
     {{ maxTimeErrorLabel }} {{ max }}.
   </div>
 
-  <br><br><br><br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>

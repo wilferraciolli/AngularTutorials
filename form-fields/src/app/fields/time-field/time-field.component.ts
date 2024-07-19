@@ -10,6 +10,7 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 import { DATE_MAX_END, DATE_MIN_START } from '../date-field/date.constants';
 import {
   TIME_FIELD_TYPE,
@@ -25,7 +26,8 @@ import {
   imports: [
     ReactiveFormsModule,
     NgIf,
-    FormsModule
+    FormsModule,
+    MatInput
   ],
   providers: [
     {

@@ -1,29 +1,39 @@
-<div class="form-group">
-  <label>{{ label }}</label>
-  <input
-    [type]="fieldType"
-    class="form-control"
-    [attr.placeholder]="label"
-    [(ngModel)]="value"
-    [disabled]="disabled"
-    [readOnly]="disabled"
-    [min]="min"
-    [max]="max"
-    (input)="onChange(value)"
-    (blur)="onTouched()"
-  />
+<div class="date-field-container">
+  <div class="date-field-label">
+    <label>{{ label }}</label>
+  </div>
+  <div class="date-field-input">
+    <input
+      matInput
+      [type]="fieldType"
+      [attr.placeholder]="label"
+      [(ngModel)]="value"
+      [disabled]="disabled"
+      [readOnly]="disabled"
+      [min]="min"
+      [max]="max"
+      (input)="onChange(value)"
+      (blur)="onTouched()"
+    />
+  </div>
 
-  <div *ngIf="errorRequired()" class="text-danger">
+  <div *ngIf="errorRequired()"
+       class="date-field-error">
     This field is required.
   </div>
 
-  <div *ngIf="errorCannotBeBeforeMinDate()" class="text-danger">
+  <div *ngIf="errorCannotBeBeforeMinDate()"
+       class="date-field-error">
     {{ minDateErrorLabel }} {{ min }}.
   </div>
 
-  <div *ngIf="errorCannotBeAfterMaxDate()" class="text-danger">
+  <div *ngIf="errorCannotBeAfterMaxDate()"
+       class="date-field-error">
     {{ maxDateErrorLabel }} {{ max }}.
   </div>
 
-  <br><br><br><br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>

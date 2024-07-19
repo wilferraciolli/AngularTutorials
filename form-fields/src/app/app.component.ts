@@ -22,7 +22,6 @@ export class AppComponent {
   private _dateTimeFormBuilder: DateTimeFormBuilderService = inject(DateTimeFormBuilderService);
 
   public form: FormGroup<DateTimeForm>;
-  // public canSubmitForm: WritableSignal<boolean> = signal<boolean>(false);
 
   constructor() {
     this.form = this._dateTimeFormBuilder.form;

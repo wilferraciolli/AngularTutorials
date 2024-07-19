@@ -1,85 +1,95 @@
-<h1>Form Fields</h1>
+<div class="app-container">
+  <div class="app-header">
+    <h1>Form Fields</h1>
+  </div>
 
-<form [formGroup]="form"
-      (ngSubmit)="onSubmit()">
+  <div class="app-content-container">
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit()">
 
-  <app-date-field
-    label="Enter Date"
-    [required]="true"
-    [min]="'2024-01-01'"
-    [max]="'2024-07-01'"
-    formControlName="date"
-  ></app-date-field>
-  <!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
-  <!--    <span *ngIf="form.controls['date'].errors?.required"-->
-  <!--    >This field is required</span-->
-  <!--    >-->
-  <!--  </div>-->
+      <app-date-field
+        label="Enter Date"
+        [required]="true"
+        [min]="'2024-01-01'"
+        [max]="'2024-07-01'"
+        formControlName="date"
+      ></app-date-field>
+      <!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
+      <!--    <span *ngIf="form.controls['date'].errors?.required"-->
+      <!--    >This field is required</span-->
+      <!--    >-->
+      <!--  </div>-->
 
-  <app-time-field
-    label="Enter Time"
-    [required]="true"
-    [min]="'09:00'"
-    [minTimeErrorLabel]="'Time cannot be before min time'"
-    [max]="'17:00'"
-    formControlName="time"
-  ></app-time-field>
-  <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
-  <!--    <span *ngIf="form.controls['time'].errors?.required"-->
-  <!--    >This field is required</span-->
-  <!--    >-->
-  <!--  </div>-->
+      <app-time-field
+        label="Enter Time"
+        [required]="true"
+        [min]="'09:00'"
+        [minTimeErrorLabel]="'Time cannot be before min time'"
+        [max]="'17:00'"
+        formControlName="time"
+      ></app-time-field>
+      <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
+      <!--    <span *ngIf="form.controls['time'].errors?.required"-->
+      <!--    >This field is required</span-->
+      <!--    >-->
+      <!--  </div>-->
 
-  <app-date-time-field
-    label="Enter Date and Time"
-    [required]="true"
-    [min]="'2024-01-01T09:00'"
-    [max]="'2025-07-01T23:59'"
-    formControlName="dateTime"
-  ></app-date-time-field>
-  <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
-  <!--    <span *ngIf="form.controls['time'].errors?.required"-->
-  <!--    >This field is required</span-->
-  <!--    >-->
-  <!--  </div>-->
+      <app-date-time-field
+        label="Enter Date and Time"
+        [required]="true"
+        [min]="'2024-01-01T09:00'"
+        [max]="'2025-07-01T23:59'"
+        formControlName="dateTime"
+      ></app-date-time-field>
+      <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
+      <!--    <span *ngIf="form.controls['time'].errors?.required"-->
+      <!--    >This field is required</span-->
+      <!--    >-->
+      <!--  </div>-->
 
-  <button type="submit"
+      <div class="app-form-actions">
+        <button
+          type="submit"
           [disabled]="shouldDisableSubmit()">Submit
-  </button>
+        </button>
 
-  <button
-    type="button"
-  (click)="resetForm()">Reset
-  </button>
-</form>
+        <button
+          type="button"
+          (click)="resetForm()">Reset
+        </button>
+      </div>
+    </form>
+  </div>
 
-{{ form.getRawValue() | json }}
-<br>
-<br>
-<br>
-<br>
-<br>
-Form valid
-{{ form.valid | json }}
-<br>
-<br>
-Form touched
-{{ form.touched | json }}
-<br>
-<br>
-Date Errors
-{{ date.errors | json }}
-<br>
-<br>
-Time Errors
-{{ time.errors | json }}
-<br>
-<br>
-Date Time Errors
-{{ dateTime.errors | json }}
 
-<br>
-<br>
-Disable Submit
-{{ form.invalid  | json }}
-{{ form.untouched  | json }}
+  {{ form.getRawValue() | json }}
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  Form valid
+  {{ form.valid | json }}
+  <br>
+  <br>
+  Form touched
+  {{ form.touched | json }}
+  <br>
+  <br>
+  Date Errors
+  {{ form.controls.date.errors | json }}
+  <br>
+  <br>
+  Time Errors
+  {{ form.controls.time.errors | json }}
+  <br>
+  <br>
+  Date Time Errors
+  {{ form.controls.dateTime.errors | json }}
+
+  <br>
+  <br>
+  Disable Submit
+  {{ form.invalid  | json }}
+  {{ form.untouched  | json }}
+</div>
