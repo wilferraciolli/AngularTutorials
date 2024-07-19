@@ -3,12 +3,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { DateFieldComponent } from './fields/date-field/date-field.component';
+import { TimeFieldComponent } from './fields/time-field/time-field.component';
 import { DateTimeForm } from './forms/date-time.form';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule, DateFieldComponent, JsonPipe, NgIf],
+  imports: [RouterOutlet, ReactiveFormsModule, DateFieldComponent, JsonPipe, NgIf, TimeFieldComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

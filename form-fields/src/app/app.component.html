@@ -7,11 +7,23 @@
     [type]="'date'"
     formControlName="date"
   ></app-date-field>
-<!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
-<!--    <span *ngIf="form.controls['date'].errors?.required"-->
-<!--    >This field is required</span-->
-<!--    >-->
-<!--  </div>-->
+  <!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
+  <!--    <span *ngIf="form.controls['date'].errors?.required"-->
+  <!--    >This field is required</span-->
+  <!--    >-->
+  <!--  </div>-->
+
+  <app-time-field
+    label="Enter Time"
+    [type]="'time'"
+    formControlName="time"
+  ></app-time-field>
+  <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
+  <!--    <span *ngIf="form.controls['time'].errors?.required"-->
+  <!--    >This field is required</span-->
+  <!--    >-->
+  <!--  </div>-->
+
 
 </form>
 
@@ -20,8 +32,8 @@
 <br><br>
 <br>
 <br>
-Form invalid
-{{ form.invalid | json }}
+Form valid
+{{ form.valid | json }}
 <br>
 <br>
 Form touched
