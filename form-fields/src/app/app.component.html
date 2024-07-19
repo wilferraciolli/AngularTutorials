@@ -43,7 +43,14 @@
   <!--    >-->
   <!--  </div>-->
 
-  <button type="submit">Submit</button>
+  <button type="submit"
+          [disabled]="shouldDisableSubmit()">Submit
+  </button>
+
+  <button
+    type="button"
+  (click)="resetForm()">Reset
+  </button>
 </form>
 
 {{ form.getRawValue() | json }}
@@ -70,3 +77,9 @@ Time Errors
 <br>
 Date Time Errors
 {{ dateTime.errors | json }}
+
+<br>
+<br>
+Disable Submit
+{{ form.invalid  | json }}
+{{ form.untouched  | json }}

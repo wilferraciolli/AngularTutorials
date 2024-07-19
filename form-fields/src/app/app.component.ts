@@ -1,10 +1,11 @@
 import { JsonPipe, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { DateFieldComponent } from './fields/date-field/date-field.component';
 import { DateTimeFieldComponent } from './fields/date-time-field/date-time-field.component';
 import { TimeFieldComponent } from './fields/time-field/time-field.component';
+import { DateTimeFormBuilderService } from './forms/date-time-form-builder.service';
 import { DateTimeForm } from './forms/date-time.form';
 
 @Component({
@@ -18,20 +19,16 @@ import { DateTimeForm } from './forms/date-time.form';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  form!: FormGroup<DateTimeForm>;
+  private _dateTimeFormBuilder: DateTimeFormBuilderService = inject(DateTimeFormBuilderService);
 
-  constructor(private formBuilder: FormBuilder) {
+  public form: FormGroup<DateTimeForm>;
+  // public canSubmitForm: WritableSignal<boolean> = signal<boolean>(false);
+
+  constructor() {
+    this.form = this._dateTimeFormBuilder.form;
   }
 
   public ngOnInit(): void {
-    this.form = this.formBuilder.group<DateTimeForm>({
-      date: this.formBuilder.control('2024-01-01'),
-      time: this.formBuilder.control('09:00'),
-      dateTime: this.formBuilder.control('2024-01-01T09:00')
-      // dateTime: this.formBuilder.control('2024-01-01T09:00', {
-      //   validators: [Validators.required]
-      // })
-    });
   }
 
   get date(): FormControl<string | null> {
@@ -47,6 +44,15 @@ export class AppComponent {
   }
 
   public onSubmit(): void {
-    console.log('Submitting form');
+    console.log('Submitting form ', this._dateTimeFormBuilder.getFormValue());
+  }
+
+  public shouldDisableSubmit(): boolean {
+    return this.form.invalid
+      || this.form.untouched;
+  }
+
+  public resetForm(): void {
+    this._dateTimeFormBuilder.resetFormValue();
   }
 }
