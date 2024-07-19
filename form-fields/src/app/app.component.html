@@ -24,6 +24,17 @@
   <!--    >-->
   <!--  </div>-->
 
+  <app-date-time-field
+    label="Enter Date and Time"
+    [type]="'datetime-local'"
+    formControlName="dateTime"
+  ></app-date-time-field>
+  <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
+  <!--    <span *ngIf="form.controls['time'].errors?.required"-->
+  <!--    >This field is required</span-->
+  <!--    >-->
+  <!--  </div>-->
+
 
 </form>
 

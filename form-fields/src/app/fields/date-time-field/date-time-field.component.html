@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label>{{ label }}</label>
+  <input
+    [type]="type"
+    class="form-control"
+    [attr.placeholder]="label"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (input)="onChange(value)"
+    (blur)="onTouched()"
+  />
+  <div *ngIf="control.invalid && control.touched" class="text-danger">
+    This field is required.
+  </div>
+</div>
