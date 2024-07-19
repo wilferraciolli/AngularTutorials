@@ -4,7 +4,9 @@
 
   <app-date-field
     label="Enter Date"
-    [type]="'date'"
+    [required]="true"
+    [min]="'2024-01-01'"
+    [max]="'2024-07-01'"
     formControlName="date"
   ></app-date-field>
   <!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
@@ -25,7 +27,7 @@
   <!--  </div>-->
 
   <app-date-time-field
-    label="Enter Date and Time"
+    label="Enter Date and 7Time"
     [type]="'datetime-local'"
     formControlName="dateTime"
   ></app-date-time-field>

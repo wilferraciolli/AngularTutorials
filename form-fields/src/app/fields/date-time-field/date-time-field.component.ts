@@ -34,12 +34,18 @@ import {
   styleUrl: './date-time-field.component.scss'
 })
 export class DateTimeFieldComponent implements ControlValueAccessor, Validator  {
-  @Input()
-  label: string = '';
-  @Input()
+  @Input({
+    required: false
+  })
+  label: string = 'Enter date and time';
+
+  @Input({
+    required: false
+  })
   type: string = 'text';
-  @Output()
-  valueChange: EventEmitter<string> = new EventEmitter<string>();
+
+  // @Output()
+  // valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   public value: string = '';
   disabled: boolean = false;

@@ -1,13 +1,17 @@
 import { NgIf } from '@angular/common';
-import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormControl, FormsModule, NG_VALIDATORS,
+  FormControl,
+  FormsModule,
+  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ReactiveFormsModule, ValidationErrors, Validator,
-  Validators
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
+import { DATE_LABEL, DATE_FIELD_TYPE, DATE_MAX_END, DATE_MIN_START } from './date.constants';
 
 
 @Component({
@@ -33,31 +37,45 @@ import {
   templateUrl: './date-field.component.html',
   styleUrl: './date-field.component.scss'
 })
-export class DateFieldComponent implements ControlValueAccessor, Validator  {
-  @Input()
-  label: string = '';
-  @Input()
-  type: string = 'text';
-  @Output()
-  valueChange: EventEmitter<string> = new EventEmitter<string>();
+export class DateFieldComponent implements ControlValueAccessor, Validator {
+  @Input({
+    required: false
+  })
+  public label: string = DATE_LABEL;
 
+  @Input({
+    required: false
+  })
+  min: string = DATE_MIN_START;
+
+  @Input({
+    required: false
+  })
+  max: string = DATE_MAX_END;
+
+  @Input({
+    required: false
+  })
+  required: boolean = false;
+
+  public fieldType: string = DATE_FIELD_TYPE;
   public value: string = '';
-  disabled: boolean = false;
-  onChange: Function = (value: string) => {};
-  onTouched: Function = () => {};
-  // private _touched: boolean = false;
+  public disabled: boolean = false;
+  public control: FormControl = new FormControl('', this.validate.bind(this));
 
-  control: FormControl = new FormControl('', Validators.required);
-  //
-  // get value(): string {
-  //   return this.control.value;
-  // }
-  //
-  // set value(val: string) {
-  //   this.control.setValue(val);
-  //   this.valueChange.emit(val);
-  // }
+  public errorRequired: WritableSignal<boolean> = signal(false);
+  public errorCannotBeBeforeMinDate: WritableSignal<boolean> = signal(false);
+  public errorCannotBeAfterMaxDate: WritableSignal<boolean> = signal(false);
 
+  onChange: Function = (value: string) => {
+  };
+  onTouched: Function = () => {
+  };
+
+  /**
+   * Write value method is used only during initialization to set the value.
+   * @param newValue
+   */
   public writeValue(newValue: any): void {
     console.log('Writing value ', newValue);
     this.value = newValue;
@@ -77,34 +95,58 @@ export class DateFieldComponent implements ControlValueAccessor, Validator  {
     this.disabled = isDisabled;
   }
 
-  // public markAsTouched(): void {
-  //   if (!this._touched) {
-  //     this._touched = true;
-  //     this.onTouched();
-  //   }
-  // }
-
   validate(control: AbstractControl): ValidationErrors | null {
-    const date: string = control.value;
-    // do validation here
-    // console.log('Validating date: ', control);
-    // console.log('Validating date: ', control.value);
-    // console.log('Validating date: ', date === '2024-01-01');
-    // console.log('Validating date: ', date , '2024-01-01');
+    this.resetErrorsOnChange();
 
-    if (date === '2024-01-01') {
-      console.log('Validation failed');
+    const date: string = control.value;
+
+    // if field is required then validate for empty
+    if (this.required && (!date || date === '')) {
+      this.errorRequired.set(true);
+      console.log('setting reuired to true');
       return {
-        cannotBeThisDate: {
-          date
-        }
+        required: true
       };
     }
 
-    if (!control.value || control.value === '') {
-      return { required: true };
+    // if there is a date, then validate
+    if (date) {
+      // if chosen date is before the min
+      if (this.min && date < this.min) {
+        this.errorCannotBeBeforeMinDate.set(true);
+        return {
+          cannotBeBeforeMinDate: {
+            date
+          }
+        };
+      }
+
+      // if chosen date is after max
+      if (this.max && date > this.max) {
+        this.errorCannotBeAfterMaxDate.set(true);
+        return {
+          cannotBeAfterMaxDate: {
+            date
+          }
+        };
+      }
     }
 
     return null;
+  }
+
+  private resetErrorsOnChange(): void {
+    // since it can be called before component initializes, then check if not null
+    if (this.errorRequired) {
+      this.errorRequired.set(false);
+    }
+
+    if (this.errorCannotBeBeforeMinDate) {
+      this.errorCannotBeBeforeMinDate.set(false);
+    }
+
+    if (this.errorCannotBeAfterMaxDate) {
+      this.errorCannotBeAfterMaxDate.set(false);
+    }
   }
 }

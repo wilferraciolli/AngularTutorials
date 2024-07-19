@@ -20,19 +20,17 @@ import { DateTimeForm } from './forms/date-time.form';
 export class AppComponent {
   form!: FormGroup<DateTimeForm>;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group<DateTimeForm>({
-      date: this.formBuilder.control('2024-01-01', {
-        validators: [Validators.required]
-      }),
-      time: this.formBuilder.control('09:00', {
-        validators: [Validators.required]
-      }),
-      dateTime: this.formBuilder.control('2024-01-01T09:00', {
-        validators: [Validators.required]
-      })
+      date: this.formBuilder.control('2024-01-01'),
+      time: this.formBuilder.control('09:00'),
+      dateTime: this.formBuilder.control('2024-01-01T09:00')
+      // dateTime: this.formBuilder.control('2024-01-01T09:00', {
+      //   validators: [Validators.required]
+      // })
     });
   }
 

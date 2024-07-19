@@ -33,12 +33,18 @@ import {
   styleUrl: './time-field.component.scss'
 })
 export class TimeFieldComponent implements ControlValueAccessor, Validator  {
-  @Input()
-  label: string = '';
-  @Input()
-  type: string = 'text';
-  @Output()
-  valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input({
+    required: false
+  })
+  public label: string = 'Enter the time';
+
+  @Input({
+    required: false
+  })
+  public type: string = 'text';
+
+  // @Output()
+  // valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   public value: string = '';
   disabled: boolean = false;
