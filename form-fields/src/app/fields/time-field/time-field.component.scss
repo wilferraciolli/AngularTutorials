@@ -8,18 +8,32 @@
 
   &-label {
     width: 30%;
+    font-size: 0.75rem; /* adjust font size */
+    color: #333; /* adjust text color */
+  }
+
+  &-label label {
+    font-weight: lighter; /* make the label bold */
+  }
+
+  &-input-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* make the input field full-width */
   }
 
   &-input {
     display: flex;
     flex-direction: column;
-    width: 70%; /* make the input field full-width */
-    padding: 0.5rem 0.75rem; /* add some padding */
+    width: 100%; /* make the input field full-width */
+    padding: 0.5rem; /* add some padding */
     font-size: 1rem; /* adjust font size */
     border: none; /* remove the default border */
     border-radius: 0.25rem; /* add a slight border radius */
     background-color: #fff; /* set background color to white */
-    cursor: pointer; /* change cursor to a pointer on hover */
+    //cursor: pointer; /* change cursor to a pointer on hover */
+    margin-bottom: 1rem;
   }
 
   &-input.mat-input-element {

@@ -2,8 +2,8 @@
   <div class="time-field-label">
     <label>{{ label }}</label>
   </div>
-  <div class="time-field-input">
-    <input
+  <div class="date-field-input-container">
+    <input class="date-field-input"
       matInput
       [type]="fieldType"
       [attr.placeholder]="label"
@@ -32,8 +32,4 @@
     {{ maxTimeErrorLabel }} {{ max }}.
   </div>
 
-  <br>
-  <br>
-  <br>
-  <br>
 </div>

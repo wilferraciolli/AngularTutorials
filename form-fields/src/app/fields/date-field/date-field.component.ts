@@ -11,8 +11,6 @@ import {
   Validator
 } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { DATE_TIME_MAX_END, DATE_TIME_MIN_START } from '../date-time-field/date-time.constants';
-import { TIME_LABEL } from '../time-field/time.constants';
 import {
   DATE_FIELD_TYPE,
   DATE_LABEL,

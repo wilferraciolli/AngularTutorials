@@ -11,7 +11,6 @@ import {
   Validator
 } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
-import { DATE_LABEL } from '../date-field/date.constants';
 import {
   DATE_TIME_FIELD_TYPE,
   DATE_TIME_LABEL,
