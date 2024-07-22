@@ -1,6 +1,7 @@
 import { JsonPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { RouterOutlet } from '@angular/router';
 import { DateFieldComponent } from './fields/date-field/date-field.component';
 import { DateTimeFieldComponent } from './fields/date-time-field/date-time-field.component';
@@ -13,7 +14,7 @@ import { DateTimeForm } from './forms/date-time.form';
   standalone: true,
   imports: [
     RouterOutlet, ReactiveFormsModule, DateFieldComponent, JsonPipe, NgIf, TimeFieldComponent,
-    DateTimeFieldComponent
+    DateTimeFieldComponent, MatButton
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
