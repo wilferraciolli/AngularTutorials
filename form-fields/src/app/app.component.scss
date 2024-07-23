@@ -1,7 +1,7 @@
 .app {
   &-container {
     display: flex;
-    background-color: aqua;
+    background-color: lightgrey;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -9,12 +9,10 @@
   }
 
   &-header {
-    background-color: pink;
     width: 80%;
   }
 
   &-content-container {
-    background-color: blanchedalmond;
     width: 80%;
   }
 
