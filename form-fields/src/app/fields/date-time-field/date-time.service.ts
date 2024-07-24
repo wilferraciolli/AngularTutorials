@@ -22,21 +22,21 @@ export class DateTimeService {
     const dt = DateTime.fromISO(dateTimeInUtc, { zone: 'utc' });
     const dtInTimeZone = dt.setZone(timeZone);
 
-    const year = dtInTimeZone.year;
-    const month = dtInTimeZone.month.toString().padStart(2, '0');
-    const day = dtInTimeZone.day.toString().padStart(2, '0');
-    const hour = dtInTimeZone.hour.toString().padStart(2, '0');
-    const minute = dtInTimeZone.minute.toString().padStart(2, '0');
+    const year: number = dtInTimeZone.year;
+    const month: string = dtInTimeZone.month.toString().padStart(2, '0');
+    const day: string = dtInTimeZone.day.toString().padStart(2, '0');
+    const hour: string = dtInTimeZone.hour.toString().padStart(2, '0');
+    const minute: string = dtInTimeZone.minute.toString().padStart(2, '0');
 
-    const formattedString = `${year}-${month}-${day}T${hour}-${minute}`;
+    const formattedString: string = `${ year }-${ month }-${ day }T${ hour }-${ minute }`;
     return formattedString;
   }
 
   public parseUTCDateTimeToTimezone0(dateTimeInUtc: string, timeZone: string): string {
     // split the date and time
-    const dateTimeParts = dateTimeInUtc.split('T');
-    const dateParts = dateTimeParts[0].split('-');
-    const timeParts = dateTimeParts[1].split(':');
+    const dateTimeParts: string[] = dateTimeInUtc.split('T');
+    const dateParts: string[] = dateTimeParts[0].split('-');
+    const timeParts: string[] = dateTimeParts[1].split(':');
 
     // create UTC date
     const date = new Date(
