@@ -1,0 +1,13 @@
+.fullForm {
+  &-content-container {
+    width: 80%;
+  }
+
+  &-form-actions {
+    //background-color: grey;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin: 20px;
+  }
+}

@@ -3,106 +3,113 @@
     <h1>Form Fields</h1>
   </div>
 
+
   <div class="app-content-container">
-    <form [formGroup]="form"
-          (ngSubmit)="onSubmit()">
+    <mat-tab-group class="app-content-tab">
+      <mat-tab label="Full Form"> <app-full-form /> </mat-tab>
+      <mat-tab label="Date Time"><app-date-time-form/> </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
 
-      <app-date-field
-        label="Enter Date"
-        [required]="true"
-        [min]="'2024-01-01'"
-        [max]="'2024-07-01'"
-        formControlName="date"
-      ></app-date-field>
-      <!--  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">-->
-      <!--    <span *ngIf="form.controls['date'].errors?.required"-->
-      <!--    >This field is required</span-->
-      <!--    >-->
-      <!--  </div>-->
+<!--    <form [formGroup]="form"-->
+<!--          (ngSubmit)="onSubmit()">-->
 
-      <app-time-field
-        label="Enter Time"
-        [required]="true"
-        [min]="'09:00'"
-        [minTimeErrorLabel]="'Time cannot be before min time'"
-        [max]="'17:00'"
-        formControlName="time"
-      ></app-time-field>
-      <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
-      <!--    <span *ngIf="form.controls['time'].errors?.required"-->
-      <!--    >This field is required</span-->
-      <!--    >-->
-      <!--  </div>-->
+<!--      <app-date-field-->
+<!--        label="Enter Date"-->
+<!--        [required]="true"-->
+<!--        [min]="'2024-01-01'"-->
+<!--        [max]="'2024-07-01'"-->
+<!--        formControlName="date"-->
+<!--      ></app-date-field>-->
+<!--      &lt;!&ndash;  <div *ngIf="form.controls['date'].invalid && form.controls['date'].touched">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <span *ngIf="form.controls['date'].errors?.required"&ndash;&gt;-->
+<!--      &lt;!&ndash;    >This field is required</span&ndash;&gt;-->
+<!--      &lt;!&ndash;    >&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
 
-      <app-date-time-field
-        label="Enter Date and Time"
-        [required]="true"
-        [min]="'2024-01-01T09:00'"
-        [max]="'2025-07-01T23:59'"
-        formControlName="dateTime"
-      ></app-date-time-field>
-      <!--  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">-->
-      <!--    <span *ngIf="form.controls['time'].errors?.required"-->
-      <!--    >This field is required</span-->
-      <!--    >-->
-      <!--  </div>-->
+<!--      <app-time-field-->
+<!--        label="Enter Time"-->
+<!--        [required]="true"-->
+<!--        [min]="'09:00'"-->
+<!--        [minTimeErrorLabel]="'Time cannot be before min time'"-->
+<!--        [max]="'17:00'"-->
+<!--        formControlName="time"-->
+<!--      ></app-time-field>-->
+<!--      &lt;!&ndash;  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <span *ngIf="form.controls['time'].errors?.required"&ndash;&gt;-->
+<!--      &lt;!&ndash;    >This field is required</span&ndash;&gt;-->
+<!--      &lt;!&ndash;    >&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
 
-      <div class="app-form-actions">
-        <button
-          type="button"
-          mat-flat-button
-          (click)="resetForm()">Reset
-        </button>
+<!--      <app-date-time-field-->
+<!--        label="Enter Date and Time"-->
+<!--        [required]="true"-->
+<!--        [min]="'2024-01-01T09:00'"-->
+<!--        [max]="'2025-07-01T23:59'"-->
+<!--        formControlName="dateTime"-->
+<!--      ></app-date-time-field>-->
+<!--      &lt;!&ndash;  <div *ngIf="form.controls['time'].invalid && form.controls['time'].touched">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <span *ngIf="form.controls['time'].errors?.required"&ndash;&gt;-->
+<!--      &lt;!&ndash;    >This field is required</span&ndash;&gt;-->
+<!--      &lt;!&ndash;    >&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
 
-        <button type="button"
-                mat-flat-button
-                color="accent"
-                (click)="resetForm()">Reset
-        </button>
-        <button type="button"
-                mat-flat-button
-                color="warn"
-                (click)="resetForm()">Reset
-        </button>
+<!--      <div class="app-form-actions">-->
+<!--        <button-->
+<!--          type="button"-->
+<!--          mat-flat-button-->
+<!--          (click)="resetForm()">Reset-->
+<!--        </button>-->
 
-        <button type="submit"
-                mat-flat-button
-                [disabled]="shouldDisableSubmit()"
-                color="primary">Submit
-        </button>
-      </div>
-    </form>
+<!--        <button type="button"-->
+<!--                mat-flat-button-->
+<!--                color="accent"-->
+<!--                (click)="resetForm()">Reset-->
+<!--        </button>-->
+<!--        <button type="button"-->
+<!--                mat-flat-button-->
+<!--                color="warn"-->
+<!--                (click)="resetForm()">Reset-->
+<!--        </button>-->
+
+<!--        <button type="submit"-->
+<!--                mat-flat-button-->
+<!--                [disabled]="shouldDisableSubmit()"-->
+<!--                color="primary">Submit-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </form>-->
   </div>
 
 
-  {{ form.getRawValue() | json }}
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  Form valid
-  {{ form.valid | json }}
-  <br>
-  <br>
-  Form touched
-  {{ form.touched | json }}
-  <br>
-  <br>
-  Date Errors
-  {{ form.controls.date.errors | json }}
-  <br>
-  <br>
-  Time Errors
-  {{ form.controls.time.errors | json }}
-  <br>
-  <br>
-  Date Time Errors
-  {{ form.controls.dateTime.errors | json }}
+<!--  {{ form.getRawValue() | json }}-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  Form valid-->
+<!--  {{ form.valid | json }}-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  Form touched-->
+<!--  {{ form.touched | json }}-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  Date Errors-->
+<!--  {{ form.controls.date.errors | json }}-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  Time Errors-->
+<!--  {{ form.controls.time.errors | json }}-->
+<!--  <br>-->
+<!--  <br>-->
+<!--  Date Time Errors-->
+<!--  {{ form.controls.dateTime.errors | json }}-->
 
-  <br>
-  <br>
-  Disable Submit
-  {{ form.invalid  | json }}
-  {{ form.untouched  | json }}
+<!--  <br>-->
+<!--  <br>-->
+<!--  Disable Submit-->
+<!--  {{ form.invalid  | json }}-->
+<!--  {{ form.untouched  | json }}-->
 </div>

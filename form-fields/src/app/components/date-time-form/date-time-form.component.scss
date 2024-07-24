@@ -1,0 +1,17 @@
+.dateTimeForm {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+  }
+
+  &-select {
+    gap: 20px
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    //gap: 20px;
+  }
+}

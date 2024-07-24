@@ -1,0 +1,29 @@
+<div class="dateTimeForm-container">
+
+  <div class="dateTimeForm-select">
+    <mat-form-field>
+      <mat-label>Select timezone</mat-label>
+      <mat-select [(value)]="selectedTimezone">
+        @for (timezone of timezones; track timezone) {
+          <mat-option [value]="timezone.id">{{ timezone.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <form [formGroup]="form">
+    <app-date-time-field
+      label="Enter Date and Time"
+      [required]="true"
+      [min]="'2020-01-01T09:00'"
+      [max]="'2025-07-01T23:59'"
+      formControlName="dateTime"
+    ></app-date-time-field>
+  </form>
+
+  <div class="dateTimeForm-content">
+    <h4>Selected timezone: {{ selectedTimezone }}</h4>
+    <h4>Date and time: {{ dateTime.value }}</h4>
+    <h4>Date and time in UTC: {{ convertChosenDateTimeToUtc() }}</h4>
+  </div>
+</div>
