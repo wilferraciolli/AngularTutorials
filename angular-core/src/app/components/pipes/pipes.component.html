@@ -1,0 +1,130 @@
+<div class="pipes-container">
+  <h2>Pipes</h2>
+  <mat-divider></mat-divider>
+
+  <div class="pipes-cards-container">
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Date Pipe</mat-card-title>
+          <mat-card-subtitle>2024-01-01T09:00</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p> date</p>
+            <p>{{ '2024-01-01T09:00' | date }}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p>date:'medium'</p>
+            <p>{{ '2024-01-01T09:00' | date:'medium' }}</p>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Text manipulation</mat-card-title>
+          <mat-card-subtitle>SomeTeXt TO ChAnge</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p>uppercase</p>
+            <p>{{ 'SomeTeXt TO ChAnge' | uppercase }}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p> lowercase</p>
+            <p>{{ 'SomeTeXt TO ChAnge' | lowercase }}</p>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Number manipulation</mat-card-title>
+          <mat-card-subtitle>3.14159265359</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p>currency</p>
+            <p>{{ '3.14159265359' | currency }}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p>currency: 'GBP'</p>
+            <p>{{ '3.14159265359' | currency: 'GBP' }}</p>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Number manipulation</mat-card-title>
+          <mat-card-subtitle>3.14159265359</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p>number</p>
+            <p>{{ '3.14159265359' | number }}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p>number: 1.1-5</p>
+            <p>{{ '3.14159265359' | number: '1.1-5' }}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p>percent</p>
+            <p>{{ '3.14159265359' | percent }}</p>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Async RxJS and Json pipe</mat-card-title>
+          <mat-card-subtitle>[1, 2, 3]</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p>async</p>
+            <p>{{ $values | async }}</p>
+          </span>
+          <span class="pipes-card-value"
+                *ngIf="$user | async as user">
+            <p>json</p>
+            <p>{{ user | json }}</p>
+          </span>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="addUser()">Add user</button>
+          <button mat-button (click)="removeUserr()">Remove user</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="pipes-card">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Custom pipes Translate</mat-card-title>
+          <mat-card-subtitle>greeting</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <span class="pipes-card-value">
+            <p>translate</p>
+            <p>{{ 'greeting' | translate}}</p>
+          </span>
+          <span class="pipes-card-value">
+            <p>translate: 'it'</p>
+            <p>{{ 'greeting' | translate:'it'}}</p>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

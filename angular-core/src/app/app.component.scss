@@ -1,3 +1,13 @@
-.example-spacer {
-  flex: 1 1 auto;
+.main {
+  &-header {
+  }
+
+  &-spacer {
+    flex: 1 1 auto;
+  }
+
+  &-content-container{
+    gap: 40px;
+    margin: 50px;
+  }
 }
