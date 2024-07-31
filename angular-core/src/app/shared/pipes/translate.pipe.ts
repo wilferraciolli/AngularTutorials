@@ -10,7 +10,6 @@ export class TranslatePipe implements PipeTransform {
   private _translationService: TranslationService = inject(TranslationService);
 
   transform(value: string, language?: string): string {
-    console.log('language ', language);
     if (language){
       this._translationService.language = language;
     }else {

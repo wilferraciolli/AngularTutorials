@@ -1,0 +1,111 @@
+<div class="directives-container">
+  <h2>Directives</h2>
+  <h4>There are 3 different directives, Components, Attribute and Structural</h4>
+  <mat-divider></mat-divider>
+
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Component directive
+        </mat-panel-title>
+        <mat-panel-description>
+          <h5>
+            <b>Components</b>
+            are the main type used, they are used within the template to display data
+          </h5>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="directives-cards-container">
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="directives-card-avatar"></div>
+              <mat-card-title>Just a mat card component</mat-card-title>
+              <mat-card-subtitle>Mat card sub title</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image class="directives-card-image"
+                 ngSrc="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                 alt="Photo of dog aria label"
+                 priority
+                 width="750" height="600">
+            <mat-card-content>
+              <p>The content of the card, it could be another component</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Attribute directive
+        </mat-panel-title>
+        <mat-panel-description>
+          <h5>
+            <b>Attribute</b>
+            , they are used to change the appearance or behaviour of other elements including another directive
+          </h5>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="directives-cards-container">
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>NgClass Attribute directive</mat-card-title>
+              <mat-card-subtitle>Adds and removes css classes</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>?????????????????</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>NgStyle Attribute directive</mat-card-title>
+              <mat-card-subtitle>Adds and removes html styles</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>?????????????????</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>NgModel Attribute directive</mat-card-title>
+              <mat-card-subtitle>Add 2 way data bind to forms</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>?????????????????</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Attribute directive
+        </mat-panel-title>
+        <mat-panel-description>
+          <h5>
+            <b>Structural</b>
+            , they are used to change the DOM by adding/removing elements
+          </h5>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+</div>

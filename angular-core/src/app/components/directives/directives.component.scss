@@ -1,4 +1,4 @@
-.pipes {
+.directives {
   &-container {
     display: flex;
     flex-direction: column;
@@ -18,8 +18,19 @@
     min-width: 300px;
   }
 
+  &-card-avatar {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
   &-card-value {
     display: flex;
     justify-content: space-between;
   }
+
+  &-card-image {
+    max-width: 400px;
+    max-height: 300px;
+  }
+
 }
