@@ -38,7 +38,7 @@ export class DateTimeFormComponent {
 
   constructor() {
     this.form = this._formBuilder.group({
-      dateTime: this._formBuilder.control('2024-01-01T09:00')
+      dateTime: this._formBuilder.control('2024-05-01T09:00')
       // dateTime: this.formBuilder.control('2024-01-01T09:00', {
       //   validators: [Validators.required]
       // })
@@ -49,7 +49,7 @@ export class DateTimeFormComponent {
     return this.form.controls['dateTime'];
   }
 
-  convertChosenDateTimeToUtc(): string {
+  public convertChosenDateTimeToUtc(): string {
     return this._dateTimeService.parseDateTimeFromTimezoneToUTC(this.dateTime.value, this.selectedTimezone);
   }
 }
