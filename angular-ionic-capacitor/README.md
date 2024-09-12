@@ -19,3 +19,11 @@ Capacitor
 
 ### Instructions
 Run `npx cap init` to initialize the mobile app
+Follow the instructions by filling in details
+The command above will create the capacitor.config file within the project, check its values and make sure that the webDir folder is set correctly
+
+Next build the app as prod to get the DISt files created `ng build --configuration production`
+
+The next step is to add he mobile platforms
+run 
+`npm install @capacitor/ios @capacitor/android`
