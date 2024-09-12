@@ -40,3 +40,17 @@ run
 Then add each platform individually
 `npx cap add ios`
 `npx cap add android`
+
+NEXT
+run the command to open the editor
+`npx cap open ios`
+`npx cap open android`
+
+
+
+Now we can install plugins
+PS after any plugin is installed we need to sync the app by running `npx cap sync`
+
+### Capacitor plugins
+Camera
+`npm install @capacitor/camera`
