@@ -21,6 +21,15 @@ Capacitor
 Run `npx cap init` to initialize the mobile app
 Follow the instructions by filling in details
 The command above will create the capacitor.config file within the project, check its values and make sure that the webDir folder is set correctly
+Eg 
+```
+  const config: CapacitorConfig = {
+  appId: 'com.wiltech.capacitor',
+  appName: 'angular-ionic-capacitor',
+  webDir: 'dist/angular-ionic-capacitor/browser',
+};
+```
+
 
 Next build the app as prod to get the DISt files created `ng build --configuration production`
 
@@ -29,4 +38,5 @@ run
 `npm install @capacitor/ios @capacitor/android`
 
 Then add each platform individually
-`npm cap ios`
+`npx cap add ios`
+`npx cap add android`
