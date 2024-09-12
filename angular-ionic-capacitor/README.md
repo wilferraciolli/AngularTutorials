@@ -24,6 +24,9 @@ The command above will create the capacitor.config file within the project, chec
 
 Next build the app as prod to get the DISt files created `ng build --configuration production`
 
-The next step is to add he mobile platforms
+The next step is to add he mobile platforms (apple and android)
 run 
 `npm install @capacitor/ios @capacitor/android`
+
+Then add each platform individually
+`npm cap ios`
