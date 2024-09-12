@@ -28,7 +28,7 @@ export class DateTimeService {
     const hour: string = dtInTimeZone.hour.toString().padStart(2, '0');
     const minute: string = dtInTimeZone.minute.toString().padStart(2, '0');
 
-    const formattedString: string = `${ year }-${ month }-${ day }T${ hour }-${ minute }`;
+    const formattedString: string = `${ year }-${ month }-${ day }T${ hour }:${ minute }`;
     return formattedString;
   }
 
@@ -61,6 +61,13 @@ export class DateTimeService {
     return formattedString;
   }
 
+
+  /**
+   * Converts a date and time string onto a date and time UTC value based on a timezone
+    * @param dateTime The date and time on correct format (YYYY-MM-DDThh:mm)
+   * @param timeZone The time zone used to select the value above
+   * @returns An UTC string representation  (YYYY-MM-DDThh:mm:ssZ) of the date and time chosen based on a give timezone
+   */
   public parseDateTimeFromTimezoneToUTC(dateTime: string, timeZone: string): string {
     const dateParts: string[] = dateTime.split(/[-T]/); // get the date values and add time values to the end
     const year: number = parseInt(dateParts[0], 10);
@@ -82,6 +89,7 @@ export class DateTimeService {
     let offset: number = utcDate.getTime() - tzDate.getTime();
     date.setTime(date.getTime() + offset);
 
+    console.log('Converting to ISO ', date);
     const utcString: string = date.toISOString();
 
     return utcString.replace('.000Z', 'Z');

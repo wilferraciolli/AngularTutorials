@@ -1,0 +1,22 @@
+.dateTimeTimezoneForm {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+  }
+
+  &-select {
+    gap: 20px;
+    display: flex;
+  }
+
+  &-input {
+    gap: 20px
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+}

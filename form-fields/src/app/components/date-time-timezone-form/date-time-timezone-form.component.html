@@ -1,0 +1,92 @@
+<div class="dateTimeTimezoneForm-container">
+
+  <div class="dateTimeTimezoneForm-select">
+    <mat-form-field>
+      <mat-label>Select timezone</mat-label>
+      <mat-select [(value)]="selectedTimezone">
+        @for (timezone of timezones; track timezone) {
+          <mat-option [value]="timezone.id">{{ timezone.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <form [formGroup]="form">
+    <div class="dateTimeTimezoneForm-input">
+      <mat-form-field hintLabel="Enter date and time in UTC">
+        <mat-label>YYYY-MM-DDThh:mm:ssZ</mat-label>
+        <input matInput
+               formControlName="dateTimeInUtc">
+      </mat-form-field>
+    </div>
+
+    <app-date-time-field
+      label="The date in selected timezone"
+      [required]="true"
+      [min]="'2020-01-01T09:00'"
+      [max]="'2025-07-01T23:59'"
+      formControlName="dateTime"
+    ></app-date-time-field>
+
+    <app-date-time-field
+      label="The date in UK timezone"
+      [required]="true"
+      [min]="'2020-01-01T09:00'"
+      [max]="'2025-07-01T23:59'"
+      formControlName="dateTimeUK"
+    ></app-date-time-field>
+
+    <app-date-time-field
+      label="The date in CY timezone"
+      [required]="true"
+      [min]="'2020-01-01T09:00'"
+      [max]="'2025-07-01T23:59'"
+      formControlName="dateTimeCY"
+    ></app-date-time-field>
+
+    <app-date-time-field
+      label="The date in BR timezone"
+      [required]="true"
+      [min]="'2020-01-01T09:00'"
+      [max]="'2025-07-01T23:59'"
+      formControlName="dateTimeBR"
+    ></app-date-time-field>
+
+    <button type="submit" (click)="updateForm()"
+            mat-flat-button color="primary">Update Form
+    </button>
+  </form>
+
+  <div class="dateTimeTimezoneForm-content">
+    <mat-card class="dateTimeTimezoneForm-card">
+      <mat-card-header>
+        <mat-card-title>Europe/London</mat-card-title>
+        <mat-card-subtitle>{{ convertFromUTCToTimeZone('Europe/London') }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="dateTimeTimezoneForm-card">
+      <mat-card-header>
+        <mat-card-title>Asia/Nicosia</mat-card-title>
+        <mat-card-subtitle>{{ convertFromUTCToTimeZone('Asia/Nicosia') }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="dateTimeTimezoneForm-card">
+      <mat-card-header>
+        <mat-card-title>America/Sao_Paulo</mat-card-title>
+        <mat-card-subtitle>{{ convertFromUTCToTimeZone('America/Sao_Paulo') }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+
+    <!--&lt;!&ndash;    <h4>Selected timezone: {{ selectedTimezone }}</h4>&ndash;&gt;-->
+    <!--&lt;!&ndash;    <h4>Date and time chosen by user: {{ dateTime.value }}</h4>&ndash;&gt;-->
+    <!--&lt;!&ndash;    <h4>Date and time in UTC: {{ convertChosenDateTimeToUtc() }}</h4>&ndash;&gt;-->
+<!--    <h4>Date and time in UTC entered: {{ dateTimeInUtc }}</h4>-->
+
+    <!--    <h4>Date and time in London: {{ convertFromUTCToTimeZone('Europe/London') }}</h4>-->
+    <!--    <h4>Date and time in Nicosia: {{ convertFromUTCToTimeZone('Asia/Nicosia') }}</h4>-->
+    <!--    <h4>Date and time in Sao Paulo: {{ convertFromUTCToTimeZone('America/Sao_Paulo') }}</h4>-->
+  </div>
+</div>
