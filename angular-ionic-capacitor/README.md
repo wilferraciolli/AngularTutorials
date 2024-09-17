@@ -31,7 +31,8 @@ Eg
 ```
 
 
-Next build the app as prod to get the DISt files created `ng build --configuration production`
+Next build the app as prod to get the DISt files created 
+`ng build --configuration production`
 
 The next step is to add he mobile platforms (apple and android)
 run 
