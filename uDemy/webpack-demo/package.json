@@ -12,9 +12,14 @@
   "description": "",
   "devDependencies": {
     "css-loader": "^7.1.2",
+    "csv-loader": "^3.0.5",
+    "json5": "^2.2.3",
     "style-loader": "^4.0.0",
+    "toml": "^3.0.0",
     "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "xml-loader": "^1.2.1",
+    "yamljs": "^0.3.0"
   },
   "dependencies": {
     "lodash": "^4.17.21"

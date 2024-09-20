@@ -14,6 +14,17 @@ https://webpack.js.org/guides/getting-started/
 ### CSS loader
 `npm install --save-dev style-loader css-loader`
 
+### data file loader
+`npm install --save-dev csv-loader xml-loader`
+
+
+### data file 2 loader
+`npm install toml yamljs json5 --save-dev`
+
+
+
+
+
 
 
 ## Run
