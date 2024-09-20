@@ -40,3 +40,13 @@ cacheable modules 532 KiB
 
 
 
+### Adding the build script to the package json file so we can use npm to run webpack
+```json
+{
+  "scripts": {
+    "build": "webpack"
+  }
+}
+```
+Now to run the app we can simply type
+`npm run build`
