@@ -11,6 +11,10 @@ https://webpack.js.org/guides/getting-started/
 ### lodash
 `npm install --save lodash`
 
+### CSS loader
+`npm install --save-dev style-loader css-loader`
+
+
 
 ## Run
 To run the app using default no config use the following command
