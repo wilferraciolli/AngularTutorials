@@ -15,3 +15,28 @@ To run the server simply type
 `ionic serve`
 
 
+### Capacitor
+PS make sure to build the app production first 
+`ng build --configuration production
+`
+Install
+`npm i @capacitor/core`
+`npm i -D @capacitor/cli`
+
+Instantiate capacitor project/config
+`npx cap init`
+
+Add mobile apps
+`npm i @capacitor/android @capacitor/ios`
+
+`npx cap add android`
+`npx cap add ios`
+
+
+Finally, sync the angular code to mobile projects
+`npx cap sync`
+
+
+To open the ide with the project run the following commnads
+`npx cap open ios`
+`npx cap open android`
