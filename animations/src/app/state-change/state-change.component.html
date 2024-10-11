@@ -1,0 +1,40 @@
+<div class="animation-demo-container">
+  <div class="card-container">
+    <div
+      [@enabledStateChange]="currentState"
+      class="demo-card"
+      [class.cursor-pointer]="isEnabled"
+      [class.cursor-not-allowed]="!isEnabled">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Small</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          {{ longText }}
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </div>
+  <div class="demo-controller-container">
+    <button class="demo-button"
+            (click)="toggleIsEnabled()">{{ isEnabled ? 'Disable' : 'Enable' }}
+    </button>
+    <button mat-flat-button
+            (click)="toggleState('default')"
+            color="primary">Enabled
+    </button>
+    <button mat-flat-button
+            (click)="toggleState('half-disabled')"
+            color="accent">Half Disabled
+    </button>
+    <button mat-flat-button
+            (click)="toggleState('disabled')"
+            color="warn">Disabled
+    </button>
+  </div>
+</div>
