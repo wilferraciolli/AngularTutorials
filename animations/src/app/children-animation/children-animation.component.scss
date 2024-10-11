@@ -1,0 +1,17 @@
+.animation-demo-container {
+  @apply rounded-lg border border-cyan-700 bg-slate-800 flex flex-col;
+  min-height: 350px;
+  overflow: auto;
+  .card-container {
+    @apply grow p-5;
+    .demo-card {
+      @apply w-40 h-40 rounded-lg border bg-sky-300;
+    }
+  }
+  .demo-controller-container {
+    @apply flex flex-row gap-3 px-5 py-4 bg-cyan-700 rounded-b-lg z-10;
+    .demo-button {
+      @apply font-medium bg-white text-slate-900 rounded px-3 py-2 transition hover:opacity-80 hover:scale-105 duration-200;
+    }
+  }
+}

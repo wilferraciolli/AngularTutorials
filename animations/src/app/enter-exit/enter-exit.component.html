@@ -18,8 +18,8 @@
     </div>
   </div>
   <div class="demo-controller-container">
-    <button class="demo-button"
-            (click)="toggleCard()">{{ cardIsDisplayed ? 'Hide' : 'Show' }}
+    <button mat-flat-button color="{{ cardIsDisplayed ? 'warn' : 'primary' }}" class="demo-button"
+            (click)="toggleCard()">{{ cardIsDisplayed ? 'Hide Card' : 'Show Card' }}
     </button>
   </div>
 </div>

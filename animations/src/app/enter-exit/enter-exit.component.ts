@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import {
   MatCard,
   MatCardContent,
@@ -20,7 +21,8 @@ import { EnterExit } from './enter-exit.animation';
     MatCardHeader,
     MatCardSubtitle,
     MatCardTitle,
-    MatCardTitleGroup
+    MatCardTitleGroup,
+    MatButton
   ],
   animations: [EnterExit],
   templateUrl: './enter-exit.component.html',
