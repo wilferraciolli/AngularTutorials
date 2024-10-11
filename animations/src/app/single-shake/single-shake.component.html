@@ -1,0 +1,25 @@
+<p>single-shake works!</p>
+<div class="animation-demo-container">
+  <div class="card-container" [@.disabled]="isDisabled">
+    <div
+      [@pulseAnimation]="isAnimating"
+      (@pulseAnimation.done)="animationDone()"
+      class="demo-card">
+      <mat-card class="example-card" (click)="playAnimation()">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Small</mat-card-subtitle>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          Some description on the cardddddddddddddddddddddddddddddddddd
+        </mat-card-content>
+      </mat-card>
+      </div>
+  </div>
+  <div class="demo-controller-container">
+    <button class="demo-button" (click)="playAnimation()" [disabled]="isAnimating">Play</button>
+    <button class="demo-button" (click)="toggleIsDisabled()" [disabled]="isAnimating">{{ isDisabled ? 'Enable' : 'Disable' }}</button>
+  </div>
+</div>
