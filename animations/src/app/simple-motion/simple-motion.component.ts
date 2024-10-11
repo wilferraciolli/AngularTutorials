@@ -27,7 +27,7 @@ export class SimpleMotionComponent implements OnInit {
     if (this.myElement) {
       animate(
         this.myElement.nativeElement,
-        { rotate: 180 },
+        { rotate: 360 },
         { duration: 0.5, easing: 'ease-in' }
       ).finished.then(() => {
         // animation completed
@@ -44,7 +44,7 @@ export class SimpleMotionComponent implements OnInit {
     if (this.myCard) {
       animate(
         this.myCard.nativeElement,
-        { rotate: 180 },
+        { rotate: 360 },
         { duration: 0.5, easing: spring() }
       ).finished.then(() => {
         // animation completed

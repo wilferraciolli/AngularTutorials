@@ -28,7 +28,7 @@ import { MatDivider } from '@angular/material/divider';
     trigger('fadeIn', [
       transition('void=>*', [
         style({ opacity: 0 }),
-        animate('1200ms', style({ opacity: 1 }))
+        animate('3200ms', style({ opacity: 1 }))
       ])
     ])
   ],

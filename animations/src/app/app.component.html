@@ -1,4 +1,22 @@
 <h1>Motion</h1>
+<mat-tab-group>
+  <mat-tab label="First">
+    <ng-template matTabContent>
+      Content 1
+    </ng-template>
+  </mat-tab>
 
-<!--<app-fade-in-card/>-->
-<app-simple-motion/>
+  <mat-tab label="Motion One">
+    <ng-template matTabContent>
+      <app-simple-motion/>
+    </ng-template>
+
+  </mat-tab>
+
+  <mat-tab label="Fade In">
+    <ng-template matTabContent>
+      <app-fade-in-card/>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
