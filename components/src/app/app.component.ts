@@ -18,6 +18,8 @@ export class AppComponent {
   public menus: WritableSignal<Array<string>> = signal([
     'angularHorizontalScroll',
     'swiperCardSliders',
-    'swiperCardSlidersMultiple'
+    'swiperCardSlidersMultiple',
+    'swiperCardCoverflow',
+    'swiperCardCube'
   ]);
 }
