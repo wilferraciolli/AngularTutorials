@@ -17,6 +17,7 @@ import {NgForOf} from "@angular/common";
 export class AppComponent {
   public menus: WritableSignal<Array<string>> = signal([
     'angularHorizontalScroll',
-    'swiperCardSliders'
+    'swiperCardSliders',
+    'swiperCardSlidersMultiple'
   ]);
 }
