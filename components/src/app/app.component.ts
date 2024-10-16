@@ -20,6 +20,7 @@ export class AppComponent {
     'swiperCardSliders',
     'swiperCardSlidersMultiple',
     'swiperCardCoverflow',
-    'swiperCardCube'
+    'swiperCardCube',
+    'swiperCardStack'
   ]);
 }

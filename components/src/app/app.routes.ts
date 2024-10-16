@@ -6,6 +6,7 @@ import {
   CardSwiperCoverflowComponent
 } from "./business-components/card-swiper-coverflow/card-swiper-coverflow.component";
 import {CardSwiperCubeComponent} from "./business-components/card-swiper-cube/card-swiper-cube.component";
+import {CardSwiperStackComponent} from "./business-components/card-swiper-stack/card-swiper-stack.component";
 
 export const routes: Routes = [
   {
@@ -27,5 +28,9 @@ export const routes: Routes = [
   {
     path: 'swiperCardCube',
     component: CardSwiperCubeComponent,
+  },
+  {
+    path: 'swiperCardStack',
+    component: CardSwiperStackComponent,
   }
 ];
