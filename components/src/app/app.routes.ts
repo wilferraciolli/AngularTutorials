@@ -3,7 +3,7 @@ import {CardSliderComponent} from "./business-components/card-slider/card-slider
 
 export const routes: Routes = [
   {
-    path: 'cardSliders',
+    path: 'angularHorizontalScroll',
     component: CardSliderComponent,
   }
 ];
