@@ -1,0 +1,12 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.App-container {
+  display: flex;
+  //background-color: coral;
+  width: 80%;
+  height: 90%;
+  padding: 20px 50px;
+  justify-content: center;
+}
