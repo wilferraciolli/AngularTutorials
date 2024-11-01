@@ -34,4 +34,24 @@
     max-height: 300px;
   }
 
+  &-card-label1 {
+    color: aqua;
+  }
+
+  &-card-label2 {
+    color: blue;
+  }
+
+  &-card-label3 {
+    color: blueviolet;
+  }
+
+  &-card-label4 {
+    display: none;
+  }
+
+  &-card-slider {
+    width: 100%;
+  }
+
 }

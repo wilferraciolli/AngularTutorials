@@ -4,7 +4,7 @@
   <mat-divider></mat-divider>
 
   <mat-accordion>
-<!--  **************************************** Component Directive *****************************************  -->
+    <!--  **************************************** Component Directive *****************************************  -->
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -13,7 +13,8 @@
         <mat-panel-description>
           <h5>
             <b>Components</b>
-            are the main type used, they are used within the template to display data, they are the main building block of Angular, in theory everything is a component and angular allows to easily create and resuse compnents
+            are the main type used, they are used within the template to display data, they are the main building block
+            of Angular, in theory everything is a component and angular allows to easily create and resuse compnents
           </h5>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -21,15 +22,18 @@
         <div class="directives-card">
           <mat-card>
             <mat-card-header>
-              <div mat-card-avatar class="directives-card-avatar"></div>
+              <div mat-card-avatar
+                   class="directives-card-avatar"></div>
               <mat-card-title>First Directive component</mat-card-title>
               <mat-card-subtitle>These are all components</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image class="directives-card-image"
+            <img mat-card-image
+                 class="directives-card-image"
                  ngSrc="https://material.angular.io/assets/img/examples/shiba1.jpg"
                  alt="Photo of dog aria label"
                  priority
-                 width="750" height="600">
+                 width="750"
+                 height="600">
             <mat-card-content>
               <p>The content of the card, it could be another component</p>
             </mat-card-content>
@@ -37,18 +41,23 @@
 
           <mat-card>
             <mat-card-header>
-              <div mat-card-avatar class="directives-card-avatar"></div>
+              <div mat-card-avatar
+                   class="directives-card-avatar"></div>
               <mat-card-title>Second directive component</mat-card-title>
               <mat-card-subtitle>Another component within a component</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-sm-image class="directives-card-image"
+            <img mat-card-sm-image
+                 class="directives-card-image"
                  ngSrc="https://material.angular.io/assets/img/examples/shiba2.jpg"
                  alt="Photo of dog aria label"
                  priority
-                 width="750" height="600">
+                 width="750"
+                 height="600">
             <mat-card-content>
               <p>Tnother directive component inside a component</p>
-              <button mat-button [matMenuTriggerFor]="menu">Click me to chose an option</button>
+              <button mat-button
+                      [matMenuTriggerFor]="menu">Click me to chose an option
+              </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>Item 1</button>
                 <button mat-menu-item>Item 2</button>
@@ -69,7 +78,9 @@
         <mat-panel-description>
           <h5>
             <b>Attribute</b>
-            , they are used to change the appearance or behaviour of other elements including another directive
+            , they are used to change the appearance or behaviour of other elements including another directive. They
+            are used to modify the behaviour of HTML elements, attributes, properties and components.
+            The most common one provided by Angular are: NgClass, NgStyle and NgModel.
           </h5>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -78,11 +89,29 @@
           <mat-card>
             <mat-card-header>
               <mat-card-title>NgClass Attribute directive</mat-card-title>
-              <mat-card-subtitle>Adds and removes css classes</mat-card-subtitle>
+              <mat-card-subtitle>Adds and removes css classes, ideal to use on form validation</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>?????????????????</p>
+              <p [ngClass]="shouldAddClass ? 'directives-card-label1' : ''">The button below was added to the
+                card-actions section
+              </p>
+              <p [ngClass]="shouldAddClass ? 'directives-card-label2' : ''">and a directive to align the buttons to the
+                right was used.
+              </p>
+              <p [ngClass]="{ 'directives-card-label3': shouldAddClass, 'directives-card-label4': shouldHideClass }">
+                Click the button to use the NgClass directive to modify this text
+              </p>
             </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-raised-button
+                      color="accent"
+                      (click)="toggleHideClass()">Toggle NgClass Hide
+              </button>
+              <button mat-raised-button
+                      color="accent"
+                      (click)="toggleClasses()">Toggle NgClass Style
+              </button>
+            </mat-card-actions>
           </mat-card>
         </div>
 
@@ -90,23 +119,51 @@
           <mat-card>
             <mat-card-header>
               <mat-card-title>NgStyle Attribute directive</mat-card-title>
-              <mat-card-subtitle>Adds and removes html styles</mat-card-subtitle>
+              <mat-card-subtitle>Adds and removes html styles, ideal to use to dinamically set a specific property of a
+                css Eg fontSize
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>?????????????????</p>
+              <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }">The button below was added to the
+                card-actions section
+              </p>
+              <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }">and a directive to align the buttons
+                to the right was used.
+              </p>
+              <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }"> Adjust the button to use the NgStyle
+                directive to modify styles on this text
+              </p>
             </mat-card-content>
+            <mat-card-actions align="end">
+              <mat-slider discrete min="10" max="30" class="directives-card-slider">
+                <input matSliderThumb (valueChange)="toggleNgStyle($event)">
+              </mat-slider>
+            </mat-card-actions>
           </mat-card>
         </div>
 
         <div class="directives-card">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>NgModel Attribute directive</mat-card-title>
-              <mat-card-subtitle>Add 2 way data bind to forms</mat-card-subtitle>
+              <mat-card-title>NgModel Attribute directive, used to bind the value of HTML controls to component data</mat-card-title>
+              <mat-card-subtitle>Add 2 way data bind to forms, Eg formField=name will be bound to typescript user.name property.</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>?????????????????</p>
+              <label for="model">ngModelValue: </label>
+              <input matInput type="text" [(ngModel)]="modelValue" id="model">
+              <br>
+              <br>
+              <mat-divider></mat-divider>
+              <br>
+              <label for="modelDisabled">ngModelValue 2 way binding: </label>
+              <input matInput type="text" disabled value="{{ modelValue }}" id="modelDisabled" >
             </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-raised-button
+                      color="accent"
+                      (click)="updateModelValue()">Change value via component
+              </button>
+            </mat-card-actions>
           </mat-card>
         </div>
 
