@@ -1,15 +1,17 @@
 import { DatePipe, IMAGE_CONFIG, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import {
-  MatCard,
+  MatCard, MatCardAvatar,
   MatCardContent,
   MatCardHeader,
-  MatCardImage,
+  MatCardImage, MatCardSmImage,
   MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-directives',
@@ -24,7 +26,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatCardTitle,
     MatExpansionModule,
     NgOptimizedImage,
-    MatCardImage
+    MatCardImage,
+    MatCardAvatar,
+    MatCardSmImage,
+    MatButton,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem
   ],
   // provider used to work with the ngImage placeholder
   providers: [

@@ -4,6 +4,7 @@
   <mat-divider></mat-divider>
 
   <mat-accordion>
+<!--  **************************************** Component Directive *****************************************  -->
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -12,7 +13,7 @@
         <mat-panel-description>
           <h5>
             <b>Components</b>
-            are the main type used, they are used within the template to display data
+            are the main type used, they are used within the template to display data, they are the main building block of Angular, in theory everything is a component and angular allows to easily create and resuse compnents
           </h5>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -21,11 +22,11 @@
           <mat-card>
             <mat-card-header>
               <div mat-card-avatar class="directives-card-avatar"></div>
-              <mat-card-title>Just a mat card component</mat-card-title>
-              <mat-card-subtitle>Mat card sub title</mat-card-subtitle>
+              <mat-card-title>First Directive component</mat-card-title>
+              <mat-card-subtitle>These are all components</mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image class="directives-card-image"
-                 ngSrc="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                 ngSrc="https://material.angular.io/assets/img/examples/shiba1.jpg"
                  alt="Photo of dog aria label"
                  priority
                  width="750" height="600">
@@ -33,10 +34,32 @@
               <p>The content of the card, it could be another component</p>
             </mat-card-content>
           </mat-card>
+
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="directives-card-avatar"></div>
+              <mat-card-title>Second directive component</mat-card-title>
+              <mat-card-subtitle>Another component within a component</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-sm-image class="directives-card-image"
+                 ngSrc="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                 alt="Photo of dog aria label"
+                 priority
+                 width="750" height="600">
+            <mat-card-content>
+              <p>Tnother directive component inside a component</p>
+              <button mat-button [matMenuTriggerFor]="menu">Click me to chose an option</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+              </mat-menu>
+            </mat-card-content>
+          </mat-card>
         </div>
       </div>
     </mat-expansion-panel>
 
+    <!--  **************************************** Attribute Directive *****************************************  -->
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
@@ -90,11 +113,12 @@
       </div>
     </mat-expansion-panel>
 
+    <!--  **************************************** Structural Directive *****************************************  -->
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Attribute directive
+          Structural directive
         </mat-panel-title>
         <mat-panel-description>
           <h5>
