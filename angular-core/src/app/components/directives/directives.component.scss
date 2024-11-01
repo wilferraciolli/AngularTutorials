@@ -19,6 +19,15 @@
     gap: 20px;
   }
 
+  &-card-loading {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-card-actions {
+    gap: 20px;
+  }
+
   &-card-avatar {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
@@ -35,7 +44,7 @@
   }
 
   &-card-label1 {
-    color: aqua;
+    color: beige;
   }
 
   &-card-label2 {

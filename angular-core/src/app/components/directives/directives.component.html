@@ -102,7 +102,7 @@
                 Click the button to use the NgClass directive to modify this text
               </p>
             </mat-card-content>
-            <mat-card-actions align="end">
+            <mat-card-actions align="end" class="directives-card-actions">
               <button mat-raised-button
                       color="accent"
                       (click)="toggleHideClass()">Toggle NgClass Hide
@@ -130,13 +130,18 @@
               <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }">and a directive to align the buttons
                 to the right was used.
               </p>
-              <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }"> Adjust the button to use the NgStyle
+              <p [ngStyle]="{ 'font-size': fontSize(), 'font-family': fontFamily }"> Adjust the button to use the
+                NgStyle
                 directive to modify styles on this text
               </p>
             </mat-card-content>
-            <mat-card-actions align="end">
-              <mat-slider discrete min="10" max="30" class="directives-card-slider">
-                <input matSliderThumb (valueChange)="toggleNgStyle($event)">
+            <mat-card-actions align="end" class="directives-card-actions">
+              <mat-slider discrete
+                          min="10"
+                          max="30"
+                          class="directives-card-slider">
+                <input matSliderThumb
+                       (valueChange)="toggleNgStyle($event)">
               </mat-slider>
             </mat-card-actions>
           </mat-card>
@@ -145,20 +150,30 @@
         <div class="directives-card">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>NgModel Attribute directive, used to bind the value of HTML controls to component data</mat-card-title>
-              <mat-card-subtitle>Add 2 way data bind to forms, Eg formField=name will be bound to typescript user.name property.</mat-card-subtitle>
+              <mat-card-title>NgModel Attribute directive, used to bind the value of HTML controls to component data
+              </mat-card-title>
+              <mat-card-subtitle>Add 2 way data bind to forms, Eg formField=name will be bound to typescript user.name
+                property.
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <label for="model">ngModelValue: </label>
-              <input matInput type="text" [(ngModel)]="modelValue" id="model">
+              <label for="model">ngModelValue:</label>
+              <input matInput
+                     type="text"
+                     [(ngModel)]="modelValue"
+                     id="model">
               <br>
               <br>
               <mat-divider></mat-divider>
               <br>
-              <label for="modelDisabled">ngModelValue 2 way binding: </label>
-              <input matInput type="text" disabled value="{{ modelValue }}" id="modelDisabled" >
+              <label for="modelDisabled">ngModelValue 2 way binding:</label>
+              <input matInput
+                     type="text"
+                     disabled
+                     value="{{ modelValue }}"
+                     id="modelDisabled">
             </mat-card-content>
-            <mat-card-actions align="end">
+            <mat-card-actions align="end" class="directives-card-actions">
               <button mat-raised-button
                       color="accent"
                       (click)="updateModelValue()">Change value via component
@@ -184,7 +199,76 @@
           </h5>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
+
+      <div class="directives-cards-container">
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>NgIf Structural directive</mat-card-title>
+              <mat-card-subtitle>Conditionally Adds or removes items from the template
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <ng-container *ngIf="isLoading(); then loading; else loaded;"></ng-container>
+              <ng-template #loading >
+                <div class="directives-card-loading">
+                <mat-spinner></mat-spinner>
+                </div>
+              </ng-template>
+              <ng-template #loaded>
+                <p>Ideal checks on data and dynamically render content
+                </p>
+                <p>Eg loading, hasAccess, finishedDoingX....
+                </p>
+                <p> Click the button to use the NgIf directive to remove/add items to the card
+                </p>
+                <mat-icon *ngIf="showPrize()" aria-hidden="false" color="warn" aria-label="Example home icon" fontIcon="editor_choice"></mat-icon>
+              </ng-template>
+            </mat-card-content>
+            <mat-card-actions align="end" class="directives-card-actions">
+              <button mat-raised-button
+                      color="accent"
+                      (click)="toggleLoading()">Toggle Loading
+              </button>
+              <button mat-raised-button
+                      color="accent"
+                      (click)="togglePrize()">Toggle new item
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+        <div class="directives-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>NgFor Structural directive</mat-card-title>
+              <mat-card-subtitle>Conditionally Adds or removes items from the template.
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+<!--              <p>Ideal checks on data and dynamically render content-->
+<!--              </p>-->
+<!--              <p>Eg loading, hasAccess, finishedDoingX....-->
+<!--              </p>-->
+<!--              <p> Click the button to use the NgIf directive to remove/add items to the card-->
+<!--              </p>-->
+            </mat-card-content>
+            <mat-card-actions align="end" class="directives-card-actions">
+<!--              <button mat-raised-button-->
+<!--                      color="accent"-->
+<!--                      (click)="toggleHideClass()">Toggle NgClass Hide-->
+<!--              </button>-->
+<!--              <button mat-raised-button-->
+<!--                      color="accent"-->
+<!--                      (click)="toggleClasses()">Toggle NgClass Style-->
+<!--              </button>-->
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+
+      </div>
+
     </mat-expansion-panel>
   </mat-accordion>
 
