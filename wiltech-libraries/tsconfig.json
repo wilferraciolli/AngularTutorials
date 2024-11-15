@@ -23,6 +23,9 @@
       "dom"
     ],
     "paths": {
+      "skeleton-loaders": [
+        "./dist/skeleton-loaders"
+      ],
       "user-store": [
         "./dist/user-store"
       ]

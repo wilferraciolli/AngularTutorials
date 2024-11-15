@@ -35,6 +35,39 @@
           }
         }
       }
+    },
+    "skeleton-loaders": {
+      "projectType": "library",
+      "root": "projects/skeleton-loaders",
+      "sourceRoot": "projects/skeleton-loaders/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/skeleton-loaders/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/skeleton-loaders/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/skeleton-loaders/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/skeleton-loaders/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
