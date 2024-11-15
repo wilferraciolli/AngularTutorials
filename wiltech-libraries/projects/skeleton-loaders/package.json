@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0"
+    "@angular/core": "^17.3.0",
+    "ngx-skeleton-loader": "^9.0.0"
   },
   "dependencies": {
+    "ngx-skeleton-loader": "^9.0.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
