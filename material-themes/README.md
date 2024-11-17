@@ -6,7 +6,8 @@ It will use custom theme such as light and dark and show how to dynamically chan
 Full tutorial can be found here `https://www.youtube.com/watch?v=M7q2Ty-y2zQ`
 This site allows to generate color palettes `https://coolors.co/50514f-cdf7f6-ffc4eb-ff3366-de6e4b`
 Then following this site allows to generate tones for a given color `https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors`
-or this site to ge the color paletter `https://materialpalettes.com/`
+or this site to ge the color palettes `https://materialpalettes.com/`
+And one to get a color pallete is `https://www.materialpalette.com/`
 
 Some more details can be found here `https://levelup.gitconnected.com/defining-your-own-theme-in-angular-material-8a4a6ffad400`
 

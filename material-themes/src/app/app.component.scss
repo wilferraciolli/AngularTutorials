@@ -1,3 +1,13 @@
+.AppContainer {
+  min-height: 100vh;
+}
+
+
+
+
+
+
+
 section {
   display: table;
 }
@@ -28,4 +38,12 @@ section {
   display: flex;
   justify-content: center;
   width: 120px;
+}
+
+.toolbar{
+  display: flex;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
