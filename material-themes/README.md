@@ -14,3 +14,25 @@ Some more details can be found here `https://levelup.gitconnected.com/defining-y
 
 ## Dependencies
 Material `ng add @angular/material`
+
+## Instructions
+Firstly import the
+
+
+### To apply the background color t the whole page
+Make sure to add the `mat-app-background` class to the app container and make it 100vh in order for the app to always 
+take the whole screen and have the background color applied to the whole app an its children.
+Eg app.component.html
+```html
+<div class="AppContainer mat-app-background">
+  <roter-outlet />
+</div>
+```
+
+```scss
+.AppContainer {
+  min-height: 100vh;
+}
+```
+### overlay items Eg Modal
+For the dialogs and overlay to also have themes applied, it is necessary to inject the OverlayContainer on the main component set the theme

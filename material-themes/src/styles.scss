@@ -155,9 +155,12 @@ $dark-theme: mat.define-dark-theme(
 //@include mat.all-component-themes($light-theme);
 //@include mat.all-component-themes($dark-theme);
 
-body.light-theme {
-  @include mat.all-component-themes($light-theme);
-}
+// include the light theme as default
+@include mat.all-component-themes($light-theme);
+
+//body.light-theme {
+//  @include mat.all-component-themes($light-theme);
+//}
 
 body.dark-theme {
   @include mat.all-component-themes($dark-theme);
