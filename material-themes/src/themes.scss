@@ -1,0 +1,158 @@
+// import material sass file
+@use '@angular/material' as mat;
+
+// add material core
+@include mat.core();
+
+// primary color ffde03, accent color ea2b1f, warn color 04151f
+
+
+// create light theme palette, this uses the color for background, then contrast for font
+$light-primary-palette: (
+  50: #fffee6,
+  100: #fefac0,
+  200: #fdf795,
+  300: #fcf267,
+  400: #f9ee3f,
+  500: #f6e900,
+  600: #ffdd03,
+  700: #ffc400,
+  800: #ffab00,
+  900: #ff7f00,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+$light-accent-palette: (
+  50: #ffeaec,
+  100: #ffcbce,
+  200: #f59792,
+  300: #ec6d67,
+  400: #f54b3f,
+  500: #f8391d,
+  600: #ea2d1f,
+  700: #d8201a,
+  800: #cc1511,
+  900: #bd0000,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+// define light theme palettes
+$light-primary: mat.define-palette($light-primary-palette);
+$light-accent: mat.define-palette($light-accent-palette);
+$light-warn: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+// create light theme
+$light-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $light-primary,
+        accent: $light-accent,
+        warn: $light-warn
+      )
+    )
+);
+
+
+// create dark theme palette, this uses the color for background, then contrast for font
+$dark-primary-palette: (
+  50: #fffde7,
+  100: #fff9c4,
+  200: #fff59d,
+  300: #fef175,
+  400: #fcec55,
+  500: #f9e635,
+  600: #fdd935,
+  700: #fbc12d,
+  800: #f9a925,
+  900: #f58016,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+$dark-accent-palette: (
+  50: #ffecef,
+  100: #ffced4,
+  200: #f99c9d,
+  300: #f37476,
+  400: #ff5252,
+  500: #ff3e36,
+  600: #f73536,
+  700: #e42930,
+  800: #d72028,
+  900: #c8111c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  )
+);
+
+// define dark theme palettes
+$dark-primary: mat.define-palette($dark-primary-palette);
+$dark-accent: mat.define-palette($dark-accent-palette);
+$dark-warn: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+// create dark theme
+$dark-theme: mat.define-dark-theme(
+    (
+      color: (
+        primary: $dark-primary,
+        accent: $dark-accent,
+        warn: $dark-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0
+    )
+);
+
+// use the custom theme dynamically based on body light-theme class added
+//@include mat.all-component-themes($light-theme);
+//@include mat.all-component-themes($dark-theme);
+
+// include the light theme as default
+@include mat.all-component-themes($light-theme);
+
+//body.light-theme {
+//  @include mat.all-component-themes($light-theme);
+//}
+
+body.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+}
