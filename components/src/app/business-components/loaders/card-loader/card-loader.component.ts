@@ -10,14 +10,14 @@ import {
 // import { WtLoadersComponent } from 'wt-loaders';
 
 @Component({
-  selector: 'app-card-loader',
-  standalone: true,
-  imports: [
-    // WtLoadersComponent,
-    MatCardHeader,
-            MatCard, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions],
-  templateUrl: './card-loader.component.html',
-  styleUrl: './card-loader.component.scss'
+    selector: 'app-card-loader',
+    imports: [
+        // WtLoadersComponent,
+        MatCardHeader,
+        MatCard, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions
+    ],
+    templateUrl: './card-loader.component.html',
+    styleUrl: './card-loader.component.scss'
 })
 export class CardLoaderComponent {
 
