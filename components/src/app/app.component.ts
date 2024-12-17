@@ -21,6 +21,7 @@ export class AppComponent {
     'swiperCardSlidersMultiple',
     'swiperCardCoverflow',
     'swiperCardCube',
-    'swiperCardStack'
+    'swiperCardStack',
+    'loadingCard'
   ]);
 }
