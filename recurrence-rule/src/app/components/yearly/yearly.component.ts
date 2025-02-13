@@ -27,7 +27,7 @@ import { RruleService } from '../../services/rrule.service';
 export class YearlyComponent {
   private readonly _rRuleService: RruleService = inject(RruleService);
 
-  public rRuleValue: WritableSignal<string> = signal('FREQ=YEARLY;WKST=MO;BYMONTH=1;BYMONTHDAY=3;UNTIL=20241218T000000Z');
+  public rRuleValue: WritableSignal<string> = signal('FREQ=YEARLY;WKST=MO;BYMONTH=1;BYMONTHDAY=3;UNTIL=20341218T000000Z');
   public instances: Signal<Array<string>> = computed(() =>
     this._rRuleService.generateRRuleDates(this.rRuleValue())
   );
@@ -37,13 +37,16 @@ export class YearlyComponent {
   public rRuleBAseDescription: Signal<string> = computed(() =>
     this._rRuleService.generateRRuleBaseDescription(this.rRuleValue())
   );
+  public firstInstance: Signal<string> = computed(() =>
+    this._rRuleService.generateFirstInstance(this.rRuleValue())
+  );
 
   public setValueDayOfTheMonthUntilDate(): void {
-    this.rRuleValue.set('FREQ=YEARLY;WKST=MO;BYMONTH=1;BYMONTHDAY=3;UNTIL=20241218T000000Z');
+    this.rRuleValue.set('FREQ=YEARLY;WKST=MO;BYMONTH=1;BYMONTHDAY=3;UNTIL=20341218T000000Z');
   }
 
   public setValueWeekPositionUntilDate(): void {
-    this.rRuleValue.set('FREQ=YEARLY;WKST=MO;BYSETPOS=1;BYDAY=MO;BYMONTH=5;UNTIL=20241218T000000Z');
+    this.rRuleValue.set('FREQ=YEARLY;WKST=MO;BYSETPOS=1;BYDAY=MO;BYMONTH=5;UNTIL=20341218T000000Z');
   }
 
   public setValueMonthDayWithCount(): void {

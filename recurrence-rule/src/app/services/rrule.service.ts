@@ -25,6 +25,11 @@ export class RruleService {
     return new RRule(options);
   }
 
+  public generateFirstInstance(rrule: string): string {
+    // as library does not have that ability, then get the first item
+    return this.generateRRuleDates(rrule)[0];
+  }
+
   public generateRRuleDates(rrule: string): Array<string> {
     const rule: RRule = this.generateRRule(rrule);
 

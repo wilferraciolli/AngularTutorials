@@ -37,6 +37,9 @@ export class MonthlyComponent {
   public rRuleBAseDescription: Signal<string> = computed(() =>
     this._rRuleService.generateRRuleBaseDescription(this.rRuleValue())
   );
+  public firstInstance: Signal<string> = computed(() =>
+    this._rRuleService.generateFirstInstance(this.rRuleValue())
+  );
 
   public setValueDayOfTheMonthUntilDate(): void {
     this.rRuleValue.set('FREQ=MONTHLY;WKST=MO;BYMONTHDAY=3;INTERVAL=1;UNTIL=20241218T000000Z');

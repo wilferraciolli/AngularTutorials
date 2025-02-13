@@ -37,6 +37,9 @@ export class WeeklyComponent {
   public rRuleBAseDescription: Signal<string> = computed(() =>
     this._rRuleService.generateRRuleBaseDescription(this.rRuleValue())
   );
+  public firstInstance: Signal<string> = computed(() =>
+    this._rRuleService.generateFirstInstance(this.rRuleValue())
+  );
 
   public setValueSingleDayEndDate(): void {
     this.rRuleValue.set('FREQ=WEEKLY;WKST=MO;BYDAY=MO;INTERVAL=1;UNTIL=20241218T000000Z');
