@@ -1,2 +1,33 @@
-<h1>RRule template</h1>
-<router-outlet />
+<div class="app-wrapper">
+  <div class="app-container">
+    <header class="app-header">
+      <mat-toolbar>
+        <button mat-icon-button
+                aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>RRule template</span>
+        <span class="spacer"></span>
+        <button mat-icon-button
+                aria-label="Example icon-button with share icon">
+          <mat-icon>share</mat-icon>
+        </button>
+      </mat-toolbar>
+    </header>
+
+    <main class="app-main">
+      <mat-tab-group>
+        <mat-tab label="Weekly">
+          <wt-weekly/>
+        </mat-tab>
+        <mat-tab label="Monthly">
+          <wt-monthly/>
+        </mat-tab>
+        <mat-tab label="Yearly">
+          <wt-yearly/>
+        </mat-tab>
+      </mat-tab-group>
+    </main>
+    <router-outlet/>
+  </div>
+</div>
