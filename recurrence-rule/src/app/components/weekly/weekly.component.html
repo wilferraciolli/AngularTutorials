@@ -1,1 +1,24 @@
-<p>weekly works!</p>
+<div class="weekly-container">
+
+  <section class="weekly-buttons">
+    <button mat-flat-button
+            (click)="setValueSingleDayEndDate()"   >single day with end date
+    </button>
+    <button mat-flat-button
+            (click)="setValueMultipleDayEndDate()">multiple days with end date
+    </button>
+    <button mat-flat-button
+            (click)="setValueSingleDayCount()">single day with count
+    </button>
+    <button mat-flat-button
+            (click)="setValueMultipleDayCount()">multiple days with count
+    </button>
+  </section>
+
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input matInput
+           [value]="rRuleValue()"
+           (change)="valueChanged($event)">
+  </mat-form-field>
+</div>
