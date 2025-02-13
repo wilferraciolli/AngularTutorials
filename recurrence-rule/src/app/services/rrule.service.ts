@@ -48,8 +48,12 @@ export class RruleService {
 
     const data: IRecurrenceData = this._generateDataBasedOnRRule(rule);
     const count: number = data.count || 0;
-    console.log('RRULE ', rule.options);
-    console.log('DATA ', data);
+    const startDate: string = '01/01/2024';
+    const untilDate: string = '31/12/2024';
+    const startTime: string = '09:00';
+    const endTime: string = '09:30';
+    // console.log('RRULE ', rule.options);
+    // console.log('DATA ', data);
 
     if (data.frequency === Frequency.WEEKLY) {
       // @ts-ignore
@@ -61,16 +65,16 @@ export class RruleService {
       if (count > 0) {
         // with count
         if (interval > 1) {
-          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
         } else {
-          return `Occurs on ${ weekDays } of every week effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every week effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
         }
       } else {
         // with until date
         if (interval > 1) {
-          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from 26/10/2024 until 26/10/2025 from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
         } else {
-          return `Occurs on ${ weekDays } of every week effective from 26/10/2024 until 26/10/2025 from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every week effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
         }
       }
     }
@@ -83,16 +87,16 @@ export class RruleService {
         // day of the month
         if (count > 0) {
           if (interval > 1) {
-            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
           } else {
-            return `Occurs on day ${ byMonthDay } of every month effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+            return `Occurs on day ${ byMonthDay } of every month effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
           }
         } else {
           // not count
           if (interval > 1) {
-            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
           } else {
-            return `Occurs on day ${ byMonthDay } of every month effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+            return `Occurs on day ${ byMonthDay } of every month effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
           }
         }
       } else {
@@ -104,16 +108,16 @@ export class RruleService {
         // by set position
         if (count > 0) {
           if (interval > 1) {
-            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
           } else {
-            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
           }
         } else {
           // not count
           if (interval > 1) {
-            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
           } else {
-            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
           }
         }
       }
@@ -127,11 +131,11 @@ export class RruleService {
       if (yearlyMonthDay > 0) {
         // day of the month
         if (count > 0) {
-          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
 
         } else {
           // not count
-          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
         }
       } else {
         const yearlySetPositionIndex: number = data.yearlySetPosition || 0;
@@ -141,10 +145,10 @@ export class RruleService {
 
         // by set position
         if (count > 0) {
-          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from ${ startDate } for ${ count } check-ins from ${ startTime } to ${ endTime }`;
         } else {
           // not count
-          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from ${ startDate } until ${ untilDate } from ${ startTime } to ${ endTime }`;
         }
       }
     }
