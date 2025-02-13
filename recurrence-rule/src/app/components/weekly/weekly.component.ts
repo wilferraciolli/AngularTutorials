@@ -39,12 +39,17 @@ export class WeeklyComponent {
   }
 
   public setValueSingleDayCount(): void {
-    this.rRuleValue.set('FREQ=WEEKLY;WKST=MO;BYDAY=MO,TU;INTERVAL=1;COUNT=5');
+    this.rRuleValue.set('FREQ=WEEKLY;WKST=MO;BYDAY=MO;INTERVAL=1;COUNT=5');
   }
 
   public setValueMultipleDayCount(): void {
     this.rRuleValue.set('FREQ=WEEKLY;WKST=MO;BYDAY=SU,MO,TU;INTERVAL=1;COUNT=5');
   }
+
+  public setValueWithInterval(): void {
+    this.rRuleValue.set('FREQ=WEEKLY;WKST=MO;BYDAY=SU,MO,TU;INTERVAL=2;COUNT=5');
+  }
+
 
   public valueChanged(event: any): void {
     this.rRuleValue.set(event.target.value);
