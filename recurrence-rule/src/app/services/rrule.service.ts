@@ -9,6 +9,15 @@ export class RruleService {
   constructor() {
   }
 
+  // used to convert from BYSETPOS onto a week of the month
+  public static monthWeeksSetPosition: { [key: number]: string } = {
+    [1]: 'first',
+    [2]: 'second',
+    [3]: 'third',
+    [4]: 'fourth',
+    [-1]: 'last'
+  };
+
   public generateRRule(rrule: string): RRule {
     const options: Partial<Options> = RRule.parseString(rrule);
     options.dtstart = datetime(2024, 1, 1, 10, 30);
@@ -17,13 +26,10 @@ export class RruleService {
   }
 
   public generateRRuleDates(rrule: string): Array<string> {
-    // console.log('RRUle received', rrule);
     const rule: RRule = this.generateRRule(rrule);
 
-    const dates: Array<string> = rule.all().map((date: Date) =>
+    return rule.all().map((date: Date) =>
       moment(date).format('YYYY-MM-DD HH:mm'));
-
-    return dates;
   }
 
   public generateRRuleBaseDescription(rrule: string): string {
@@ -34,19 +40,18 @@ export class RruleService {
 
   public generateRRuleDescription(rrule: string): string {
     const rule: RRule = this.generateRRule(rrule);
-    // default user friendly text
-    // return rule.toText();
 
-    const data: IRecurrenceData = this._generateData(rule);
+    const data: IRecurrenceData = this._generateDataBasedOnRRule(rule);
+    const count: number = data.count || 0;
+    console.log('RRULE ', rule.options);
     console.log('DATA ', data);
-    // TODO build text
 
     if (data.frequency === Frequency.WEEKLY) {
       // @ts-ignore
-      const weekDays: string = data.weeklySelectedDays.map((day: number) => moment().day(day).format('dddd'))
+      const weekDays: string = data.weeklySelectedDays
+                                   .map((day: number) => moment().day(day).format('dddd'))
                                    .join(', ');
       const interval: number = data.weeklyInterval || 1;
-      const count: number = data.count || 0;
 
       if (count > 0) {
         // with count
@@ -65,15 +70,88 @@ export class RruleService {
       }
     }
 
+    if (data.frequency === Frequency.MONTHLY) {
+      const interval: number = data.monthlyInterval || 1;
+      const byMonthDay: number = data.monthlyMonthDay || 0;
+
+      if (byMonthDay > 0) {
+        // day of the month
+        if (count > 0) {
+          if (interval > 1) {
+            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          } else {
+            return `Occurs on day ${ byMonthDay } of every month effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          }
+        } else {
+          // not count
+          if (interval > 1) {
+            return `Occurs on day ${ byMonthDay } of every ${ interval } months effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          } else {
+            return `Occurs on day ${ byMonthDay } of every month effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          }
+        }
+      } else {
+        const setPositionIndex: number = data.monthlySetPosition || 0;
+        const monthWeek: string = RruleService.monthWeeksSetPosition[setPositionIndex];
+        const monthWeekDay: number = data.monthlySelectedDays?.[0] || 0;
+        const weekDay: string = moment().day(monthWeekDay).format('dddd');
+
+        // by set position
+        if (count > 0) {
+          if (interval > 1) {
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          } else {
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+          }
+        } else {
+          // not count
+          if (interval > 1) {
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every ${ interval } months effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          } else {
+            return `Occurs on the ${ monthWeek } ${ weekDay } of every month effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+          }
+        }
+      }
+    }
+
+    if (data.frequency === Frequency.YEARLY) {
+      const yearlyMonthDay: number = data.yearlyMonthDay || 0;
+      const monthIndex: number = data.yearlyBy || 0;
+      const month: string = moment().month(monthIndex).format('MMMM');
+
+      if (yearlyMonthDay > 0) {
+        // day of the month
+        if (count > 0) {
+          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+
+        } else {
+          // not count
+          return `Occurs on day ${ yearlyMonthDay } in ${ month } of every year effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+        }
+      } else {
+        const yearlySetPositionIndex: number = data.yearlySetPosition || 0;
+        const monthWeek: string = RruleService.monthWeeksSetPosition[yearlySetPositionIndex];
+        const yearlyWeekDay: number = data.yearlySelectedDays?.[0] || 0;
+        const weekDay: string = moment().day(yearlyWeekDay).format('dddd');
+
+        // by set position
+        if (count > 0) {
+          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09:30`;
+        } else {
+          // not count
+          return `Occurs on the ${ monthWeek } ${ weekDay } of ${ month } every year effective from 26/10/2024 until 26/10/2025 from 09:00 to 09:30`;
+        }
+      }
+    }
+
     return 'todo';
   }
 
-  private _generateData(rule: RRule): IRecurrenceData {
-
+  private _generateDataBasedOnRRule(rule: RRule): IRecurrenceData {
     return {
       frequency: rule.options.freq,
 
-      weeklySelectedDays: rule.options.byweekday.map((day) => day + 1),
+      weeklySelectedDays: rule.options.byweekday?.map((day) => day + 1),
       weeklyInterval: rule.options.interval,
 
       monthlyInterval: rule.options.interval,
@@ -81,12 +159,12 @@ export class RruleService {
       monthlyMonth: rule.options.bymonth?.[0],
       monthlyMonthDay: rule.options.bymonthday?.[0],
       monthlySetPosition: rule.options.bysetpos?.[0],
-      monthlySelectedDays: rule.options.bynmonthday,
+      monthlySelectedDays: rule.options.byweekday?.map((day) => day + 1),
 
-      yearlyBy: rule.options.bymonth?.[0],
+      yearlyBy: rule.options.bymonth?.[0] - 1,
       yearlyMonthDay: rule.options.bymonthday?.[0],
       yearlySetPosition: rule.options.bysetpos?.[0],
-      yearlySelectedDays: rule.options.byyearday,
+      yearlySelectedDays: rule.options.byweekday?.map((day) => day + 1),
 
       until: rule.options.until,
       count: rule.options.count
@@ -116,9 +194,3 @@ export enum MonthlyBy {
   BYMONTHDAY,
   BYSETPOS
 }
-
-export const MonthlyByFieldValues: Array<MonthlyBy> = [MonthlyBy.BYMONTHDAY, MonthlyBy.BYSETPOS];
-export const RecurrenceMonthlyByLabels: Record<MonthlyBy, string> = {
-  [MonthlyBy.BYMONTHDAY]: 'byMonthDay',
-  [MonthlyBy.BYSETPOS]: 'bySetPos'
-};
