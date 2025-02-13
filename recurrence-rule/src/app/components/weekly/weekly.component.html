@@ -26,7 +26,21 @@
   </mat-form-field>
 
   <section class="weekly-section">
-    <span>{{ rRuleDescription() }}</span>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title> Base description from library</mat-card-title>
+        <mat-card-subtitle> {{ rRuleBAseDescription() }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </section>
+
+  <section class="weekly-section">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title> Formatted description</mat-card-title>
+        <mat-card-subtitle> {{ rRuleDescription() }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
   </section>
 
   <section class="weekly-section">

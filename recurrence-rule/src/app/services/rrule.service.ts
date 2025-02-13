@@ -26,6 +26,12 @@ export class RruleService {
     return dates;
   }
 
+  public generateRRuleBaseDescription(rrule: string): string {
+    const rule: RRule = this.generateRRule(rrule);
+
+    return rule.toText();
+  }
+
   public generateRRuleDescription(rrule: string): string {
     const rule: RRule = this.generateRRule(rrule);
     // default user friendly text
@@ -45,9 +51,9 @@ export class RruleService {
       if (count > 0) {
         // with count
         if (interval > 1) {
-          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from 26/10/2024 for ${count} check-ins from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every ${ interval } weeks effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09: 30`;
         } else {
-          return `Occurs on ${ weekDays } of every week effective from 26/10/2024 for ${count} check-ins from 09:00 to 09: 30`;
+          return `Occurs on ${ weekDays } of every week effective from 26/10/2024 for ${ count } check-ins from 09:00 to 09: 30`;
         }
       } else {
         // with until date
@@ -58,6 +64,7 @@ export class RruleService {
         }
       }
     }
+
     return 'todo';
   }
 
