@@ -2,7 +2,7 @@
 
   <section class="weekly-buttons">
     <button mat-flat-button
-            (click)="setValueSingleDayEndDate()"   >single day with end date
+            (click)="setValueSingleDayEndDate()">single day with end date
     </button>
     <button mat-flat-button
             (click)="setValueMultipleDayEndDate()">multiple days with end date
@@ -21,4 +21,17 @@
            [value]="rRuleValue()"
            (change)="valueChanged($event)">
   </mat-form-field>
+
+  <section class="weekly-section">
+    <span>{{ rRuleDescription() }}</span>
+  </section>
+
+  <section class="weekly-section">
+    <span>Candidate dates</span>
+    <mat-chip-set aria-label="Fish selection">
+      @for (instance of instances(); track instance) {
+        <mat-chip>{{ instance }}</mat-chip>
+      }
+    </mat-chip-set>
+  </section>
 </div>
