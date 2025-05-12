@@ -7,6 +7,7 @@ import { UiUserDetails } from './user-details.interface';
 const meta: Meta<UserDetailsComponent> ={
   title: "User/UserDetails",
   component: UserDetailsComponent,
+  tags: ['autodocs'],
   argTypes: {
     notificationCount: {
       options: [0, 1, 9, 15, 99, 123, 999, 2317],

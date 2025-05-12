@@ -2,6 +2,57 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "UiUserDetails",
+            "id": "interface-UiUserDetails-8fa76cf6289232a561e300cc6f06f301469cda5e2ec6929759d66ac3ffcc777b8e5f9124d54fc86d15eb49d8128e5cf8bf31fcb35537a5d89875723b3a3dfaad",
+            "file": "src/app/ui/user-details/components/user-details/user-details.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface UiUserDetails {\r\n  firstName: string;\r\n  lastName: string;\r\n  email: string;\r\n  avatar: {\r\n    url: string;\r\n    alt: string;\r\n  } | null;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "avatar",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "email",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "firstName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "lastName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
             "file": "src/stories/User.ts",
@@ -369,18 +420,80 @@
             ],
             "stylesData": "",
             "extends": []
+        },
+        {
+            "name": "UserDetailsComponent",
+            "id": "component-UserDetailsComponent-5664ea5f125bdeaf5f05556556b38181ffce0efebd993d98b1335e53c22b3b78f8dad9dfdd57b39d57a0fbed169e456d0293f39216c8cc0aa310dcf8fee49c24",
+            "file": "src/app/ui/user-details/components/user-details/user-details.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-user-details",
+            "styleUrls": [
+                "./user-details.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./user-details.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "notificationCount",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "user",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "UiUserDetails",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { UiUserDetails } from './user-details.interface';\n\n@Component({\n  selector: 'app-user-details',\n  templateUrl: './user-details.component.html',\n  styleUrls: ['./user-details.component.scss']\n})\nexport class UserDetailsComponent {\n  @Input() user?: UiUserDetails;\n\n  @Input() notificationCount: number = 0;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".details {\r\n  display: inline-flex;\r\n  align-items: center;\r\n  border: solid black 1px;\r\n  border-radius: 8px;\r\n  padding: 8px;\r\n  color: gray;\r\n  position: relative;\r\n}\r\n\r\n.details__img {\r\n  width: 100px;\r\n  height: 100px;\r\n  object-fit: cover;\r\n  object-position: center center;\r\n  border-radius: 50%;\r\n  overflow: hidden;\r\n  border: solid gray 1px;\r\n  margin-right: 16px;\r\n}\r\n\r\n.details__notification-count {\r\n  position: absolute;\r\n  top: -10px;\r\n  right: -10px;\r\n  border-radius: 50%;\r\n  padding: 8px;\r\n  justify-content: center;\r\n  align-items: center;\r\n  width: 20px;\r\n  height: 20px;\r\n  color: white;\r\n  background-color: red;\r\n  text-align: center;\r\n  font-weight: bold;\r\n  font-size: 20px;\r\n  line-height: 20px;\r\n  border: solid black 1px;\r\n}\r\n",
+                    "styleUrl": "./user-details.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div *ngIf=\"user\" class=\"details\">\n  <div *ngIf=\"notificationCount\" class=\"details__notification-count\">\n    {{ notificationCount }}\n  </div>\n  <img\n    [alt]=\"user.avatar?.alt || 'avatar'\"\n    [src]=\"user.avatar?.url || '/assets/placeholder.jpeg'\"\n    class=\"details__img\"\n  />\n  <div class=\"details__data\">\n    <h1>{{ user.firstName }}&nbsp;{{ user.lastName }}</h1>\n    <h3>{{ user.email }}</h3>\n  </div>\n</div>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-b0bb343999c0401a2e3ecbec65490c5a76866396b25cae82ed79702c1d4e115033ea8c8ade9395518e8eba42217f2ec5d6c7a62f3d969b3ab2838fe206d56a66",
+            "id": "module-AppModule-ec512816baa97985c6d71fe90077ff9e421b83449f8a9497b58baae99f2725a7add282404eabe206b5d911be472d5732080dbc907e466c681ae83387553c12d8",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { UserDetailsComponent } from './ui/user-details/components/user-details/user-details.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    UserDetailsComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -391,6 +504,9 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "UserDetailsComponent"
                         }
                     ]
                 },
@@ -540,6 +656,16 @@
                 "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
             },
             {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<UserDetailsComponent>",
+                "defaultValue": "{\r\n  title: \"User/UserDetails\",\r\n  component: UserDetailsComponent,\r\n  argTypes: {\r\n    notificationCount: {\r\n      options: [0, 1, 9, 15, 99, 123, 999, 2317],\r\n      defaultValue: 0,\r\n      control: { type: \"radio\" }\r\n    }\r\n  }\r\n}"
+            },
+            {
                 "name": "preview",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -550,6 +676,16 @@
                 "defaultValue": "{\n  parameters: {\n    actions: { argTypesRegex: \"^on[A-Z].*\" },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
             },
             {
+                "name": "primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "UserDetailsStory",
+                "defaultValue": "{\r\n  args: {\r\n    user: userMock,\r\n    notificationCount: 100\r\n  }\r\n}"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -558,6 +694,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "UserDetailsStory",
+                "defaultValue": "{\r\n  args: {\r\n    user: userMock2\r\n  }\r\n}"
             },
             {
                 "name": "Secondary",
@@ -578,6 +724,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "userMock",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "UiUserDetails",
+                "defaultValue": "{\r\n  firstName: \"John\",\r\n  lastName: \"Smith\",\r\n  email: \"john.smith@abc.efd\",\r\n  avatar: {\r\n    url: \"https://placehold.it/100x100\",\r\n    alt: \"John Smith avatar\"\r\n  }\r\n}"
+            },
+            {
+                "name": "userMock2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "UiUserDetails",
+                "defaultValue": "{\r\n  firstName: \"Wiliam\",\r\n  lastName: \"Ferraciolli\",\r\n  email: \"wiliam.ferreciolli@wiltech.com\",\r\n  avatar: {\r\n    url: \"https://placehold.it/100x100\",\r\n    alt: \"Wiliam avatar\"\r\n  }\r\n}"
             }
         ],
         "functions": [],
@@ -610,6 +776,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<Page>",
                 "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "UserDetailsStory",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<UserDetailsComponent>",
+                "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -734,6 +911,58 @@
                     "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
                 }
             ],
+            "src/app/ui/user-details/components/user-details/user-details.stories.ts": [
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<UserDetailsComponent>",
+                    "defaultValue": "{\r\n  title: \"User/UserDetails\",\r\n  component: UserDetailsComponent,\r\n  argTypes: {\r\n    notificationCount: {\r\n      options: [0, 1, 9, 15, 99, 123, 999, 2317],\r\n      defaultValue: 0,\r\n      control: { type: \"radio\" }\r\n    }\r\n  }\r\n}"
+                },
+                {
+                    "name": "primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "UserDetailsStory",
+                    "defaultValue": "{\r\n  args: {\r\n    user: userMock,\r\n    notificationCount: 100\r\n  }\r\n}"
+                },
+                {
+                    "name": "secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "UserDetailsStory",
+                    "defaultValue": "{\r\n  args: {\r\n    user: userMock2\r\n  }\r\n}"
+                },
+                {
+                    "name": "userMock",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "UiUserDetails",
+                    "defaultValue": "{\r\n  firstName: \"John\",\r\n  lastName: \"Smith\",\r\n  email: \"john.smith@abc.efd\",\r\n  avatar: {\r\n    url: \"https://placehold.it/100x100\",\r\n    alt: \"John Smith avatar\"\r\n  }\r\n}"
+                },
+                {
+                    "name": "userMock2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "UiUserDetails",
+                    "defaultValue": "{\r\n  firstName: \"Wiliam\",\r\n  lastName: \"Ferraciolli\",\r\n  email: \"wiliam.ferreciolli@wiltech.com\",\r\n  avatar: {\r\n    url: \"https://placehold.it/100x100\",\r\n    alt: \"Wiliam avatar\"\r\n  }\r\n}"
+                }
+            ],
             ".storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -788,6 +1017,19 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "src/app/ui/user-details/components/user-details/user-details.stories.ts": [
+                {
+                    "name": "UserDetailsStory",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<UserDetailsComponent>",
+                    "file": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
@@ -806,7 +1048,7 @@
         ]
     },
     "coverage": {
-        "count": 4,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -826,6 +1068,74 @@
                 "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "UserDetailsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "UiUserDetails",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "userMock",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/ui/user-details/components/user-details/user-details.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "userMock2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
