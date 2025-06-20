@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { GiphyApiResponse, GiphyGif } from '../interfaces/giphy/giphy.interfaces';
 import { GiphyComponent } from '../giphy/giphy.component';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-giphy-list',
@@ -17,7 +18,7 @@ export class GiphyListComponent implements OnInit {
   private http = inject(HttpClient);
 
   private _baseUrl: string = 'https://api.giphy.com/v1/gifs/';
-  private _apiKey: string = 'Q9nb56erJnyXSwYchtFi7EYYVNsei69j';
+  private _apiKey: string = environment.giphyApiKey;
 
   public searchTerm = '';
   public gifs: GiphyGif[] = [];
