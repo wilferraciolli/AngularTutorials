@@ -1,0 +1,5 @@
+<div *ngIf="gif">
+  <img [src]="gif.images.fixed_height.url" [alt]="gif.title" />
+  <h2>{{ gif.title }}</h2>
+  <!-- <a [href]="gif.url" target="_blank">View on Giphy</a> -->
+</div>

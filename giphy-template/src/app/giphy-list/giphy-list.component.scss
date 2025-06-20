@@ -31,4 +31,21 @@
       padding: 1.5rem 1rem;
     }
   }
+
+  &-gifGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+
+app-giphy {
+  flex: 0 1 240px;
+  max-width: 100%;
+  min-width: 200px;
+  box-sizing: border-box;
+  padding: 20px;
 }
