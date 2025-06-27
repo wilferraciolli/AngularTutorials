@@ -1,19 +1,53 @@
+@use 'styles/theme';
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+// Light theme styles (default)
+body {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  &.dark-theme {
+    background-color: #121212;
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+// Custom Material 3 styled components
+.mat-mdc-card {
+  transition: background-color 0.3s ease;
+}
+
+.dark-theme .mat-mdc-card {
+  background-color: #1e1e1e;
+}
+
+// Custom scrollbar for dark theme
+.dark-theme {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #2d2d2d;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+}
