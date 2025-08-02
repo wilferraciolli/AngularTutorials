@@ -11,9 +11,10 @@ import * as d3 from 'd3';
 import {ScaleBand} from 'd3';
 
 @Component({
-  selector: 'app-bar-char-vertical',
-  templateUrl: './bar-char-vertical.component.html',
-  styleUrls: ['./bar-char-vertical.component.scss']
+    selector: 'app-bar-char-vertical',
+    templateUrl: './bar-char-vertical.component.html',
+    styleUrls: ['./bar-char-vertical.component.scss'],
+    standalone: false
 })
 export class BarCharVerticalComponent implements AfterViewInit, OnChanges {
   @Input() data!: { name: string, series: { name: string, value: number }[] }[];

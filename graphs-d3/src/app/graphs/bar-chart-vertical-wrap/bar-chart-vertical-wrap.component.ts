@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-bar-chart-vertical-wrap',
-  templateUrl: './bar-chart-vertical-wrap.component.html',
-  styleUrls: ['./bar-chart-vertical-wrap.component.scss']
+    selector: 'app-bar-chart-vertical-wrap',
+    templateUrl: './bar-chart-vertical-wrap.component.html',
+    styleUrls: ['./bar-chart-vertical-wrap.component.scss'],
+    standalone: false
 })
 export class BarChartVerticalWrapComponent {
   // @ts-ignore

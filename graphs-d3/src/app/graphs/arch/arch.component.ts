@@ -3,9 +3,10 @@ import * as d3 from 'd3';
 
 
 @Component({
-  selector: 'app-arch',
-  templateUrl: './arch.component.html',
-  styleUrls: ['./arch.component.scss']
+    selector: 'app-arch',
+    templateUrl: './arch.component.html',
+    styleUrls: ['./arch.component.scss'],
+    standalone: false
 })
 export class ArchComponent implements OnInit {
   ngOnInit(): void {

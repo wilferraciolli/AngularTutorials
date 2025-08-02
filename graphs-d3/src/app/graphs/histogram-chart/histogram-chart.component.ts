@@ -2,9 +2,10 @@ import { Component, OnInit, ElementRef, ViewEncapsulation, Input, SimpleChanges,
 import * as d3 from 'd3';
 
 @Component({
-  selector: 'app-histogram-chart',
-  templateUrl: './histogram-chart.component.html',
-  styleUrls: ['./histogram-chart.component.scss']
+    selector: 'app-histogram-chart',
+    templateUrl: './histogram-chart.component.html',
+    styleUrls: ['./histogram-chart.component.scss'],
+    standalone: false
 })
 export class HistogramChartComponent   implements OnInit, OnChanges {
   @Input() transitionTime = 1000;
