@@ -1,0 +1,81 @@
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <mat-slide-toggle
+    [checked]="isDarkTheme$ | async"
+    (change)="toggleTheme()"
+    aria-label="Toggle dark theme">
+  </mat-slide-toggle>
+  <mat-icon>{{ (isDarkTheme$ | async) ? 'dark_mode' : 'light_mode' }}</mat-icon>
+</mat-toolbar>
+
+<div class="content">
+  <mat-card class="demo-card">
+    <mat-card-header>
+      <mat-card-title>Material 3 Theme Demo</mat-card-title>
+      <mat-card-subtitle>Grey primary color with light/dark theme support</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>This is a demo of Angular Material 3 with a custom grey theme.</p>
+      <p>Use the toggle in the toolbar to switch between light and dark themes.</p>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary">Primary Button</button>
+        <button mat-raised-button color="accent">Accent Button</button>
+        <button mat-raised-button color="warn">Warn Button</button>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<mat-toolbar color="primary">
+  Themed Toolbar
+</mat-toolbar>
+
+<div style="padding: 24px; display: grid; gap: 24px; max-width: 600px; margin: auto">
+
+  <mat-card>
+    <mat-card-title>Themed Card</mat-card-title>
+    <mat-card-content>
+      <p>This is a sample card using the current theme.</p>
+      <button mat-raised-button color="primary">Primary Button</button>
+      <button mat-raised-button color="accent">Accent Button</button>
+      <button mat-stroked-button color="warn">Warn Button</button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Input Field</mat-label>
+    <input matInput placeholder="Type something" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose an option</mat-label>
+    <mat-select>
+      <mat-option value="one">Option One</mat-option>
+      <mat-option value="two">Option Two</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox>Check me</mat-checkbox>
+
+  <mat-radio-group>
+    <mat-radio-button value="1">Option A</mat-radio-button>
+    <mat-radio-button value="2">Option B</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+
+  <mat-tab-group>
+    <mat-tab label="Tab One">Content 1</mat-tab>
+    <mat-tab label="Tab Two">Content 2</mat-tab>
+  </mat-tab-group>
+
+</div>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,25 @@
+.chat {
+  &-container {
+    display: flex;
+    //background-color: aqua;
+    gap: 20px;
+    padding: 20px 0;
+    width: auto;
+  }
+
+  &-input {
+    width: 80%;
+  }
+
+  &-input-icon {
+    width: 20%;
+  }
+
+  &-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    //background-color: aqua;
+  }
+}

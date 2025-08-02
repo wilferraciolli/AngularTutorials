@@ -1,0 +1,20 @@
+.weekly {
+  &-container {
+    flex-direction: column;
+    display: flex;
+    padding: 50px;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+  }
+
+  &-section {
+    //display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+  }
+}
+

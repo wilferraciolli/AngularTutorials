@@ -9,6 +9,10 @@ It use swiper js `https://swiperjs.com/demos`
 ### Material
 `ng add @angular/material`
 
+### WtLoaders
+`npm install wtloaders`
+peerdependencies `npm install ngx-skeleton-loader --save-dev`
+
 ### Swiper Js
 This library allow many swipes and gestures to be used just by passing some configs
 

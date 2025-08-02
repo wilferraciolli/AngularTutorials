@@ -1,0 +1,60 @@
+<div class="yearly-container">
+
+  <section class="yearly-buttons">
+    <button mat-flat-button
+            (click)="setValueDayOfTheMonthUntilDate()">month day until date
+    </button>
+    <button mat-flat-button
+            (click)="setValueWeekPositionUntilDate()">set position until date
+    </button>
+    <button mat-flat-button
+            (click)="setValueMonthDayWithCount()">month day count
+    </button>
+    <button mat-flat-button
+            (click)="setValueWeekPositionCount()">set position with count
+    </button>
+  </section>
+
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input matInput
+           [value]="rRuleValue()"
+           (change)="valueChanged($event)">
+  </mat-form-field>
+
+  <section class="yearly-section">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title> Base description from library</mat-card-title>
+        <mat-card-subtitle> {{ rRuleBAseDescription() }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </section>
+
+  <section class="yearly-section">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title> Formatted description</mat-card-title>
+        <mat-card-subtitle> {{ rRuleDescription() }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </section>
+
+  <section class="weekly-section">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title> First instance</mat-card-title>
+        <mat-card-subtitle> {{ firstInstance() }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </section>
+
+  <section class="yearly-section">
+    <span>Candidate dates</span>
+    <mat-chip-set aria-label="Fish selection">
+      @for (instance of instances(); track instance) {
+        <mat-chip>{{ instance }}</mat-chip>
+      }
+    </mat-chip-set>
+  </section>
+</div>

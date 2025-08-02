@@ -7,7 +7,7 @@ It talks about Component Driven UI
 
 
 ## Dependencies
-Storybook
+### Storybook
 `npx storybook@latest init`
 
 

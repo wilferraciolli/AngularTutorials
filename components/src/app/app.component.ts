@@ -8,11 +8,10 @@ import {MatListItem} from "@angular/material/list";
 import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, MatToolbar, MatIconButton, MatIcon, MatDrawerContainer, MatButton, MatDrawer, MatListItem, NgForOf, RouterLink],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, MatToolbar, MatIconButton, MatIcon, MatDrawerContainer, MatButton, MatDrawer, MatListItem, NgForOf, RouterLink],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   public menus: WritableSignal<Array<string>> = signal([
@@ -21,6 +20,7 @@ export class AppComponent {
     'swiperCardSlidersMultiple',
     'swiperCardCoverflow',
     'swiperCardCube',
-    'swiperCardStack'
+    'swiperCardStack',
+    'loadingCard'
   ]);
 }

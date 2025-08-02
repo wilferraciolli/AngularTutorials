@@ -1,0 +1,23 @@
+.app {
+  &-wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  &-container {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    margin: 0 10%;
+  }
+
+  &-header {
+    display: flex;
+  }
+
+  &-main {
+    padding: 20px 0;
+    //width: 100%;
+  }
+}
+

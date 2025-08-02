@@ -1,6 +1,9 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+//  "paths": {
+//    "wt-loaders": ["./node_modules/wt-loaders"]
+//  },
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,

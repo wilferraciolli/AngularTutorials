@@ -29,7 +29,7 @@
     "@angular/cli": "~16.0.4",
     "@angular/compiler-cli": "^16.0.0",
     "@compodoc/compodoc": "^1.1.22",
-    "@storybook/addon-docs": "^7.5.2",
+    "@storybook/addon-docs": "^7.6.20",
     "@storybook/addon-essentials": "^7.5.2",
     "@storybook/addon-interactions": "^7.5.2",
     "@storybook/addon-links": "^7.5.2",

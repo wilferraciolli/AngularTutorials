@@ -1,0 +1,21 @@
+<div class="giphyList-container">
+    <h1 class="giphyList-title">Giphy Search</h1>
+    <p class="giphyList-description">Please search for GIFs</p>
+
+    <mat-form-field appearance="outline" class="giphyList-searchBar">
+        <input matInput placeholder="Search for GIFs..." 
+        [(ngModel)]="searchTerm" 
+        (keyup.enter)="searchGifs()">
+    </mat-form-field>
+
+    <ng-container *ngIf="gifs.length > 0; else noGifs">
+      <div class="giphyList-gifGrid">
+        @for (gif of gifs; track gif.id) {
+          <app-giphy [gif]="gif" />
+        }
+      </div>
+    </ng-container>
+    <ng-template #noGifs>
+      <p style="text-align:center; color:#888;">No GIFs to display.</p>
+    </ng-template>
+</div>
