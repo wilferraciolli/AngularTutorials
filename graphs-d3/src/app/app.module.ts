@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {ArchComponent} from './graphs/arch/arch.component';
+import {ArcComponent} from './graphs/arc/arc.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {BarCharVerticalComponent} from './graphs/bar-char-vertical/bar-char-vertical.component';
@@ -26,7 +26,7 @@ import {MatListModule} from "@angular/material/list";
 @NgModule({
   declarations: [
     AppComponent,
-    ArchComponent,
+    ArcComponent,
     BarCharVerticalComponent,
     BarChartVerticalWrapComponent,
     HistogramChartWrapComponent,
