@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArchComponent } from './arch.component';
+import { ArcComponent } from './arc.component';
 
-describe('ArchComponent', () => {
-  let component: ArchComponent;
-  let fixture: ComponentFixture<ArchComponent>;
+describe('ArcComponent', () => {
+  let component: ArcComponent;
+  let fixture: ComponentFixture<ArcComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ArchComponent]
+      declarations: [ArcComponent]
     });
-    fixture = TestBed.createComponent(ArchComponent);
+    fixture = TestBed.createComponent(ArcComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

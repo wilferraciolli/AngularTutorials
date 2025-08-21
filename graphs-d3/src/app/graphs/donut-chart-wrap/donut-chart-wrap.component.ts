@@ -43,9 +43,10 @@ const HOBBITON_DATA = {
 
 
 @Component({
-  selector: 'app-donut-chart-wrap',
-  templateUrl: './donut-chart-wrap.component.html',
-  styleUrls: ['./donut-chart-wrap.component.scss']
+    selector: 'app-donut-chart-wrap',
+    templateUrl: './donut-chart-wrap.component.html',
+    styleUrls: ['./donut-chart-wrap.component.scss'],
+    standalone: false
 })
 export class DonutChartWrapComponent implements OnInit, OnDestroy, AfterContentInit {
 

@@ -23,9 +23,10 @@ export class DeliveryMetric {
 
 
 @Component({
-  selector: 'app-histogram-chart-wrap',
-  templateUrl: './histogram-chart-wrap.component.html',
-  styleUrls: ['./histogram-chart-wrap.component.scss']
+    selector: 'app-histogram-chart-wrap',
+    templateUrl: './histogram-chart-wrap.component.html',
+    styleUrls: ['./histogram-chart-wrap.component.scss'],
+    standalone: false
 })
 export class HistogramChartWrapComponent  implements OnInit, OnDestroy, AfterContentInit {
 

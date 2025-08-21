@@ -3,9 +3,10 @@ import * as d3 from 'd3';
 
 
 @Component({
-  selector: 'app-scatter-chart',
-  templateUrl: './scatter-chart.component.html',
-  styleUrls: ['./scatter-chart.component.scss']
+    selector: 'app-scatter-chart',
+    templateUrl: './scatter-chart.component.html',
+    styleUrls: ['./scatter-chart.component.scss'],
+    standalone: false
 })
 export class ScatterChartComponent implements OnInit {
   private data = [

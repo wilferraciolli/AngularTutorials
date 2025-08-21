@@ -10,10 +10,11 @@ import {ScaleOrdinal} from "d3-scale";
 // }
 
 @Component({
-  selector: 'app-donut-chart',
-  templateUrl: './donut-chart.component.html',
-  styleUrls: ['./donut-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-donut-chart',
+    templateUrl: './donut-chart.component.html',
+    styleUrls: ['./donut-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DonutChartComponent implements OnInit, OnChanges {
 

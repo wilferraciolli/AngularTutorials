@@ -3,15 +3,17 @@ import * as d3 from 'd3';
 
 
 @Component({
-  selector: 'app-arch',
-  templateUrl: './arch.component.html',
-  styleUrls: ['./arch.component.scss']
+    selector: 'app-arc',
+    templateUrl: './arc.component.html',
+    styleUrls: ['./arc.component.scss'],
+    standalone: false
 })
-export class ArchComponent implements OnInit {
+export class ArcComponent implements OnInit {
   ngOnInit(): void {
     var svg = d3.select("svg")
       .append("g")
       .attr("transform", "translate(150,50)");
+
 
     // Function is used
     var arc = d3.arc()
