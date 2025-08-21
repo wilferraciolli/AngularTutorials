@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { DirectivesComponent } from '../../../components/directives/directives.component';
-import { PipesComponent } from '../../../components/pipes/pipes.component';
 
 export interface ILink {
   label: string;
@@ -13,7 +11,7 @@ export interface ILink {
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [MatTabsModule, PipesComponent, DirectivesComponent, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [MatTabsModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
@@ -41,8 +39,13 @@ export class NavBarComponent {
       label: 'Providers',
       link: '/providers',
       index: 3
+    },
+    {
+      label: 'Projection',
+      link: '/projection',
+      index: 4
     }
   ];
   // public activeLink: string = this.links[1].label;
-  public activeLinkIndex: number = 1;
+  public activeLinkIndex: number = 3;
 }

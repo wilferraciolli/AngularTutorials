@@ -1,0 +1,28 @@
+<mat-card class="projectionCard-container"
+          appearance="outlined">
+  <mat-card-content>
+    <ng-template #contentTemplate>
+      <ng-content/>
+    </ng-template>
+
+    @if (disableClickableHeader) {
+      <div class="projectionCard-content">
+        <ng-container *ngTemplateOutlet="contentTemplate"/>
+
+      </div>
+    } @else {
+      <button
+        type="button"
+        class="projectionCard-button"
+        (click)="toggleState()"
+      >
+        <div class="projectionCard-content">
+          <ng-container *ngTemplateOutlet="contentTemplate"/>
+        </div>
+        <mat-icon aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="keyboard_arrow_down"></mat-icon>
+      </button>
+    }
+  </mat-card-content>
+</mat-card>

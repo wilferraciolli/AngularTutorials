@@ -1,0 +1,18 @@
+<div class="projection-container">
+  <section class="projection-item">
+    <mat-checkbox class="example-margin"
+                  [(ngModel)]="disableClickableHeader">Disable Clickable header
+    </mat-checkbox>
+  </section>
+
+  <section class="projection-item">
+    <app-projection-card
+      [disableClickableHeader]="disableClickableHeader"
+      (toggledValue)="toggledValue($event)">
+      <p>
+        This is the content to be projected within the body of the card.
+      </p>
+    </app-projection-card>
+  </section>
+</div>
+{{ disableClickableHeader }}

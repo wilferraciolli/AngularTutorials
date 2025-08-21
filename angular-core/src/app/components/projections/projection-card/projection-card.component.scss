@@ -1,0 +1,36 @@
+.projectionCard {
+  &-container {
+    display: flex;
+  }
+
+  &-icon {
+    margin-left: auto;
+  }
+
+  &-content {
+    align-content: center;
+  }
+
+  &-button {
+    // Reset button styles to make it look like a div
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:focus {
+      outline: 2px solid #1976d2;
+      outline-offset: 2px;
+    }
+
+    .projectionCard-content {
+      flex: 1;
+    }
+  }
+
+}
