@@ -42,10 +42,10 @@ export class GiphyListComponent implements OnInit {
   }
 
   private _buildTrendingUrl(): string {
-    return `${this._baseUrl}trending?api_key=${this._apiKey}&limit=5&offset=0&rating=g&bundle=messaging_non_clips`;
+    return `${this._baseUrl}trending?api_key=${this._apiKey}&limit=10&offset=0&rating=g&bundle=messaging_non_clips`;
   }
 
   private _buildSearchUrl(): string {
-    return `${this._baseUrl}search?api_key=${this._apiKey}&q=${this.searchTerm}&limit=5&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
+    return `${this._baseUrl}search?api_key=${this._apiKey}&q=${this.searchTerm}&limit=10&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
   }
 }

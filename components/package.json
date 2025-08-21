@@ -24,6 +24,7 @@
     "rxjs": "~7.8.0",
     "swiper": "^11.1.14",
     "tslib": "^2.3.0",
+    "wt-loaders": "file:../../ng-libraries/wt-libraries/dist/wt-loaders",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

@@ -3,7 +3,6 @@
 // Include the common styles for Angular Material
 @include mat.core();
 
-
 // Create light theme
 $light-theme: mat.define-theme((
   color: (

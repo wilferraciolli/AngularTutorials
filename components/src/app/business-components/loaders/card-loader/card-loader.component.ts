@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardSubtitle,
-  MatCardTitle
-} from '@angular/material/card';
+import { MatCard, MatCardContent } from '@angular/material/card';
 
-// import { WtLoadersComponent } from 'wt-loaders';
+import { WtLoadersComponent } from 'wt-loaders';
+import { LoaderCardComponent } from 'wt-loaders';
 
 @Component({
   selector: 'app-card-loader',
   standalone: true,
   imports: [
-    // WtLoadersComponent,
-    MatCard, MatCardContent
+    WtLoadersComponent,
+    LoaderCardComponent,
+    MatCard,
+    MatCardContent
   ],
   templateUrl: './card-loader.component.html',
   styleUrl: './card-loader.component.scss'

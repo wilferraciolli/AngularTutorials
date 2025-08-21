@@ -1,1 +1,22 @@
-<p>unsplash-list works!</p>
+<div class="unsplashList-container">
+  <h1 class="unsplashList-title">Unsplash Search</h1>
+  <p class="unsplashList-description">Please search for Unsplash images</p>
+
+  <mat-form-field appearance="outline" class="unsplashList-searchBar">
+    <input matInput placeholder="Search for Unsplash images..."
+      [(ngModel)]="searchTerm"
+      (keyup.enter)="searchImages()">
+  </mat-form-field>
+
+  <ng-container *ngIf="images.length > 0; else noImages">
+    <div class="unsplashList-imageGrid">
+      @for (image of images; track image.id) {
+        <img [src]="image.urls.small" [alt]="image.description || 'Unsplash image'" class="unsplashList-image" />
+        <div class="unsplashList-imageDescription">{{ image.description }}</div>
+      }
+    </div>
+  </ng-container>
+  <ng-template #noImages>
+    <p style="text-align:center; color:#888;">No images to display.</p>
+  </ng-template>
+</div>
