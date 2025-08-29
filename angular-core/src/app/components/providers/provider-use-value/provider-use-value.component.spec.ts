@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvidersComponent } from './providers.component';
+import { ProviderUseValueComponent } from './provider-use-value.component';
 
-describe('ProvidersComponent', () => {
-  let component: ProvidersComponent;
-  let fixture: ComponentFixture<ProvidersComponent>;
+describe('ProviderUseValueComponent', () => {
+  let component: ProviderUseValueComponent;
+  let fixture: ComponentFixture<ProviderUseValueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProvidersComponent]
+      imports: [ProviderUseValueComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ProvidersComponent);
+    fixture = TestBed.createComponent(ProviderUseValueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,17 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>useExisting</mat-card-title>
+    <mat-card-subtitle>Allows you to alias a token and reference any existing one
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <h4>Value is: {{ value() }}</h4>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button matMiniFab aria-label="Trigger action" (click)="logMessage()">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

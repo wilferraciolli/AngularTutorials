@@ -1,0 +1,9 @@
+.providerList {
+  &-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #993926;
+    flex-wrap: wrap;
+  }
+}
