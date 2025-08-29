@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDivider } from '@angular/material/divider';
+import {
+  ProjectionCardMultiSelectorsComponent
+} from '../projection-card-multi-selectors/projection-card-multi-selectors.component';
 import { ProjectionCardComponent } from '../projection-card/projection-card.component';
 
 @Component({
@@ -10,8 +14,11 @@ import { ProjectionCardComponent } from '../projection-card/projection-card.comp
 
     MatCheckbox,
     FormsModule,
-    ProjectionCardComponent
+    ProjectionCardComponent,
+    ProjectionCardMultiSelectorsComponent,
+    MatDivider
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './projection.component.html',
   styleUrl: './projection.component.scss'
 })

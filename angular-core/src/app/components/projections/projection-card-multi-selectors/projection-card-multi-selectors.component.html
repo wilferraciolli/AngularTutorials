@@ -1,0 +1,26 @@
+<mat-card class="projectionCardMultiSelectors-container"
+          appearance="outlined">
+  <mat-card-header>
+    <div class="projectionCardMultiSelectors-header">
+      <ng-content select="card-header"/>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="projectionCardMultiSelectors-content">
+      <ng-content select="card-body"/>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<!--
+using this component as follow
+<app-projection-card-multi-selectors>
+  <card-header>Hello</card-title>
+  <card-body>Welcome to the example</card-body>
+</app-projection-card-multi-selectors>
+
+ALSO make sure to add the custom schjema where this will be used
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+-->

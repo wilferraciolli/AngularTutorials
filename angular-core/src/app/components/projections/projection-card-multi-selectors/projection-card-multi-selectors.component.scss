@@ -1,0 +1,18 @@
+:host {
+  --Projection-card-multi-selectors-color: #993926;
+}
+
+.projectionCardMultiSelectors {
+  &-container {
+    display: flex;
+  }
+
+  &-header {
+    color: var(--Projection-card-multi-selectors-color, #993926);
+  }
+
+  &-content {
+    display: flex;
+    align-content: center;
+  }
+}
