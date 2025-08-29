@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDivider } from '@angular/material/divider';
 import {
+  ProjectionCardMultiNamedSelectorComponent
+} from '../projection-card-multi-named-selector/projection-card-multi-named-selector.component';
+import {
   ProjectionCardMultiSelectorsComponent
 } from '../projection-card-multi-selectors/projection-card-multi-selectors.component';
 import { ProjectionCardComponent } from '../projection-card/projection-card.component';
@@ -16,7 +19,8 @@ import { ProjectionCardComponent } from '../projection-card/projection-card.comp
     FormsModule,
     ProjectionCardComponent,
     ProjectionCardMultiSelectorsComponent,
-    MatDivider
+    MatDivider,
+    ProjectionCardMultiNamedSelectorComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './projection.component.html',

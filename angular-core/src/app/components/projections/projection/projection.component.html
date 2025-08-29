@@ -16,7 +16,7 @@
     </section>
   </section>
 
-  <mat-divider />
+  <mat-divider/>
 
   <section class="projection-section">
     <section class="projection-item">
@@ -24,7 +24,7 @@
     </section>
     <section class="projection-item">
       <app-projection-card-multi-selectors>
-        <card-header class="projection-header">
+        <card-header>
           <h3>Header of the card</h3>
         </card-header>
         <card-body>
@@ -35,7 +35,22 @@
     </section>
   </section>
 
-  <mat-divider />
+  <mat-divider/>
 
+  <section class="projection-section">
+    <section class="projection-item">
+      <h2>Multiple projection using content tags</h2>
+    </section>
+    <section class="projection-item">
+      <app-projection-card-multi-named-selector class="projection-card">
+        <h3 cardHeader>
+          Header of the card
+        </h3>
+        <span cardBody>
+          <h4>Body of the card projected on body</h4>
+        </span>
+      </app-projection-card-multi-named-selector>
 
+    </section>
+  </section>
 </div>

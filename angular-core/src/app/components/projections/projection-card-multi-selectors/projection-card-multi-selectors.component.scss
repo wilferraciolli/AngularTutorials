@@ -1,5 +1,5 @@
 :host {
-  --Projection-card-multi-selectors-color: #993926;
+  --Projection-card-multi-selectors-color: #4F40AEFF;
 }
 
 .projectionCardMultiSelectors {
@@ -8,7 +8,7 @@
   }
 
   &-header {
-    color: var(--Projection-card-multi-selectors-color, #993926);
+    color: var(--Projection-card-multi-selectors-color, #4F40AEFF);
   }
 
   &-content {
