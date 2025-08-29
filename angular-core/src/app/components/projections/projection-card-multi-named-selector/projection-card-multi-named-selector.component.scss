@@ -1,0 +1,14 @@
+.projectionCardMultiNamedSelector {
+  &-container {
+    display: flex;
+  }
+
+  &-header {
+    color: #993926;
+  }
+
+  &-content {
+    display: flex;
+    align-content: center;
+  }
+}

@@ -1,0 +1,23 @@
+<mat-card class="projectionCardMultiNamedSelector-container"
+          appearance="outlined">
+  <mat-card-header>
+    <div class="projectionCardMultiNamedSelector-header">
+      <ng-content select="[cardHeader]"/>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="projectionCardMultiNamedSelector-content">
+      <ng-content select="[cardBody]"/>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<!--
+using this component as follow
+<app-projection-card-multi-selectors>
+  <p cardHeader>Hello</p>
+  <p cardBody>Welcome to the example</p>
+</app-projection-card-multi-selectors>
+-->
