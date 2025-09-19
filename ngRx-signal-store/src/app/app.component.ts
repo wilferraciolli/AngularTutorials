@@ -1,14 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { RouterOutlet } from '@angular/router';
+import { ComponentStoreComponent } from './component-stores/component-store/component-store.component';
 import { TodosStore } from './store/todos.store';
 import { TodosListComponent } from './todos-list/todos-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, TodosListComponent, MatProgressSpinner],
+  imports: [
+    CommonModule, RouterOutlet, TodosListComponent, MatProgressSpinner, MatTabGroup, MatTab,
+    ComponentStoreComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
