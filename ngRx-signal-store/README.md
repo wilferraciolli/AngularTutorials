@@ -14,3 +14,5 @@ Angular material
 
 #### ngTRx signals
 `ng add @ngrx/signals@latest`
+
+To update run `ng update @ngrx/signals`
