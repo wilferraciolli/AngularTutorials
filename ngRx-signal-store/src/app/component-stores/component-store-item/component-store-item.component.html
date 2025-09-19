@@ -1,0 +1,34 @@
+<div class="component-store-item-container">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title> Component Store</mat-card-title>
+      <mat-card-subtitle>This component should have its own store and not shared within the app or other components
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="component-store-item-content">
+      <h3>Count value from the component store: {{ count() }}</h3>
+      <h4>Count is even from the component store: {{ isCountEven() }}</h4>
+      <mat-divider/>
+      <h4> From app store: {{ filteredToDosCount() }}</h4>
+    </mat-card-content>
+
+    <mat-card-actions class="component-store-item-actions">
+      <button matFab
+              aria-label="Example icon button with a delete icon"
+              (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button matFab
+              aria-label="Example icon button with a delete icon"
+              (click)="onRemove()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <button matFab
+              aria-label="Example icon button with a delete icon"
+              (click)="onReset()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
