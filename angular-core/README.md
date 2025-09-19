@@ -7,5 +7,5 @@ Material
 
 # Topics
 [01 Angular core.md](01%20Angular%20core.md)
-[Javascript.md](Javascript.md)
+[02 Javascript.md](Javascript.md)
 
