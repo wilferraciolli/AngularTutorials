@@ -27,6 +27,9 @@ export const TodosStore = signalStore(
   { providedIn: 'root' },
   // state
   withState(initialState),
+  withComputed((store) => ({
+    completedTodosCount: computed(() => store.todos().filter(todo => todo.completed).length)
+  })),
   // methods to manipulate the store
   withMethods((store, todoService = inject(TodosService)) => ({
       async loadAll(): Promise<void> {

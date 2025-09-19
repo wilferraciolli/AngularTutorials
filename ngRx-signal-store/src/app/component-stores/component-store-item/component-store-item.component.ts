@@ -20,7 +20,7 @@ export class ComponentStoreItemComponent {
   protected count: Signal<number> = this._componentItemStore.count;
   protected isCountEven: Signal<boolean> = this._componentItemStore.countEven;
 
-  protected filteredToDosCount: Signal<number> =  computed(() => this._todoStore.filteredTodos.length);
+  protected completedTodosCount: Signal<number> = this._todoStore.completedTodosCount;
 
   public onAdd(): void {
     this._componentItemStore.increment();
