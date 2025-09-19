@@ -8,14 +8,13 @@ import { TodosStore } from './store/todos.store';
 import { TodosListComponent } from './todos-list/todos-list.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule, RouterOutlet, TodosListComponent, MatProgressSpinner, MatTabGroup, MatTab,
-    ComponentStoreComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    imports: [
+        CommonModule, RouterOutlet, TodosListComponent, MatProgressSpinner, MatTabGroup, MatTab,
+        ComponentStoreComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 

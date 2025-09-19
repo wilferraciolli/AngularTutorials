@@ -8,22 +8,21 @@ import { MatListOption, MatSelectionList } from '@angular/material/list';
 import { TodosFilter, TodosStore } from '../store/todos.store';
 
 @Component({
-  selector: 'todos-list',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatInput,
-    MatIcon,
-    MatLabel,
-    MatSuffix,
-    MatButtonToggleGroup,
-    MatButtonToggle,
-    MatSelectionList,
-    MatListOption,
-    NgStyle
-  ],
-  templateUrl: './todos-list.component.html',
-  styleUrl: './todos-list.component.scss'
+    selector: 'todos-list',
+    imports: [
+        MatFormField,
+        MatInput,
+        MatIcon,
+        MatLabel,
+        MatSuffix,
+        MatButtonToggleGroup,
+        MatButtonToggle,
+        MatSelectionList,
+        MatListOption,
+        NgStyle
+    ],
+    templateUrl: './todos-list.component.html',
+    styleUrl: './todos-list.component.scss'
 })
 export class TodosListComponent {
 
