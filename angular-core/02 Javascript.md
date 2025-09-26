@@ -157,14 +157,108 @@ Promises were created to resolve the callback hell issue, however it can still b
 
 
 ## Promises
-A promise is a way to work with async tasks on a single thread application (JS) and perform sequential operation without the need to use callbacks, it is a wrapper object that will execute in paralel and return either the value of the promise or a reject in case of a failure
+A promise is a way to work with async tasks on a single thread application (JS) and perform sequential operation without the need to use callbacks, 
+it is a wrapper object that will execute in parallel and return either the value of the promise or a reject in case of a failure. 
+Promises have the state of pending, fulfiled and rejected.
+The basics of a promise
+```js
+const promise = new Promise((resolve, reject) => {
+  if (someLogic) {
+    resolve('value');
+  }
 
-## Async Await
+  reject('error');
+});
 
+promise
+  .then((value) => console.log('promised resolved'))
+  .catch(error => console.log('error'));
+```
+Promises can be chained together which would always return another promise to its next `then` handler (note that this is the same as the callback hell if needs to handle error for each next promise)
+```js
+fetch(`api/users/${userId}`)
+  .then(response => response.json())
+  .then(user => fetch(`api/posts/${user.id}`))
+  .then(response => resonponse.json())
+  .then(posts => console.log(posts))
+  .catch(error => console.log('error'))
+```
 
+### Promises - Async Await
+Async await was added to JS to allow asynchronous tasks to be handle synchronous, this is useful when the code flow is dependant on previous ran code.
+For the example above, it was required to async fetch the user and then when it was resolved, it would fire another http request to fetch the user posts
+then it was mapped so it could be used.
+By having async await, it is possible to write better code and handle it on each async operation. Eg the example below shows handling each request individually so easier to manage errors. Ps note that the await keyword means that the app will stop there until the promise is resolved
+```js
+async function printUserPosts(userId) {
+  try {
+    const userResponse = await fetch(`api/users/${ userId }`);
+    const user = await response.json();
+  } catch (error) {
+    console.log('Failed to resolve user');
+    throw error;
+  }
+  
+  try {
+    const userPostsResponse = await fetch(`api/posts/${userId}`);
+    const userPosts = await userPostsResponse.json();
+    
+    console.log(userPosts);
+  } catch (error) {
+    console.log('Failed to get user posts');
+    throw error;
+  }
+}
+```
 
+Promises can also be bashed together to improve performance, `Promise.all` allows to concurrently fire many actions and it will resolve once all of them have either resolved or rejected.
+If any of the promises reject, then the whole returned promise will be rejected
+```js
+async function fetchMultipleUsers() {
+  const [user1, user2, user3] = await Promise.all([
+    fetchUser(1),
+    fetchUser(2),
+    fetchUser(3)
+  ]);
+  
+  console/log('Fetched 3 users and returned all of them');
+}
+```
 
+## Event Loop
+Javascript is a single threaded language, therefore it uses its own mechanism to manage async tasks called Event Loop so the browser is never stuck waiting on expensive operations.
+Event Loop mechanism is formed by 
+* Call Stack (All the functions that are being called are put in here) - LIFO
+* Web API (Web browser and Node JS APIs) - setTimeOut(), fetch()...
+* Micro queue - then(), catch(), finally()... 
+* Macro queue - setInterval
 
+The event loop combines everything together. The javascript code is read line by line from top to bottom, the synchronous code will 
+be put straight away onto the Call Stack and it will be executed. Thenfor any async code, it will be put either on the Macro or Micro queues which will be dealt with later via callbacks.
+The Event loop will always execute in the following order `Call Stack - Micro queue, Macro queue`. Regardless of which one was called first.
+Eg
+```js
+  console.log('1- START');
+
+  setTimeOut(()=>{
+    console.log('2- Macrotask');
+  }, 0);
+  
+  Promise.resolve().then(()=> {
+    console.log('3- Microtask');
+  });
+
+  queueMicrotask(() => console.log('4- Microtask'));
+  
+  console.log('5- END');
+  
+  // The code above will print in the following order
+  // 1- START
+  // 5- END
+  // 3- Microtask
+  // 4- Microtask
+  // 2- Macrotask
+```
 
 
 
