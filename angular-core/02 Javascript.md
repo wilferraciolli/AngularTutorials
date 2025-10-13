@@ -260,6 +260,69 @@ Eg
   // 2- Macrotask
 ```
 
+### Some code samples
+```js
+// String concatenation
+const name = 'Wil';
+const age = 40;
+const message = `Hello ${ name }, you are ${ 40 } years old`;
+
+const text = 'Wiliam';
+const sliced = text.slice(0, 2); // Wil
+const contains = text.includes('Wil'); // true
+```
+```js
+// Array operations
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2]; // combine both arrays onto 1
+const combined = arr1.concat(arr2); // combine both arrays onto 1
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2); // [2,4,6,8,10]
+const even = numbers.map(n => n % 2 === 0); // [2, 4]
+const sum = numbers.reduce((acc, n) => acc + n, 0); // 15
+```
+```js
+// Object destructuring
+const user = { name: 'Wiliam', age: 40, city: 'Nicosia' };
+const { name, age } = user; // will pick name and age from user
+const { city: locaion } = user; // will rename the property city to location
+
+// array destructutring
+const colors = ['red', 'blue', 'green'];
+const [first, second] = colors; // takes first and second value from array
+const [, , third ] = colors; // skip first and seconds, then take the third
+
+// nested destructuring
+const person = {
+  info: { name: 'Bob', age: 25 },
+  hobbies: ['reading', ' gaming']
+};
+const {
+  info: { name: personName}, 
+  hobbies: [firstHobby] 
+} = person;
+```
+```js
+// Spread operators
+const fruits = ['apples', 'bananas'];
+const moreFruits = [...fruits, 'orange']; // adds to end 
+const evenMore = ['grape', ...fruits, 'kiwi']; // adds to middle
+
+const baseConfig = { theme: 'dark', lang: 'en' };
+const userConfig = { ...baseConfig, theme: 'light' }; // overide theme
+const fullConfig = { ...baseConfig, debug: true }; // add a new property
+```
+
+
+
+
+
+
+
+
+
 
 
 
