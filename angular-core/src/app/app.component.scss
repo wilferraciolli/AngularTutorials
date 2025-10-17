@@ -1,12 +1,14 @@
 .main {
-  &-header {
+  &-container {
+    display: flex;
+    flex-direction: column;
   }
 
-  &-spacer {
-    flex: 1 1 auto;
+  &-headerItem {
+    margin-left: auto;
   }
 
-  &-content-container{
+  &-contentContainer {
     gap: 40px;
     margin: 50px;
   }

@@ -1,20 +1,39 @@
-<div class="main-header">
+<div class="main-container">
   <mat-toolbar>
     <button mat-icon-button
+            [matMenuTriggerFor]="menu"
             class="example-icon"
             aria-label="menu aria label">
       <mat-icon>menu</mat-icon>
     </button>
     <span>Angular core examples</span>
-    <span class="main-spacer"></span>
-    <button mat-icon-button
-            class="example-icon"
-            aria-label="icon aria label">
-      <mat-icon>share</mat-icon>
-    </button>
+
+    <div class="main-headerItem">
+      <button mat-icon-button
+              class="example-icon"
+              aria-label="icon aria label">
+        <mat-icon>share</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
 </div>
 
-<div class="main-content-container">
+<div class="main-contentContainer">
   <app-nav-bar/>
+  <router-outlet/>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="navigateTo('services')">
+    <mat-icon>design_services</mat-icon>
+    <span>Services</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>voicemail</mat-icon>
+    <span>Change me</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Change me</span>
+  </button>
+</mat-menu>

@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 export interface ILink {
   label: string;
@@ -16,9 +16,6 @@ export interface ILink {
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
-  private _router: Router = inject(Router);
-
-  // public links: string[] = ['Pipes', 'Directives', 'Routing', 'Providers'];
   public links: ILink[] = [
     {
       label: 'Pipes',
