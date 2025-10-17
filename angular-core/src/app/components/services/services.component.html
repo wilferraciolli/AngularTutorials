@@ -6,13 +6,15 @@
               class="services-contentItem">
       <mat-card-header>
         <mat-card-title>Polling Service</mat-card-title>
-        <mat-card-subtitle>Poll using RxJS</mat-card-subtitle>
+        <mat-card-subtitle>Poll using RxJS. This will poll using lastestValueFrom, and will stop polling as soon as the
+          value is not pending, hence it will return either success or failures
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         @if (isLoading()) {
           <mat-progress-bar mode="determinate"
-                            [value]=progress() />
-          <span>Current attempt: {{ currentAttemptCount() }}</span>
+                            [value]=progress()/>
+            <span>Current attempt: {{ currentAttemptCount() }}</span>
         } @else {
           <p> The result is:</p>
           <mat-divider/>
