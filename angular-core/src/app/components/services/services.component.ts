@@ -18,13 +18,18 @@ import {
   tap
 } from 'rxjs';
 import { IModel } from './model.interface';
+import { PollingPendingComponent } from './polling-pending/polling-pending.component';
+import { PollingSuccessComponent } from './polling-success/polling-success.component';
 import { ResultCode } from './result-code.constant';
 
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatProgressBarModule, JsonPipe, MatDivider],
+  imports: [
+    MatCardModule, MatButtonModule, MatProgressBarModule, JsonPipe, MatDivider, PollingPendingComponent,
+    PollingSuccessComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss'
