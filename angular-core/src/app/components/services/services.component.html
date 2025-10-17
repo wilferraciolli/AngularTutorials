@@ -11,7 +11,8 @@
       <mat-card-content>
         @if (isLoading()) {
           <mat-progress-bar mode="determinate"
-                            [value]=progress()></mat-progress-bar>
+                            [value]=progress() />
+          <span>Current attempt: {{ currentAttemptCount() }}</span>
         } @else {
           <p> The result is:</p>
           <mat-divider/>

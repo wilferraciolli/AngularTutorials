@@ -38,6 +38,7 @@ export class ServicesComponent {
 
   protected isLoading: WritableSignal<boolean> = signal<boolean>(true);
   protected progress: WritableSignal<number> = signal<number>(this.progressBarMin);
+  protected currentAttemptCount: WritableSignal<number> = signal<number>(0);
 
   protected result: WritableSignal<IModel | null> = signal(null);
 
@@ -73,13 +74,14 @@ export class ServicesComponent {
   // For demo: Returns PENDING for first 3 attempts, then SUCCESS, or ERROR on attempt 5
   private _simulateHttpCall(attempt: number): Observable<IModel | null> {
     this.progress.set((this.progressBarMax / this.retryCont) * attempt);
+    this.currentAttemptCount.set(attempt);
 
     const delayMs = 500; // Simulate slow response time
     let result: IModel;
 
-    if (attempt < 13) {
+    if (attempt < 12) {
       result = { attributes: { resultCode: ResultCode.PENDING } };
-    } else if (attempt === 14) {
+    } else if (attempt === 13) {
       result = { attributes: { resultCode: ResultCode.ERROR, data: 'Simulated error' } };
     } else {
       result = { attributes: { resultCode: ResultCode.SUCCESS, data: 'Simulated success data' } };
