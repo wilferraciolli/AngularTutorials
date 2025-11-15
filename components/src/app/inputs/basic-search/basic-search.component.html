@@ -1,0 +1,20 @@
+<div class="basicSearchInput-container">
+  <h2>Basic search field. It uses debounce time to fire events on debounced time to be used when searching</h2>
+  <h3>In this case it emits an event, however it can be changed so it would be the actual form value</h3>
+
+  <pre>{{ value() }}</pre>
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Type query here</mat-label>
+    <input matInput
+           type="text"
+           [(ngModel)]="value">
+    @if (value()) {
+      <button matSuffix matIconButton
+              aria-label="Clear"
+              (click)="clearField()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+</div>

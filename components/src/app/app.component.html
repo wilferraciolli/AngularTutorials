@@ -1,7 +1,16 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button matIconButton
+          [matMenuTriggerFor]="menu"
+          aria-label="Menu button">
     <mat-icon>menu</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="'basicSearchInput'">
+      <mat-icon>search</mat-icon>
+      <span>Basic search</span>
+    </button>
+  </mat-menu>
+
   <span>Template Components</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
