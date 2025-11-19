@@ -12,11 +12,11 @@ export class StarRatingComponent {
   protected readonly value: WritableSignal<number> = signal(0);
   protected readonly hovered: WritableSignal<number | null> = signal(null);
 
-  protected setRating(value: number): void {
-    if (this.value() === value) {
+  protected setRating(newValue: number): void {
+    if (this.value() === newValue) {
       this.value.set(0);
     } else {
-      this.value.set(value);
+      this.value.set(newValue);
     }
   }
 
