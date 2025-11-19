@@ -9,6 +9,7 @@ import {CardSwiperCubeComponent} from "./business-components/card-swiper-cube/ca
 import {CardSwiperStackComponent} from "./business-components/card-swiper-stack/card-swiper-stack.component";
 import { CardLoaderComponent } from './business-components/loaders/card-loader/card-loader.component';
 import {BasicSearchComponent} from "./inputs/basic-search/basic-search.component";
+import {StarRatingComponent} from "./inputs/star-rating/star-rating.component";
 
 export const routes: Routes = [
   {
@@ -42,5 +43,9 @@ export const routes: Routes = [
   {
     path: 'basicSearchInput',
     component: BasicSearchComponent,
+  },
+  {
+    path: 'starRatingInput',
+    component: StarRatingComponent,
   }
 ];

@@ -1,0 +1,20 @@
+<div
+  role="radioGroup"
+  aria-label="Star Rating"
+  class="StarRating-container">
+  <ng-container>
+    @for (star of [].constructor(star); track $index) {
+      <span class="StarRating-star"
+            role="radio"
+            tabindex="0"
+            [attr.aria-checked]="value() ===  $index + 1"
+            (click)="setRating($index + 1)"
+            (keydown.enter)="setRating( $index + 1)"
+            (mouseenter)="setHover($index + 1)"
+            (mouseleave)="setHover(null)"
+            [class.filled]="$index < (hovered() ?? value())"
+      >  ★
+      </span>
+    }
+  </ng-container>
+</div>
