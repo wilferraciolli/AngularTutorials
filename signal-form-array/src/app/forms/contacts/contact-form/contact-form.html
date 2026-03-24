@@ -1,0 +1,32 @@
+<div class="contact-form-container">
+  <mat-form-field class="contact-form-field">
+    <mat-label>First name</mat-label>
+    <input matInput
+           [formField]="contactForm.firstName"/>
+  </mat-form-field>
+
+
+  <mat-form-field class="contact-form-field">
+    <mat-label>Email</mat-label>
+    <input matInput type="email"
+           [formField]="contactForm.email"/>
+  </mat-form-field>
+
+  <mat-form-field class="contact-form-field">
+    <mat-label>Phone (optional)</mat-label>
+    <input matInput type="tel"
+           [formField]="contactForm.phone"/>
+  </mat-form-field>
+
+  <div class="contact-form-actions-container">
+    <button mat-flat-button (click)="handleSubmit()">Save</button>
+    <button matButton="outlined" (click)="clearForm()">Clear</button>
+  </div>
+
+  <mat-divider></mat-divider>
+  <pre>
+  {{
+      contactModel() | json
+    }}
+</pre>
+</div>
