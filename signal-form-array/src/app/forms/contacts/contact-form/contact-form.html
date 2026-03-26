@@ -3,23 +3,50 @@
     <mat-label>First name</mat-label>
     <input matInput
            [formField]="contactForm.firstName"/>
+    @if (contactForm.firstName().touched() && contactForm.firstName().invalid()) {
+      @for (error of contactForm.firstName().errors(); track error.kind) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
   </mat-form-field>
 
+  <mat-form-field class="contact-form-field">
+    <mat-label>Last name</mat-label>
+    <input matInput
+           [formField]="contactForm.lastName"/>
+    @if (contactForm.lastName().touched() && contactForm.lastName().invalid()) {
+      @for (error of contactForm.lastName().errors(); track error.kind) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
+  </mat-form-field>
 
   <mat-form-field class="contact-form-field">
     <mat-label>Email</mat-label>
     <input matInput type="email"
            [formField]="contactForm.email"/>
+    @if (contactForm.email().touched() && contactForm.email().invalid()) {
+      @for (error of contactForm.email().errors(); track error.kind) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field class="contact-form-field">
     <mat-label>Phone (optional)</mat-label>
     <input matInput type="tel"
            [formField]="contactForm.phone"/>
+    @if (contactForm.phone().touched() && contactForm.phone().invalid()) {
+      @for (error of contactForm.phone().errors(); track error.kind) {
+        <mat-error>{{ error.message }}</mat-error>
+      }
+    }
   </mat-form-field>
 
   <div class="contact-form-actions-container">
-    <button mat-flat-button (click)="handleSubmit()">Save</button>
+    <button mat-flat-button
+            [disabled]="contactForm().invalid()"
+            (click)="handleSubmit()">Save</button>
     <button matButton="outlined" (click)="clearForm()">Clear</button>
   </div>
 

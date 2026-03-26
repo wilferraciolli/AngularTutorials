@@ -2,7 +2,7 @@ import {Component, signal} from '@angular/core';
 import {form, FormField} from '@angular/forms/signals';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ContactData} from '../models/contact';
+import {ContactData, contactSchema} from '../models/contact';
 import {MatButton} from '@angular/material/button';
 import {JsonPipe} from '@angular/common';
 import {MatDivider} from '@angular/material/list';
@@ -26,16 +26,23 @@ export class ContactForm {
     firstName: '',
     lastName:  '',
     email:     '',
-    phone:     '',   // null = empty optional field
+    phone:     ''
   });
 
   // 2. The form — wraps the signal, creates the FieldTree
-  protected readonly contactForm = form(this.contactModel);
+  protected readonly contactForm = form(
+    this.contactModel,
+    contactSchema);
 
   // 3. Read data at submit time directly from the signal
   protected handleSubmit(): void {
-    const data: ContactData = this.contactModel();
-    console.log(data);
+    const root = this.contactForm();
+    // Only submit if the whole form is valid
+    if (root.invalid()) {
+      root.errorSummary().forEach(e => console.warn(e.message));
+      return;
+    }
+    console.log('Submitted:', this.contactModel());
   }
 
   protected clearForm(): void {
@@ -44,7 +51,10 @@ export class ContactForm {
       lastName: '',
       email: '',
       phone: ''
-    })
+    });
+
+    // Reset touched/dirty state so error messages disappear
+    this.contactForm().reset();
   }
 
   protected readonly form = form;
