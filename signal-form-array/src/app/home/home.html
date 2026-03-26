@@ -1,0 +1,37 @@
+<div class="home-container">
+  <div class="home-header">
+    <h1 class="home-title">Angular 21 Signal Forms</h1>
+    <p class="home-subtitle">
+      A collection of examples demonstrating the new <code>@angular/forms/signals</code> API.
+      Click a card to explore each scenario.
+    </p>
+  </div>
+
+  <div class="home-grid">
+    @for (card of cards; track card.route) {
+      <mat-card class="home-card" matRipple (click)="navigate(card.route)">
+        <mat-card-header>
+          <div class="home-card-icon" mat-card-avatar>
+            <mat-icon>{{ card.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ card.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <span class="home-card-badge home-card-badge--{{ card.badgeColor }}">
+              {{ card.badge }}
+            </span>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{ card.description }}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <span class="home-card-link">
+            View example <mat-icon inline>arrow_forward</mat-icon>
+          </span>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</div>

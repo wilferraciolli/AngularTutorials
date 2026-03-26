@@ -9,14 +9,14 @@
     width: 100%;
     gap: 20px;
     box-sizing: border-box; // Ensures padding doesn't cause overflow
-    background-color: aqua;
+    //background-color: aqua;
   }
 
   &-field {
     width: 100%; // Full viewport width
     max-width: 600px; // Optional: limit max width for better UX
     box-sizing: border-box;
-    background-color: beige;
+    //background-color: beige;
   }
 
   &-actions-container {

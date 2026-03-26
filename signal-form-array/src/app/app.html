@@ -1,2 +1,17 @@
+<mat-toolbar class="app-navbar" color="primary">
+  <a routerLink="/" class="app-navbar-brand">
+    <mat-icon>dynamic_form</mat-icon>
+    <span>{{ title() }}</span>
+  </a>
 
-<router-outlet />
+  <span class="app-navbar-spacer"></span>
+
+  <a mat-button routerLink="/">
+    <mat-icon>home</mat-icon>
+    Home
+  </a>
+</mat-toolbar>
+
+<main class="app-content">
+  <router-outlet />
+</main>
