@@ -7,6 +7,22 @@ export interface CrossFieldDataForm {
   dateOfBirth: string;
 }
 
+function calculateAge(isoDate: string): number {
+  const today: Date = new Date();
+  const dob: Date = new Date(isoDate + 'T00:00:00');
+
+  let age: number = today.getFullYear() - dob.getFullYear();
+
+  // If birthday hasn't occurred yet this year, subtract one year
+  const hasBirthdayPassed: boolean =
+    today.getMonth() > dob.getMonth() ||
+    (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+
+  if (!hasBirthdayPassed) age--;
+
+  return age;
+}
+
 export const crossFieldSchema = schema<CrossFieldDataForm>((path) => {
   required(path.username, {message: 'Username is required'});
   minLength(path.username, 2, {message: 'Username must be at least 2 characters'});
@@ -25,20 +41,40 @@ export const crossFieldSchema = schema<CrossFieldDataForm>((path) => {
 
   required(path.dateOfBirth, {message: 'Date of birth is required'});
 
-  // ✅ Cross-field validator: runs at the ROOT level, reads both fields
+  // Cross-field validator: runs at the ROOT level, reads both fields
   validateTree(path, ({valueOf, fieldTreeOf}) => {
-    const password = valueOf(path.password);
-    const confirmPassword = valueOf(path.confirmPassword);
+    const errors: ValidationError.WithOptionalFieldTree[] = [];
 
-    // Only check if confirmPassword has a value (required handles the empty case)
+    // password matches
+    const password: string = valueOf(path.password);
+    const confirmPassword: string = valueOf(path.confirmPassword);
+
+    // 1 - Only check if confirmPassword has a value (required handles the empty case)
     if (confirmPassword && password !== confirmPassword) {
-      return {
-        kind: 'passwordMismatch',
-        message: 'Passwords do not match',
-        fieldTree: fieldTreeOf(path.confirmPassword),  // ← targets the confirmPassword field
-      };
+      errors.push(
+        {
+          kind: 'passwordMismatch',
+          message: 'Passwords do not match',
+          fieldTree: fieldTreeOf(path.confirmPassword),  // ← targets the confirmPassword field
+        });
     }
 
-    return null;
+    // 2. Minimum age (18)
+    const dateOfBirth = valueOf(path.dateOfBirth);
+
+    if (dateOfBirth) {
+      const age = calculateAge(dateOfBirth);
+      if (age < 18) {
+        errors.push({
+          kind: 'minAge',
+          message: `You must be at least 18 years old (age: ${age})`,
+          fieldTree: fieldTreeOf(path.dateOfBirth),
+        });
+      }
+    }
+
+    return errors.length > 0
+      ? errors
+      : null;
   });
 });

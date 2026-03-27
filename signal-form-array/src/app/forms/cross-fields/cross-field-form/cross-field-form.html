@@ -31,7 +31,7 @@
     <mat-datepicker-toggle matIconSuffix [for]="dobPicker">
       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
     </mat-datepicker-toggle>
-    <mat-datepicker #dobPicker/>
+    <mat-datepicker #dobPicker xPosition="end" yPosition="below"/>
     <app-error-details [formField]="crossFieldForm.dateOfBirth"/>
   </mat-form-field>
 
