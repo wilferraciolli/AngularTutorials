@@ -1,6 +1,6 @@
 import {email, maxLength, minLength, pattern, required, schema} from '@angular/forms/signals';
 
-export interface ContactData {
+export interface ContactDataForm {
   firstName: string;
   lastName: string;
   email: string;
@@ -8,7 +8,7 @@ export interface ContactData {
 }
 
 
-export const contactSchema = schema<ContactData>((path) => {
+export const contactSchema = schema<ContactDataForm>((path) => {
   // firstName: required, 2–50 chars
   required(path.firstName, { message: 'First name is required' });
   minLength(path.firstName, 2, { message: 'First name must be at least 2 characters' });

@@ -1,0 +1,27 @@
+.cross_field-form {
+  &-container {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center horizontally
+    justify-content: center; // Center vertically
+    min-height: 100vh; // Full viewport height
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box; // Ensures padding doesn't cause overflow
+    //background-color: aqua;
+  }
+
+  &-field {
+    width: 100%; // Full viewport width
+    max-width: 600px; // Optional: limit max width for better UX
+    box-sizing: border-box;
+    //background-color: beige;
+  }
+
+  &-actions-container {
+    display: flex;
+    gap: 20px;
+    //background-color: aqua;
+  }
+}

@@ -1,8 +1,8 @@
-import {Component, signal} from '@angular/core';
-import {form, FormField, ValidationError} from '@angular/forms/signals';
+import {Component, signal, WritableSignal} from '@angular/core';
+import {FieldState, FieldTree, form, FormField} from '@angular/forms/signals';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {ContactData, contactSchema} from '../models/contact';
+import {ContactDataForm, contactSchema} from '../models/contact-data.form';
 import {MatButton} from '@angular/material/button';
 import {JsonPipe} from '@angular/common';
 import {MatDivider} from '@angular/material/list';
@@ -24,30 +24,21 @@ import {ErrorDetails} from '../../shared/error-details/error-details';
 })
 export class ContactForm {
   // 1. The writable signal — single source of truth
-  protected readonly contactModel = signal<ContactData>({
+  protected readonly contactModel: WritableSignal<ContactDataForm> = signal<ContactDataForm>({
     firstName: '',
     lastName: '',
     email: '',
     phone: ''
   });
 
-  protected firsNameErrors(): ValidationError.WithFieldTree[] {
-    if (this.contactForm.firstName().touched()
-      && this.contactForm.firstName().invalid()) {
-      return this.contactForm.firstName().errors();
-    }
-
-    return [];
-  }
-
   // 2. The form — wraps the signal, creates the FieldTree
-  protected readonly contactForm = form(
+  protected readonly contactForm: FieldTree<ContactDataForm> = form(
     this.contactModel,
     contactSchema);
 
   // 3. Read data at submit time directly from the signal
   protected handleSubmit(): void {
-    const root = this.contactForm();
+    const root: FieldState<ContactDataForm> = this.contactForm();
     // Only submit if the whole form is valid
     if (root.invalid()) {
       root.errorSummary().forEach(e => console.warn(e.message));
@@ -67,8 +58,4 @@ export class ContactForm {
     // Reset touched/dirty state so error messages disappear
     this.contactForm().reset();
   }
-
-  protected readonly form = form;
-
-
 }
