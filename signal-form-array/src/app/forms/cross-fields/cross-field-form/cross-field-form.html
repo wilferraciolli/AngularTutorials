@@ -1,33 +1,41 @@
-<div class="cross_field-form-container">
-  <mat-form-field class="cross_field-form-field">
+<div class="cross-field-form-container">
+  <mat-form-field class="cross-field-form-field">
     <mat-label>username</mat-label>
     <input matInput
            [formField]="crossFieldForm.username"/>
     <app-error-details [formField]="crossFieldForm.username"/>
   </mat-form-field>
 
-  <mat-form-field class="cross_field-form-field">
+  <mat-form-field class="cross-field-form-field">
     <mat-label>Password</mat-label>
     <input matInput
            [formField]="crossFieldForm.password"/>
     <app-error-details [formField]="crossFieldForm.password"/>
   </mat-form-field>
 
-  <mat-form-field class="cross_field-form-field">
+  <mat-form-field class="cross-field-form-field">
     <mat-label>Confirm password</mat-label>
     <input matInput type="email"
            [formField]="crossFieldForm.confirmPassword"/>
     <app-error-details [formField]="crossFieldForm.confirmPassword"/>
   </mat-form-field>
 
-  <mat-form-field class="cross_field-form-field">
+  <mat-form-field class="cross-field-form-field">
     <mat-label>Date of birth</mat-label>
-    <input matInput type="tel"
-           [formField]="crossFieldForm.dateOfBirth"/>
+    <input matInput
+           [matDatepicker]="dobPicker"
+           [value]="dateOfBirthAsDate"
+           (dateChange)="onDateChange($event)"
+           (blur)="crossFieldForm.dateOfBirth().markAsTouched()"/>
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="dobPicker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #dobPicker/>
     <app-error-details [formField]="crossFieldForm.dateOfBirth"/>
   </mat-form-field>
 
-  <div class="cross_field-form-actions-container">
+  <div class="cross-field-form-actions-container">
     <button mat-flat-button
             [disabled]="crossFieldForm().invalid()"
             (click)="handleSubmit()">Save

@@ -5,7 +5,15 @@ import {ErrorDetails} from '../../shared/error-details/error-details';
 import {JsonPipe} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {MatDivider} from '@angular/material/list';
-import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {MatFormField, MatHint, MatInput, MatLabel, MatSuffix} from '@angular/material/input';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerInputEvent,
+  MatDatepickerToggle,
+  MatDatepickerToggleIcon
+} from '@angular/material/datepicker';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-cross-field-form',
@@ -17,7 +25,15 @@ import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
     MatFormField,
     MatInput,
     MatLabel,
-    FormField
+    FormField,
+    MatDatepickerInput,
+    MatHint,
+    MatDatepicker,
+    MatIcon,
+    MatHint,
+    MatSuffix,
+    MatDatepickerToggle,
+    MatDatepickerToggleIcon,
   ],
   templateUrl: './cross-field-form.html',
   styleUrl: './cross-field-form.scss',
@@ -35,6 +51,30 @@ export class CrossFieldForm {
   protected readonly crossFieldForm: FieldTree<CrossFieldDataForm> = form(
     this.crossFieldModel,
     crossFieldSchema);
+
+  // method to convert a date to a String
+  protected get dateOfBirthAsDate(): Date | null {
+    const iso = this.crossFieldForm.dateOfBirth().value();
+
+    if (!iso) {
+      return null;
+    }
+
+    const date: Date = new Date(iso + 'T00:00:00');
+
+    return isNaN(date.getTime())
+      ? null
+      : date;
+  }
+
+  protected onDateChange(event: MatDatepickerInputEvent<Date>): void {
+    const date = event.value;
+    const iso = date ? date.toISOString().substring(0, 10) : '';
+
+    this.crossFieldForm.dateOfBirth().value.set(iso);
+    this.crossFieldForm.dateOfBirth().markAsTouched();
+    this.crossFieldForm.dateOfBirth().markAsDirty();
+  }
 
   // 3. Read data at submit time directly from the signal
   protected handleSubmit(): void {
