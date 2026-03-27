@@ -1,4 +1,4 @@
-import {maxLength, minLength, pattern, required, schema} from '@angular/forms/signals';
+import {maxLength, minLength, pattern, required, schema, validateTree, ValidationError} from '@angular/forms/signals';
 
 export interface CrossFieldDataForm {
   username: string;
@@ -24,4 +24,21 @@ export const crossFieldSchema = schema<CrossFieldDataForm>((path) => {
   maxLength(path.confirmPassword, 20, {message: 'Confirm password cannot exceed 20 characters'});
 
   required(path.dateOfBirth, {message: 'Date of birth is required'});
+
+  // ✅ Cross-field validator: runs at the ROOT level, reads both fields
+  validateTree(path, ({valueOf, fieldTreeOf}) => {
+    const password = valueOf(path.password);
+    const confirmPassword = valueOf(path.confirmPassword);
+
+    // Only check if confirmPassword has a value (required handles the empty case)
+    if (confirmPassword && password !== confirmPassword) {
+      return {
+        kind: 'passwordMismatch',
+        message: 'Passwords do not match',
+        fieldTree: fieldTreeOf(path.confirmPassword),  // ← targets the confirmPassword field
+      };
+    }
+
+    return null;
+  });
 });
