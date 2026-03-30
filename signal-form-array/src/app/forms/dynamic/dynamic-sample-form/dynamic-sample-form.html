@@ -1,0 +1,17 @@
+<mat-tab-group>
+  <mat-tab label="Flighs">
+    <app-dynamic-form
+      [metaInfo]="flightFormConfig"
+      [dynamicForm]="flightsForm"
+    />
+  </mat-tab>
+
+  <mat-tab label="Appointments">
+    <app-dynamic-form
+      [metaInfo]="appointmentFormConfig"
+      [dynamicForm]="appointmentsForm"
+    />
+  </mat-tab>
+
+  <mat-tab label="Third"> Content 3</mat-tab>
+</mat-tab-group>

@@ -1,0 +1,18 @@
+@for (fieldDef of metaInfo(); track fieldDef.name) {
+  @let field = $any(dynamicForm())[fieldDef.name];
+
+  <div class="form-group">
+    <label>
+      {{fieldDef.label}}
+      <input
+        [type]=fieldDef.type
+        [formField]="field"
+        [class.form-control]="fieldDef.type !== 'checkbox'"
+      />
+    </label>
+
+    <app-error-details [formField]="field" />
+
+  </div>
+
+}

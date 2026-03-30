@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {FieldDef} from '../forms/dynamic/interfaces/field-definition';
 
 @Component({
   selector: 'app-home',
@@ -56,6 +57,15 @@ export class Home {
         'Fields validated against a server — e.g. username availability check with debounce and pending state.',
       icon: 'cloud_sync',
       route: '/forms/async',
+      badge: 'Advanced',
+      badgeColor: 'warn',
+    },
+    {
+      title: 'Dynamic Form & Schema',
+      description:
+        'Using form config to create form and validation.',
+      icon: 'schema',
+      route: '/forms/dynamic-form',
       badge: 'Advanced',
       badgeColor: 'warn',
     },
