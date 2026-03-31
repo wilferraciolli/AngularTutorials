@@ -4,10 +4,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DynamicForm} from '../dynamic-form/dynamic-form';
 import {form} from '@angular/forms/signals';
 import {toSchema} from '../dynamic-form.utils';
+import {FormFieldType} from '../form-field.constant';
+import {JsonPipe} from '@angular/common';
+import {MatDivider} from '@angular/material/list';
 
 @Component({
   selector: 'app-dynamic-sample-form',
-  imports: [MatTabsModule, DynamicForm],
+  imports: [MatTabsModule, DynamicForm, JsonPipe, MatDivider],
   templateUrl: './dynamic-sample-form.html',
   styleUrl: './dynamic-sample-form.scss',
 })
@@ -15,17 +18,18 @@ export class DynamicSampleForm {
   // ******************************************** FLIGHTS *****************************************************
   // FLIGHTS: form config
   protected readonly flightFormConfig: FieldDef[] = [
-    {name: 'id', label: 'Id', required: true},
+    {name: 'id', type: FormFieldType.TEXT, label: 'Id', required: true},
     {
       name: 'from',
+      type: FormFieldType.TEXT,
       label: 'From',
       required: true,
       minLength: 3,
       maxLength: 20,
     },
-    {name: 'to', label: 'To', required: true, minLength: 3, maxLength: 20},
-    {name: 'date', label: 'Date', required: true, type: 'datetime-local'},
-    {name: 'delayed', label: 'Delayed', type: 'checkbox'}
+    {name: 'to', type: FormFieldType.TEXT, label: 'To', required: true, minLength: 3, maxLength: 20},
+    {name: 'date', type: FormFieldType.DATE_TIME, label: 'Date', required: true},
+    {name: 'delayed', type: FormFieldType.CHECKBOX, label: 'Delayed'}
   ];
   // FLIGHTS: initial state
   private readonly flightEntity: WritableSignal<unknown> = signal({
@@ -39,14 +43,15 @@ export class DynamicSampleForm {
   // ******************************************** APPOINTMENT *****************************************************
   // APPOINTMENT: form config
   protected readonly appointmentFormConfig: FieldDef[] = [
-    {name: 'id', label: 'Id', required: true},
-    {name: 'name', label: 'Name', required: true, minLength: 3, maxLength: 30},
-    {name: 'startDate', label: 'Start Day', required: true, type: 'datetime-local'},
-    {name: 'endDate', label: 'End Day', required: true, type: 'datetime-local'}
+    {name: 'id', type: FormFieldType.TEXT, label: 'Id', required: true},
+    {name: 'name', type: FormFieldType.TEXT, label: 'Name', required: true, minLength: 3, maxLength: 30},
+    {name: 'startDate', type: FormFieldType.DATE, label: 'Start Day', required: true},
+    {name: 'endDate', type: FormFieldType.TIME, label: 'End Day', required: true},
+    {name: 'duration', type: FormFieldType.NUMBER, label: 'Duration', required: true}
   ];
   // APPOINTMENT: initial state
   private readonly appointmentEntity: WritableSignal<unknown> = signal({
-    id: '', name: '',  startDate: '', endDate: ''
+    id: '', name: '', startDate: '', endDate: '', duration: 0
   });
   // APPOINTMENT: form
   protected readonly appointmentsForm = form(
