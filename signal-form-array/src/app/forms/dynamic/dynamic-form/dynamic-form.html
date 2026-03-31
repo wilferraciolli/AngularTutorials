@@ -2,46 +2,61 @@
   @for (fieldDef of metaInfo(); track fieldDef.name) {
     @let field = $any(dynamicForm())[fieldDef.name];
 
-    <div class="dynamic-form-field">
-      @if (fieldDef.type === 'radio' && fieldDef.options) {
-        <!-- Radio button group -->
-        <fieldset class="dynamic-form-radio-group">
-          <legend class="dynamic-form-radio-legend">{{ fieldDef.label }}</legend>
-          @for (option of fieldDef.options; track option.value) {
-            <label class="dynamic-form-radio-option">
-              <input
-                [type]=fieldDef.type
-                [name]="fieldDef.name"
-                [checked]="field().value() === option.value"
-                (change)="field().value.set(option.value)"
-              />
-              {{ option.label }}
-            </label>
-          }
-        </fieldset>
-      } @else {
-        <label>
-          {{ fieldDef.label }}
-          <input
-            [type]=fieldDef.type
-            [formField]="field"
-            [class.dynamic-form-control]="fieldDef.type !== 'checkbox'"
-          />
-        </label>
-      }
+    @if (!fieldDef.hidden) {
+      <div class="dynamic-form-field">
+        @if (fieldDef.type === 'radio' && fieldDef.options) {
+          <!-- Radio button group -->
+          <fieldset class="dynamic-form-radio-group"
+                    [disabled]="fieldDef.disabled">
+            <legend class="dynamic-form-radio-legend">{{ fieldDef.label }}</legend>
+            @for (option of fieldDef.options; track option.value) {
+              <label class="dynamic-form-radio-option">
+                <input
+                  [type]=fieldDef.type
+                  [name]="fieldDef.name"
+                  [checked]="field().value() === option.value"
+                  (change)="field().value.set(option.value)"
+                />
+                {{ option.label }}
+              </label>
+            }
+          </fieldset>
+        } @else if (fieldDef.type === 'select' && fieldDef.options) {
+          <!-- dropdown select -->
+          <label>
+            {{ fieldDef.label }}
+            <select
+              [formField]="field"
+              class="dynamic-form-control">
+              @for (option of fieldDef.options; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </label>
+        } @else {
+          <label>
+            {{ fieldDef.label }}
+            <input
+              [type]=fieldDef.type
+              [formField]="field"
+              [class.dynamic-form-control]="fieldDef.type !== 'checkbox'"
+            />
+          </label>
+        }
 
-      <!--    <label [for]="fieldDef.name"> {{ fieldDef.label }} </label>-->
-      <!--    <input-->
-      <!--      [id]="fieldDef.name"-->
-      <!--      [type]=fieldDef.type-->
-      <!--      [formField]="field"-->
-      <!--      [class.form-control]="fieldDef.type !== 'checkbox'"-->
-      <!--    />-->
+        <!--    <label [for]="fieldDef.name"> {{ fieldDef.label }} </label>-->
+        <!--    <input-->
+        <!--      [id]="fieldDef.name"-->
+        <!--      [type]=fieldDef.type-->
+        <!--      [formField]="field"-->
+        <!--      [class.form-control]="fieldDef.type !== 'checkbox'"-->
+        <!--    />-->
 
 
-      <app-error-details [formField]="field"/>
+        <app-error-details [formField]="field"/>
 
-    </div>
+      </div>
+    }
   }
 
   <div class="dynamic-form-actions-container">

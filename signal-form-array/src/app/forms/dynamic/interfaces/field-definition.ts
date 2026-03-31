@@ -14,4 +14,7 @@ export interface FieldDef {
   minLength?: number;
   maxLength?: number;
   options?: FieldOption[];  // For radio buttons and select dropdowns
+
+  hidden?: boolean;         // Hide the field from display
+  disabled?: boolean;       // Disable the field (read-only)
 }

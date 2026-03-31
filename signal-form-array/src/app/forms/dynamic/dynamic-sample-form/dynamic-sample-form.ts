@@ -22,7 +22,7 @@ export class DynamicSampleForm {
   protected readonly flightFormConfig: SchemaConfig<FlightSchema> = defineSchema<FlightSchema>({
     schemaType: 'flight',
     fields: [
-      {name: 'id', type: FormFieldType.TEXT, label: 'Id', required: true},
+      {name: 'id', type: FormFieldType.TEXT, label: 'Id', disabled: true, hidden: true},
       {
         name: 'from',
         type: FormFieldType.TEXT,
@@ -63,7 +63,7 @@ export class DynamicSampleForm {
   protected readonly appointmentFormConfig = defineSchema<AppointmentSchema>({
     schemaType: 'appointment',
     fields: [
-      {name: 'id', type: FormFieldType.TEXT, label: 'Id', required: true},
+      {name: 'id', type: FormFieldType.TEXT, label: 'Id', disabled: true, hidden: true},
       {name: 'name', type: FormFieldType.TEXT, label: 'Name', required: true, minLength: 3, maxLength: 30},
       {name: 'startDate', type: FormFieldType.DATE, label: 'Start Day', required: true},
       {name: 'startTime', type: FormFieldType.TIME, label: 'StartTime', required: true},
@@ -99,7 +99,7 @@ export class DynamicSampleForm {
   protected readonly allFieldsFormConfig = defineSchema<AllFieldsSchema>({
     schemaType: 'allFields',
     fields: [
-      {name: 'id', type: FormFieldType.TEXT, label: 'ID', required: true},
+      {name: 'id', type: FormFieldType.TEXT, label: 'Id', disabled: true, hidden: true},
       {name: 'schemaType', type: FormFieldType.TEXT, label: 'Schema Type', required: true},
       {name: 'username', type: FormFieldType.TEXT, label: 'Username', required: true, minLength: 3, maxLength: 20},
       {name: 'password', type: FormFieldType.PASSWORD, label: 'Password', required: true, minLength: 8},
@@ -113,10 +113,27 @@ export class DynamicSampleForm {
         label: 'Gender',
         required: true,
         options: [
-          { label: 'Male', value: 'male' },
-          { label: 'Female', value: 'female' },
-          { label: 'Other', value: 'other' },
-          { label: 'Prefer not to say', value: 'not_specified' }
+          {label: 'Male', value: 'male'},
+          {label: 'Female', value: 'female'},
+          {label: 'Other', value: 'other'},
+          {label: 'Prefer not to say', value: 'not_specified'}
+        ]
+      },
+      {
+        name: 'country',
+        type: FormFieldType.SELECT,
+        label: 'Country',
+        required: true,
+        options: [
+          {label: 'Select a country...', value: ''},
+          {label: 'United States', value: 'us'},
+          {label: 'United Kingdom', value: 'uk'},
+          {label: 'Canada', value: 'ca'},
+          {label: 'Australia', value: 'au'},
+          {label: 'Germany', value: 'de'},
+          {label: 'France', value: 'fr'},
+          {label: 'Japan', value: 'jp'},
+          {label: 'Other', value: 'other'}
         ]
       },
       {name: 'acceptTerms', type: FormFieldType.CHECKBOX, label: 'Accept Terms & Conditions', required: true},
@@ -131,6 +148,7 @@ export class DynamicSampleForm {
       appointmentTime: '',
       eventDateTime: '',
       gender: 'not_specified',
+      country: '',
       acceptTerms: false,
       age: 0,
       satisfaction: 5

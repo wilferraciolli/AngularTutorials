@@ -30,6 +30,7 @@ export interface AllFieldsSchema extends BaseSchema {
   appointmentTime: string;    // TIME
   eventDateTime: string;      // DATE_TIME
   gender: string;             // RADIO (handle options separately)
+  country: string;            // SELECT
   acceptTerms: boolean;       // CHECKBOX
   age: number;                // NUMBER
   satisfaction: number;       // RANGE

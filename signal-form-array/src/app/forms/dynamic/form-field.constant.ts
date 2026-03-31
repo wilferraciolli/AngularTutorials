@@ -9,4 +9,5 @@ export enum FormFieldType {
   CHECKBOX = 'checkbox',
   NUMBER = 'number',
   RANGE = 'range',
+  SELECT = 'select'
 }
