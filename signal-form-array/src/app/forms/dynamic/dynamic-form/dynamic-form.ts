@@ -4,6 +4,7 @@ import {FieldDef} from '../interfaces/field-definition';
 import {ErrorDetails} from '../../shared/error-details/error-details';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButton} from '@angular/material/button';
+import {BaseSchema} from '../interfaces/base.schema';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -16,13 +17,12 @@ import {MatButton} from '@angular/material/button';
   templateUrl: './dynamic-form.html',
   styleUrl: './dynamic-form.scss',
 })
-export class DynamicForm {
-  // form config
-  metaInfo: InputSignal<FieldDef[]> = input.required<FieldDef[]>();
-  dynamicForm: InputSignal<FieldTree<unknown>> = input.required<FieldTree<unknown>>();
+export class DynamicForm<T extends BaseSchema = BaseSchema> {
+  public metaInfo: InputSignal<FieldDef[]> = input.required<FieldDef[]>();
+  public dynamicForm: InputSignal<FieldTree<T>> = input.required<FieldTree<T>>();
 
-  onFormSubmit = output<void>();
-  onFormClear = output<void>();
+  public onFormSubmit = output<void>();
+  public onFormClear = output<void>();
 
   protected handleSubmit(): void {
     const fieldTree: FieldTree<unknown> = this.dynamicForm();  // Get the FieldTree from InputSignal

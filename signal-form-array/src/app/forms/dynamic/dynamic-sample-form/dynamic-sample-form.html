@@ -1,7 +1,7 @@
 <mat-tab-group>
   <mat-tab label="Flighs">
     <app-dynamic-form
-      [metaInfo]="flightFormConfig"
+      [metaInfo]="flightFormConfig.fields"
       [dynamicForm]="flightsForm"
       (onFormClear)="handleClearFlightForm()"
       (onFormSubmit)="handleFlightSubmit()"
@@ -13,7 +13,7 @@
 
   <mat-tab label="Appointments">
     <app-dynamic-form
-      [metaInfo]="appointmentFormConfig"
+      [metaInfo]="appointmentFormConfig.fields"
       [dynamicForm]="appointmentsForm"
       (onFormClear)="handleClearAppointmentForm()"
       (onFormSubmit)="handleAppointmentSubmit()"
