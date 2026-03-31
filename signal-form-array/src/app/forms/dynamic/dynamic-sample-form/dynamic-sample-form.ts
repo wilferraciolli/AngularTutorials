@@ -7,7 +7,7 @@ import {createEmptyEntity, defineSchema, toSchema} from '../dynamic-form.utils';
 import {FormFieldType} from '../form-field.constant';
 import {JsonPipe} from '@angular/common';
 import {MatDivider} from '@angular/material/list';
-import {AppointmentSchema, FlightSchema} from '../interfaces/schema-definition.schema';
+import {AllFieldsSchema, AppointmentSchema, FlightSchema} from '../interfaces/schema-definition.schema';
 import {SchemaConfig} from '../interfaces/base.schema';
 
 @Component({
@@ -92,5 +92,60 @@ export class DynamicSampleForm {
   protected handleAppointmentSubmit() {
     console.log('Submitted:', this.appointmentEntity());
     this.flightsForm().reset();
+  }
+
+  // ******************************************** ALL FIELDS DEMO *****************************************************
+  // ALL FIELDS: form config - demonstrates every field type
+  protected readonly allFieldsFormConfig = defineSchema<AllFieldsSchema>({
+    schemaType: 'allFields',
+    fields: [
+      {name: 'id', type: FormFieldType.TEXT, label: 'ID', required: true},
+      {name: 'schemaType', type: FormFieldType.TEXT, label: 'Schema Type', required: true},
+      {name: 'username', type: FormFieldType.TEXT, label: 'Username', required: true, minLength: 3, maxLength: 20},
+      {name: 'password', type: FormFieldType.PASSWORD, label: 'Password', required: true, minLength: 8},
+      {name: 'searchQuery', type: FormFieldType.SEARCH, label: 'Search Query', maxLength: 50},
+      {name: 'birthDate', type: FormFieldType.DATE, label: 'Birth Date', required: true},
+      {name: 'appointmentTime', type: FormFieldType.TIME, label: 'Appointment Time', required: true},
+      {name: 'eventDateTime', type: FormFieldType.DATE_TIME, label: 'Event Date & Time', required: true},
+      {name: 'gender', type: FormFieldType.RADIO, label: 'Gender', required: true},
+      {name: 'acceptTerms', type: FormFieldType.CHECKBOX, label: 'Accept Terms & Conditions', required: true},
+      {name: 'age', type: FormFieldType.NUMBER, label: 'Age', required: true},
+      {name: 'satisfaction', type: FormFieldType.RANGE, label: 'Satisfaction Level (1-10)'}
+    ],
+    initialValue: createEmptyEntity<AllFieldsSchema>('allFields', {
+      username: '',
+      password: '',
+      searchQuery: '',
+      birthDate: '',
+      appointmentTime: '',
+      eventDateTime: '',
+      gender: '',
+      acceptTerms: false,
+      age: 0,
+      satisfaction: 5
+    })
+  });
+
+  // ALL FIELDS: initial state
+  protected readonly allFieldsEntity: WritableSignal<AllFieldsSchema> = signal(
+    this.allFieldsFormConfig.initialValue
+  );
+
+  // ALL FIELDS: form
+  protected readonly allFieldsForm = form(
+    this.allFieldsEntity,
+    toSchema<AllFieldsSchema>(this.allFieldsFormConfig.fields)
+  );
+
+  protected handleClearAllFieldsForm(): void {
+    this.allFieldsEntity.set(this.allFieldsFormConfig.initialValue);
+    this.allFieldsForm().reset();
+  }
+
+  protected handleAllFieldsSubmit() {
+    console.log('All Fields Form Submitted:', this.allFieldsEntity());
+    const data = this.allFieldsEntity();
+    console.log(`Username: ${data.username}, Age: ${data.age}, Gender: ${data.gender}`);
+    this.allFieldsForm().reset();
   }
 }

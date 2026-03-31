@@ -19,8 +19,26 @@ export interface AppointmentSchema extends BaseSchema {
 }
 
 /**
+ * Comprehensive demo schema that uses all available field types
+ */
+export interface AllFieldsSchema extends BaseSchema {
+  schemaType: 'allFields';
+  username: string;           // TEXT
+  password: string;           // PASSWORD
+  searchQuery: string;        // SEARCH
+  birthDate: string;          // DATE
+  appointmentTime: string;    // TIME
+  eventDateTime: string;      // DATE_TIME
+  gender: string;             // RADIO (handle options separately)
+  acceptTerms: boolean;       // CHECKBOX
+  age: number;                // NUMBER
+  satisfaction: number;       // RANGE
+}
+
+/**
  * Union type of all available schemas
  */
 export type EntitySchema =
   FlightSchema
-  | AppointmentSchema;
+  | AppointmentSchema
+  | AllFieldsSchema;
