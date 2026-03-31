@@ -3,14 +3,32 @@
     @let field = $any(dynamicForm())[fieldDef.name];
 
     <div class="dynamic-form-field">
-      <label>
-        {{ fieldDef.label }}
-        <input
-          [type]=fieldDef.type
-          [formField]="field"
-          [class.dynamic-form-control]="fieldDef.type !== 'checkbox'"
-        />
-      </label>
+      @if (fieldDef.type === 'radio' && fieldDef.options) {
+        <!-- Radio button group -->
+        <fieldset class="dynamic-form-radio-group">
+          <legend class="dynamic-form-radio-legend">{{ fieldDef.label }}</legend>
+          @for (option of fieldDef.options; track option.value) {
+            <label class="dynamic-form-radio-option">
+              <input
+                [type]=fieldDef.type
+                [name]="fieldDef.name"
+                [checked]="field().value() === option.value"
+                (change)="field().value.set(option.value)"
+              />
+              {{ option.label }}
+            </label>
+          }
+        </fieldset>
+      } @else {
+        <label>
+          {{ fieldDef.label }}
+          <input
+            [type]=fieldDef.type
+            [formField]="field"
+            [class.dynamic-form-control]="fieldDef.type !== 'checkbox'"
+          />
+        </label>
+      }
 
       <!--    <label [for]="fieldDef.name"> {{ fieldDef.label }} </label>-->
       <!--    <input-->

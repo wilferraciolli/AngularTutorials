@@ -27,6 +27,27 @@
     border-radius: 4px;
   }
 
+  &-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+      width: auto;
+      margin: 0;
+    }
+  }
+
   &-actions-container {
     display: flex;
     gap: 20px;

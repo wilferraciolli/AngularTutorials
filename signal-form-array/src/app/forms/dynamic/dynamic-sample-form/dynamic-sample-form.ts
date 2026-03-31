@@ -107,7 +107,18 @@ export class DynamicSampleForm {
       {name: 'birthDate', type: FormFieldType.DATE, label: 'Birth Date', required: true},
       {name: 'appointmentTime', type: FormFieldType.TIME, label: 'Appointment Time', required: true},
       {name: 'eventDateTime', type: FormFieldType.DATE_TIME, label: 'Event Date & Time', required: true},
-      {name: 'gender', type: FormFieldType.RADIO, label: 'Gender', required: true},
+      {
+        name: 'gender',
+        type: FormFieldType.RADIO,
+        label: 'Gender',
+        required: true,
+        options: [
+          { label: 'Male', value: 'male' },
+          { label: 'Female', value: 'female' },
+          { label: 'Other', value: 'other' },
+          { label: 'Prefer not to say', value: 'not_specified' }
+        ]
+      },
       {name: 'acceptTerms', type: FormFieldType.CHECKBOX, label: 'Accept Terms & Conditions', required: true},
       {name: 'age', type: FormFieldType.NUMBER, label: 'Age', required: true},
       {name: 'satisfaction', type: FormFieldType.RANGE, label: 'Satisfaction Level (1-10)'}
@@ -119,7 +130,7 @@ export class DynamicSampleForm {
       birthDate: '',
       appointmentTime: '',
       eventDateTime: '',
-      gender: '',
+      gender: 'not_specified',
       acceptTerms: false,
       age: 0,
       satisfaction: 5
