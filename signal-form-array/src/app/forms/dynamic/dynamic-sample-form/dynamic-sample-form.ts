@@ -32,13 +32,27 @@ export class DynamicSampleForm {
     {name: 'delayed', type: FormFieldType.CHECKBOX, label: 'Delayed'}
   ];
   // FLIGHTS: initial state
-  private readonly flightEntity: WritableSignal<unknown> = signal({
+  protected readonly flightEntity: WritableSignal<unknown> = signal({
     id: '', from: '', to: '', date: '', delayed: false
   });
   // FLIGHTS: form
   protected readonly flightsForm = form(
     this.flightEntity,
-    toSchema(this.flightFormConfig));
+    toSchema(this.flightFormConfig)
+  );
+
+  protected handleClearFlightForm(): void {
+    this.flightEntity.set({
+      id: '', from: '', to: '', date: '', delayed: false
+    });
+
+    this.flightsForm().reset();
+  }
+
+  protected handleFlightSubmit() {
+    console.log('Submitted:', this.flightEntity());
+    this.flightsForm().reset();
+  }
 
   // ******************************************** APPOINTMENT *****************************************************
   // APPOINTMENT: form config
@@ -46,15 +60,29 @@ export class DynamicSampleForm {
     {name: 'id', type: FormFieldType.TEXT, label: 'Id', required: true},
     {name: 'name', type: FormFieldType.TEXT, label: 'Name', required: true, minLength: 3, maxLength: 30},
     {name: 'startDate', type: FormFieldType.DATE, label: 'Start Day', required: true},
-    {name: 'endDate', type: FormFieldType.TIME, label: 'End Day', required: true},
+    {name: 'startTime', type: FormFieldType.TIME, label: 'StartTime', required: true},
     {name: 'duration', type: FormFieldType.NUMBER, label: 'Duration', required: true}
   ];
   // APPOINTMENT: initial state
-  private readonly appointmentEntity: WritableSignal<unknown> = signal({
-    id: '', name: '', startDate: '', endDate: '', duration: 0
+  protected readonly appointmentEntity: WritableSignal<unknown> = signal({
+    id: '', name: '', startDate: '', startTime: '', duration: 0
   });
   // APPOINTMENT: form
   protected readonly appointmentsForm = form(
     this.appointmentEntity,
-    toSchema(this.appointmentFormConfig));
+    toSchema(this.appointmentFormConfig)
+  );
+
+  protected handleClearAppointmentForm(): void {
+    this.appointmentEntity.set({
+      id: '', from: '', to: '', date: '', delayed: false
+    });
+
+    this.flightsForm().reset();
+  }
+
+  protected handleAppointmentSubmit() {
+    console.log('Submitted:', this.appointmentEntity());
+    this.flightsForm().reset();
+  }
 }

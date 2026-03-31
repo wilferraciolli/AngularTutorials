@@ -1,5 +1,4 @@
 <div class="dynamic-form-container">
-  field
   @for (fieldDef of metaInfo(); track fieldDef.name) {
     @let field = $any(dynamicForm())[fieldDef.name];
 
@@ -9,7 +8,7 @@
         <input
           [type]=fieldDef.type
           [formField]="field"
-          [class.form-control]="fieldDef.type !== 'checkbox'"
+          [class.dynamic-form-control]="fieldDef.type !== 'checkbox'"
         />
       </label>
 
@@ -27,12 +26,12 @@
     </div>
   }
 
-<!--  <div class="dynamic-form-actions-container">-->
-<!--    <button mat-flat-button-->
-<!--            [disabled]="contactForm().invalid()"-->
-<!--            (click)="handleSubmit()">Save-->
-<!--    </button>-->
-<!--    <button matButton="outlined" (click)="clearForm()">Clear</button>-->
-<!--  </div>-->
+  <div class="dynamic-form-actions-container">
+    <button mat-flat-button
+            [disabled]="dynamicForm()().invalid()"
+            (click)="handleSubmit()">Save
+    </button>
+    <button matButton="outlined" (click)="clearForm()">Clear</button>
+  </div>
 
 </div>

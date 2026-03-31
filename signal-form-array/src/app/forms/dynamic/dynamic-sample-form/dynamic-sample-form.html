@@ -3,20 +3,24 @@
     <app-dynamic-form
       [metaInfo]="flightFormConfig"
       [dynamicForm]="flightsForm"
+      (onFormClear)="handleClearFlightForm()"
+      (onFormSubmit)="handleFlightSubmit()"
     />
 
     <mat-divider></mat-divider>
-<!--    <pre> {{ flightsForm() | json }}</pre>-->
+    <pre> {{ flightEntity() | json }}</pre>
   </mat-tab>
 
   <mat-tab label="Appointments">
     <app-dynamic-form
       [metaInfo]="appointmentFormConfig"
       [dynamicForm]="appointmentsForm"
+      (onFormClear)="handleClearAppointmentForm()"
+      (onFormSubmit)="handleAppointmentSubmit()"
     />
 
     <mat-divider></mat-divider>
-<!--    <pre> {{ appointmentsForm() | json }}</pre>-->
+    <pre> {{ appointmentEntity() | json }}</pre>
   </mat-tab>
 
   <mat-tab label="Third"> Content 3</mat-tab>

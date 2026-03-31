@@ -5,11 +5,11 @@
     flex-direction: column;
     align-items: center; // Center horizontally
     justify-content: center; // Center vertically
-    min-height: 100vh; // Full viewport height
+    min-height: 80vh; // Full viewport height
     width: 100%;
     gap: 20px;
     box-sizing: border-box; // Ensures padding doesn't cause overflow
-    background-color: aqua;
+    //background-color: aqua;
   }
 
   &-field {
@@ -19,36 +19,17 @@
     //background-color: beige;
   }
 
+  &-control {
+    width: 98%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
   &-actions-container {
     display: flex;
     gap: 20px;
     //background-color: aqua;
   }
 }
-
-
-
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-control {
-  width: 98%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  /* margin-bottom: 0.5rem; */
-}
-
-//.form-group label {
-//  display: flex;
-//  flex-direction: column;  // or use gap/margin
-//  margin-bottom: 1rem;
-//}
