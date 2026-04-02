@@ -1,3 +1,4 @@
-@for (error of errors; track error.kind) {
+<!-- This expects the field to be Angular Material -->
+@for (error of errors(); track error.kind) {
   <mat-error>{{ error.message }}</mat-error>
 }

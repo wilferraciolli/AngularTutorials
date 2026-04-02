@@ -35,13 +35,13 @@ export function toSchema<T extends  BaseSchema>(meta: FieldDef[]): Schema<T> {
         }
 
         if (fieldDef.required) {
-          required(fieldPath);
+          required(fieldPath, { message: `${fieldDef.label} is required` });
         }
         if (typeof fieldDef.minLength !== 'undefined') {
-          minLength(fieldPath, fieldDef.minLength);
+          minLength(fieldPath, fieldDef.minLength, { message: `${fieldDef.label} must be at least ${fieldDef.minLength} characters` });
         }
         if (typeof fieldDef.maxLength !== 'undefined') {
-          maxLength(fieldPath, fieldDef.maxLength);
+          maxLength(fieldPath, fieldDef.maxLength, { message: `${fieldDef.label} cannot exceed ${fieldDef.maxLength} characters` });
         }
       }
     }

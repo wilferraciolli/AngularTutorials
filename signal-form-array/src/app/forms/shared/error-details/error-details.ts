@@ -1,5 +1,5 @@
-import {Component, input} from '@angular/core';
-import {FieldTree, ValidationError} from '@angular/forms/signals';
+import {Component, computed, input} from '@angular/core';
+import {FieldState, FieldTree, ValidationError} from '@angular/forms/signals';
 import {MatError} from '@angular/material/form-field';
 
 @Component({
@@ -11,14 +11,16 @@ import {MatError} from '@angular/material/form-field';
   styleUrl: './error-details.scss',
 })
 export class ErrorDetails {
-// FieldTree<unknown> covers any field — string, number, etc.
   readonly formField = input.required<FieldTree<unknown>>();
 
-  protected get errors(): ValidationError.WithFieldTree[] {
-    const state = this.formField()();  // call FieldTree to get FieldState
-    if (state.touched() && state.invalid()) {
-      return state.errors();
+  protected readonly errors = computed<ValidationError.WithFieldTree[]>(() => {
+    const fieldTree: FieldTree<unknown> = this.formField();  // Get the FieldTree from InputSignal
+    const fieldState: FieldState<unknown> = fieldTree();  // Call the FieldTree to get the FieldState
+
+    if (fieldState.touched() && fieldState.invalid()) {
+      return fieldState.errors();
     }
+
     return [];
-  }
+  });
 }
