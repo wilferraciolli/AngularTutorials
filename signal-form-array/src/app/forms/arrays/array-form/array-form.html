@@ -1,0 +1,41 @@
+<div class="array-form-container">
+  <mat-form-field class="array-form-field">
+    <mat-label>First name</mat-label>
+    <input matInput
+           [formField]="arrayDataForm.firstName"/>
+    <app-error-details [formField]="arrayDataForm.firstName"/>
+  </mat-form-field>
+
+  <mat-form-field class="array-form-field">
+    <mat-label>Last name</mat-label>
+    <input matInput
+           [formField]="arrayDataForm.lastName"/>
+    <app-error-details [formField]="arrayDataForm.lastName"/>
+  </mat-form-field>
+
+  @for (phone of arrayModel().phoneNumbers; track $index) {
+    <mat-form-field class="array-form-field">
+      <mat-label>Phone number</mat-label>
+      <input matInput
+             [id]="'phone' + $index"
+             [formField]="arrayDataForm.phoneNumbers[$index]"/>
+      <button matMiniFab (click)="removePhone($index)">
+        <mat-icon iconPositionEnd>delete</mat-icon>
+      </button>
+      <app-error-details [formField]="arrayDataForm.lastName"/>
+    </mat-form-field>
+  }
+
+  <button matButton="outlined" (click)="addPhone()">Add phone</button>
+
+  <div class="array-form-actions-container">
+    <button mat-flat-button
+            [disabled]="arrayDataForm().invalid()"
+            (click)="handleSubmit()">Save
+    </button>
+    <button matButton="outlined" (click)="clearForm()">Clear</button>
+  </div>
+
+  <mat-divider></mat-divider>
+  <pre> {{ arrayModel() | json }} </pre>
+</div>
