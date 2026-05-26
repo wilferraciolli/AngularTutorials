@@ -1,10 +1,9 @@
 <div class="attribute-form-container">
-  <mat-form-field class="attribute-form-field">
-    <mat-label>Name</mat-label>
-    <input matInput
-           [formField]="form.name"/>
-    <app-error-details [formField]="form.name"/>
-  </mat-form-field>
+  <mat-slide-toggle
+    [formField]="form.alcoholPurchase">
+    Purchasing alcohol?
+  </mat-slide-toggle>
+
 
   <mat-form-field class="attribute-form-field">
     <mat-label>Age</mat-label>
@@ -14,7 +13,7 @@
   </mat-form-field>
 
   <mat-form-field class="attribute-form-field">
-    <mat-label>Beverage</mat-label>
+    <mat-label>Beverages</mat-label>
     <mat-chip-grid #chipGrid
                    aria-label="Enter beverage form keywords"
                    [disabled]="form.beverage().disabled()">

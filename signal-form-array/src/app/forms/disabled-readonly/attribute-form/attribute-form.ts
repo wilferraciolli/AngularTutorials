@@ -8,6 +8,7 @@ import {MatDivider} from '@angular/material/list';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow} from '@angular/material/chips';
 import {MatIcon} from '@angular/material/icon';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-attribute-form',
@@ -24,7 +25,8 @@ import {MatIcon} from '@angular/material/icon';
     MatChipRow,
     MatIcon,
     MatChipInput,
-    MatChipRemove
+    MatChipRemove,
+    MatSlideToggle
   ],
   templateUrl: './attribute-form.html',
   styleUrl: './attribute-form.scss',
