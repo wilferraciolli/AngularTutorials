@@ -47,7 +47,7 @@ export class Home {
       description:
         'Demonstrates conditional disabled and readonly fields driven by other field values using schema logic.',
       icon: 'lock',
-      route: '/forms/disabled',
+      route: '/forms/attribute-disable',
       badge: 'Intermediate',
       badgeColor: 'accent',
     },

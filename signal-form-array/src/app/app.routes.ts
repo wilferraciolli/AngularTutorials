@@ -4,6 +4,7 @@ import {Home} from './home/home';
 import {CrossFieldForm} from './forms/cross-fields/cross-field-form/cross-field-form';
 import {DynamicSampleForm} from './forms/dynamic/dynamic-sample-form/dynamic-sample-form';
 import {ArrayForm} from './forms/arrays/array-form/array-form';
+import {AttributeForm} from './forms/disabled-readonly/attribute-form/attribute-form';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,12 @@ export const routes: Routes = [
   {
     path: 'forms/arrays',
     component: ArrayForm,
-  },  {
+  },
+  {
+    path: 'forms/attribute-disable',
+    component: AttributeForm,
+  },
+  {
     path: 'forms/dynamic-form',
     component: DynamicSampleForm,
   },
