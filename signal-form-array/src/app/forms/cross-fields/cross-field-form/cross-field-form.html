@@ -1,26 +1,26 @@
 <div class="cross-field-form-container">
-  <mat-form-field class="cross-field-form-field">
+  <mat-form-field class="cross-field-form-field" appearance="outline">
     <mat-label>username</mat-label>
     <input matInput
            [formField]="crossFieldForm.username"/>
     <app-error-details [formField]="crossFieldForm.username"/>
   </mat-form-field>
 
-  <mat-form-field class="cross-field-form-field">
+  <mat-form-field class="cross-field-form-field" appearance="outline">
     <mat-label>Password</mat-label>
     <input matInput
            [formField]="crossFieldForm.password"/>
     <app-error-details [formField]="crossFieldForm.password"/>
   </mat-form-field>
 
-  <mat-form-field class="cross-field-form-field">
+  <mat-form-field class="cross-field-form-field" appearance="outline">
     <mat-label>Confirm password</mat-label>
     <input matInput type="email"
            [formField]="crossFieldForm.confirmPassword"/>
     <app-error-details [formField]="crossFieldForm.confirmPassword"/>
   </mat-form-field>
 
-  <mat-form-field class="cross-field-form-field">
+  <mat-form-field class="cross-field-form-field" appearance="outline">
     <mat-label>Date of birth</mat-label>
     <input matInput
            [matDatepicker]="dobPicker"

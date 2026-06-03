@@ -1,12 +1,12 @@
 <div class="array-form-container">
-  <mat-form-field class="array-form-field">
+  <mat-form-field class="array-form-field" appearance="outline">
     <mat-label>First name</mat-label>
     <input matInput
            [formField]="arrayDataForm.firstName"/>
     <app-error-details [formField]="arrayDataForm.firstName"/>
   </mat-form-field>
 
-  <mat-form-field class="array-form-field">
+  <mat-form-field class="array-form-field" appearance="outline">
     <mat-label>Last name</mat-label>
     <input matInput
            [formField]="arrayDataForm.lastName"/>
@@ -14,7 +14,7 @@
   </mat-form-field>
 
   @for (phone of arrayModel().phoneNumbers; track $index) {
-    <mat-form-field class="array-form-field">
+    <mat-form-field class="array-form-field" appearance="outline">
       <mat-label>Phone number</mat-label>
       <input matInput
              [id]="'phone' + $index"
