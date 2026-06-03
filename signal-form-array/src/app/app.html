@@ -10,6 +10,12 @@
     <mat-icon>home</mat-icon>
     Home
   </a>
+
+  <button matIconButton
+          type="button"
+          (click)="toggleDarkMode()">
+    <mat-icon>{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
 </mat-toolbar>
 
 <main class="app-content">
