@@ -1,0 +1,87 @@
+.dynamic-form {
+  &-container {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center horizontally
+    justify-content: center; // Center vertically
+    min-height: 80vh; // Full viewport height
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box; // Ensures padding doesn't cause overflow
+    //background-color: aqua;
+  }
+
+  &-field {
+    width: 100%; // Full viewport width
+    max-width: 600px; // Optional: limit max width for better UX
+    box-sizing: border-box;
+    //background-color: beige;
+  }
+
+  &-control {
+    width: 98%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &-radio-group {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:disabled {
+      background-color: #f5f5f5;
+      opacity: 0.6;
+    }
+  }
+
+  &-radio-legend {
+    font-weight: 500;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  &-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    input[type="radio"] {
+      cursor: pointer;
+      width: auto;
+      margin: 0;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+
+      }
+    }
+  }
+
+  &-actions-container {
+    display: flex;
+    gap: 20px;
+    //background-color: aqua;
+  }
+}

@@ -1,0 +1,23 @@
+<mat-toolbar class="app-navbar" color="primary">
+  <a routerLink="/" class="app-navbar-brand">
+    <mat-icon>dynamic_form</mat-icon>
+    <span>{{ title() }}</span>
+  </a>
+
+  <span class="app-navbar-spacer"></span>
+
+  <a mat-button routerLink="/">
+    <mat-icon>home</mat-icon>
+    Home
+  </a>
+
+  <button matIconButton
+          type="button"
+          (click)="toggleDarkMode()">
+    <mat-icon>{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="app-content">
+  <router-outlet />
+</main>

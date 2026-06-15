@@ -1,0 +1,37 @@
+<mat-tab-group>
+  <mat-tab label="Flighs">
+    <app-dynamic-form
+      [metaInfo]="flightFormConfig.fields"
+      [dynamicForm]="flightsForm"
+      (onFormClear)="handleClearFlightForm()"
+      (onFormSubmit)="handleFlightSubmit()"
+    />
+
+    <mat-divider></mat-divider>
+    <pre> {{ flightEntity() | json }}</pre>
+  </mat-tab>
+
+  <mat-tab label="Appointments">
+    <app-dynamic-form
+      [metaInfo]="appointmentFormConfig.fields"
+      [dynamicForm]="appointmentsForm"
+      (onFormClear)="handleClearAppointmentForm()"
+      (onFormSubmit)="handleAppointmentSubmit()"
+    />
+
+    <mat-divider></mat-divider>
+    <pre> {{ appointmentEntity() | json }}</pre>
+  </mat-tab>
+
+  <mat-tab label="All Field Types Demo">
+    <app-dynamic-form
+      [metaInfo]="allFieldsFormConfig.fields"
+      [dynamicForm]="allFieldsForm"
+      (onFormClear)="handleClearAllFieldsForm()"
+      (onFormSubmit)="handleAllFieldsSubmit()"
+    />
+
+    <mat-divider></mat-divider>
+    <pre> {{ allFieldsEntity() | json }}</pre>
+  </mat-tab>
+</mat-tab-group>

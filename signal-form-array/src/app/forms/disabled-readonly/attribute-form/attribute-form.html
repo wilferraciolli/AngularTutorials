@@ -1,0 +1,48 @@
+<div class="attribute-form-container">
+  <mat-slide-toggle
+    [formField]="form.alcoholPurchase">
+    Purchasing alcohol?
+  </mat-slide-toggle>
+
+
+  <mat-form-field class="attribute-form-field" appearance="outline">
+    <mat-label>Age</mat-label>
+    <input matInput type="number"
+           [formField]="form.age"/>
+    <app-error-details [formField]="form.age"/>
+  </mat-form-field>
+
+  <mat-form-field class="attribute-form-field" appearance="outline">
+    <mat-label>Beverages</mat-label>
+    <mat-chip-grid #chipGrid
+                   aria-label="Enter beverage form keywords"
+                   [disabled]="form.beverage().disabled()">
+      @for (item of model().beverage; track $index) {
+        <mat-chip-row (removed)="removeTemplateKeyword(item)">
+          {{ item }}
+          <button matChipRemove [attr.aria-label]="'remove template form' + item">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+    </mat-chip-grid>
+
+    <input
+      placeholder="New keyword..."
+      [matChipInputFor]="chipGrid"
+      (matChipInputTokenEnd)="addTemplateKeyword($event)"
+    />
+
+  </mat-form-field>
+
+  <div class="attribute-form-actions-container">
+    <button mat-flat-button
+            [disabled]="form().invalid()"
+            (click)="handleSubmit()">Save
+    </button>
+    <button matButton="outlined" (click)="clearForm()">Clear</button>
+  </div>
+
+  <mat-divider></mat-divider>
+  <pre> {{ model() | json }} </pre>
+</div>
