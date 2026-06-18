@@ -13,16 +13,27 @@ export class VoiceRecognitionService {
 
   constructor() {
     this.recognition.interimResults = true;
+    this.recognition.continuous = true;
+    this.recognition.maxAlternatives = 1;
     this.recognition.lang = 'en-US';
+  }
+
+  get liveText(): string {
+    return this.text + this.tempWords;
   }
 
   init() {
     this.recognition.addEventListener('result', (event: any) => {
-      const transcript = Array.from(event.results)
-                              .map((result: any) => result[0])
-                              .map((result: any) => result.transcript)
-                              .join('');
-      this.tempWords = transcript;
+      let interimTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          this.text += transcript + ' ';
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      this.tempWords = interimTranscript;
     });
   }
 
@@ -36,7 +47,6 @@ export class VoiceRecognitionService {
         this.recognition.stop();
         console.log('End speech recognition');
       } else {
-        this.wordConcat();
         this.recognition.start();
       }
     });
@@ -44,13 +54,9 @@ export class VoiceRecognitionService {
 
   stop() {
     this.isStoppedSpeechRecog = true;
-    this.wordConcat();
+    this.text += this.tempWords;
+    this.tempWords = '';
     this.recognition.stop();
     console.log('End speech recognition');
-  }
-
-  wordConcat() {
-    this.text = `${this.text} ${this.tempWords}.`;
-    this.tempWords = '';
   }
 }
