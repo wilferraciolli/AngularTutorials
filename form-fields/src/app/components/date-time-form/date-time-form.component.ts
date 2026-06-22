@@ -8,18 +8,17 @@ import { DateTimeForm } from "../../forms/date-time.form";
 import { DateTimeService } from "../../fields/date-time-field/date-time.service";
 
 @Component({
-  selector: 'app-date-time-form',
-  standalone: true,
-  imports: [
-    DateTimeFieldComponent,
-    ReactiveFormsModule,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    MatSelectModule
-  ],
-  templateUrl: './date-time-form.component.html',
-  styleUrl: './date-time-form.component.scss'
+    selector: 'app-date-time-form',
+    imports: [
+        DateTimeFieldComponent,
+        ReactiveFormsModule,
+        MatLabel,
+        MatSelect,
+        MatOption,
+        MatSelectModule
+    ],
+    templateUrl: './date-time-form.component.html',
+    styleUrl: './date-time-form.component.scss'
 })
 export class DateTimeFormComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);

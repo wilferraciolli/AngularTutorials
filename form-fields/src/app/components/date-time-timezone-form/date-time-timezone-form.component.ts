@@ -11,26 +11,25 @@ import { DateTimeService } from '../../fields/date-time-field/date-time.service'
 import { TimeZone } from '../date-time-form/timezone';
 
 @Component({
-  selector: 'app-date-time-timezone-form',
-  standalone: true,
-  imports: [
-    DateTimeFieldComponent,
-    FormsModule,
-    MatFormField,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    ReactiveFormsModule,
-    MatInput,
-    MatCard,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatButton
-    // MatCardModule
-  ],
-  templateUrl: './date-time-timezone-form.component.html',
-  styleUrl: './date-time-timezone-form.component.scss'
+    selector: 'app-date-time-timezone-form',
+    imports: [
+        DateTimeFieldComponent,
+        FormsModule,
+        MatFormField,
+        MatLabel,
+        MatOption,
+        MatSelect,
+        ReactiveFormsModule,
+        MatInput,
+        MatCard,
+        MatCardHeader,
+        MatCardSubtitle,
+        MatCardTitle,
+        MatButton
+        // MatCardModule
+    ],
+    templateUrl: './date-time-timezone-form.component.html',
+    styleUrl: './date-time-timezone-form.component.scss'
 })
 export class DateTimeTimezoneFormComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);

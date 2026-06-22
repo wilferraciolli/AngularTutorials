@@ -12,22 +12,21 @@ import { RouterOutlet } from "@angular/router";
 import { MatTab, MatTabGroup } from "@angular/material/tabs";
 
 @Component({
-  selector: 'app-full-form',
-  standalone: true,
-  imports: [
-    DateFieldComponent,
-    DateTimeFieldComponent,
-    JsonPipe,
-    MatButton,
-    MatTabGroup,
-    MatTab,
-    NgIf,
-    ReactiveFormsModule,
-    RouterOutlet,
-    TimeFieldComponent
-  ],
-  templateUrl: './full-form.component.html',
-  styleUrl: './full-form.component.scss'
+    selector: 'app-full-form',
+    imports: [
+        DateFieldComponent,
+        DateTimeFieldComponent,
+        JsonPipe,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        NgIf,
+        ReactiveFormsModule,
+        RouterOutlet,
+        TimeFieldComponent
+    ],
+    templateUrl: './full-form.component.html',
+    styleUrl: './full-form.component.scss'
 })
 export class FullFormComponent {
   private _dateTimeFormBuilder: DateTimeFormBuilderService = inject(DateTimeFormBuilderService);

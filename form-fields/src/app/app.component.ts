@@ -13,25 +13,24 @@ import { FullFormComponent } from "./components/full-form/full-form.component";
 import { DateTimeFormComponent } from "./components/date-time-form/date-time-form.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    DateFieldComponent,
-    DateTimeFieldComponent,
-    JsonPipe,
-    MatButton,
-    MatTabGroup,
-    MatTab,
-    NgIf,
-    ReactiveFormsModule,
-    RouterOutlet,
-    TimeFieldComponent,
-    FullFormComponent,
-    DateTimeFormComponent,
-    DateTimeTimezoneFormComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [
+        DateFieldComponent,
+        DateTimeFieldComponent,
+        JsonPipe,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        NgIf,
+        ReactiveFormsModule,
+        RouterOutlet,
+        TimeFieldComponent,
+        FullFormComponent,
+        DateTimeFormComponent,
+        DateTimeTimezoneFormComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   private _dateTimeService: DateTimeService = inject(DateTimeService);

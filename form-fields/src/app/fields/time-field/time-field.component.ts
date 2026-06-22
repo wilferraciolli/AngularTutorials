@@ -21,28 +21,27 @@ import {
 } from './time.constants';
 
 @Component({
-  selector: 'app-time-field',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgIf,
-    FormsModule,
-    MatInput
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => TimeFieldComponent)
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: TimeFieldComponent
-    }
-  ],
-  templateUrl: './time-field.component.html',
-  styleUrl: './time-field.component.scss'
+    selector: 'app-time-field',
+    imports: [
+        ReactiveFormsModule,
+        NgIf,
+        FormsModule,
+        MatInput
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: forwardRef(() => TimeFieldComponent)
+        },
+        {
+            provide: NG_VALIDATORS,
+            multi: true,
+            useExisting: TimeFieldComponent
+        }
+    ],
+    templateUrl: './time-field.component.html',
+    styleUrl: './time-field.component.scss'
 })
 export class TimeFieldComponent implements ControlValueAccessor, Validator {
   @Input({

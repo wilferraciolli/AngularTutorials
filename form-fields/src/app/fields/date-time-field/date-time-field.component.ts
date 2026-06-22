@@ -21,28 +21,27 @@ import {
 } from './date-time.constants';
 
 @Component({
-  selector: 'app-date-time-field',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgIf,
-    FormsModule,
-    MatInput
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => DateTimeFieldComponent)
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: DateTimeFieldComponent
-    }
-  ],
-  templateUrl: './date-time-field.component.html',
-  styleUrl: './date-time-field.component.scss'
+    selector: 'app-date-time-field',
+    imports: [
+        ReactiveFormsModule,
+        NgIf,
+        FormsModule,
+        MatInput
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: forwardRef(() => DateTimeFieldComponent)
+        },
+        {
+            provide: NG_VALIDATORS,
+            multi: true,
+            useExisting: DateTimeFieldComponent
+        }
+    ],
+    templateUrl: './date-time-field.component.html',
+    styleUrl: './date-time-field.component.scss'
 })
 export class DateTimeFieldComponent implements ControlValueAccessor, Validator {
   @Input({
