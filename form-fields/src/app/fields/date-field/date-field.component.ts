@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, forwardRef, Input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import {
   AbstractControl,
@@ -24,11 +24,10 @@ import {
 @Component({
     selector: 'app-date-field',
     imports: [
-        ReactiveFormsModule,
-        NgIf,
-        FormsModule,
-        MatInput
-    ],
+    ReactiveFormsModule,
+    FormsModule,
+    MatInput
+],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

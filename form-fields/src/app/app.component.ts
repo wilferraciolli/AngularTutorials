@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -15,20 +15,19 @@ import { DateTimeFormComponent } from "./components/date-time-form/date-time-for
 @Component({
     selector: 'app-root',
     imports: [
-        DateFieldComponent,
-        DateTimeFieldComponent,
-        JsonPipe,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        NgIf,
-        ReactiveFormsModule,
-        RouterOutlet,
-        TimeFieldComponent,
-        FullFormComponent,
-        DateTimeFormComponent,
-        DateTimeTimezoneFormComponent
-    ],
+    DateFieldComponent,
+    DateTimeFieldComponent,
+    JsonPipe,
+    MatButton,
+    MatTabGroup,
+    MatTab,
+    ReactiveFormsModule,
+    RouterOutlet,
+    TimeFieldComponent,
+    FullFormComponent,
+    DateTimeFormComponent,
+    DateTimeTimezoneFormComponent
+],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

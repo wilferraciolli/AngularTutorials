@@ -14,21 +14,27 @@
       [max]="max"
       (input)="onChange(value)"
       (blur)="onTouched()"
-    />
-  </div>
+      />
+    </div>
 
-  <div *ngIf="errorRequired()"
-       class="date-field-error">
-    This field is required.
-  </div>
+    @if (errorRequired()) {
+      <div
+        class="date-field-error">
+        This field is required.
+      </div>
+    }
 
-  <div *ngIf="errorCannotBeBeforeMinDate()"
-       class="date-field-error">
-    {{ minDateErrorLabel }} {{ min }}.
-  </div>
+    @if (errorCannotBeBeforeMinDate()) {
+      <div
+        class="date-field-error">
+        {{ minDateErrorLabel }} {{ min }}.
+      </div>
+    }
 
-  <div *ngIf="errorCannotBeAfterMaxDate()"
-       class="date-field-error">
-    {{ maxDateErrorLabel }} {{ max }}.
+    @if (errorCannotBeAfterMaxDate()) {
+      <div
+        class="date-field-error">
+        {{ maxDateErrorLabel }} {{ max }}.
+      </div>
+    }
   </div>
-</div>

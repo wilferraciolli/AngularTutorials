@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DateFieldComponent } from "../../fields/date-field/date-field.component";
 import { DateTimeFieldComponent } from "../../fields/date-time-field/date-time-field.component";
-import { JsonPipe, NgIf } from "@angular/common";
+import { JsonPipe } from "@angular/common";
 import { MatButton } from "@angular/material/button";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { TimeFieldComponent } from "../../fields/time-field/time-field.component";
@@ -14,17 +14,16 @@ import { MatTab, MatTabGroup } from "@angular/material/tabs";
 @Component({
     selector: 'app-full-form',
     imports: [
-        DateFieldComponent,
-        DateTimeFieldComponent,
-        JsonPipe,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        NgIf,
-        ReactiveFormsModule,
-        RouterOutlet,
-        TimeFieldComponent
-    ],
+    DateFieldComponent,
+    DateTimeFieldComponent,
+    JsonPipe,
+    MatButton,
+    MatTabGroup,
+    MatTab,
+    ReactiveFormsModule,
+    RouterOutlet,
+    TimeFieldComponent
+],
     templateUrl: './full-form.component.html',
     styleUrl: './full-form.component.scss'
 })
