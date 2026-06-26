@@ -46,3 +46,27 @@
     </div>
   }
 </div>
+
+<div class="recordings-section" *ngIf="recordings.length > 0">
+  <h3 class="recordings-title">
+    <mat-icon>audiotrack</mat-icon> Recordings
+  </h3>
+  @for (rec of recordings; track rec.id) {
+    <div class="recording-item">
+      <div class="recording-meta">
+        <mat-icon class="recording-icon">mic</mat-icon>
+        <span class="recording-duration">{{ rec.duration }}s</span>
+        <span class="recording-time">{{ rec.createdAt | date:'HH:mm:ss' }}</span>
+        @if (rec.transcript) {
+          <span class="recording-transcript">"{{ rec.transcript }}"</span>
+        }
+      </div>
+      <div class="recording-controls">
+        <audio [src]="rec.url" controls></audio>
+        <button mat-mini-fab class="btn-delete" matTooltip="Delete recording" (click)="deleteRecording(rec.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+</div>

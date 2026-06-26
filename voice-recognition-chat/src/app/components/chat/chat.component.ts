@@ -1,4 +1,5 @@
 import { Component, computed, OnDestroy, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { DatePipe, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatMiniFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -12,7 +13,9 @@ import { VoiceRecognitionService } from '../../services/voice-recognition.servic
     FormsModule,
     MatIcon,
     MatMiniFabButton,
-    MatTooltip
+    MatTooltip,
+    DatePipe,
+    NgIf
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
@@ -37,21 +40,24 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.liveTextSubscription?.unsubscribe();
   }
 
-  startRecording() {
+  get recordings() {
+    return this.voiceRecognitionService.recordings;
+  }
+
+  async startRecording() {
     this.voiceRecognitionService.text = '';
     this.voiceRecognitionService.tempWords = '';
-    this.voiceRecognitionService.start();
+    await this.voiceRecognitionService.start();
     this.isRecording.set(true);
 
-    // Update textarea every second with live transcription
     this.liveTextSubscription = interval(1000).subscribe(() => {
       this.message.set(this.voiceRecognitionService.liveText);
     });
   }
 
-  stopRecording() {
+  async stopRecording() {
     this.liveTextSubscription?.unsubscribe();
-    this.voiceRecognitionService.stop();
+    await this.voiceRecognitionService.stop();
     this.message.set(this.voiceRecognitionService.liveText);
     this.voiceRecognitionService.text = '';
     this.isRecording.set(false);
@@ -64,4 +70,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.message.set('');
   }
 
+  deleteRecording(id: number) {
+    this.voiceRecognitionService.deleteRecording(id);
+  }
 }
