@@ -1,6 +1,29 @@
 <div class="fullForm-container">
+
   <form [formGroup]="form"
         (ngSubmit)="onSubmit()">
+
+    <!-- DISABLED: skipped by keyboard/tab, value not submitted, screen reader announces as unavailable -->
+    <div class="field-demo">
+      <label for="disabledInput">Disabled Field</label>
+      <input
+        id="disabledInput"
+        type="text"
+        value="I am disabled"
+        disabled
+      />
+    </div>
+
+    <!-- READONLY: focusable, value is submitted, user can copy. Screen reader announces as read-only -->
+    <div class="field-demo">
+      <label for="readonlyInput">Read-only Field</label>
+      <input
+        id="readonlyInput"
+        type="text"
+        value="I am read-only"
+        readonly
+      />
+    </div>
 
     <app-date-field
       label="Enter Date"
