@@ -26,6 +26,19 @@ export class VoiceRecognitionService {
   recordings: AudioRecording[] = [];
   private nextId = 1;
 
+  // Kept as a field so we can removeEventListener before re-adding on each start()
+  private endHandler = () => {
+    if (this.isStoppedSpeechRecog) {
+      console.log('End speech recognition');
+    } else {
+      try {
+        this.recognition.start();
+      } catch (e) {
+        // Already starting — ignore
+      }
+    }
+  };
+
   constructor() {
     this.recognition.interimResults = true;
     this.recognition.continuous = true;
@@ -54,8 +67,25 @@ export class VoiceRecognitionService {
 
   async start() {
     this.isStoppedSpeechRecog = false;
-    this.recognition.start();
-    console.log('Speech recognition started');
+
+    // Remove previous listeners to prevent duplicates across multiple start() calls
+    this.recognition.removeEventListener('end', this.endHandler);
+    this.recognition.addEventListener('end', this.endHandler);
+
+    // Restart on recoverable errors (no-speech, network, audio-capture)
+    this.recognition.onerror = (event: any) => {
+      if (!this.isStoppedSpeechRecog && event.error !== 'aborted') {
+        console.warn('Speech recognition error:', event.error);
+        // 'end' will fire right after 'error', which will trigger endHandler to restart
+      }
+    };
+
+    try {
+      this.recognition.start();
+      console.log('Speech recognition started');
+    } catch (e) {
+      console.warn('Recognition start failed:', e);
+    }
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -73,15 +103,6 @@ export class VoiceRecognitionService {
     } catch (err) {
       console.error('Microphone access denied:', err);
     }
-
-    this.recognition.addEventListener('end', () => {
-      if (this.isStoppedSpeechRecog) {
-        this.recognition.stop();
-        console.log('End speech recognition');
-      } else {
-        this.recognition.start();
-      }
-    });
   }
 
   stop(): Promise<AudioRecording | null> {
