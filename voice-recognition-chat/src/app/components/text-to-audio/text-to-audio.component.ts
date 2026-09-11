@@ -1,16 +1,14 @@
 import { Component, computed, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MatMiniFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
-import { environment } from '../../../environments/environment';
 
 type AudioRequest = {
   text: string;
   format: 'mp3';
-  model: string;
 };
 
 @Component({
@@ -46,17 +44,10 @@ export class TextToAudioComponent {
 
     const payload: AudioRequest = {
       text,
-      format: 'mp3',
-      model: environment.fishModel
+      format: 'mp3'
     };
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${environment.fishApiKey}`
-    });
-
-    this.http.post(environment.fishUrl, payload, {
-      headers,
+    this.http.post('/api/tts', payload, {
       responseType: 'arraybuffer'
     }).subscribe({
       next: (audioBuffer: ArrayBuffer) => {

@@ -145,3 +145,36 @@ If you are setting up a fresh Angular project and want to add the same dependenc
 # Angular Material (includes CDK and animations)
 ng add @angular/material
 ```
+
+---
+
+## 🔐 Text-to-audio proxy server
+
+The text-to-audio page does not call Fish Audio directly from the browser. Instead, Angular calls the local proxy endpoint `/api/tts`, and the Node.js server in `server/` forwards the request to Fish Audio using the configured API key.
+
+### Environment variables for the server
+
+Create a `server/.env` file from `server/.env.example`:
+
+```bash
+PORT=3000
+FISH_API_KEY=your_fish_api_key_here
+```
+
+The model and URL are hardcoded in the proxy server as `s2.1-pro-free` and `https://api.fish.audio/v1/tts`.
+
+### Run both apps
+
+```bash
+# Terminal 1: backend proxy
+cd server
+npm install
+npm start
+
+# Terminal 2: Angular app
+npm start
+```
+
+The Angular app uses `proxy.conf.json`, so requests to `/api/*` are forwarded to the backend on `http://localhost:3000`.
+
+See `server/README.md` for full proxy-server documentation.
