@@ -1,15 +1,14 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button class="example-icon" aria-label="Navigation menu">
     <mat-icon>menu</mat-icon>
   </button>
   <span>Voice recognition chat</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+
+  <nav class="nav-actions" aria-label="Main navigation">
+    <button mat-stroked-button routerLink="/home" routerLinkActive="active">Voice Chat</button>
+    <button mat-stroked-button routerLink="/text-to-audio" routerLinkActive="active">Text to Audio</button>
+  </nav>
 </mat-toolbar>
 
 <div class="container">
