@@ -177,4 +177,6 @@ npm start
 
 The Angular app uses `proxy.conf.json`, so requests to `/api/*` are forwarded to the backend on `http://localhost:3000`.
 
+> ⚠️ **Both terminals must be running.** If the backend proxy isn't started, any request to `/api/tts` will fail with an HTTP **500** from the Angular dev server proxy (it can't connect to `localhost:3000`) — this looks like a server bug but just means `npm start` wasn't run inside `server/`.
+
 See `server/README.md` for full proxy-server documentation.
