@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, output} from '@angular/core';
+import {Component, input, InputSignal, output, ChangeDetectionStrategy} from '@angular/core';
 import {FieldState, FieldTree, FormField} from '@angular/forms/signals';
 import {FieldDef} from '../interfaces/field-definition';
 import {ErrorDetails} from '../../shared/error-details/error-details';
@@ -15,6 +15,7 @@ import {BaseSchema} from '../interfaces/base.schema';
     MatButton
   ],
   templateUrl: './dynamic-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dynamic-form.scss',
 })
 export class DynamicForm<T extends BaseSchema = BaseSchema> {

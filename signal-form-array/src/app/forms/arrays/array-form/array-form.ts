@@ -1,4 +1,4 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {ArrayDataForm, arrayDataSchema, initialState} from '../models/array-data.form';
 import {FieldState, FieldTree, form, FormField} from '@angular/forms/signals';
 import {ErrorDetails} from '../../shared/error-details/error-details';
@@ -23,6 +23,7 @@ import {MatIcon} from '@angular/material/icon';
     MatIcon
   ],
   templateUrl: './array-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './array-form.scss',
 })
 export class ArrayForm {

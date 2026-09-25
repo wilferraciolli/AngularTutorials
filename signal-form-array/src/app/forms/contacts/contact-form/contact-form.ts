@@ -1,4 +1,4 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {FieldState, FieldTree, form, FormField} from '@angular/forms/signals';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -20,6 +20,7 @@ import {ErrorDetails} from '../../shared/error-details/error-details';
     ErrorDetails,
   ],
   templateUrl: './contact-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './contact-form.scss',
 })
 export class ContactForm {

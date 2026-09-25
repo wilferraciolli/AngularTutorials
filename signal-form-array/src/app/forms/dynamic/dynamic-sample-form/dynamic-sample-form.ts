@@ -1,4 +1,4 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DynamicForm} from '../dynamic-form/dynamic-form';
 import {form} from '@angular/forms/signals';
@@ -14,6 +14,7 @@ import {SchemaConfig} from '../interfaces/base.schema';
   selector: 'app-dynamic-sample-form',
   imports: [MatTabsModule, DynamicForm, JsonPipe, MatDivider],
   templateUrl: './dynamic-sample-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dynamic-sample-form.scss',
 })
 export class DynamicSampleForm {

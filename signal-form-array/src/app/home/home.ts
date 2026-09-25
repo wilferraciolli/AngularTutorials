@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
@@ -9,6 +9,7 @@ import {FieldDef} from '../forms/dynamic/interfaces/field-definition';
   selector: 'app-home',
   imports: [MatCardModule, MatIconModule, MatRippleModule],
   templateUrl: './home.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.scss',
 })
 export class Home {

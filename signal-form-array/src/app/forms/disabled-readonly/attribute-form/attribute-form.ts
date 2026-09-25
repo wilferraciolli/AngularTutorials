@@ -1,4 +1,4 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {AttributeDataForm, attributeInitialValue, attributeSchema} from '../models/attribute-data.form';
 import {FieldState, FieldTree, form, FormField} from '@angular/forms/signals';
 import {ErrorDetails} from '../../shared/error-details/error-details';
@@ -29,6 +29,7 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     MatSlideToggle
   ],
   templateUrl: './attribute-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './attribute-form.scss',
 })
 export class AttributeForm {

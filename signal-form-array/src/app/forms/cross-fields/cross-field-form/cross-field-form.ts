@@ -1,4 +1,4 @@
-import {Component, signal, WritableSignal} from '@angular/core';
+import {Component, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {FieldState, FieldTree, form, FormField} from '@angular/forms/signals';
 import {CrossFieldDataForm, crossFieldSchema} from '../cross-field-data.form';
 import {ErrorDetails} from '../../shared/error-details/error-details';
@@ -36,6 +36,7 @@ import {MatIcon} from '@angular/material/icon';
     MatDatepickerToggleIcon,
   ],
   templateUrl: './cross-field-form.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cross-field-form.scss',
 })
 export class CrossFieldForm {
