@@ -1,0 +1,51 @@
+.utc-date-time-field {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+  }
+
+  &-label {
+    font-size: 0.75rem;
+    color: #333;
+  }
+
+  &-label label {
+    font-weight: lighter;
+  }
+
+  &-input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+
+  &-hint {
+    color: #555;
+    font-size: 0.75rem;
+    margin: 0.25rem 0 0.5rem;
+  }
+
+  &-notice {
+    color: #8a5a00;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+}

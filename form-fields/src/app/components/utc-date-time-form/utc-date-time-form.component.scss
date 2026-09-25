@@ -1,0 +1,17 @@
+.utcDateTimeForm {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-tip {
+    font-size: 0.875rem;
+    color: #555;
+  }
+}

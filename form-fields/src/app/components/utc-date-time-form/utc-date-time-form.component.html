@@ -1,0 +1,40 @@
+<div class="utcDateTimeForm-container">
+
+  <div class="utcDateTimeForm-select">
+    <mat-form-field>
+      <mat-label>Select timezone</mat-label>
+      <mat-select [(value)]="selectedTimezone">
+        @for (timezone of timezones; track timezone.id) {
+          <mat-option [value]="timezone.id">{{ timezone.value }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <form [formGroup]="form">
+    <app-utc-date-time-field
+      label="Appointment"
+      [timeZone]="selectedTimezone"
+      [required]="true"
+      [min]="'2024-01-01T00:00:00Z'"
+      formControlName="appointment"
+    />
+  </form>
+
+  <div class="utcDateTimeForm-content">
+    <h4>Form value (always UTC): {{ form.getRawValue() | json }}</h4>
+    <h4>Valid: {{ form.valid }} · Errors: {{ form.controls['appointment'].errors | json }}</h4>
+
+    <h4>The same instant in each timezone:</h4>
+    <ul>
+      @for (timezone of timezones; track timezone.id) {
+        <li>{{ timezone.id }}: {{ convertToTimeZone(timezone.id) }}</li>
+      }
+    </ul>
+
+    <p class="utcDateTimeForm-tip">
+      Try Europe/London with 2024-03-31 01:30 (does not exist, clocks go forward)
+      or 2024-10-27 01:30 (happens twice, clocks go back).
+    </p>
+  </div>
+</div>

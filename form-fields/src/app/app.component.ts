@@ -11,6 +11,7 @@ import { TimeFieldComponent } from './fields/time-field/time-field.component';
 import { MatTab, MatTabGroup } from "@angular/material/tabs";
 import { FullFormComponent } from "./components/full-form/full-form.component";
 import { DateTimeFormComponent } from "./components/date-time-form/date-time-form.component";
+import { UtcDateTimeFormComponent } from "./components/utc-date-time-form/utc-date-time-form.component";
 
 @Component({
     selector: 'app-root',
@@ -26,7 +27,8 @@ import { DateTimeFormComponent } from "./components/date-time-form/date-time-for
     TimeFieldComponent,
     FullFormComponent,
     DateTimeFormComponent,
-    DateTimeTimezoneFormComponent
+    DateTimeTimezoneFormComponent,
+    UtcDateTimeFormComponent
 ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
