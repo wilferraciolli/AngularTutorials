@@ -3,7 +3,7 @@
   <div class="utcDateTimeForm-select">
     <mat-form-field>
       <mat-label>Select timezone</mat-label>
-      <mat-select [(value)]="selectedTimezone">
+      <mat-select [formField]="form.selectedTimezone">
         @for (timezone of timezones; track timezone.id) {
           <mat-option [value]="timezone.id">{{ timezone.value }}</mat-option>
         }
@@ -11,19 +11,19 @@
     </mat-form-field>
   </div>
 
-  <form [formGroup]="form">
+  <form [formRoot]="form" (submit)="handleSubmit()">
     <app-utc-date-time-field
       label="Appointment"
-      [timeZone]="selectedTimezone"
+      [timeZone]="form.selectedTimezone().value()"
       [required]="true"
       [min]="'2024-01-01T00:00:00Z'"
-      formControlName="appointment"
+      [formField]="form.appointment"
     />
   </form>
 
   <div class="utcDateTimeForm-content">
-    <h4>Form value (always UTC): {{ form.getRawValue() | json }}</h4>
-    <h4>Valid: {{ form.valid }} · Errors: {{ form.controls['appointment'].errors | json }}</h4>
+    <h4>Form value (always UTC): {{ model() | json }}</h4>
+    <h4>Valid: {{ form().valid() }} · Errors: {{ form.appointment().errors() | json }}</h4>
 
     <h4>The same instant in each timezone:</h4>
     <ul>

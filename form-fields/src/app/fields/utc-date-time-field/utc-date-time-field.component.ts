@@ -62,10 +62,10 @@ export class UtcDateTimeFieldComponent implements ControlValueAccessor, Validato
   public timeZone = input<string>(Temporal.Now.timeZoneId());
 
   /** Minimum allowed instant in UTC, Eg '2024-01-01T00:00:00Z'. */
-  public min = input<string | null>(null);
+  public min = input<string | null | undefined>(null);
 
   /** Maximum allowed instant in UTC, Eg '2025-12-31T23:59:00Z'. */
-  public max = input<string | null>(null);
+  public max = input<string | null | undefined>(null);
 
   public required = input<boolean>(false);
 
@@ -82,7 +82,7 @@ export class UtcDateTimeFieldComponent implements ControlValueAccessor, Validato
 
   public readonly utcValue: WritableSignal<string | null> = signal(null);
   public readonly disabled: WritableSignal<boolean> = signal(false);
-  public readonly errors: WritableSignal<ValidationErrors | null> = signal(null);
+  public readonly errors = computed(() => this._getErrors(this.utcValue()));
 
   /** Explains how a DST gap or overlap was resolved for the last value typed by the user. */
   public readonly notice: WritableSignal<string | null> = signal(null);
@@ -177,9 +177,7 @@ export class UtcDateTimeFieldComponent implements ControlValueAccessor, Validato
   }
 
   public validate(control: AbstractControl<string | null>): ValidationErrors | null {
-    const errors: ValidationErrors | null = this._getErrors(control.value);
-    this.errors.set(errors);
-    return errors;
+    return this._getErrors(control.value);
   }
 
   private _getErrors(value: string | null): ValidationErrors | null {
@@ -214,7 +212,7 @@ export class UtcDateTimeFieldComponent implements ControlValueAccessor, Validato
   }
 }
 
-function parseInstant(value: string | null): Temporal.Instant | null {
+function parseInstant(value: string | null | undefined): Temporal.Instant | null {
   if (!value) {
     return null;
   }
@@ -230,7 +228,7 @@ function parseInstant(value: string | null): Temporal.Instant | null {
  * Converts a UTC instant into the YYYY-MM-DDThh:mm wall-clock value of a timezone,
  * as expected by a datetime-local input. Returns '' for empty or invalid values.
  */
-function toLocalDateTime(value: string | null, timeZone: string): string {
+function toLocalDateTime(value: string | null | undefined, timeZone: string): string {
   const instant = parseInstant(value);
 
   if (!instant) {
