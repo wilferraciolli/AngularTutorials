@@ -27,6 +27,7 @@
     "luxon": "^3.4.4",
     "luxon-angular": "^6.0.0",
     "rxjs": "~7.8.0",
+    "temporal-polyfill": "^1.0.5",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"
   },

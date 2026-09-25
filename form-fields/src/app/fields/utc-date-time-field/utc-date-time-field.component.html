@@ -1,0 +1,53 @@
+<div class="utc-date-time-field-container">
+  <div class="utc-date-time-field-label">
+    <label [for]="inputId">{{ label() }}</label>
+  </div>
+
+  <div class="utc-date-time-field-input-container">
+    <input class="utc-date-time-field-input"
+           [id]="inputId"
+           [type]="fieldType"
+           [value]="localValue()"
+           [disabled]="disabled()"
+           [min]="localMin()"
+           [max]="localMax()"
+           [attr.aria-invalid]="errors() ? true : null"
+           [attr.aria-describedby]="inputId + '-hint ' + inputId + '-messages'"
+           (input)="onLocalInput($any($event.target).value)"
+           (blur)="onBlur()"
+    />
+  </div>
+
+  <div class="utc-date-time-field-hint" [id]="inputId + '-hint'">
+    {{ timeZone() }}@if (offset()) { (UTC{{ offset() }}) }
+    @if (utcValue()) {
+      · stored as {{ utcValue() }}
+    }
+  </div>
+
+  <div [id]="inputId + '-messages'">
+    @if (notice()) {
+      <div class="utc-date-time-field-notice">{{ notice() }}</div>
+    }
+
+    @if (errors()?.['required']) {
+      <div class="utc-date-time-field-error" role="alert">{{ requiredErrorLabel() }}</div>
+    }
+
+    @if (errors()?.['invalidUtcDateTime']) {
+      <div class="utc-date-time-field-error" role="alert">{{ invalidErrorLabel() }}</div>
+    }
+
+    @if (errors()?.['cannotBeBeforeMinUtcDateTime']) {
+      <div class="utc-date-time-field-error" role="alert">
+        {{ minErrorLabel() }} {{ localMin().replace('T', ' ') }} ({{ timeZone() }}).
+      </div>
+    }
+
+    @if (errors()?.['cannotBeAfterMaxUtcDateTime']) {
+      <div class="utc-date-time-field-error" role="alert">
+        {{ maxErrorLabel() }} {{ localMax().replace('T', ' ') }} ({{ timeZone() }}).
+      </div>
+    }
+  </div>
+</div>
