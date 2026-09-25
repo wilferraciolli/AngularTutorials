@@ -1,5 +1,5 @@
 
-import { Component, forwardRef, Input, signal, WritableSignal } from '@angular/core';
+import { Component, forwardRef, Input, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -40,6 +40,7 @@ import {
         }
     ],
     templateUrl: './date-time-field.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './date-time-field.component.scss'
 })
 export class DateTimeFieldComponent implements ControlValueAccessor, Validator {

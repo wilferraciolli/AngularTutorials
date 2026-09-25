@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { DateTimeFieldComponent } from "../../fields/date-time-field/date-time-field.component";
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatLabel } from "@angular/material/form-field";
@@ -18,6 +18,7 @@ import { DateTimeService } from "../../fields/date-time-field/date-time.service"
         MatSelectModule
     ],
     templateUrl: './date-time-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './date-time-form.component.scss'
 })
 export class DateTimeFormComponent {

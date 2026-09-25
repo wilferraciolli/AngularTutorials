@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatButton } from '@angular/material/button';
@@ -29,6 +29,7 @@ import { TimeZone } from '../date-time-form/timezone';
         // MatCardModule
     ],
     templateUrl: './date-time-timezone-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './date-time-timezone-form.component.scss'
 })
 export class DateTimeTimezoneFormComponent {

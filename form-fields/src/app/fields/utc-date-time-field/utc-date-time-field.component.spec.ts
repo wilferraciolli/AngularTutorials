@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -7,6 +7,7 @@ import { UtcDateTimeFieldComponent } from './utc-date-time-field.component';
 
 @Component({
   imports: [ReactiveFormsModule, UtcDateTimeFieldComponent],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <app-utc-date-time-field
       [formControl]="control"

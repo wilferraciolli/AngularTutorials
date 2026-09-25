@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { RouterOutlet } from '@angular/router';
@@ -31,6 +31,7 @@ import { UtcDateTimeFormComponent } from "./components/utc-date-time-form/utc-da
     UtcDateTimeFormComponent
 ],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.scss'
 })
 export class AppComponent {

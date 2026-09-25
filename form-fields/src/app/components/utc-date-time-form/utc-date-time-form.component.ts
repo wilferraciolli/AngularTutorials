@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -19,6 +19,7 @@ import { TimeZone } from '../date-time-form/timezone';
     UtcDateTimeFieldComponent
   ],
   templateUrl: './utc-date-time-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './utc-date-time-form.component.scss'
 })
 export class UtcDateTimeFormComponent {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { DateFieldComponent } from "../../fields/date-field/date-field.component";
 import { DateTimeFieldComponent } from "../../fields/date-time-field/date-time-field.component";
 import { JsonPipe } from "@angular/common";
@@ -25,6 +25,7 @@ import { MatTab, MatTabGroup } from "@angular/material/tabs";
     TimeFieldComponent
 ],
     templateUrl: './full-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './full-form.component.scss'
 })
 export class FullFormComponent {
