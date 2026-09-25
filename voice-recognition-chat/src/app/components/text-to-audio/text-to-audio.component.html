@@ -1,0 +1,32 @@
+<div class="chat-container">
+  <textarea class="chat-textarea"
+            placeholder="Type a message to convert to audio…"
+            [ngModel]="message()"
+            (ngModelChange)="message.set($event)"
+            (keydown.enter)="$event.preventDefault(); submitMessage($event)"
+            rows="8"></textarea>
+
+  <div class="chat-actions">
+    <button mat-mini-fab
+            class="btn-send"
+            aria-label="Generate audio"
+            matTooltip="Generate audio"
+            [disabled]="!hasMessage() || isLoading()"
+            (click)="submitMessage($event)">
+      <mat-icon>{{ isLoading() ? 'hourglass_top' : 'send' }}</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="chat-messages">
+  @for (message of messages(); track $index) {
+    <div class="chat-message">
+      <mat-icon class="message-icon">chat_bubble_outline</mat-icon>
+      <span>{{ message }}</span>
+    </div>
+  }
+</div>
+
+<div class="audio-player" *ngIf="audioUrl()">
+  <audio [src]="audioUrl()" controls></audio>
+</div>
