@@ -6,6 +6,25 @@ Instead of `FormControl` / `FormGroup`, the **form state lives in a plain `signa
 
 The app is a set of small, self-contained examples, each one building on the previous concept, styled with Angular Material.
 
+## Temporal API
+Had to install the polifill and type
+
+```bash 
+    npm install temporal-polyfill
+    npm install --save-dev @js-temporal/polyfill
+```
+A simple converter is as follow
+```ts
+    protected dateTime: string = new Date().toISOString();
+    protected dateTime1: Temporal.Instant = Temporal.Instant.from('2020-01-01T09:00:00Z');
+    protected dateTime2: string = Temporal.Instant.from('2020-07-01T09:00:00Z')
+        .toZonedDateTimeISO("Asia/Nicosia")
+        .toPlainDateTime()
+        .toString({ smallestUnit: 'minute' }) // Drops seconds if desired
+        .replace('T', ' ');                   // Converts "2026-05-01T10:00" to "2026-05-01 10:00"
+```
+
+
 ---
 
 ## Contents

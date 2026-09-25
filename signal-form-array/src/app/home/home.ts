@@ -1,9 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import {FieldDef} from '../forms/dynamic/interfaces/field-definition';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +12,9 @@ import {FieldDef} from '../forms/dynamic/interfaces/field-definition';
   styleUrl: './home.scss',
 })
 export class Home {
-  constructor(private readonly router: Router) {}
+  private readonly _routedService: Router = inject(Router);
+
+
 
   protected readonly cards: FormCard[] = [
     {
@@ -82,6 +83,6 @@ export class Home {
   ];
 
   protected navigate(route: string): void {
-    this.router.navigate([route]);
+    this._routedService.navigate([route]);
   }
 }
