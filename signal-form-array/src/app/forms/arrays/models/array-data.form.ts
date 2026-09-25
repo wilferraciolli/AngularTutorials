@@ -1,6 +1,5 @@
-import {maxLength, minLength, PathKind, required, schema, SchemaPathTree} from '@angular/forms/signals';
-import Root = PathKind.Root;
-import {ContactDataForm} from '../../contacts/models/contact-data.form';
+import {maxLength, minLength, PathKind, required, Schema, schema, SchemaPathTree} from '@angular/forms/signals';
+
 
 export interface ArrayDataForm {
   id: string;
@@ -18,7 +17,7 @@ export const initialState: ArrayDataForm = {
   ],
 }
 
-export const arrayDataSchema = schema<ArrayDataForm>((path: SchemaPathTree<ArrayDataForm, Root>) => {
+export const arrayDataSchema: Schema<ArrayDataForm> = schema<ArrayDataForm>((path: SchemaPathTree<ArrayDataForm>) => {
   required(path.firstName, {message: 'First name is required'});
   minLength(path.firstName, 2, {message: 'First name must be at least 2 characters'});
   maxLength(path.firstName, 50, {message: 'First name cannot exceed 50 characters'});
