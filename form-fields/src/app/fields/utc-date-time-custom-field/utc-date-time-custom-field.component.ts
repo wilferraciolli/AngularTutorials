@@ -50,9 +50,6 @@ export class UtcDateTimeCustomFieldComponent implements FormValueControl<string 
 
   public readonly inputId: string = `utc-date-time-custom-field-${nextId++}`;
 
-  // public readonly disabled: WritableSignal<boolean> = signal(false);
-  // public readonly errors = computed(() => this._getErrors(this.value()));
-
   /** Explains how a DST gap or overlap was resolved for the last value typed by the user. */
   public readonly notice: WritableSignal<string | null> = signal(null);
 
