@@ -12,10 +12,13 @@ import { MatTab, MatTabGroup } from "@angular/material/tabs";
 import { FullFormComponent } from "./components/full-form/full-form.component";
 import { DateTimeFormComponent } from "./components/date-time-form/date-time-form.component";
 import { UtcDateTimeFormComponent } from "./components/utc-date-time-form/utc-date-time-form.component";
+import {
+  UtcDateTimeCustomFormComponent
+} from "./components/utc-date-time-custom-form/utc-date-time-custom-form.component";
 
 @Component({
     selector: 'app-root',
-    imports: [
+  imports: [
     DateFieldComponent,
     DateTimeFieldComponent,
     JsonPipe,
@@ -28,8 +31,9 @@ import { UtcDateTimeFormComponent } from "./components/utc-date-time-form/utc-da
     FullFormComponent,
     DateTimeFormComponent,
     DateTimeTimezoneFormComponent,
-    UtcDateTimeFormComponent
-],
+    UtcDateTimeFormComponent,
+    UtcDateTimeCustomFormComponent
+  ],
     templateUrl: './app.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.scss'
