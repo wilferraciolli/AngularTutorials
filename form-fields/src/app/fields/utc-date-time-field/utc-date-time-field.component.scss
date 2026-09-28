@@ -2,50 +2,77 @@
   &-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0 20px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto; // Centers the field horizontally
+    font-family: Roboto, "Helvetica Neue", sans-serif;
   }
 
   &-label {
-    font-size: 0.75rem;
-    color: #333;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+
+    label {
+      font-weight: lighter;
+    }
   }
 
-  &-label label {
-    font-weight: lighter;
-  }
-
+  /* Material Outlined Field Simulation moved to the container box */
   &-input-container {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
+    padding: 10px 12px;
+    background-color: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    /* Material Focus State */
+    &:focus-within {
+      border-color: #3f51b5; // Primary theme color
+      border-width: 2px;
+      padding: 9px 11px; // Compensate for thicker border to prevent layout shifts
+    }
   }
 
   &-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.87);
     width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    background-color: #fff;
     box-sizing: border-box;
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &-hint {
-    color: #555;
-    font-size: 0.75rem;
-    margin: 0.25rem 0 0.5rem;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 4px;
+    line-height: 1.2;
   }
 
   &-notice {
+    font-size: 11px;
     color: #8a5a00;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    margin-top: 4px;
   }
 
   &-error {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    font-size: 11px;
+    color: #dc3545; // Material error red
+    margin-top: 4px;
   }
 }
