@@ -1,42 +1,30 @@
-import { JsonPipe } from '@angular/common';
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { RouterOutlet } from '@angular/router';
-import { DateTimeTimezoneFormComponent } from './components/date-time-timezone-form/date-time-timezone-form.component';
-import { DateFieldComponent } from './fields/date-field/date-field.component';
-import { DateTimeFieldComponent } from './fields/date-time-field/date-time-field.component';
-import { DateTimeService } from './fields/date-time-field/date-time.service';
-import { TimeFieldComponent } from './fields/time-field/time-field.component';
-import { MatTab, MatTabGroup } from "@angular/material/tabs";
-import { FullFormComponent } from "./components/full-form/full-form.component";
-import { DateTimeFormComponent } from "./components/date-time-form/date-time-form.component";
-import { UtcDateTimeFormComponent } from "./components/utc-date-time-form/utc-date-time-form.component";
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {DateTimeTimezoneFormComponent} from './components/date-time-timezone-form/date-time-timezone-form.component';
+import {DateTimeService} from './fields/date-time-field/date-time.service';
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {FullFormComponent} from "./components/full-form/full-form.component";
+import {DateTimeFormComponent} from "./components/date-time-form/date-time-form.component";
+import {UtcDateTimeFormComponent} from "./components/utc-date-time-form/utc-date-time-form.component";
 import {
   UtcDateTimeCustomFormComponent
 } from "./components/utc-date-time-custom-form/utc-date-time-custom-form.component";
 
 @Component({
-    selector: 'app-root',
+  selector: 'app-root',
   imports: [
-    DateFieldComponent,
-    DateTimeFieldComponent,
-    JsonPipe,
-    MatButton,
     MatTabGroup,
     MatTab,
     ReactiveFormsModule,
-    RouterOutlet,
-    TimeFieldComponent,
     FullFormComponent,
     DateTimeFormComponent,
     DateTimeTimezoneFormComponent,
     UtcDateTimeFormComponent,
     UtcDateTimeCustomFormComponent
   ],
-    templateUrl: './app.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './app.component.scss'
+  templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   private _dateTimeService: DateTimeService = inject(DateTimeService);

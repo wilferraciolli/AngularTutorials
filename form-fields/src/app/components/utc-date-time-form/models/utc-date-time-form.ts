@@ -11,7 +11,7 @@ export interface UTCDateTimeForm {
 // form initial state
 export const initialState: UTCDateTimeForm = {
   selectedTimezone: 'Europe/London',
-  appointment: '2024-05-01T09:00:00Z'
+  appointment: '2026-05-01T17:00:00Z'
 }
 
 // form validation

@@ -4,22 +4,25 @@
   </div>
 
   <div class="utc-date-time-custom-field-input-container">
-    <input class="utc-date-time-custom-field-input"
-           [id]="inputId"
-           [type]="fieldType"
-           [value]="localValue()"
-           [disabled]="disabled()"
-           [min]="localMin()"
-           [max]="localMax()"
-           [attr.aria-invalid]="errors() ? true : null"
-           [attr.aria-describedby]="inputId + '-hint ' + inputId + '-messages'"
-           (input)="onLocalInput($any($event.target).value)"
-           (blur)="onBlur()"
+    <!-- Date Part -->
+    <input
+      type="date"
+      [value]="localDatePartValue()"
+      (input)="onDateInput($any($event.target).value)"
+    />
+
+    <!-- Time Part (Supports 24h or custom formatting) -->
+    <input
+      type="time"
+      [value]="localTimePartValue()"
+      (input)="onTimeInput($any($event.target).value)"
     />
   </div>
 
   <div class="utc-date-time-custom-field-hint" [id]="inputId + '-hint'">
-    {{ timeZone() }}@if (offset()) { (UTC{{ offset() }}) }
+    {{ timeZone() }}@if (offset()) {
+    (UTC{{ offset() }})
+  }
     @if (utcValue()) {
       · stored as {{ utcValue() }}
     }

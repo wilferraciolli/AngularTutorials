@@ -77,8 +77,7 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
   public minErrorLabel = input<string>(UTC_DATE_TIME_MIN_ERROR_LABEL);
   public maxErrorLabel = input<string>(UTC_DATE_TIME_MAX_ERROR_LABEL);
 
-  public readonly fieldType: string = UTC_DATE_TIME_FIELD_TYPE;
-  public readonly inputId: string = `utc-date-time-field-${nextId++}`;
+  public readonly inputId: string = `utc-date-time-custom-field-${nextId++}`;
 
   public readonly utcValue: WritableSignal<string | null> = signal(null);
   public readonly disabled: WritableSignal<boolean> = signal(false);
@@ -87,7 +86,44 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
   /** Explains how a DST gap or overlap was resolved for the last value typed by the user. */
   public readonly notice: WritableSignal<string | null> = signal(null);
 
-  public readonly localValue = computed(() => toLocalDateTime(this.utcValue(), this.timeZone()));
+  // 1. Convert incoming UTC Instant -> Target Timezone -> Split into Date & Time parts for the inputs
+  public readonly localDatePartValue = computed(() => {
+    const instant = parseInstant(this.utcValue());
+    if (!instant) {
+      return '';
+    }
+
+    // return YYYY-DD-MM
+    return instant.toZonedDateTimeISO(this.timeZone())
+      .toPlainDate()
+      .toString();
+  });
+  public readonly localTimePartValue = computed(() => {
+    const instant = parseInstant(this.utcValue());
+    if (!instant) {
+      return '';
+    }
+
+    // return TT:mm
+    return instant.toZonedDateTimeISO(this.timeZone())
+      .toPlainTime()
+      .toString({smallestUnit: 'minute'});
+  });
+
+  // 2. When user changes the date, combine with existing time and convert back to UTC
+  public onDateInput(newDateStr: string) {
+    const currentTime = this.localTimePartValue() || '00:00';
+    this.updateCombinedDateTime(newDateStr, currentTime);
+    console.log('date changes , newDateStr:', newDateStr, 'currentTime:', currentTime);
+  }
+
+  // 3. When user changes the time, combine with existing date and convert back to UTC
+  public onTimeInput(newTimeStr: string) {
+    const currentDate = this.localDatePartValue() || new Date().toISOString().split('T')[0];
+    this.updateCombinedDateTime(currentDate, newTimeStr);
+    console.log('time changes , newTimeStr:', newTimeStr, 'currentDate:', currentDate);
+  }
+
   public readonly localMin = computed(() => toLocalDateTime(this.min(), this.timeZone()));
   public readonly localMax = computed(() => toLocalDateTime(this.max(), this.timeZone()));
   public readonly offset = computed(() => toOffset(this.utcValue(), this.timeZone()));
@@ -98,6 +134,48 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
   };
   private _onValidatorChange: () => void = () => {
   };
+
+
+  private updateCombinedDateTime(dateStr: string, timeStr: string) {
+    this.notice.set(null);
+
+    if (!dateStr || !timeStr) {
+      this._emit(null);
+      return;
+    }
+
+    try {
+      const timeZone: string = this.timeZone();
+      const plainDateTime = Temporal.PlainDateTime.from(`${dateStr}T${timeStr}`);
+      const earlier = plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'earlier' });
+      const later = plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'later' });
+
+      let chosen = earlier;
+
+      if (!earlier.equals(later)) {
+        const isGap: boolean = !earlier.toPlainDateTime().equals(plainDateTime);
+
+        if (isGap) {
+          chosen = later;
+          this.notice.set(
+            `${formatLocal(plainDateTime)} does not exist in ${timeZone} (clocks go forward). `
+            + `Using ${formatLocal(chosen.toPlainDateTime())} (UTC${chosen.offset}) instead.`
+          );
+        } else {
+          chosen = this.disambiguation() === 'later' ? later : earlier;
+          this.notice.set(
+            `${formatLocal(plainDateTime)} happens twice in ${timeZone} (clocks go back). `
+            + `Using the ${chosen === earlier ? 'first' : 'second'} occurrence (UTC${chosen.offset}).`
+          );
+        }
+      }
+
+      // This correctly updates the signal AND notifies the parent form via CVA
+      this._emit(chosen.toInstant().toString());
+    } catch {
+      this._emit(null);
+    }
+  }
 
   constructor() {
     // re-validate when the rules change at runtime

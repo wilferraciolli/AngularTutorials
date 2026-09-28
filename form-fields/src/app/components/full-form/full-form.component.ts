@@ -1,32 +1,27 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { DateFieldComponent } from "../../fields/date-field/date-field.component";
-import { DateTimeFieldComponent } from "../../fields/date-time-field/date-time-field.component";
-import { JsonPipe } from "@angular/common";
-import { MatButton } from "@angular/material/button";
-import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { TimeFieldComponent } from "../../fields/time-field/time-field.component";
-import { DateTimeFormBuilderService } from "../../forms/date-time-form-builder.service";
-import { DateTimeService } from "../../fields/date-time-field/date-time.service";
-import { DateTimeForm } from "../../forms/date-time.form";
-import { RouterOutlet } from "@angular/router";
-import { MatTab, MatTabGroup } from "@angular/material/tabs";
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {DateFieldComponent} from "../../fields/date-field/date-field.component";
+import {DateTimeFieldComponent} from "../../fields/date-time-field/date-time-field.component";
+import {JsonPipe} from "@angular/common";
+import {MatButton} from "@angular/material/button";
+import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {TimeFieldComponent} from "../../fields/time-field/time-field.component";
+import {DateTimeFormBuilderService} from "../../forms/date-time-form-builder.service";
+import {DateTimeService} from "../../fields/date-time-field/date-time.service";
+import {DateTimeForm} from "../../forms/date-time.form";
 
 @Component({
-    selector: 'app-full-form',
-    imports: [
+  selector: 'app-full-form',
+  imports: [
     DateFieldComponent,
     DateTimeFieldComponent,
     JsonPipe,
     MatButton,
-    MatTabGroup,
-    MatTab,
     ReactiveFormsModule,
-    RouterOutlet,
     TimeFieldComponent
-],
-    templateUrl: './full-form.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './full-form.component.scss'
+  ],
+  templateUrl: './full-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './full-form.component.scss'
 })
 export class FullFormComponent {
   private _dateTimeFormBuilder: DateTimeFormBuilderService = inject(DateTimeFormBuilderService);
