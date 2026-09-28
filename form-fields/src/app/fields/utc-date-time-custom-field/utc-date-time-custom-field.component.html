@@ -23,8 +23,8 @@
     {{ timeZone() }}@if (offset()) {
     (UTC{{ offset() }})
   }
-    @if (utcValue()) {
-      · stored as {{ utcValue() }}
+    @if (value()) {
+      · stored as {{ value() }}
     }
   </div>
 
@@ -33,21 +33,21 @@
       <div class="utc-date-time-custom-field-notice">{{ notice() }}</div>
     }
 
-    @if (errors()?.['required']) {
+    @if (localErrors()?.['required']) {
       <div class="utc-date-time-custom-field-error" role="alert">{{ requiredErrorLabel() }}</div>
     }
 
-    @if (errors()?.['invalidUtcDateTime']) {
+    @if (localErrors()?.['invalidUtcDateTime']) {
       <div class="utc-date-time-custom-field-error" role="alert">{{ invalidErrorLabel() }}</div>
     }
 
-    @if (errors()?.['cannotBeBeforeMinUtcDateTime']) {
+    @if (localErrors()?.['cannotBeBeforeMinUtcDateTime']) {
       <div class="utc-date-time-custom-field-error" role="alert">
         {{ minErrorLabel() }} {{ localMin().replace('T', ' ') }} ({{ timeZone() }}).
       </div>
     }
 
-    @if (errors()?.['cannotBeAfterMaxUtcDateTime']) {
+    @if (localErrors()?.['cannotBeAfterMaxUtcDateTime']) {
       <div class="utc-date-time-custom-field-error" role="alert">
         {{ maxErrorLabel() }} {{ localMax().replace('T', ' ') }} ({{ timeZone() }}).
       </div>

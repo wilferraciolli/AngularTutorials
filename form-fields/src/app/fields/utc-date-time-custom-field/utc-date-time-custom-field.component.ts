@@ -1,31 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  forwardRef,
-  input,
-  signal,
-  untracked,
-  WritableSignal
-} from '@angular/core';
-import {
-  AbstractControl,
-  ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  ValidationErrors,
-  Validator
-} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, computed, input, model, signal, WritableSignal} from '@angular/core';
+import {ValidationErrors} from '@angular/forms';
 import {Temporal} from 'temporal-polyfill';
 import {
-  UTC_DATE_TIME_FIELD_TYPE,
   UTC_DATE_TIME_INVALID_ERROR_LABEL,
   UTC_DATE_TIME_LABEL,
   UTC_DATE_TIME_MAX_ERROR_LABEL,
   UTC_DATE_TIME_MIN_ERROR_LABEL,
-  UTC_DATE_TIME_REQUIRED_ERROR_LABEL, UtcDateTimeDisambiguation,
+  UTC_DATE_TIME_REQUIRED_ERROR_LABEL,
+  UtcDateTimeDisambiguation,
 } from "../utc-date-time-field/utc-date-time.constants";
+import {FormValueControl} from "@angular/forms/signals";
 
 
 let nextId: number = 0;
@@ -39,39 +23,26 @@ let nextId: number = 0;
  */
 @Component({
   selector: 'app-utc-date-time-custom-field',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => UtcDateTimeCustomFieldComponent)
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: forwardRef(() => UtcDateTimeCustomFieldComponent)
-    }
-  ],
   styleUrl: './utc-date-time-custom-field.component.scss',
   templateUrl: './utc-date-time-custom-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Validator {
-  public label = input<string>(UTC_DATE_TIME_LABEL);
+export class UtcDateTimeCustomFieldComponent implements FormValueControl<string | null> {
+  public value = model<string | null>(null);
 
+  // Component Inputs
+  public label = input<string>(UTC_DATE_TIME_LABEL);
   /** IANA timezone used to display and edit the value, Eg 'Europe/London'. Defaults to the user's timezone. */
   public timeZone = input<string>(Temporal.Now.timeZoneId());
-
   /** Minimum allowed instant in UTC, Eg '2024-01-01T00:00:00Z'. */
-  public min = input<string | null | undefined>(null);
-
+  public minUtc = input<string | null | undefined>(null);
   /** Maximum allowed instant in UTC, Eg '2025-12-31T23:59:00Z'. */
-  public max = input<string | null | undefined>(null);
-
+  public maxUtc = input<string | null | undefined>(null);
   public required = input<boolean>(false);
-
   /** Which occurrence to use when the entered time happens twice (clocks going back). */
   public disambiguation = input<UtcDateTimeDisambiguation>('earlier');
 
+  // validation inputs
   public requiredErrorLabel = input<string>(UTC_DATE_TIME_REQUIRED_ERROR_LABEL);
   public invalidErrorLabel = input<string>(UTC_DATE_TIME_INVALID_ERROR_LABEL);
   public minErrorLabel = input<string>(UTC_DATE_TIME_MIN_ERROR_LABEL);
@@ -79,16 +50,15 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
 
   public readonly inputId: string = `utc-date-time-custom-field-${nextId++}`;
 
-  public readonly utcValue: WritableSignal<string | null> = signal(null);
-  public readonly disabled: WritableSignal<boolean> = signal(false);
-  public readonly errors = computed(() => this._getErrors(this.utcValue()));
+  // public readonly disabled: WritableSignal<boolean> = signal(false);
+  // public readonly errors = computed(() => this._getErrors(this.value()));
 
   /** Explains how a DST gap or overlap was resolved for the last value typed by the user. */
   public readonly notice: WritableSignal<string | null> = signal(null);
 
   // 1. Convert incoming UTC Instant -> Target Timezone -> Split into Date & Time parts for the inputs
   public readonly localDatePartValue = computed(() => {
-    const instant = parseInstant(this.utcValue());
+    const instant = parseInstant(this.value());
     if (!instant) {
       return '';
     }
@@ -98,8 +68,9 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
       .toPlainDate()
       .toString();
   });
+
   public readonly localTimePartValue = computed(() => {
-    const instant = parseInstant(this.utcValue());
+    const instant = parseInstant(this.value());
     if (!instant) {
       return '';
     }
@@ -110,45 +81,39 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
       .toString({smallestUnit: 'minute'});
   });
 
+  public readonly localMin = computed(() => toLocalDateTime(this.minUtc(), this.timeZone()));
+  public readonly localMax = computed(() => toLocalDateTime(this.maxUtc(), this.timeZone()));
+  public readonly offset = computed(() => toOffset(this.value(), this.timeZone()));
+
+  public readonly localErrors = computed(() => this._getErrors());
+
   // 2. When user changes the date, combine with existing time and convert back to UTC
   public onDateInput(newDateStr: string) {
     const currentTime = this.localTimePartValue() || '00:00';
-    this.updateCombinedDateTime(newDateStr, currentTime);
+    this._updateCombinedDateTime(newDateStr, currentTime);
     console.log('date changes , newDateStr:', newDateStr, 'currentTime:', currentTime);
   }
 
   // 3. When user changes the time, combine with existing date and convert back to UTC
   public onTimeInput(newTimeStr: string) {
     const currentDate = this.localDatePartValue() || new Date().toISOString().split('T')[0];
-    this.updateCombinedDateTime(currentDate, newTimeStr);
+    this._updateCombinedDateTime(currentDate, newTimeStr);
     console.log('time changes , newTimeStr:', newTimeStr, 'currentDate:', currentDate);
   }
 
-  public readonly localMin = computed(() => toLocalDateTime(this.min(), this.timeZone()));
-  public readonly localMax = computed(() => toLocalDateTime(this.max(), this.timeZone()));
-  public readonly offset = computed(() => toOffset(this.utcValue(), this.timeZone()));
-
-  private _onChange: (value: string | null) => void = () => {
-  };
-  private _onTouched: () => void = () => {
-  };
-  private _onValidatorChange: () => void = () => {
-  };
-
-
-  private updateCombinedDateTime(dateStr: string, timeStr: string) {
+  private _updateCombinedDateTime(dateStr: string, timeStr: string) {
     this.notice.set(null);
 
     if (!dateStr || !timeStr) {
-      this._emit(null);
+      this.value.set(null);
       return;
     }
 
     try {
       const timeZone: string = this.timeZone();
       const plainDateTime = Temporal.PlainDateTime.from(`${dateStr}T${timeStr}`);
-      const earlier = plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'earlier' });
-      const later = plainDateTime.toZonedDateTime(timeZone, { disambiguation: 'later' });
+      const earlier = plainDateTime.toZonedDateTime(timeZone, {disambiguation: 'earlier'});
+      const later = plainDateTime.toZonedDateTime(timeZone, {disambiguation: 'later'});
 
       let chosen = earlier;
 
@@ -171,94 +136,14 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
       }
 
       // This correctly updates the signal AND notifies the parent form via CVA
-      this._emit(chosen.toInstant().toString());
+      this.value.set(chosen.toInstant().toString());
     } catch {
-      this._emit(null);
+      this.value.set(null);
     }
   }
 
-  constructor() {
-    // re-validate when the rules change at runtime
-    effect(() => {
-      this.required();
-      this.min();
-      this.max();
-      untracked(() => this._onValidatorChange());
-    });
-
-    // the notice refers to the previous timezone, the instant itself does not change
-    effect(() => {
-      this.timeZone();
-      untracked(() => this.notice.set(null));
-    });
-  }
-
-  public writeValue(value: string | null): void {
-    this.utcValue.set(value || null);
-    this.notice.set(null);
-  }
-
-  public registerOnChange(fn: (value: string | null) => void): void {
-    this._onChange = fn;
-  }
-
-  public registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
-  }
-
-  public registerOnValidatorChange(fn: () => void): void {
-    this._onValidatorChange = fn;
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
-
-  public onLocalInput(localDateTime: string): void {
-    this.notice.set(null);
-
-    if (!localDateTime) {
-      this._emit(null);
-      return;
-    }
-
-    const timeZone: string = this.timeZone();
-    const plainDateTime = Temporal.PlainDateTime.from(localDateTime);
-    const earlier = plainDateTime.toZonedDateTime(timeZone, {disambiguation: 'earlier'});
-    const later = plainDateTime.toZonedDateTime(timeZone, {disambiguation: 'later'});
-
-    let chosen = earlier;
-
-    if (!earlier.equals(later)) {
-      const isGap: boolean = !earlier.toPlainDateTime().equals(plainDateTime);
-
-      if (isGap) {
-        // clocks went forward, the wall time never happened: shift it forward by the gap
-        chosen = later;
-        this.notice.set(
-          `${formatLocal(plainDateTime)} does not exist in ${timeZone} (clocks go forward). `
-          + `Using ${formatLocal(chosen.toPlainDateTime())} (UTC${chosen.offset}) instead.`);
-      } else {
-        // clocks went back, the wall time happened twice
-        chosen = this.disambiguation() === 'later' ? later : earlier;
-        this.notice.set(
-          `${formatLocal(plainDateTime)} happens twice in ${timeZone} (clocks go back). `
-          + `Using the ${chosen === earlier ? 'first' : 'second'} occurrence (UTC${chosen.offset}).`);
-      }
-    }
-
-    this._emit(chosen.toInstant().toString());
-  }
-
-  public onBlur(): void {
-    this._onTouched();
-  }
-
-  public validate(control: AbstractControl<string | null>): ValidationErrors | null {
-    return this._getErrors(control.value);
-  }
-
-  private _getErrors(value: string | null): ValidationErrors | null {
+  private _getErrors(): ValidationErrors | null {
+    const value = this.value();
     if (!value) {
       return this.required() ? {required: true} : null;
     }
@@ -269,24 +154,19 @@ export class UtcDateTimeCustomFieldComponent implements ControlValueAccessor, Va
       return {invalidUtcDateTime: {value}};
     }
 
-    const min = parseInstant(this.min());
+    const min = parseInstant(this.minUtc());
 
     if (min && Temporal.Instant.compare(instant, min) < 0) {
-      return {cannotBeBeforeMinUtcDateTime: {value, min: this.min()}};
+      return {cannotBeBeforeMinUtcDateTime: {value, min: this.minUtc()}};
     }
 
-    const max = parseInstant(this.max());
+    const max = parseInstant(this.maxUtc());
 
     if (max && Temporal.Instant.compare(instant, max) > 0) {
-      return {cannotBeAfterMaxUtcDateTime: {value, max: this.max()}};
+      return {cannotBeAfterMaxUtcDateTime: {value, max: this.maxUtc()}};
     }
 
     return null;
-  }
-
-  private _emit(value: string | null): void {
-    this.utcValue.set(value);
-    this._onChange(value);
   }
 }
 

@@ -15,8 +15,7 @@
     <app-utc-date-time-custom-field
       label="Appointment"
       [timeZone]="form.selectedTimezone().value()"
-      [required]="true"
-      [min]="'2024-01-01T17:00:00Z'"
+      [minUtc]="'2024-01-01T17:00:00Z'"
       [formField]="form.appointment"
     />
   </form>
