@@ -2,50 +2,98 @@
   &-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0 20px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
   }
 
   &-label {
-    font-size: 0.75rem;
-    color: #333;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+
+    label {
+      font-weight: lighter;
+    }
   }
 
-  &-label label {
-    font-weight: lighter;
-  }
-
-  &-input-container {
+  /* Flex wrapper for the two fields side-by-side with responsive wrapping */
+  &-inputs-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 8px;
     width: 100%;
+
+    @media (max-width: 400px) {
+      flex-direction: column; // Stacks them vertically on small screens
+    }
   }
 
-  &-input {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.25rem;
+  /* Each independent field styled as an outlined box */
+  &-input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
+    padding: 10px 12px;
     background-color: #fff;
-    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+      border-color: #3f51b5;
+      border-width: 2px;
+      padding: 9px 11px; // Compensate for thicker border to prevent shifts
+    }
+  }
+
+  /* Proportions: Date box takes ~70%, Time box takes ~30% */
+  &-date-box {
+    flex: 7;
+  }
+
+  &-time-box {
+    flex: 3;
+  }
+
+  /* Input styles inside each box */
+  &-date-input,
+  &-time-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.87);
+    width: 100%;
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &-hint {
-    color: #555;
-    font-size: 0.75rem;
-    margin: 0.25rem 0 0.5rem;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 4px;
+    line-height: 1.2;
   }
 
   &-notice {
-    color: #8a5a00;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 4px;
   }
 
   &-error {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
+    font-size: 11px;
+    color: #f44336;
+    margin-top: 4px;
   }
 }

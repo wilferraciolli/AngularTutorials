@@ -3,20 +3,27 @@
     <label [for]="inputId">{{ label() }}</label>
   </div>
 
-  <div class="utc-date-time-custom-field-input-container">
-    <!-- Date Part -->
-    <input
-      type="date"
-      [value]="localDatePartValue()"
-      (input)="onDateInput($any($event.target).value)"
-    />
+  <!-- Row wrapper holding the two distinct fields -->
+  <div class="utc-date-time-custom-field-inputs-wrapper">
+    <!-- Date Field Box (70%) -->
+    <div class="utc-date-time-custom-field-input-box utc-date-time-custom-field-date-box">
+      <input
+        class="utc-date-time-custom-field-date-input"
+        type="date"
+        [value]="localDatePartValue()"
+        (input)="onDateInput($any($event.target).value)"
+      />
+    </div>
 
-    <!-- Time Part (Supports 24h or custom formatting) -->
-    <input
-      type="time"
-      [value]="localTimePartValue()"
-      (input)="onTimeInput($any($event.target).value)"
-    />
+    <!-- Time Field Box (30%) -->
+    <div class="utc-date-time-custom-field-input-box utc-date-time-custom-field-time-box">
+      <input
+        class="utc-date-time-custom-field-time-input"
+        type="time"
+        [value]="localTimePartValue()"
+        (input)="onTimeInput($any($event.target).value)"
+      />
+    </div>
   </div>
 
   <div class="utc-date-time-custom-field-hint" [id]="inputId + '-hint'">
