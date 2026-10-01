@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { YearlyComponent } from './yearly.component';
 
@@ -8,7 +9,8 @@ describe('YearlyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [YearlyComponent]
+      imports: [YearlyComponent],
+      providers: [provideNoopAnimations()]
     })
     .compileComponents();
 

@@ -1,0 +1,14 @@
+<div class="theme-settings">
+  <h2>Theme Settings</h2>
+  <mat-button-toggle-group [value]="currentTheme" aria-label="Theme Selection" (change)="onThemeChange($event.value)">
+    <mat-button-toggle value="light">
+      <mat-icon>light_mode</mat-icon> Light
+    </mat-button-toggle>
+    <mat-button-toggle value="dark">
+      <mat-icon>dark_mode</mat-icon> Dark
+    </mat-button-toggle>
+    <mat-button-toggle value="system">
+      <mat-icon>settings_brightness</mat-icon> System
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

@@ -1,5 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
+// Include the core Material styles
+@include mat.core();
+
+// 1. Define your custom M3 color palettes (or use standard ones like mat.$azure-palette)
+$my-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$violet-palette,
+  )
+));
+
+$my-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$violet-palette,
+  )
+));
+
+// 2. Apply light theme by default on the root body
+body {
+  @include mat.all-component-themes($my-light-theme);
+}
+
+// 3. Apply dark theme when a .dark-theme class is present on an ancestor element (like body or html)
+body.dark-theme {
+  @include mat.all-component-themes($my-dark-theme);
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { WeeklyComponent } from './weekly.component';
 
@@ -8,7 +9,8 @@ describe('WeeklyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WeeklyComponent]
+      imports: [WeeklyComponent],
+      providers: [provideNoopAnimations()]
     })
     .compileComponents();
 
