@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ThemeComponent } from './theme.component';
 
 describe('ThemeComponent', () => {
@@ -8,7 +8,8 @@ describe('ThemeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThemeComponent]
+      imports: [ThemeComponent],
+      providers: [provideAnimationsAsync()]
     })
     .compileComponents();
 
@@ -19,5 +20,10 @@ describe('ThemeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update theme when onThemeChange is called', () => {
+    component.onThemeChange('dark');
+    expect(component.currentTheme).toBe('dark');
   });
 });

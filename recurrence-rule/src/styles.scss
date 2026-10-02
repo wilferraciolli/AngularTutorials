@@ -23,11 +23,20 @@ $my-dark-theme: mat.define-theme((
 // 2. Apply light theme by default on the root body
 body {
   @include mat.all-component-themes($my-light-theme);
+  // Emit the --mat-sys-* tokens so custom styles (and page background) follow the theme
+  @include mat.system-level-colors($my-light-theme);
+  @include mat.system-level-typography($my-light-theme);
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
 }
 
 // 3. Apply dark theme when a .dark-theme class is present on an ancestor element (like body or html)
 body.dark-theme {
-  @include mat.all-component-themes($my-dark-theme);
+  // Only colors change between light and dark, so avoid re-emitting density/typography
+  @include mat.all-component-colors($my-dark-theme);
+  @include mat.system-level-colors($my-dark-theme);
+  color-scheme: dark;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
